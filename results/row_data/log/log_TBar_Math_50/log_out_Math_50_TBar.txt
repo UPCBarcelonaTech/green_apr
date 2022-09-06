@@ -1,0 +1,344 @@
+Sleep 1m start
+GPR[SSLI]-1661302354191
+GPR[ESLI]-1661302414195
+Running Tbar Math 50b
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+Seed 284
+Timezone: America/Los_Angeles
+Java 8: /experiment_home/jdk1.8.0_45/bin 
+DEFECTS4J_HOME: /experiment_home/defects4j/
+Killing all java process
+Creating out dir /experiment_home///results/TBar/Math/50/seed_284/
+The file script/workingdir/TBar/Math_50 does not exist!
+script/workingdir/TBar/Math_50
+Current directory: script/workingdir/TBar/Math_50
+classpath:  script/workingdir/TBar/Math_50/target/classes:script/workingdir/TBar/Math_50/target/test-classes:/experiment_home/defects4j/framework/projects/lib/junit-4.11.jar:script/workingdir/TBar/Math_50/lib/junit-4.8.2.jar
+Src java:  /src/main/java
+Classes Java:  /target/classes
+Src Test:  /src/test/java
+Classes Test:  /target/test-classes
+GPR[SSLB]-1661302429770
+GPR[ESLB]-1661302489774
+Calling Tbar:
+content current dir: BugPositions.txt build.xml checkstyle.xml defects4j.build.properties doap_math.rdf FailedTestCases findbugs-exclude-filter.xml license-header.txt LICENSE.txt math-pre-RC.sh math-RC.sh NOTICE.txt pom.xml PROPOSAL.html RELEASE-NOTES.txt siteMods src SuspiciousCodePositions target test-jar.xml
+Node: host-61
+Date init: Tue 23 Aug 2022 05:54:50 PM PDT
+OAR_JOB_ID: 3743711
+M branch:
+Bug id Math_50
+isTestFixPatterns true
+GPR[SSUP]-1661302490457
+GPR[ESUP]-1661302520375
+GPR[SFL]-1661302520376
+GPR[EFL]-1661302520377
+17:55:20.377 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Start to fix suspicious code======
+GPR[SFP]-1661302520380
+GPR[SSUN]-1661302520380
+GPR[SPS]-1661302520883
+GPR[EPS]-1661302520915
+GPR[SPVA]-1661302520915
+GPR[SPVS]-1661302520915
+GPR[SPVAP]-1661302520915
+GPR[EPVAP]-1661302521341
+GPR[SPVATF]-1661302521341
+GPR[EPVATF]-1661302521406
+GPR[SPVATR]-1661302521406
+GPR[EPVATR]-1661302548658
+GPR[EPVS]-1661302548658
+GPR[SPVS]-1661302548658
+GPR[SPVAP]-1661302548658
+GPR[EPVAP]-1661302549090
+GPR[SPVATF]-1661302549090
+GPR[EPVATF]-1661302549157
+GPR[SPVATR]-1661302549157
+GPR[EPVATR]-1661302575215
+GPR[EPVS]-1661302575215
+GPR[SPVS]-1661302575215
+GPR[SPVAP]-1661302575215
+GPR[EPVAP]-1661302575660
+GPR[SPVATF]-1661302575660
+GPR[EPVATF]-1661302575723
+GPR[SPVATR]-1661302575723
+GPR[EPVATR]-1661302603230
+GPR[EPVS]-1661302603230
+GPR[SPVS]-1661302603230
+GPR[SPVAP]-1661302603230
+GPR[EPVAP]-1661302603658
+GPR[SPVATF]-1661302603658
+GPR[EPVATF]-1661302603722
+GPR[SPVATR]-1661302603722
+GPR[EPVATR]-1661302631686
+GPR[EPVS]-1661302631686
+GPR[SPVS]-1661302631686
+GPR[SPVAP]-1661302631686
+GPR[EPVAP]-1661302632109
+GPR[SPVATF]-1661302632109
+GPR[EPVATF]-1661302632171
+GPR[SPVATR]-1661302632171
+GPR[EPVATR]-1661302659889
+GPR[EPVS]-1661302659889
+GPR[SPVS]-1661302659889
+GPR[SPVAP]-1661302659889
+GPR[EPVAP]-1661302660333
+GPR[SPVS]-1661302660334
+GPR[SPVAP]-1661302660334
+GPR[EPVAP]-1661302660725
+GPR[SPVS]-1661302660725
+GPR[SPVAP]-1661302660725
+GPR[EPVAP]-1661302661116
+GPR[SPVS]-1661302661116
+GPR[SPVAP]-1661302661116
+GPR[EPVAP]-1661302661509
+GPR[SPVS]-1661302661510
+GPR[SPVAP]-1661302661510
+GPR[EPVAP]-1661302661903
+GPR[SPVS]-1661302661903
+GPR[SPVAP]-1661302661903
+GPR[EPVAP]-1661302662294
+GPR[SPVESU]-1661302662294
+GPR[EPVESU]-1661302662295
+GPR[EPVA]-1661302662295
+GPR[SPS]-1661302662295
+GPR[EPS]-1661302662311
+GPR[SPVA]-1661302662311
+GPR[SPVS]-1661302662311
+GPR[SPVAP]-1661302662311
+GPR[EPVAP]-1661302662734
+GPR[SPVATF]-1661302662734
+GPR[EPVATF]-1661302662800
+GPR[SPVATR]-1661302662800
+GPR[EPVATR]-1661302690187
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..914a6e0c2 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(x);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302690187
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_199730_12_cp6_ts_1661302690187.txt
+GPR[EPVS]-1661302690204
+GPR[SPVS]-1661302690204
+GPR[SPVAP]-1661302690204
+GPR[EPVAP]-1661302690631
+GPR[SPVATF]-1661302690631
+GPR[EPVATF]-1661302690696
+GPR[SPVATR]-1661302690696
+GPR[EPVATR]-1661302717905
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..07576bed5 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(fx);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302717905
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_227448_13_cp7_ts_1661302717905.txt
+GPR[EPVS]-1661302717918
+GPR[SPVS]-1661302717918
+GPR[SPVAP]-1661302717918
+GPR[EPVAP]-1661302718340
+GPR[SPVATF]-1661302718340
+GPR[EPVATF]-1661302718403
+GPR[SPVATR]-1661302718403
+GPR[EPVATR]-1661302745801
+GPR[EPVS]-1661302745801
+GPR[SPVS]-1661302745801
+GPR[SPVAP]-1661302745801
+GPR[EPVAP]-1661302746226
+GPR[SPVATF]-1661302746226
+GPR[EPVATF]-1661302746291
+GPR[SPVATR]-1661302746291
+GPR[EPVATR]-1661302772670
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..8998cde05 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(x1);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302772670
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_282213_15_cp9_ts_1661302772670.txt
+GPR[EPVS]-1661302772682
+GPR[SPVS]-1661302772683
+GPR[SPVAP]-1661302772683
+GPR[EPVAP]-1661302773101
+GPR[SPVATF]-1661302773101
+GPR[EPVATF]-1661302773166
+GPR[SPVATR]-1661302773166
+GPR[EPVATR]-1661302800594
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..521c374d8 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(rtol);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302800594
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_310137_16_cp10_ts_1661302800594.txt
+GPR[EPVS]-1661302800604
+GPR[SPVS]-1661302800604
+GPR[SPVAP]-1661302800604
+GPR[EPVAP]-1661302801034
+GPR[SPVATF]-1661302801034
+GPR[EPVATF]-1661302801099
+GPR[SPVATR]-1661302801099
+GPR[EPVATR]-1661302828396
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..e61fc1027 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(atol);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302828399
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_337942_17_cp11_ts_1661302828399.txt
+GPR[EPVS]-1661302828409
+GPR[SPVS]-1661302828409
+GPR[SPVAP]-1661302828409
+GPR[EPVAP]-1661302828818
+GPR[SPVATF]-1661302828818
+GPR[EPVATF]-1661302828883
+GPR[SPVATR]-1661302828883
+GPR[EPVATR]-1661302856446
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..3698375b7 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(ftol);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302856446
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_365989_18_cp12_ts_1661302856446.txt
+GPR[EPVS]-1661302856460
+GPR[SPVS]-1661302856460
+GPR[SPVAP]-1661302856460
+GPR[EPVAP]-1661302856881
+GPR[SPVATF]-1661302856881
+GPR[EPVATF]-1661302856947
+GPR[SPVATR]-1661302856947
+GPR[EPVATR]-1661302885449
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..fc6072c11 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(f1);
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302885449
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_394992_19_cp13_ts_1661302885449.txt
+GPR[EPVS]-1661302885527
+GPR[SPVS]-1661302885527
+GPR[SPVAP]-1661302885527
+GPR[EPVAP]-1661302885946
+GPR[SPVATF]-1661302885946
+GPR[EPVATF]-1661302886012
+GPR[SPVATR]-1661302886012
+GPR[EPVATR]-1661302914014
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+index e47d98204..6b6da1aa6 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,7 +186,7 @@ public abstract class BaseSecantSolver
+                     // Nothing.
+                     if (x == x1) {
+                         x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                        f0 = computeObjectiveValue(doSolve());
+                     }
+                     break;
+                 default:
+GPR[PF]-1661302914014
+Saving patch at: /experiment_home///results/TBar/Math/50/seed_284/NormalFLTBar/VariableReplacer/FixedBugs/Math_50/Patch_423557_20_cp14_ts_1661302914014.txt
+GPR[EPVS]-1661302914023
+GPR[SPVESU]-1661302914023
+GPR[EPVESU]-1661302914024
+GPR[EPVA]-1661302914024
+GPR[SPS]-1661302914024
+GPR[EPS]-1661302914036
+GPR[SPS]-1661302914037
+GPR[EPS]-1661302914106
+GPR[SPS]-1661302914106
+GPR[EPS]-1661302914114
+GPR[SPS]-1661302914114
+GPR[EPS]-1661302914122
+GPR[SPS]-1661302914122
+GPR[EPS]-1661302914129
+GPR[SPS]-1661302914129
+GPR[EPS]-1661302914136
+GPR[SPVA]-1661302914136
+GPR[SPVS]-1661302914136
+GPR[SPVAP]-1661302914136
+GPR[EPVAP]-1661302914563
+GPR[SPVATF]-1661302914563
+GPR[EPVATF]-1661302914627
+GPR[SPVATR]-1661302914627
+GPR[EPVATR]-1661302940314
+GPR[EPVS]-1661302940314
+GPR[SPVS]-1661302940314
+GPR[SPVAP]-1661302940314
+GPR[EPVAP]-1661302940708
+GPR[SPVATF]-1661302940708
+GPR[EPVATF]-1661302940771
+GPR[SPVATR]-1661302940771
+GPR[EPVATR]-1661302967914
+GPR[EPVS]-1661302967914
+GPR[SPVESU]-1661302967914
+GPR[EPVESU]-1661302967915
+GPR[EPVA]-1661302967915
+GPR[SPS]-1661302967916
+GPR[EPS]-1661302967923
+GPR[ESUN]-1661302967923
+18:02:47.923 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Finish off fixing======
+GPR[EFP]-1661302967923
+Succeeded to fix bug Math_50
+Forcing exit:
+End running Math/50 results at /experiment_home///results/TBar/Math/50/seed_284/
+\n\nNode: host-61\n
+\n\nDate: Tue 23 Aug 2022 06:02:47 PM PDT\n
+Removing checked out dir script/workingdir/TBar/Math_50
+Killing all java process
+GPR[SSLE]-1661302968426
+GPR[ESLE]-1661303028429

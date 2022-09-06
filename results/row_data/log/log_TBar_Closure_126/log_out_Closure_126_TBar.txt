@@ -1,0 +1,214 @@
+Sleep 1m start
+GPR[SSLI]-1659878300482
+GPR[ESLI]-1659878360487
+Running Tbar Closure 126b
+Seed 264
+Timezone: America/Los_Angeles
+Java 8: /experiment_home/jdk1.8.0_45/bin 
+DEFECTS4J_HOME: /experiment_home/defects4j/
+Creating out dir /experiment_home///results/TBar/Closure/126/seed_264/
+The file script/workingdir/TBar/Closure_126 does not exist!
+script/workingdir/TBar/Closure_126
+Current directory: script/workingdir/TBar/Closure_126
+classpath:  script/workingdir/TBar/Closure_126/build/classes:script/workingdir/TBar/Closure_126/lib/args4j.jar:script/workingdir/TBar/Closure_126/lib/guava.jar:script/workingdir/TBar/Closure_126/lib/json.jar:script/workingdir/TBar/Closure_126/lib/jsr305.jar:script/workingdir/TBar/Closure_126/lib/protobuf-java.jar:script/workingdir/TBar/Closure_126/build/lib/rhino.jar:script/workingdir/TBar/Closure_126/lib/ant.jar:script/workingdir/TBar/Closure_126/lib/ant-launcher.jar:script/workingdir/TBar/Closure_126/lib/caja-r4314.jar:script/workingdir/TBar/Closure_126/lib/jarjar.jar:script/workingdir/TBar/Closure_126/lib/junit.jar:script/workingdir/TBar/Closure_126/build/test
+Src java:  /src
+Classes Java:  /build/classes
+Src Test:  /test
+Classes Test:  /build/test
+GPR[SSLB]-1659878378601
+GPR[ESLB]-1659878438605
+Calling Tbar:
+content current dir: BugPositions.txt build build.xml closure-compiler.pom contrib CONTRIBUTORS COPYING defects4j.build.properties externs FailedTestCases gen lib README src SuspiciousCodePositions test tools
+Node: host-47
+Date init: Sun 07 Aug 2022 06:20:39 AM PDT
+OAR_JOB_ID: 3720517
+M branch:
+Bug id Closure_126
+isTestFixPatterns true
+GPR[SSUP]-1659878439187
+GPR[ESUP]-1659878507366
+GPR[SFL]-1659878507367
+GPR[EFL]-1659878507367
+06:21:47.369 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Start to fix suspicious code======
+GPR[SFP]-1659878507370
+GPR[SSUN]-1659878507370
+GPR[SPS]-1659878507850
+GPR[EPS]-1659878507886
+GPR[SPVA]-1659878507886
+GPR[SPVS]-1659878507887
+GPR[SPVAP]-1659878507887
+GPR[EPVAP]-1659878510363
+GPR[SPVS]-1659878510363
+GPR[SPVAP]-1659878510363
+GPR[EPVAP]-1659878512794
+GPR[SPVS]-1659878512794
+GPR[SPVAP]-1659878512794
+GPR[EPVAP]-1659878517608
+GPR[SPVATF]-1659878517608
+GPR[EPVATF]-1659878517692
+GPR[SPVATR]-1659878517692
+GPR[EPVATR]-1659878581131
+diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+index 4146f177..83acd41d 100644
+--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -140,7 +140,7 @@ class MinimizeExitPoints
+        */
+       if (NodeUtil.hasFinally(n)) {
+         Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        matchingExitNode(finallyBlock, exitType, labelName);
+       }
+     }
+GPR[PF]-1659878581131
+Saving patch at: /experiment_home///results/TBar/Closure/126/seed_264/NormalFLTBar/MethodInvocationMutator/FixedBugs/Closure_126/Patch_141944_3_cp1_ts_1659878581131.txt
+GPR[EPVS]-1659878581177
+GPR[SPVS]-1659878581177
+GPR[SPVAP]-1659878581177
+GPR[EPVAP]-1659878583441
+GPR[SPVS]-1659878583442
+GPR[SPVAP]-1659878583442
+GPR[EPVAP]-1659878585738
+GPR[SPVS]-1659878585738
+GPR[SPVAP]-1659878585738
+GPR[EPVAP]-1659878587958
+GPR[SPVESU]-1659878587958
+GPR[EPVESU]-1659878587959
+GPR[EPVA]-1659878587959
+GPR[SPS]-1659878587959
+GPR[EPS]-1659878587976
+GPR[SPS]-1659878587976
+GPR[EPS]-1659878587988
+GPR[SPS]-1659878587988
+GPR[EPS]-1659878588000
+GPR[SPVA]-1659878588000
+GPR[SPVS]-1659878588000
+GPR[SPVAP]-1659878588000
+GPR[EPVAP]-1659878592844
+GPR[SPVATF]-1659878592844
+GPR[EPVATF]-1659878592908
+GPR[SPVATR]-1659878592908
+GPR[EPVATR]-1659878656290
+diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+index 4146f177..b8e1720c 100644
+--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -140,7 +140,7 @@ class MinimizeExitPoints
+        */
+       if (NodeUtil.hasFinally(n)) {
+         Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        tryMinimizeExits(tryBlock, exitType, labelName);
+       }
+     }
+GPR[PF]-1659878656290
+Saving patch at: /experiment_home///results/TBar/Closure/126/seed_264/NormalFLTBar/VariableReplacer/FixedBugs/Closure_126/Patch_217103_7_cp2_ts_1659878656290.txt
+GPR[EPVS]-1659878656347
+GPR[SPVS]-1659878656347
+GPR[SPVAP]-1659878656347
+GPR[EPVAP]-1659878660490
+GPR[SPVATF]-1659878660490
+GPR[EPVATF]-1659878660555
+GPR[SPVATR]-1659878660555
+GPR[EPVATR]-1659878723893
+diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+index 4146f177..70e3b1d9 100644
+--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -140,7 +140,7 @@ class MinimizeExitPoints
+        */
+       if (NodeUtil.hasFinally(n)) {
+         Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        tryMinimizeExits(allCatchNodes, exitType, labelName);
+       }
+     }
+GPR[PF]-1659878723893
+Saving patch at: /experiment_home///results/TBar/Closure/126/seed_264/NormalFLTBar/VariableReplacer/FixedBugs/Closure_126/Patch_284706_8_cp3_ts_1659878723893.txt
+GPR[EPVS]-1659878723943
+GPR[SPVS]-1659878723943
+GPR[SPVAP]-1659878723943
+GPR[EPVAP]-1659878728112
+GPR[SPVATF]-1659878728112
+GPR[EPVATF]-1659878728176
+GPR[SPVATR]-1659878728176
+GPR[EPVATR]-1659878791587
+GPR[EPVS]-1659878791587
+GPR[SPVESU]-1659878791587
+GPR[EPVESU]-1659878791589
+GPR[EPVA]-1659878791589
+GPR[SPS]-1659878791589
+GPR[EPS]-1659878791607
+GPR[SPVA]-1659878791607
+GPR[SPVS]-1659878791607
+GPR[SPVAP]-1659878791607
+GPR[EPVAP]-1659878795815
+GPR[SPVATF]-1659878795815
+GPR[EPVATF]-1659878795879
+GPR[SPVATR]-1659878795879
+GPR[EPVATR]-1659878859540
+GPR[EPVS]-1659878859540
+GPR[SPVS]-1659878859540
+GPR[SPVAP]-1659878859540
+GPR[EPVAP]-1659878863703
+GPR[SPVATF]-1659878863703
+GPR[EPVATF]-1659878863766
+GPR[SPVATR]-1659878863766
+GPR[EPVATR]-1659878926706
+GPR[EPVS]-1659878926706
+GPR[SPVS]-1659878926706
+GPR[SPVAP]-1659878926706
+GPR[EPVAP]-1659878931491
+GPR[SPVATF]-1659878931491
+GPR[EPVATF]-1659878931557
+GPR[SPVATR]-1659878931557
+GPR[EPVATR]-1659878995228
+GPR[EPVS]-1659878995228
+GPR[SPVS]-1659878995228
+GPR[SPVAP]-1659878995228
+GPR[EPVAP]-1659878999456
+GPR[SPVATF]-1659878999457
+GPR[EPVATF]-1659878999520
+GPR[SPVATR]-1659878999521
+GPR[EPVATR]-1659879064173
+GPR[EPVS]-1659879064173
+GPR[SPVS]-1659879064173
+GPR[SPVAP]-1659879064173
+GPR[EPVAP]-1659879068536
+GPR[SPVATF]-1659879068536
+GPR[EPVATF]-1659879068601
+GPR[SPVATR]-1659879068601
+GPR[EPVATR]-1659879132323
+GPR[EPVS]-1659879132323
+GPR[SPVS]-1659879132323
+GPR[SPVAP]-1659879132323
+GPR[EPVAP]-1659879136720
+GPR[SPVATF]-1659879136720
+GPR[EPVATF]-1659879136784
+GPR[SPVATR]-1659879136784
+GPR[EPVATR]-1659879201218
+GPR[EPVS]-1659879201221
+GPR[SPVS]-1659879201221
+GPR[SPVAP]-1659879201221
+GPR[EPVAP]-1659879203643
+GPR[SPVS]-1659879203643
+GPR[SPVAP]-1659879203643
+GPR[EPVAP]-1659879207934
+GPR[SPVATF]-1659879207934
+GPR[EPVATF]-1659879207999
+GPR[SPVATR]-1659879207999
+GPR[EPVATR]-1659879270968
+GPR[SPVESU]-1659879271005
+GPR[EPVESU]-1659879271007
+GPR[EPVA]-1659879271007
+GPR[ESUN]-1659879271007
+06:34:31.007 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Finish off fixing======
+GPR[EFP]-1659879271007
+Failed to fix bug Closure_126
+Forcing exit:
+End running Closure/126 results at /experiment_home///results/TBar/Closure/126/seed_264/
+\n\nNode: host-47\n
+\n\nDate: Sun 07 Aug 2022 06:34:31 AM PDT\n
+Removing checked out dir script/workingdir/TBar/Closure_126
+GPR[SSLE]-1659879271766
+GPR[ESLE]-1659879331770

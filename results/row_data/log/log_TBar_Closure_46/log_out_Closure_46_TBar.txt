@@ -1,0 +1,154 @@
+Sleep 1m start
+GPR[SSLI]-1659902977487
+GPR[ESLI]-1659903037491
+Running Tbar Closure 46b
+Seed 262
+Timezone: America/Los_Angeles
+Java 8: /experiment_home/jdk1.8.0_45/bin 
+DEFECTS4J_HOME: /experiment_home/defects4j/
+Creating out dir /experiment_home///results/TBar/Closure/46/seed_262/
+The file script/workingdir/TBar/Closure_46 does not exist!
+script/workingdir/TBar/Closure_46
+Current directory: script/workingdir/TBar/Closure_46
+classpath:  script/workingdir/TBar/Closure_46/build/classes:script/workingdir/TBar/Closure_46/lib/args4j.jar:script/workingdir/TBar/Closure_46/lib/guava.jar:script/workingdir/TBar/Closure_46/lib/json.jar:script/workingdir/TBar/Closure_46/lib/jsr305.jar:script/workingdir/TBar/Closure_46/lib/protobuf-java.jar:script/workingdir/TBar/Closure_46/build/lib/rhino.jar:script/workingdir/TBar/Closure_46/lib/ant.jar:script/workingdir/TBar/Closure_46/lib/ant-launcher.jar:script/workingdir/TBar/Closure_46/lib/caja-r4314.jar:script/workingdir/TBar/Closure_46/lib/jarjar.jar:script/workingdir/TBar/Closure_46/lib/junit.jar:script/workingdir/TBar/Closure_46/build/test
+Src java:  /src
+Classes Java:  /build/classes
+Src Test:  /test
+Classes Test:  /build/test
+GPR[SSLB]-1659903057029
+GPR[ESLB]-1659903117035
+Calling Tbar:
+content current dir: BugPositions.txt build build.xml closure-compiler.pom contrib CONTRIBUTORS COPYING defects4j.build.properties externs FailedTestCases gen javadoc lib README src SuspiciousCodePositions test tools
+Node: host-52
+Date init: Sun 07 Aug 2022 01:11:57 PM PDT
+OAR_JOB_ID: 3720517
+M branch:
+Bug id Closure_46
+isTestFixPatterns true
+GPR[SSUP]-1659903117742
+GPR[ESUP]-1659903174454
+GPR[SFL]-1659903174455
+GPR[EFL]-1659903174456
+13:12:54.457 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Start to fix suspicious code======
+GPR[SFP]-1659903174458
+GPR[SSUN]-1659903174458
+GPR[SPS]-1659903174943
+GPR[EPS]-1659903174965
+GPR[SPS]-1659903174966
+GPR[EPS]-1659903175060
+GPR[SPS]-1659903175060
+GPR[EPS]-1659903175068
+GPR[SPS]-1659903175068
+GPR[EPS]-1659903175076
+GPR[SPS]-1659903175077
+GPR[EPS]-1659903175085
+GPR[SPVA]-1659903175085
+GPR[SPVS]-1659903175085
+GPR[SPVAP]-1659903175085
+GPR[EPVAP]-1659903177321
+GPR[SPVS]-1659903177321
+GPR[SPVAP]-1659903177321
+GPR[EPVAP]-1659903179808
+GPR[SPVESU]-1659903179808
+GPR[EPVESU]-1659903179809
+GPR[EPVA]-1659903179809
+GPR[SPS]-1659903179810
+GPR[EPS]-1659903179818
+GPR[SPVA]-1659903179818
+GPR[SPVS]-1659903179818
+GPR[SPVAP]-1659903179818
+GPR[EPVAP]-1659903182273
+GPR[SPVS]-1659903182273
+GPR[SPVAP]-1659903182273
+GPR[EPVAP]-1659903186476
+GPR[SPVATF]-1659903186477
+GPR[EPVATF]-1659903186541
+GPR[SPVATR]-1659903186541
+GPR[EPVATR]-1659903238520
+GPR[EPVS]-1659903238520
+GPR[SPVS]-1659903238520
+GPR[SPVAP]-1659903238520
+GPR[EPVAP]-1659903242980
+GPR[SPVATF]-1659903242980
+GPR[EPVATF]-1659903243047
+GPR[SPVATR]-1659903243047
+GPR[EPVATR]-1659903294154
+GPR[EPVS]-1659903294154
+GPR[SPVS]-1659903294154
+GPR[SPVAP]-1659903294154
+GPR[EPVAP]-1659903296340
+GPR[SPVS]-1659903296340
+GPR[SPVAP]-1659903296340
+GPR[EPVAP]-1659903298483
+GPR[SPVS]-1659903298483
+GPR[SPVAP]-1659903298483
+GPR[EPVAP]-1659903302686
+GPR[SPVATF]-1659903302686
+GPR[EPVATF]-1659903302748
+GPR[SPVATR]-1659903302748
+GPR[EPVATR]-1659903354720
+GPR[EPVS]-1659903354720
+GPR[SPVESU]-1659903354720
+GPR[EPVESU]-1659903354721
+GPR[EPVA]-1659903354721
+GPR[SPS]-1659903354721
+GPR[EPS]-1659903354728
+GPR[SPS]-1659903354728
+GPR[EPS]-1659903354734
+GPR[SPVA]-1659903354734
+GPR[SPVS]-1659903354735
+GPR[SPVAP]-1659903354735
+GPR[EPVAP]-1659903358926
+GPR[SPVATF]-1659903358926
+GPR[EPVATF]-1659903358995
+GPR[SPVATR]-1659903358995
+GPR[EPVATR]-1659903410711
+diff --git a/src/com/google/javascript/rhino/jstype/RecordType.java b/src/com/google/javascript/rhino/jstype/RecordType.java
+old mode 100755
+new mode 100644
+index 7289803e..9c61b021
+--- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -137,22 +137,7 @@ class RecordType extends PrototypeObjectType {
+         propertyNode);
+   }
+ 
+-  @Override
+-  public JSType getLeastSupertype(JSType that) {
+-    if (!that.isRecordType()) {
+-      return super.getLeastSupertype(that);
+-    }
+-    RecordTypeBuilder builder = new RecordTypeBuilder(registry);
+-    for (String property : properties.keySet()) {
+-      if (that.toMaybeRecordType().hasProperty(property) &&
+-          that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(
+-              getPropertyType(property))) {
+-        builder.addProperty(property, getPropertyType(property),
+-            getPropertyNode(property));
+-      }
+-    }
+-    return builder.build();
+-  }
++  
+   JSType getGreatestSubtypeHelper(JSType that) {
+     if (that.isRecordType()) {
+       RecordType thatRecord = that.toMaybeRecordType();
+GPR[PF]-1659903410711
+Saving patch at: /experiment_home///results/TBar/Closure/46/seed_262/NormalFLTBar/StatementRemover/FixedBugs/Closure_46/Patch_292969_9_cp4_ts_1659903410711.txt
+GPR[EPVS]-1659903410759
+GPR[SPVESU]-1659903410759
+GPR[EPVESU]-1659903410760
+GPR[EPVA]-1659903410760
+GPR[SPS]-1659903410761
+GPR[EPS]-1659903410768
+GPR[ESUN]-1659903410768
+13:16:50.768 [main] INFO edu.lu.uni.serval.tbar.TBarFixer - =======TBar: Finish off fixing======
+GPR[EFP]-1659903410768
+Succeeded to fix bug Closure_46
+Forcing exit:
+End running Closure/46 results at /experiment_home///results/TBar/Closure/46/seed_262/
+\n\nNode: host-52\n
+\n\nDate: Sun 07 Aug 2022 01:16:50 PM PDT\n
+Removing checked out dir script/workingdir/TBar/Closure_46
+GPR[SSLE]-1659903411497
+GPR[ESLE]-1659903471504
