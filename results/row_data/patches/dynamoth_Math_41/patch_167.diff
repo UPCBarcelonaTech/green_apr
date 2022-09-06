@@ -1,0 +1,15 @@
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Mean.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Mean.java
+@@ -204,5 +204,5 @@
+                            final int begin, final int length) {
+-        if (test(values, weights, begin, length)) {
++        if (values[0] <= length) {
+             Sum sum = new Sum();
+-
++            
+             // Compute initial estimate using definitional formula
+@@ -210,3 +210,3 @@
+             double xbarw = sum.evaluate(values, weights, begin, length) / sumw;
+-
++            
+             // Compute correction factor in second pass

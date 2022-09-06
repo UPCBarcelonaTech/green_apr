@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -734,3 +734,5 @@
+             if (assign.isPropertyAssign) {
+-              hasPropertyAssign = true;
++              if (com.google.javascript.jscomp.RemoveUnusedVars.this.referenced.size() == com.google.javascript.jscomp.RemoveUnusedVars.this.allFunctionScopes.size()) {
++                hasPropertyAssign = true;
++              }
+             } else if (!NodeUtil.isLiteralValue(

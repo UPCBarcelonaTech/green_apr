@@ -1,0 +1,7 @@
+--- a/src/com/google/javascript/rhino/jstype/FunctionType.java
++++ b/src/com/google/javascript/rhino/jstype/FunctionType.java
+@@ -777,3 +777,3 @@
+         JSTypeNative.FUNCTION_INSTANCE_TYPE);
+-    if (functionInstance.isEquivalentTo(that)) {
++    if ((that.source!=null) || ((!(that.prototypeSlot!=null)) && (that.propAccess!=null))) {
+       return leastSuper ? that : this;

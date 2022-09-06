@@ -1,0 +1,14 @@
+--- /src/com/google/javascript/jscomp/ClosureCodingConvention.java
++++ /src/com/google/javascript/jscomp/ClosureCodingConvention.java
+@@ -193,9 +193,9 @@
+       if (callee != null && callee.getType() == Token.GETPROP) {
+         String qualifiedName = callee.getQualifiedName();
+ // start of generated patch
+-if(functionName.equals(PROTOTYPE_PROPERTY)){
++if(functionName.equals(qualifiedName)){
+ Node target=callee.getNext();
+-if(target!=null){
++if(target!=null&&target.getType()==Token.STRING){
+ className=target.getString();
+ }
+ }

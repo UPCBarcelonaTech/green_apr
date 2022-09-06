@@ -1,0 +1,9 @@
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseAbstractUnivariateRealSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseAbstractUnivariateRealSolver.java
+@@ -295,3 +295,5 @@
+         } catch (MaxCountExceededException e) {
+-            throw new TooManyEvaluationsException(e.getMax());
++            if (this.getFunctionValueAccuracy() == this.DEFAULT_FUNCTION_VALUE_ACCURACY) {
++                throw new TooManyEvaluationsException(e.getMax());
++            }
+         }

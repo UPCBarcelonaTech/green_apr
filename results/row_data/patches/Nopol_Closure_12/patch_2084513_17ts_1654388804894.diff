@@ -1,0 +1,11 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -259,4 +259,6 @@
+     }
+-    if (!escaped.contains(var)) {
+-      use.mayUseMap.put(var, node);
++    if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.size() <= 1) {
++      if (!escaped.contains(var)) {
++        use.mayUseMap.put(var, node);
++      }
+     }

@@ -1,0 +1,21 @@
+--- a/src/com/google/javascript/jscomp/InlineFunctions.java
++++ b/src/com/google/javascript/jscomp/InlineFunctions.java
+@@ -691,10 +691,12 @@
+       // Try again without Block inlining references
+-      if (fs.hasBlockInliningReferences()) {
+-        fs.setRemove(false);
+-        fs.removeBlockInliningReferences();
+-        if (!fs.hasReferences() || !inliningLowersCost(fs)) {
++      if (fs.references.size() <= 2) {
++        if (fs.hasBlockInliningReferences()) {
++          fs.setRemove(false);
++          fs.removeBlockInliningReferences();
++          if (!fs.hasReferences() || !inliningLowersCost(fs)) {
++            return false;
++          }
++        } else {
+           return false;
+         }
+-      } else {
+-        return false;
+       }

@@ -1,0 +1,62 @@
+--- a/src/com/google/javascript/jscomp/GlobalNamespace.java
++++ b/src/com/google/javascript/jscomp/GlobalNamespace.java
+@@ -634,24 +634,25 @@
+       Ref.Type type = Ref.Type.DIRECT_GET;
+-      if (parent != null) {
+-        switch (parent.getType()) {
+-          case Token.IF:
+-          case Token.TYPEOF:
+-          case Token.VOID:
+-          case Token.NOT:
+-          case Token.BITNOT:
+-          case Token.POS:
+-          case Token.NEG:
++      if (((com.google.javascript.jscomp.GlobalNamespace.this.nameMap.size()) != (com.google.javascript.jscomp.GlobalNamespace.this.globalNames.size())) || ((name.length() <= 2) && (parent != null))) {
++        if (parent != null) {
++          switch (parent.getType()) {
++            case Token.IF:
++            case Token.TYPEOF:
++            case Token.VOID:
++            case Token.NOT:
++            case Token.BITNOT:
++            case Token.POS:
++            case Token.NEG:
+             break;
+-          case Token.CALL:
++            case Token.CALL:
+             type = n == parent.getFirstChild()
+-                   ? Ref.Type.CALL_GET
+-                   : Ref.Type.ALIASING_GET;
++            ? Ref.Type.CALL_GET
++            : Ref.Type.ALIASING_GET;
+             break;
+-          case Token.NEW:
++            case Token.NEW:
+             type = n == parent.getFirstChild()
+-                   ? Ref.Type.DIRECT_GET
+-                   : Ref.Type.ALIASING_GET;
++            ? Ref.Type.DIRECT_GET
++            : Ref.Type.ALIASING_GET;
+             break;
+-          case Token.OR:
+-          case Token.AND:
++            case Token.OR:
++            case Token.AND:
+             // This node is x or y in (x||y) or (x&&y). We only know that an
+@@ -662,3 +663,3 @@
+             break;
+-          case Token.HOOK:
++            case Token.HOOK:
+             if (n != parent.getFirstChild()) {
+@@ -670,8 +671,9 @@
+             break;
+-          case Token.DELPROP:
++            case Token.DELPROP:
+             type = Ref.Type.DELETE_PROP;
+             break;
+-          default:
++            default:
+             type = Ref.Type.ALIASING_GET;
+             break;
++          }
+         }

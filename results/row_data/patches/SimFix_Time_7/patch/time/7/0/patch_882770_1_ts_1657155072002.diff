@@ -1,0 +1,14 @@
+--- /src/main/java/org/joda/time/format/DateTimeFormatter.java
++++ /src/main/java/org/joda/time/format/DateTimeFormatter.java
+@@ -706,10 +706,9 @@
+         long instantMillis = instant.getMillis();
+         Chronology chrono = instant.getChronology();
+ // start of generated patch
+-setDate(instantLocal);
+ long instantLocal=instantMillis+chrono.getZone().getOffset(instantMillis);
+ chrono=selectChronology(chrono);
+-long defaultYear=chrono.year().get(instantLocal);
++int defaultYear=chrono.year().get(instantMillis);
+ // end of generated patch
+ /* start of original code
+         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);

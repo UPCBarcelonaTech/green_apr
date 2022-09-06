@@ -1,0 +1,44 @@
+--- script/workingdir/jGenProg/Closure_21/src/com/google/javascript/jscomp/CheckSideEffectsjava
++++ script/workingdir/jGenProg/Closure_21/src/com/google/javascript/jscomp/CheckSideEffectsjava
+@@ -117,6 +117,18 @@
+-			if (n == parent.getLastChild()) {
+-				for (com.google.javascript.rhino.Node an : parent.getAncestors()) {
+-					int ancestorType = an.getType();
+-					if (ancestorType == com.google.javascript.rhino.Token.COMMA) { 						continue;}
+-					if ((ancestorType != com.google.javascript.rhino.Token.EXPR_RESULT) && (ancestorType != com.google.javascript.rhino.Token.BLOCK)) { 						return;} else
+-						break;
++
++
++
++
++
++			if (n.isFunction()) {
++				if (com.google.javascript.jscomp.NodeUtil.isFunctionDeclaration(n)) {
++					// Rewrite: function f() {} ==> var f = function() {}
++					com.google.javascript.rhino.Node fnNameNode = n.getFirstChild();
++
++					com.google.javascript.rhino.Node name = com.google.javascript.rhino.IR.name(fnNameNode.getString()).srcref(fnNameNode);
++					com.google.javascript.rhino.Node var = com.google.javascript.rhino.IR.var(name).srcref(n);
++
++					fnNameNode.setString("");
++					// Add the VAR, remove the FUNCTION
++					n.getParent().replaceChild(n, var);
++					// readd the function as a function expression
++					name.addChildToFront(n);
+@@ -124,3 +135,0 @@
+-			}
+-		} else if ((parent.getType() != com.google.javascript.rhino.Token.EXPR_RESULT) && (parent.getType() != com.google.javascript.rhino.Token.BLOCK)) {
+-			if (!(((parent.getType() == com.google.javascript.rhino.Token.FOR) && (parent.getChildCount() == 4)) && ((n == parent.getFirstChild()) || (n == parent.getFirstChild().getNext().getNext())))) {
+@@ -128,10 +137 @@
+-			}
+-		}
+-		if (
+-		isSimpleOp || (!com.google.javascript.jscomp.NodeUtil.mayHaveSideEffects(n, t.getCompiler()))) {
+-			java.lang.String msg = "This code lacks side-effects. Is there a bug?";
+-			if (n.isString()) {
+-				msg = "Is there a missing '+' on the previous line?";
+-			} else if (isSimpleOp) {
+-				msg = ("The result of the '" + com.google.javascript.rhino.Token.name(n.getType()).toLowerCase()) + 
+-				"' operator is not being used.";
++			}} else if ((parent.getType() != com.google.javascript.rhino.Token.EXPR_RESULT) && (parent.getType() != com.google.javascript.rhino.Token.BLOCK)) { 			if (!(((parent.getType() == com.google.javascript.rhino.Token.FOR) && (parent.getChildCount() == 4)) && ((n == parent.getFirstChild()) || (n == parent.getFirstChild().getNext().getNext())))) { 				return;}} 		if (isSimpleOp || (!com.google.javascript.jscomp.NodeUtil.mayHaveSideEffects(n, t.getCompiler()))) { 			java.lang.String msg = "This code lacks side-effects. Is there a bug?"; 			if (n.isString()) { 				msg = "Is there a missing '+' on the previous line?";} else if (isSimpleOp) { 				msg = ("The result of the '" + com.google.javascript.rhino.Token.name(n.getType()).toLowerCase()) + "' operator is not being used.";
+

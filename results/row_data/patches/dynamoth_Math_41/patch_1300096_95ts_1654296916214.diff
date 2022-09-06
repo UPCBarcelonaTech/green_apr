@@ -1,0 +1,17 @@
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+@@ -321,6 +321,10 @@
+                 var = 0.0;
+-            } else if (length > 1) {
+-                Mean mean = new Mean();
+-                double m = mean.evaluate(values, weights, begin, length);
+-                var = evaluate(values, weights, m, begin, length);
++            } else {
++                if ((values[0] <= length) && this.isBiasCorrected) {
++                    if (length > 1) {
++                        Mean mean = new Mean();
++                        double m = mean.evaluate(values, weights, begin, length);
++                        var = evaluate(values, weights, m, begin, length);
++                    }
++                }
+             }

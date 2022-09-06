@@ -1,0 +1,11 @@
+--- a/src/com/google/javascript/jscomp/VarCheck.java
++++ b/src/com/google/javascript/jscomp/VarCheck.java
+@@ -186,4 +186,6 @@
+         // The extern checks are stricter, don't report a second error.
+-        if (!strictExternCheck || !t.getInput().isExtern()) {
+-          t.report(n, UNDEFINED_VAR_ERROR, varName);
++        if ((!(com.google.javascript.jscomp.VarCheck.this.varsToDeclareInExterns.isEmpty())) || (varName.length() <= 1)) {
++          if (!strictExternCheck || !t.getInput().isExtern()) {
++            t.report(n, UNDEFINED_VAR_ERROR, varName);
++          }
+         }

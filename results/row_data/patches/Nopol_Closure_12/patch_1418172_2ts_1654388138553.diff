@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -227,3 +227,5 @@
+           if (!conditional) {
+-            removeFromUseIfLocal(name.getString(), output);
++            if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.isEmpty()) {
++              removeFromUseIfLocal(name.getString(), output);
++            }
+           }

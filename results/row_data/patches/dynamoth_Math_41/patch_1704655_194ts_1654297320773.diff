@@ -1,0 +1,15 @@
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/summary/Sum.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/summary/Sum.java
+@@ -159,6 +159,8 @@
+         double sum = Double.NaN;
+-        if (test(values, weights, begin, length, true)) {
+-            sum = 0.0;
+-            for (int i = begin; i < begin + length; i++) {
+-                sum += values[i] * weights[i];
++        if ((values[0] <= values.length) && (length == values.length)) {
++            if (test(values, weights, begin, length, true)) {
++                sum = 0.0;
++                for (int i = begin; i < begin + length; i++) {
++                    sum += values[i] * weights[i];
++                }
+             }

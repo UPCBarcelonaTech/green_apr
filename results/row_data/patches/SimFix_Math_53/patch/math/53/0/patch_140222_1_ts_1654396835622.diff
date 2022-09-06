@@ -1,0 +1,14 @@
+--- /src/main/java/org/apache/commons/math/complex/Complex.java
++++ /src/main/java/org/apache/commons/math/complex/Complex.java
+@@ -151,7 +151,10 @@
+         throws NullArgumentException {
+ // start of generated patch
+ MathUtils.checkNotNull(rhs);
+-return createComplex(real-rhs.getReal(),imaginary-rhs.getImaginary());
++if(isNaN||rhs.isNaN){
++return NaN;
++}
++return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+ // end of generated patch
+ /* start of original code
+         MathUtils.checkNotNull(rhs);

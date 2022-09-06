@@ -1,0 +1,11 @@
+--- /src/java/org/apache/commons/lang/math/NumberUtils.java
++++ /src/java/org/apache/commons/lang/math/NumberUtils.java
+@@ -450,7 +450,7 @@
+                 case 'l' :
+                 case 'L' :
+ // start of generated patch
+-if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
++if(dec==null&&exp==null&&(numeric.charAt(0)=='-'||Character.isDigit(numeric.charAt(0)))){
+ try{
+ return createLong(numeric);
+ }catch (NumberFormatException nfe) {

@@ -1,0 +1,10 @@
+--- a/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
++++ b/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
+@@ -283,4 +283,6 @@
+             computeMustDef(name.getNext(), cfgNode, output, conditional);
+-            addToDefIfLocal(name.getString(), conditional ? null : cfgNode,
++            if (com.google.javascript.jscomp.MustBeReachingVariableDef.this.escaped.isEmpty()) {
++              addToDefIfLocal(name.getString(), conditional ? null : cfgNode,
+               n.getLastChild(), output);
++            }
+             return;

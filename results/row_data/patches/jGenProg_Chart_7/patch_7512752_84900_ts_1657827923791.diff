@@ -1,0 +1,431 @@
+--- script/workingdir/jGenProg/Chart_7/source/org/jfree/data/time/TimePeriodValuesjava
++++ script/workingdir/jGenProg/Chart_7/source/org/jfree/data/time/TimePeriodValuesjava
+@@ -317,17 +316,0 @@
+-				this.minEndIndex = index;
+-			}
+-		} else 
+-		{
+-			this.minEndIndex = index;
+-		}
+-
+-		if (this.maxEndIndex >= 0) {
+-			long maxEnd = getDataItem(this.maxEndIndex).getPeriod().getEnd().getTime();
+-
+-			if (end > maxEnd) {
+-				this.maxEndIndex = index;
+-			}
+-		} else 
+-		{
+-			this.maxEndIndex = index;
+-		}
+@@ -335 +317,0 @@
+-	}
+@@ -337,15 +318,0 @@
+-	/**
+-	 * Recalculates the bounds for the collection of items.
+-	 */
+-	private void recalculateBounds() {
+-		this.minStartIndex = -1;
+-		this.minMiddleIndex = -1;
+-		this.minEndIndex = -1;
+-		this.maxStartIndex = -1;
+-		this.maxMiddleIndex = -1;
+-		this.maxEndIndex = -1;
+-		for (int i = 0; i < this.data.size(); i++) {
+-			org.jfree.data.time.TimePeriodValue tpv = ((org.jfree.data.time.TimePeriodValue) (this.data.get(i)));
+-			updateBounds(tpv.getPeriod(), i);
+-		}
+-	}
+@@ -353 +320,222 @@
+-	/**
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++				this.data.remove(0); 				this.minEndIndex = index;}} else { 			this.minEndIndex = index;} 		if (this.maxEndIndex >= 0) { 			long maxEnd = getDataItem(this.maxEndIndex).getPeriod().getEnd().getTime(); 			if (end > maxEnd) { 				this.maxEndIndex = index;}} else { 			this.maxEndIndex = index;}} 	/**
++	 * Recalculates the bounds for the collection of items.
++	 */ 	private void recalculateBounds() { 		this.minStartIndex = -1; 		this.minMiddleIndex = -1; 		this.minEndIndex = -1; 		this.maxStartIndex = -1; 		this.maxMiddleIndex = -1; 		this.maxEndIndex = -1; 		for (int i = 0; i < this.data.size(); i++) { 			org.jfree.data.time.TimePeriodValue tpv = ((org.jfree.data.time.TimePeriodValue) (this.data.get(i))); 			updateBounds(tpv.getPeriod(), i);}} 	/**
+@@ -362,6 +550 @@
+-	 */ 	public void add(org.jfree.data.time.TimePeriod period, double value) {
+-		org.jfree.data.time.TimePeriodValue item = new org.jfree.data.time.TimePeriodValue(period, value);
+-		add(item);
+-	}
+-
+-	/**
++	 */ 	public void add(org.jfree.data.time.TimePeriod period, double value) { 		org.jfree.data.time.TimePeriodValue item = new org.jfree.data.time.TimePeriodValue(period, value); 		add(item);} 	/**
+@@ -375,5 +558 @@
+-	 */ 	public void add(org.jfree.data.time.TimePeriod period, java.lang.Number value) { 		org.jfree.data.time.TimePeriodValue item = new org.jfree.data.time.TimePeriodValue(period, value);
+-		add(item);
+-	}
+-
+-	/**
++	 */ 	public void add(org.jfree.data.time.TimePeriod period, java.lang.Number value) { 		org.jfree.data.time.TimePeriodValue item = new org.jfree.data.time.TimePeriodValue(period, value); 		add(item);} 	/**
+@@ -387,6 +566 @@
+-	 */ 	public void update(int index, java.lang.Number value) { 		org.jfree.data.time.TimePeriodValue item = getDataItem(index);
+-		item.setValue(value);
+-		fireSeriesChanged();
+-	}
+-
+-	/**
++	 */ 	public void update(int index, java.lang.Number value) { 		org.jfree.data.time.TimePeriodValue item = getDataItem(index); 		item.setValue(value); 		fireSeriesChanged();} 	/**
+@@ -400,8 +574 @@
+-	 */ 	public void delete(int start, int end) { 		for (int i = 0; i <= (end - start); i++) {
+-			this.data.remove(start);
+-		}
+-		recalculateBounds();
+-		fireSeriesChanged();
+-	}
+-
+-	/**
++	 */ 	public void delete(int start, int end) { 		for (int i = 0; i <= (end - start); i++) { 			this.data.remove(start);} 		recalculateBounds(); 		fireSeriesChanged();} 	/**
+@@ -413,33 +580 @@
+-	 */
+-	public boolean equals(java.lang.Object obj) {
+-		if (obj == this) {
+-			return true;
+-		}
+-		if (!(obj instanceof org.jfree.data.time.TimePeriodValues)) {
+-			return false;
+-		}
+-		if (!super.equals(obj)) {
+-			return false;
+-		}
+-		org.jfree.data.time.TimePeriodValues that = ((org.jfree.data.time.TimePeriodValues) (obj));
+-		if (!org.jfree.chart.util.ObjectUtilities.equal(this.getDomainDescription(), 
+-		that.getDomainDescription())) {
+-			return false;
+-		}
+-		if (!org.jfree.chart.util.ObjectUtilities.equal(this.getRangeDescription(), 
+-		that.getRangeDescription())) {
+-			return false;
+-		}
+-		int count = getItemCount();
+-		if (count != that.getItemCount()) {
+-			return false;
+-		}
+-		for (int i = 0; i < count; i++) {
+-			if (!getDataItem(i).equals(that.getDataItem(i))) {
+-				return false;
+-			}
+-		}
+-		return true;
+-	}
+-
+-	/**
++	 */ 	public boolean equals(java.lang.Object obj) { 		if (obj == this) { 			return true;} 		if (!(obj instanceof org.jfree.data.time.TimePeriodValues)) { 			return false;} 		if (!super.equals(obj)) { 			return false;} 		org.jfree.data.time.TimePeriodValues that = ((org.jfree.data.time.TimePeriodValues) (obj)); 		if (!org.jfree.chart.util.ObjectUtilities.equal(this.getDomainDescription(), that.getDomainDescription())) { 			return false;} 		if (!org.jfree.chart.util.ObjectUtilities.equal(this.getRangeDescription(), that.getRangeDescription())) { 			return false;} 		int count = getItemCount(); 		if (count != that.getItemCount()) { 			return false;} 		for (int i = 0; i < count; i++) { 			if (!getDataItem(i).equals(that.getDataItem(i))) { 				return false;}} 		return true;} 	/**
+@@ -449,16 +584 @@
+-	 */
+-	public int hashCode() {
+-		int result;
+-		result = (this.domain != null) ? this.domain.hashCode() : 0;
+-		result = (29 * result) + (this.range != null ? this.range.hashCode() : 0);
+-		result = (29 * result) + this.data.hashCode();
+-		result = (29 * result) + this.minStartIndex;
+-		result = (29 * result) + this.maxStartIndex;
+-		result = (29 * result) + this.minMiddleIndex;
+-		result = (29 * result) + this.maxMiddleIndex;
+-		result = (29 * result) + this.minEndIndex;
+-		result = (29 * result) + this.maxEndIndex;
+-		return result;
+-	}
+-
+-	/**
++	 */ 	public int hashCode() { 		int result; 		result = (this.domain != null) ? this.domain.hashCode() : 0; 		result = (29 * result) + (this.range != null ? this.range.hashCode() : 0); 		result = (29 * result) + this.data.hashCode(); 		result = (29 * result) + this.minStartIndex; 		result = (29 * result) + this.maxStartIndex; 		result = (29 * result) + this.minMiddleIndex; 		result = (29 * result) + this.maxMiddleIndex; 		result = (29 * result) + this.minEndIndex; 		result = (29 * result) + this.maxEndIndex; 		return result;} 	/**
+@@ -478,7 +598 @@
+-	 */
+-	public java.lang.Object clone() throws java.lang.CloneNotSupportedException {
+-		java.lang.Object clone = createCopy(0, getItemCount() - 1);
+-		return clone;
+-	}
+-
+-	/**
++	 */ 	public java.lang.Object clone() throws java.lang.CloneNotSupportedException { 		java.lang.Object clone = createCopy(0, getItemCount() - 1); 		return clone;} 	/**
+@@ -495,23 +609 @@
+-	 */ 	public org.jfree.data.time.TimePeriodValues createCopy(int start, int end) throws 
+-	java.lang.CloneNotSupportedException {
+-
+-		org.jfree.data.time.TimePeriodValues copy = ((org.jfree.data.time.TimePeriodValues) (super.clone()));
+-
+-		copy.data = new java.util.ArrayList();
+-		if (this.data.size() > 0) {
+-			for (int index = start; index <= end; index++) {
+-				org.jfree.data.time.TimePeriodValue item = ((org.jfree.data.time.TimePeriodValue) (this.data.get(index)));
+-				org.jfree.data.time.TimePeriodValue clone = ((org.jfree.data.time.TimePeriodValue) (item.clone()));
+-				try {
+-					copy.add(clone);
+-				}
+-				 catch (org.jfree.data.general.SeriesException e) {
+-					java.lang.System.err.println("Failed to add cloned item.");
+-				}
+-			}
+-		}
+-		return copy;
+-
+-	}
+-
+-	/**
++	 */ 	public org.jfree.data.time.TimePeriodValues createCopy(int start, int end) throws java.lang.CloneNotSupportedException { 		org.jfree.data.time.TimePeriodValues copy = ((org.jfree.data.time.TimePeriodValues) (super.clone())); 		copy.data = new java.util.ArrayList(); 		if (this.data.size() > 0) { 			for (int index = start; index <= end; index++) { 				org.jfree.data.time.TimePeriodValue item = ((org.jfree.data.time.TimePeriodValue) (this.data.get(index))); 				org.jfree.data.time.TimePeriodValue clone = ((org.jfree.data.time.TimePeriodValue) (item.clone())); 				try { 					copy.add(clone);} catch (org.jfree.data.general.SeriesException e) { 					java.lang.System.err.println("Failed to add cloned item.");}}} 		return copy;} 	/**
+@@ -521,6 +613 @@
+-	 */
+-	public int getMinStartIndex() {
+-		return this.minStartIndex;
+-	}
+-
+-	/**
++	 */ 	public int getMinStartIndex() { 		return this.minStartIndex;} 	/**
+@@ -530,6 +617 @@
+-	 */
+-	public int getMaxStartIndex() {
+-		return this.maxStartIndex;
+-	}
+-
+-	/**
++	 */ 	public int getMaxStartIndex() { 		return this.maxStartIndex;} 	/**
+@@ -540,6 +622 @@
+-	 */
+-	public int getMinMiddleIndex() {
+-		return this.minMiddleIndex;
+-	}
+-
+-	/**
++	 */ 	public int getMinMiddleIndex() { 		return this.minMiddleIndex;} 	/**
+@@ -550,6 +627 @@
+-	 */
+-	public int getMaxMiddleIndex() {
+-		return this.maxMiddleIndex;
+-	}
+-
+-	/**
++	 */ 	public int getMaxMiddleIndex() { 		return this.maxMiddleIndex;} 	/**
+@@ -559,6 +631 @@
+-	 */
+-	public int getMinEndIndex() {
+-		return this.minEndIndex;
+-	}
+-
+-	/**
++	 */ 	public int getMinEndIndex() { 		return this.minEndIndex;} 	/**
+@@ -568,4 +635 @@
+-	 */
+-	public int getMaxEndIndex() {
+-		return this.maxEndIndex;
+-	}}
+\ No newline at end of file
++	 */ 	public int getMaxEndIndex() { 		return this.maxEndIndex;}}
+\ No newline at end of file
+

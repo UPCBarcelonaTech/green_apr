@@ -1,0 +1,25 @@
+--- /source/org/jfree/chart/plot/MultiplePiePlot.java
++++ /source/org/jfree/chart/plot/MultiplePiePlot.java
+@@ -143,15 +143,15 @@
+     public MultiplePiePlot(CategoryDataset dataset) {
+         super();
+ // start of generated patch
+-fireChangeEvent();
+-this.dataset=dataset;
+-PiePlot piePlot=new PiePlot(null);
+-if(pieChart==null){
+-throw new IllegalArgumentException("Null \'pieChart\' argument.");
++if(this.dataset!=null){
++this.dataset.removeChangeListener(this);
+ }
+-if(!(pieChart.getPlot() instanceof PiePlot)){
+-throw new IllegalArgumentException("The \'pieChart\' argument must "+"be a chart based on a PiePlot.");
++if(dataset!=null){
++setDatasetGroup(dataset.getGroup());
++dataset.addChangeListener(this);
+ }
++this.dataset=dataset;
++PiePlot piePlot=new PiePlot(null);
+ this.pieChart=new JFreeChart(piePlot);
+ // end of generated patch
+ /* start of original code

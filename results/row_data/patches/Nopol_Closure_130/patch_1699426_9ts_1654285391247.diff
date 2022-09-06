@@ -1,0 +1,27 @@
+--- a/src/com/google/javascript/jscomp/CollapseProperties.java
++++ b/src/com/google/javascript/jscomp/CollapseProperties.java
+@@ -171,12 +171,14 @@
+ 
+-      if (name.globalSets == 1 && name.localSets == 0 &&
+-          name.aliasingGets > 0) {
+-        // {@code name} meets condition (b). Find all of its local aliases
+-        // and try to inline them.
+-        List<Ref> refs = Lists.newArrayList(name.getRefs());
+-        for (Ref ref : refs) {
+-          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
+-            // {@code name} meets condition (c). Try to inline it.
+-            if (inlineAliasIfPossible(ref, namespace)) {
+-              name.removeRef(ref);
++      if (!(com.google.javascript.jscomp.CollapseProperties.this.collapsePropertiesOnExternTypes)) {
++        if (name.globalSets == 1 && name.localSets == 0 &&
++        name.aliasingGets > 0) {
++          // {@code name} meets condition (b). Find all of its local aliases
++          // and try to inline them.
++          List<Ref> refs = Lists.newArrayList(name.getRefs());
++          for (Ref ref : refs) {
++            if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
++              // {@code name} meets condition (c). Try to inline it.
++              if (inlineAliasIfPossible(ref, namespace)) {
++                name.removeRef(ref);
++              }
+             }

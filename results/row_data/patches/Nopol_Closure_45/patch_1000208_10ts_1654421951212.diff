@@ -1,0 +1,34 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -713,3 +713,3 @@
+         Var var = maybeUnreferenced.get(current);
+-        if (referenced.contains(var)) {
++        if ((changes) || (((com.google.javascript.jscomp.RemoveUnusedVars.this.assignsByNode.size()) != (0)) && (!(com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals)))) {
+           maybeUnreferenced.remove(current);
+@@ -719,8 +719,8 @@
+           boolean hasPropertyAssign = false;
+-
++          
+           if (var.getParentNode().isVar() &&
+-              !NodeUtil.isForIn(var.getParentNode().getParent())) {
++          !NodeUtil.isForIn(var.getParentNode().getParent())) {
+             Node value = var.getInitialValue();
+             assignedToUnknownValue = value != null &&
+-                !NodeUtil.isLiteralValue(value, true);
++            !NodeUtil.isLiteralValue(value, true);
+           } else {
+@@ -730,3 +730,3 @@
+           }
+-
++          
+           for (Assign assign : assignsByVar.get(var)) {
+@@ -735,3 +735,3 @@
+             } else if (!NodeUtil.isLiteralValue(
+-                assign.assignNode.getLastChild(), true)) {
++            assign.assignNode.getLastChild(), true)) {
+               assignedToUnknownValue = true;
+@@ -739,3 +739,3 @@
+           }
+-
++          
+           if (assignedToUnknownValue && hasPropertyAssign) {

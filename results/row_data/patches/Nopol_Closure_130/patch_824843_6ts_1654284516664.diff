@@ -1,0 +1,15 @@
+--- a/src/com/google/javascript/jscomp/CollapseProperties.java
++++ b/src/com/google/javascript/jscomp/CollapseProperties.java
+@@ -177,6 +177,8 @@
+         for (Ref ref : refs) {
+-          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
+-            // {@code name} meets condition (c). Try to inline it.
+-            if (inlineAliasIfPossible(ref, namespace)) {
+-              name.removeRef(ref);
++          if ((!(com.google.javascript.jscomp.CollapseProperties.this.collapsePropertiesOnExternTypes)) || ((2) != (2))) {
++            if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
++              // {@code name} meets condition (c). Try to inline it.
++              if (inlineAliasIfPossible(ref, namespace)) {
++                name.removeRef(ref);
++              }
+             }

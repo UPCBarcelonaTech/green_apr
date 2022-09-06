@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -171,3 +171,5 @@
+       case Token.NAME:
+-        addToUseIfLocal(n.getString(), cfgNode, output);
++        if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.size() <= 1) {
++          addToUseIfLocal(n.getString(), cfgNode, output);
++        }
+         return;

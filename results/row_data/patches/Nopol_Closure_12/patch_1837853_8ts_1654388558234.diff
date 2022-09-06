@@ -1,0 +1,11 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -274,4 +274,6 @@
+     }
+-    if (!escaped.contains(var)) {
+-      use.mayUseMap.removeAll(var);
++    if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.isEmpty()) {
++      if (!escaped.contains(var)) {
++        use.mayUseMap.removeAll(var);
++      }
+     }

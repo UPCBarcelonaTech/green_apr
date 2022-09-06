@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/FunctionRewriter.java
++++ b/src/com/google/javascript/jscomp/FunctionRewriter.java
+@@ -87,3 +87,5 @@
+       for (Reduction reduction : reductions) {
+-        savings += reduction.estimateSavings();
++        if ((!((1 == reductions.size()) || (reducers.size() < reductions.size()))) && (root!=null)) {
++          savings += reduction.estimateSavings();
++        }
+       }

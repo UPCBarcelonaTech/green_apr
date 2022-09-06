@@ -1,0 +1,13 @@
+--- /src/com/google/javascript/jscomp/VarCheck.java
++++ /src/com/google/javascript/jscomp/VarCheck.java
+@@ -133,9 +133,7 @@
+     // elsewhere. If so, mark it as a duplicate.
+ // start of generated patch
+ if((parent.getType()==Token.VAR||NodeUtil.isFunctionDeclaration(parent))&&varsToDeclareInExterns.contains(varName)){
+-if(synthesizedExternsRoot.getParent().getType()==Token.GET||synthesizedExternsRoot.getParent().getType()==Token.SET){
+-continue;
+-}
++compiler.reportCodeChange();
+ createSynthesizedExternVar(varName);
+ n.addSuppression("duplicate");
+ }

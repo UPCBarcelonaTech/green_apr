@@ -1,0 +1,27 @@
+--- a/src/com/google/javascript/jscomp/InlineVariables.java
++++ b/src/com/google/javascript/jscomp/InlineVariables.java
+@@ -312,12 +312,14 @@
+             AliasCandidate candidate = aliasCandidates.get(nameNode);
+-            if (!staleVars.contains(candidate.alias) &&
+-                !isVarInlineForbidden(candidate.alias)) {
+-              Reference aliasInit;
+-              aliasInit = candidate.refInfo.getInitializingReference();
+-              Node value = aliasInit.getAssignedValue();
+-              Preconditions.checkNotNull(value);
+-              inlineWellDefinedVariable(candidate.alias,
+-                  value,
+-                  candidate.refInfo.references);
+-              staleVars.add(candidate.alias);
++            if ((refCount) != (4)) {
++              if (!staleVars.contains(candidate.alias) &&
++              !isVarInlineForbidden(candidate.alias)) {
++                Reference aliasInit;
++                aliasInit = candidate.refInfo.getInitializingReference();
++                Node value = aliasInit.getAssignedValue();
++                Preconditions.checkNotNull(value);
++                inlineWellDefinedVariable(candidate.alias,
++                value,
++                candidate.refInfo.references);
++                staleVars.add(candidate.alias);
++              }
+             }

@@ -1,0 +1,755 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8 -Duser.language=en-US -Duser.country=US -Duser.language=en
+com.google.javascript.rhino.NodeTest#testCheckTreeEqualsStringDifferent
+.
+Time: 1.135
+
+OK (1 test)
+
+com.google.javascript.jscomp.IntegrationTest#testIssue724
+.E
+Time: 1.868
+There was 1 failure:
+1) testIssue724(com.google.javascript.jscomp.IntegrationTest)
+junit.framework.AssertionFailedError: 
+Expected: isFunction=function(a){var b={};return a&&"[object Function]"===b.b.a(a)}
+Result: isFunction=function(a){return a&&"[object Function]"===(void 0).a(a)}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: input0]
+        EXPR_RESULT
+            ASSIGN
+                NAME isFunction
+                FUNCTION 
+                    NAME 
+                    PARAM_LIST
+                        NAME a
+                    BLOCK
+                        VAR
+                            NAME b
+                                OBJECTLIT
+                        RETURN
+                            AND
+                                NAME a
+                                SHEQ
+                                    STRING [object Function]
+                                    CALL
+                                        GETPROP
+                                            GETPROP
+                                                NAME b
+                                                STRING b
+                                            STRING a
+                                        NAME a
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: i0]
+        EXPR_RESULT
+            ASSIGN
+                NAME isFunction
+                FUNCTION 
+                    NAME 
+                    PARAM_LIST
+                        NAME a
+                    BLOCK
+                        RETURN
+                            AND
+                                NAME a
+                                SHEQ
+                                    STRING [object Function]
+                                    CALL
+                                        GETPROP
+                                            VOID
+                                                NUMBER 0.0
+                                            STRING a
+                                        NAME a
+
+
+Subtree1: BLOCK
+    VAR
+        NAME b
+            OBJECTLIT
+    RETURN
+        AND
+            NAME a
+            SHEQ
+                STRING [object Function]
+                CALL
+                    GETPROP
+                        GETPROP
+                            NAME b
+                            STRING b
+                        STRING a
+                    NAME a
+
+
+Subtree2: BLOCK
+    RETURN
+        AND
+            NAME a
+            SHEQ
+                STRING [object Function]
+                CALL
+                    GETPROP
+                        VOID
+                            NUMBER 0.0
+                        STRING a
+                    NAME a
+
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertNull(Assert.java:233)
+	at com.google.javascript.jscomp.IntegrationTestCase.test(IntegrationTestCase.java:92)
+	at com.google.javascript.jscomp.IntegrationTestCase.test(IntegrationTestCase.java:74)
+	at com.google.javascript.jscomp.IntegrationTest.testIssue724(IntegrationTest.java:1687)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+	at fr.inria.lille.repair.MethodTestRunner.runTest(MethodTestRunner.java:44)
+	at fr.inria.lille.repair.MethodTestRunner.access$0(MethodTestRunner.java:37)
+	at fr.inria.lille.repair.MethodTestRunner$1.call(MethodTestRunner.java:20)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+com.google.javascript.jscomp.InlineObjectLiteralsTest#testObject12
+.E
+Time: 0.444
+There was 1 failure:
+1) testObject12(com.google.javascript.jscomp.InlineObjectLiteralsTest)
+junit.framework.AssertionFailedError: 
+Expected: function local(){var a;a={x:1,y:2};f(a.x,a.y2)}
+Result: function local(){var JSCompiler_object_inline_x_0;var JSCompiler_object_inline_y_1;var JSCompiler_object_inline_y2_2;JSCompiler_object_inline_x_0=1,JSCompiler_object_inline_y_1=2,JSCompiler_object_inline_y2_2=void 0,true;f(JSCompiler_object_inline_x_0,JSCompiler_object_inline_y2_2)}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: expected0]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME a
+                EXPR_RESULT
+                    ASSIGN
+                        NAME a
+                        OBJECTLIT
+                            STRING_KEY x
+                                NUMBER 1.0
+                            STRING_KEY y
+                                NUMBER 2.0
+                EXPR_RESULT
+                    CALL [free_call: 1]
+                        NAME f
+                        GETPROP
+                            NAME a
+                            STRING x
+                        GETPROP
+                            NAME a
+                            STRING y2
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: testcode]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME JSCompiler_object_inline_x_0
+                VAR
+                    NAME JSCompiler_object_inline_y_1
+                VAR
+                    NAME JSCompiler_object_inline_y2_2
+                EXPR_RESULT
+                    COMMA
+                        COMMA
+                            COMMA
+                                ASSIGN
+                                    NAME JSCompiler_object_inline_x_0
+                                    NUMBER 1.0
+                                ASSIGN
+                                    NAME JSCompiler_object_inline_y_1
+                                    NUMBER 2.0
+                            ASSIGN
+                                NAME JSCompiler_object_inline_y2_2
+                                VOID
+                                    NUMBER 0.0
+                        TRUE
+                EXPR_RESULT
+                    CALL [free_call: 1]
+                        NAME f
+                        NAME JSCompiler_object_inline_x_0
+                        NAME JSCompiler_object_inline_y2_2
+
+
+Subtree1: BLOCK
+    VAR
+        NAME a
+    EXPR_RESULT
+        ASSIGN
+            NAME a
+            OBJECTLIT
+                STRING_KEY x
+                    NUMBER 1.0
+                STRING_KEY y
+                    NUMBER 2.0
+    EXPR_RESULT
+        CALL [free_call: 1]
+            NAME f
+            GETPROP
+                NAME a
+                STRING x
+            GETPROP
+                NAME a
+                STRING y2
+
+
+Subtree2: BLOCK
+    VAR
+        NAME JSCompiler_object_inline_x_0
+    VAR
+        NAME JSCompiler_object_inline_y_1
+    VAR
+        NAME JSCompiler_object_inline_y2_2
+    EXPR_RESULT
+        COMMA
+            COMMA
+                COMMA
+                    ASSIGN
+                        NAME JSCompiler_object_inline_x_0
+                        NUMBER 1.0
+                    ASSIGN
+                        NAME JSCompiler_object_inline_y_1
+                        NUMBER 2.0
+                ASSIGN
+                    NAME JSCompiler_object_inline_y2_2
+                    VOID
+                        NUMBER 0.0
+            TRUE
+    EXPR_RESULT
+        CALL [free_call: 1]
+            NAME f
+            NAME JSCompiler_object_inline_x_0
+            NAME JSCompiler_object_inline_y2_2
+
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertNull(Assert.java:233)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:892)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:445)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:371)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:340)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:328)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testLocal(InlineObjectLiteralsTest.java:355)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testObject12(InlineObjectLiteralsTest.java:215)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+	at fr.inria.lille.repair.MethodTestRunner.runTest(MethodTestRunner.java:44)
+	at fr.inria.lille.repair.MethodTestRunner.access$0(MethodTestRunner.java:37)
+	at fr.inria.lille.repair.MethodTestRunner$1.call(MethodTestRunner.java:20)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+com.google.javascript.jscomp.InlineObjectLiteralsTest#testIssue724
+.E
+Time: 0.437
+There was 1 failure:
+1) testIssue724(com.google.javascript.jscomp.InlineObjectLiteralsTest)
+junit.framework.AssertionFailedError: 
+Expected: function local(){var getType;getType={};return functionToCheck&&getType.toString.apply(functionToCheck)==="[object Function]"}
+Result: function local(){var JSCompiler_object_inline_toString_0;JSCompiler_object_inline_toString_0=void 0,true;return functionToCheck&&JSCompiler_object_inline_toString_0.apply(functionToCheck)==="[object Function]"}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: expected0]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME getType
+                EXPR_RESULT
+                    ASSIGN
+                        NAME getType
+                        OBJECTLIT
+                RETURN
+                    AND
+                        NAME functionToCheck
+                        SHEQ
+                            CALL
+                                GETPROP
+                                    GETPROP
+                                        NAME getType
+                                        STRING toString
+                                    STRING apply
+                                NAME functionToCheck
+                            STRING [object Function]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: testcode]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME JSCompiler_object_inline_toString_0
+                EXPR_RESULT
+                    COMMA
+                        ASSIGN
+                            NAME JSCompiler_object_inline_toString_0
+                            VOID
+                                NUMBER 0.0
+                        TRUE
+                RETURN
+                    AND
+                        NAME functionToCheck
+                        SHEQ
+                            CALL
+                                GETPROP
+                                    NAME JSCompiler_object_inline_toString_0
+                                    STRING apply
+                                NAME functionToCheck
+                            STRING [object Function]
+
+
+Subtree1: NAME getType
+
+
+Subtree2: NAME JSCompiler_object_inline_toString_0
+
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertNull(Assert.java:233)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:892)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:445)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:371)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:340)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:328)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testLocal(InlineObjectLiteralsTest.java:355)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testSameLocal(InlineObjectLiteralsTest.java:360)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testIssue724(InlineObjectLiteralsTest.java:344)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+	at fr.inria.lille.repair.MethodTestRunner.runTest(MethodTestRunner.java:44)
+	at fr.inria.lille.repair.MethodTestRunner.access$0(MethodTestRunner.java:37)
+	at fr.inria.lille.repair.MethodTestRunner$1.call(MethodTestRunner.java:20)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+com.google.javascript.jscomp.InlineObjectLiteralsTest#testObject22
+.E
+Time: 0.453
+There was 1 failure:
+1) testObject22(com.google.javascript.jscomp.InlineObjectLiteralsTest)
+junit.framework.AssertionFailedError: 
+Expected: function local(){var a;for(;1;){f(a.x,a.y);a={x:1,y:1}}}
+Result: function local(){var JSCompiler_object_inline_x_0;var JSCompiler_object_inline_y_1;for(;1;){f(JSCompiler_object_inline_x_0,JSCompiler_object_inline_y_1);JSCompiler_object_inline_x_0=1,JSCompiler_object_inline_y_1=1,true}}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: expected0]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME a
+                FOR
+                    EMPTY
+                    NUMBER 1.0
+                    EMPTY
+                    BLOCK
+                        EXPR_RESULT
+                            CALL [free_call: 1]
+                                NAME f
+                                GETPROP
+                                    NAME a
+                                    STRING x
+                                GETPROP
+                                    NAME a
+                                    STRING y
+                        EXPR_RESULT
+                            ASSIGN
+                                NAME a
+                                OBJECTLIT
+                                    STRING_KEY x
+                                        NUMBER 1.0
+                                    STRING_KEY y
+                                        NUMBER 1.0
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: testcode]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME JSCompiler_object_inline_x_0
+                VAR
+                    NAME JSCompiler_object_inline_y_1
+                FOR
+                    EMPTY
+                    NUMBER 1.0
+                    EMPTY
+                    BLOCK
+                        EXPR_RESULT
+                            CALL [free_call: 1]
+                                NAME f
+                                NAME JSCompiler_object_inline_x_0
+                                NAME JSCompiler_object_inline_y_1
+                        EXPR_RESULT
+                            COMMA
+                                COMMA
+                                    ASSIGN
+                                        NAME JSCompiler_object_inline_x_0
+                                        NUMBER 1.0
+                                    ASSIGN
+                                        NAME JSCompiler_object_inline_y_1
+                                        NUMBER 1.0
+                                TRUE
+
+
+Subtree1: BLOCK
+    VAR
+        NAME a
+    FOR
+        EMPTY
+        NUMBER 1.0
+        EMPTY
+        BLOCK
+            EXPR_RESULT
+                CALL [free_call: 1]
+                    NAME f
+                    GETPROP
+                        NAME a
+                        STRING x
+                    GETPROP
+                        NAME a
+                        STRING y
+            EXPR_RESULT
+                ASSIGN
+                    NAME a
+                    OBJECTLIT
+                        STRING_KEY x
+                            NUMBER 1.0
+                        STRING_KEY y
+                            NUMBER 1.0
+
+
+Subtree2: BLOCK
+    VAR
+        NAME JSCompiler_object_inline_x_0
+    VAR
+        NAME JSCompiler_object_inline_y_1
+    FOR
+        EMPTY
+        NUMBER 1.0
+        EMPTY
+        BLOCK
+            EXPR_RESULT
+                CALL [free_call: 1]
+                    NAME f
+                    NAME JSCompiler_object_inline_x_0
+                    NAME JSCompiler_object_inline_y_1
+            EXPR_RESULT
+                COMMA
+                    COMMA
+                        ASSIGN
+                            NAME JSCompiler_object_inline_x_0
+                            NUMBER 1.0
+                        ASSIGN
+                            NAME JSCompiler_object_inline_y_1
+                            NUMBER 1.0
+                    TRUE
+
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertNull(Assert.java:233)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:892)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:445)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:371)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:340)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:328)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testLocal(InlineObjectLiteralsTest.java:355)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testObject22(InlineObjectLiteralsTest.java:288)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+	at fr.inria.lille.repair.MethodTestRunner.runTest(MethodTestRunner.java:44)
+	at fr.inria.lille.repair.MethodTestRunner.access$0(MethodTestRunner.java:37)
+	at fr.inria.lille.repair.MethodTestRunner$1.call(MethodTestRunner.java:20)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+com.google.javascript.jscomp.InlineObjectLiteralsTest#testObject10
+.E
+Time: 0.453
+There was 1 failure:
+1) testObject10(com.google.javascript.jscomp.InlineObjectLiteralsTest)
+junit.framework.AssertionFailedError: 
+Expected: function local(){var x={};var b=f();x={a:a,b:b};if(x.a)g(x.b)+x.c}
+Result: function local(){var JSCompiler_object_inline_a_0;var JSCompiler_object_inline_b_1;var JSCompiler_object_inline_c_2;var b=f();JSCompiler_object_inline_a_0=a,JSCompiler_object_inline_b_1=b,JSCompiler_object_inline_c_2=void 0,true;if(JSCompiler_object_inline_a_0)g(JSCompiler_object_inline_b_1)+JSCompiler_object_inline_c_2}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: expected0]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME x
+                        OBJECTLIT
+                VAR
+                    NAME b
+                        CALL [free_call: 1]
+                            NAME f
+                EXPR_RESULT
+                    ASSIGN
+                        NAME x
+                        OBJECTLIT
+                            STRING_KEY a
+                                NAME a
+                            STRING_KEY b
+                                NAME b
+                IF
+                    GETPROP
+                        NAME x
+                        STRING a
+                    BLOCK
+                        EXPR_RESULT
+                            ADD
+                                CALL [free_call: 1]
+                                    NAME g
+                                    GETPROP
+                                        NAME x
+                                        STRING b
+                                GETPROP
+                                    NAME x
+                                    STRING c
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [synthetic: 1] [input_id: InputId: testcode]
+        FUNCTION local
+            NAME local
+            PARAM_LIST
+            BLOCK
+                VAR
+                    NAME JSCompiler_object_inline_a_0
+                VAR
+                    NAME JSCompiler_object_inline_b_1
+                VAR
+                    NAME JSCompiler_object_inline_c_2
+                VAR
+                    NAME b
+                        CALL [free_call: 1]
+                            NAME f
+                EXPR_RESULT
+                    COMMA
+                        COMMA
+                            COMMA
+                                ASSIGN
+                                    NAME JSCompiler_object_inline_a_0
+                                    NAME a
+                                ASSIGN
+                                    NAME JSCompiler_object_inline_b_1
+                                    NAME b
+                            ASSIGN
+                                NAME JSCompiler_object_inline_c_2
+                                VOID
+                                    NUMBER 0.0
+                        TRUE
+                IF
+                    NAME JSCompiler_object_inline_a_0
+                    BLOCK
+                        EXPR_RESULT
+                            ADD
+                                CALL [free_call: 1]
+                                    NAME g
+                                    NAME JSCompiler_object_inline_b_1
+                                NAME JSCompiler_object_inline_c_2
+
+
+Subtree1: BLOCK
+    VAR
+        NAME x
+            OBJECTLIT
+    VAR
+        NAME b
+            CALL [free_call: 1]
+                NAME f
+    EXPR_RESULT
+        ASSIGN
+            NAME x
+            OBJECTLIT
+                STRING_KEY a
+                    NAME a
+                STRING_KEY b
+                    NAME b
+    IF
+        GETPROP
+            NAME x
+            STRING a
+        BLOCK
+            EXPR_RESULT
+                ADD
+                    CALL [free_call: 1]
+                        NAME g
+                        GETPROP
+                            NAME x
+                            STRING b
+                    GETPROP
+                        NAME x
+                        STRING c
+
+
+Subtree2: BLOCK
+    VAR
+        NAME JSCompiler_object_inline_a_0
+    VAR
+        NAME JSCompiler_object_inline_b_1
+    VAR
+        NAME JSCompiler_object_inline_c_2
+    VAR
+        NAME b
+            CALL [free_call: 1]
+                NAME f
+    EXPR_RESULT
+        COMMA
+            COMMA
+                COMMA
+                    ASSIGN
+                        NAME JSCompiler_object_inline_a_0
+                        NAME a
+                    ASSIGN
+                        NAME JSCompiler_object_inline_b_1
+                        NAME b
+                ASSIGN
+                    NAME JSCompiler_object_inline_c_2
+                    VOID
+                        NUMBER 0.0
+            TRUE
+    IF
+        NAME JSCompiler_object_inline_a_0
+        BLOCK
+            EXPR_RESULT
+                ADD
+                    CALL [free_call: 1]
+                        NAME g
+                        NAME JSCompiler_object_inline_b_1
+                    NAME JSCompiler_object_inline_c_2
+
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertNull(Assert.java:233)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:892)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:445)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:371)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:340)
+	at com.google.javascript.jscomp.CompilerTestCase.test(CompilerTestCase.java:328)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testLocal(InlineObjectLiteralsTest.java:355)
+	at com.google.javascript.jscomp.InlineObjectLiteralsTest.testObject10(InlineObjectLiteralsTest.java:174)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:136)
+	at fr.inria.lille.repair.MethodTestRunner.runTest(MethodTestRunner.java:44)
+	at fr.inria.lille.repair.MethodTestRunner.access$0(MethodTestRunner.java:37)
+	at fr.inria.lille.repair.MethodTestRunner$1.call(MethodTestRunner.java:20)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+

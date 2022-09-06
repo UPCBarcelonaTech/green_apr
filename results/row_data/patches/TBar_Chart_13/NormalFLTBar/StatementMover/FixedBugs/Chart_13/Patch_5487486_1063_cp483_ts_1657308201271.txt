@@ -1,0 +1,37 @@
+diff --git a/source/org/jfree/chart/block/BorderArrangement.java b/source/org/jfree/chart/block/BorderArrangement.java
+index 730aeb3..6377904 100644
+--- a/source/org/jfree/chart/block/BorderArrangement.java
++++ b/source/org/jfree/chart/block/BorderArrangement.java
+@@ -424,7 +424,15 @@ public class BorderArrangement implements Arrangement, Serializable {
+         double[] w = new double[5];
+         double[] h = new double[5];
+         w[0] = constraint.getWidth();
+-        if (this.topBlock != null) {
++        if (this.rightBlock != null) {
++            RectangleConstraint c4 = new RectangleConstraint(0.0,
++                    new Range(0.0, constraint.getWidth() - w[2]),
++                    LengthConstraintType.RANGE, h[2], null,
++                    LengthConstraintType.FIXED);
++            Size2D size = this.rightBlock.arrange(g2, c4);
++            w[3] = size.width;
++        }
++	if (this.topBlock != null) {
+             RectangleConstraint c1 = new RectangleConstraint(w[0], null,
+                     LengthConstraintType.FIXED, 0.0,
+                     new Range(0.0, constraint.getHeight()),
+@@ -450,14 +458,7 @@ public class BorderArrangement implements Arrangement, Serializable {
+             w[2] = size.width;
+         }
+         h[3] = h[2];
+-        if (this.rightBlock != null) {
+-            RectangleConstraint c4 = new RectangleConstraint(0.0,
+-                    new Range(0.0, constraint.getWidth() - w[2]),
+-                    LengthConstraintType.RANGE, h[2], null,
+-                    LengthConstraintType.FIXED);
+-            Size2D size = this.rightBlock.arrange(g2, c4);
+-            w[3] = size.width;
+-        }
++        
+         h[4] = h[2];
+         w[4] = constraint.getWidth() - w[3] - w[2];
+         RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);

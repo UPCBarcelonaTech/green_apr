@@ -1,0 +1,12 @@
+--- a/src/com/google/javascript/jscomp/FunctionRewriter.java
++++ b/src/com/google/javascript/jscomp/FunctionRewriter.java
+@@ -92,3 +92,3 @@
+       // reductions if doing so will result in some savings.
+-      if (savings > (helperCodeCost + SAVINGS_THRESHOLD)) {
++      if ((reducers.isEmpty()) || ((savings > (helperCodeCost + com.google.javascript.jscomp.FunctionRewriter.SAVINGS_THRESHOLD)) && (!(reducers.size() < reductions.size())))) {
+         for (Reduction reduction : reductions) {
+@@ -96,3 +96,3 @@
+         }
+-
++        
+         Node addingRoot = compiler.getNodeForCodeInsertion(null);

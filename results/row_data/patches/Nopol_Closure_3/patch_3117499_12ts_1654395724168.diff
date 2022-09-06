@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
++++ b/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
+@@ -314,3 +314,5 @@
+         for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {
+-          computeMustDef(c, cfgNode, output, conditional);
++          if (com.google.javascript.jscomp.MustBeReachingVariableDef.this.escaped.isEmpty()) {
++            computeMustDef(c, cfgNode, output, conditional);
++          }
+         }

@@ -1,0 +1,29 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -215,13 +215,15 @@
+           var = scope.getVar(maybeAssign.nameNode.getString());
+-          if (var != null) {
+-            assignsByVar.put(var, maybeAssign);
+-            assignsByNode.put(maybeAssign.nameNode, maybeAssign);
+-
+-            if (isRemovableVar(var) &&
+-                !maybeAssign.mayHaveSecondarySideEffects) {
+-              // If the var is unreferenced and performing this assign has
+-              // no secondary side effects, then we can create a continuation
+-              // for it instead of traversing immediately.
+-              continuations.put(var, new Continuation(n, scope));
+-              return;
++          if (com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals) {
++            if (var != null) {
++              assignsByVar.put(var, maybeAssign);
++              assignsByNode.put(maybeAssign.nameNode, maybeAssign);
++              
++              if (isRemovableVar(var) &&
++              !maybeAssign.mayHaveSecondarySideEffects) {
++                // If the var is unreferenced and performing this assign has
++                // no secondary side effects, then we can create a continuation
++                // for it instead of traversing immediately.
++                continuations.put(var, new Continuation(n, scope));
++                return;
++              }
+             }

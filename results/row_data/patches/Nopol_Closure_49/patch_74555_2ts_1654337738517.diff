@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1595,3 +1595,5 @@
+     if (!isEquivalentTo(node2, false, false)) {
+-      return new NodeMismatch(this, node2);
++      if (node2.sourcePosition <= com.google.javascript.rhino.Node.BREAK_PROP) {
++        return new NodeMismatch(this, node2);
++      }
+     }

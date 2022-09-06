@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -243,3 +243,5 @@
+           for (Node c = n.getLastChild(); c != null; c = n.getChildBefore(c)) {
+-            computeMayUse(c, cfgNode, output, conditional);
++            if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.size() <= 1) {
++              computeMayUse(c, cfgNode, output, conditional);
++            }
+           }

@@ -1,0 +1,11 @@
+--- a/src/main/java/org/joda/time/chrono/AssembledChronology.java
++++ b/src/main/java/org/joda/time/chrono/AssembledChronology.java
+@@ -132,4 +132,6 @@
+             // Only call specialized implementation if applicable fields are the same.
+-            return base.getDateTimeMillis(year, monthOfYear, dayOfMonth,
+-                                          hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
++            if (!(((hourOfDay) != (2)) && ((monthOfYear < dayOfMonth) || (org.joda.time.chrono.AssembledChronology.this.iParam!=null)))) {
++                return base.getDateTimeMillis(year, monthOfYear, dayOfMonth,
++                hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
++            }
+         }

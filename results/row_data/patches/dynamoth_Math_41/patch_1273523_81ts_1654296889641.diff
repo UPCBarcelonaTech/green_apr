@@ -1,0 +1,9 @@
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+@@ -324,3 +324,5 @@
+                 double m = mean.evaluate(values, weights, begin, length);
+-                var = evaluate(values, weights, m, begin, length);
++                if (m <= length) {
++                    var = evaluate(values, weights, m, begin, length);
++                }
+             }

@@ -1,0 +1,20 @@
+--- /source/org/jfree/chart/plot/MultiplePiePlot.java
++++ /source/org/jfree/chart/plot/MultiplePiePlot.java
+@@ -145,14 +145,11 @@
+         this.dataset = dataset;
+         PiePlot piePlot = new PiePlot(null);
+ // start of generated patch
+-if(pieChart==null){
+-throw new IllegalArgumentException("Null \'pieChart\' argument.");
+-}
+-if(!(pieChart.getPlot() instanceof PiePlot)){
+-throw new IllegalArgumentException("The \'pieChart\' argument must "+"be a chart based on a PiePlot.");
+-}
+ this.pieChart=new JFreeChart(piePlot);
+ this.pieChart.removeLegend();
++if(dataset!=null){
++dataset.addChangeListener(this);
++}
+ this.dataExtractOrder=TableOrder.BY_COLUMN;
+ // end of generated patch
+ /* start of original code

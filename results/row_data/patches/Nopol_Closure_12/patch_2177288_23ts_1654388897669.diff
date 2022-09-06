@@ -1,0 +1,48 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -224,23 +224,25 @@
+       default:
+-        if (NodeUtil.isAssignmentOp(n) && n.getFirstChild().isName()) {
+-          Node name = n.getFirstChild();
+-          if (!conditional) {
+-            removeFromUseIfLocal(name.getString(), output);
++        if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.size() <= 1) {
++          if (NodeUtil.isAssignmentOp(n) && n.getFirstChild().isName()) {
++            Node name = n.getFirstChild();
++            if (!conditional) {
++              removeFromUseIfLocal(name.getString(), output);
++            }
++            
++            // In case of a += "Hello". There is a read of a.
++            if (!n.isAssign()) {
++              addToUseIfLocal(name.getString(), cfgNode, output);
++            }
++            
++            computeMayUse(name.getNext(), cfgNode, output, conditional);
++          } else {
++            /*
++            * We want to traverse in reverse order because we want the LAST
++            * definition in the sub-tree....
++            * But we have no better way to traverse in reverse other :'(
++            */
++            for (Node c = n.getLastChild(); c != null; c = n.getChildBefore(c)) {
++              computeMayUse(c, cfgNode, output, conditional);
++            }
+           }
+-
+-          // In case of a += "Hello". There is a read of a.
+-          if (!n.isAssign()) {
+-            addToUseIfLocal(name.getString(), cfgNode, output);
+-          }
+-
+-          computeMayUse(name.getNext(), cfgNode, output, conditional);
+-        } else {
+-          /*
+-           * We want to traverse in reverse order because we want the LAST
+-           * definition in the sub-tree....
+-           * But we have no better way to traverse in reverse other :'(
+-           */
+-          for (Node c = n.getLastChild(); c != null; c = n.getChildBefore(c)) {
+-            computeMayUse(c, cfgNode, output, conditional);
+-          }
+         }

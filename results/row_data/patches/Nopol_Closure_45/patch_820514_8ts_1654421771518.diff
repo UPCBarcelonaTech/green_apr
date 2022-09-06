@@ -1,0 +1,15 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -211,3 +211,3 @@
+         Assign maybeAssign = Assign.maybeCreateAssign(n);
+-        if (maybeAssign != null) {
++        if ((com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals) && (maybeAssign!=null)) {
+           // Put this in the assign map. It might count as a reference,
+@@ -218,5 +218,5 @@
+             assignsByNode.put(maybeAssign.nameNode, maybeAssign);
+-
++            
+             if (isRemovableVar(var) &&
+-                !maybeAssign.mayHaveSecondarySideEffects) {
++            !maybeAssign.mayHaveSecondarySideEffects) {
+               // If the var is unreferenced and performing this assign has

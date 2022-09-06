@@ -1,0 +1,147 @@
+--- script/workingdir/jGenProg/Math_53/src/main/java/org/apache/commons/math/complex/Complexjava
++++ script/workingdir/jGenProg/Math_53/src/main/java/org/apache/commons/math/complex/Complexjava
+@@ -153,3 +152,0 @@
+-		return createComplex(real + rhs.getReal(), 
+-		imaginary + rhs.getImaginary());
+-	}
+@@ -157 +154,65 @@
+-	/**
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++		if (isNaN || rhs.isNaN) {
++			return org.apache.commons.math.complex.Complex.NaN;
++		} 		return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());} 	/**
+@@ -170,9 +231 @@
+-	 */
+-	public org.apache.commons.math.complex.Complex conjugate() {
+-		if (isNaN) {
+-			return org.apache.commons.math.complex.Complex.NaN;
+-		}
+-		return createComplex(real, -imaginary);
+-	}
+-
+-	/**
++	 */ 	public org.apache.commons.math.complex.Complex conjugate() { 		if (isNaN) { 			return org.apache.commons.math.complex.Complex.NaN;} 		return createComplex(real, -imaginary);} 	/**
+@@ -214,30 +267 @@
+-	 */ 	public org.apache.commons.math.complex.Complex divide(org.apache.commons.math.complex.Complex rhs) throws org.apache.commons.math.exception.NullArgumentException {
+-		org.apache.commons.math.util.MathUtils.checkNotNull(rhs);
+-		if (isNaN || rhs.isNaN) {
+-			return org.apache.commons.math.complex.Complex.NaN;
+-		}
+-
+-		double c = rhs.getReal();
+-		double d = rhs.getImaginary();
+-		if ((c == 0.0) && (d == 0.0)) {
+-			return org.apache.commons.math.complex.Complex.NaN;
+-		}
+-
+-		if (rhs.isInfinite() && (!isInfinite())) {
+-			return org.apache.commons.math.complex.Complex.ZERO;
+-		}
+-
+-		if (org.apache.commons.math.util.FastMath.abs(c) < org.apache.commons.math.util.FastMath.abs(d)) {
+-			double q = c / d;
+-			double denominator = (c * q) + d;
+-			return createComplex(((real * q) + imaginary) / denominator, 
+-			((imaginary * q) - real) / denominator);
+-		} else {
+-			double q = d / c;
+-			double denominator = (d * q) + c;
+-			return createComplex(((imaginary * q) + real) / denominator, 
+-			(imaginary - (real * q)) / denominator);
+-		}
+-	}
+-
+-	/**
++	 */ 	public org.apache.commons.math.complex.Complex divide(org.apache.commons.math.complex.Complex rhs) throws org.apache.commons.math.exception.NullArgumentException { 		org.apache.commons.math.util.MathUtils.checkNotNull(rhs); 		if (isNaN || rhs.isNaN) { 			return org.apache.commons.math.complex.Complex.NaN;} 		double c = rhs.getReal(); 		double d = rhs.getImaginary(); 		if ((c == 0.0) && (d == 0.0)) { 			return org.apache.commons.math.complex.Complex.NaN;} 		if (rhs.isInfinite() && (!isInfinite())) { 			return org.apache.commons.math.complex.Complex.ZERO;} 		if (org.apache.commons.math.util.FastMath.abs(c) < org.apache.commons.math.util.FastMath.abs(d)) { 			double q = c / d; 			double denominator = (c * q) + d; 			return createComplex(((real * q) + imaginary) / denominator, ((imaginary * q) - real) / denominator);} else { 			double q = d / c; 			double denominator = (d * q) + c; 			return createComplex(((imaginary * q) + real) / denominator, (imaginary - (real * q)) / denominator);}} 	/**
+@@ -260,18 +284 @@
+-	 */
+-	@java.lang.Override
+-	public boolean equals(java.lang.Object other) {
+-		if (this == other) {
+-			return true;
+-		}
+-		if (other instanceof org.apache.commons.math.complex.Complex) {
+-			org.apache.commons.math.complex.Complex rhs = ((org.apache.commons.math.complex.Complex) (other));
+-			if (rhs.isNaN) {
+-				return isNaN;
+-			} else {
+-				return (real == rhs.real) && (imaginary == rhs.imaginary);
+-			}
+-		}
+-		return false;
+-	}
+-
+-	/**
++	 */ 	@java.lang.Override 	public boolean equals(java.lang.Object other) { 		if (this == other) { 			return true;} 		if (other instanceof org.apache.commons.math.complex.Complex) { 			org.apache.commons.math.complex.Complex rhs = ((org.apache.commons.math.complex.Complex) (other)); 			if (rhs.isNaN) { 				return isNaN;} else { 				return (real == rhs.real) && (imaginary == rhs.imaginary);}} 		return false;} 	/**
+@@ -283,8 +290 @@
+-	 */
+-	@java.lang.Override
+-	public int hashCode() {
+-		if (isNaN) {
+-			return 7;
+-		}
+-		return 37 * ((17 * org.apache.commons.math.util.MathUtils.hash(imaginary)) + 
+-		org.apache.commons.math.util.MathUtils.hash(real));
++	 */ 	@java.lang.Override 	public int hashCode() { 		if (isNaN) { 			return 7;} 		return 37 * ((17 * org.apache.commons.math.util.MathUtils.hash(imaginary)) + org.apache.commons.math.util.MathUtils.hash(real));
+

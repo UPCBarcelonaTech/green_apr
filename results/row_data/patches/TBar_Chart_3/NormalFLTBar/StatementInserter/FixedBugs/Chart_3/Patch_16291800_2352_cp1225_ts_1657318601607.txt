@@ -1,0 +1,14 @@
+diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java
+index 795d791..ae9ebe0 100644
+--- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -575,7 +575,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
+     public void add(TimeSeriesDataItem item, boolean notify) {
+         if (item == null) {
+             throw new IllegalArgumentException("Null 'item' argument.");
+-        }
++        }
++	findBoundsByIteration();
+         item = (TimeSeriesDataItem) item.clone();
+         Class c = item.getPeriod().getClass();
+         if (this.timePeriodClass == null) {

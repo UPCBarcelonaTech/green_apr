@@ -1,0 +1,69 @@
+--- a/src/com/google/javascript/jscomp/GlobalNamespace.java
++++ b/src/com/google/javascript/jscomp/GlobalNamespace.java
+@@ -634,3 +634,3 @@
+       Ref.Type type = Ref.Type.DIRECT_GET;
+-      if (parent != null) {
++      if (((com.google.javascript.jscomp.GlobalNamespace.this.nameMap.size()) != (com.google.javascript.jscomp.GlobalNamespace.this.globalNames.size())) || ((name.length() <= 2) && (parent != null))) {
+         switch (parent.getType()) {
+@@ -643,35 +643,35 @@
+           case Token.NEG:
+-            break;
++          break;
+           case Token.CALL:
+-            type = n == parent.getFirstChild()
+-                   ? Ref.Type.CALL_GET
+-                   : Ref.Type.ALIASING_GET;
+-            break;
++          type = n == parent.getFirstChild()
++          ? Ref.Type.CALL_GET
++          : Ref.Type.ALIASING_GET;
++          break;
+           case Token.NEW:
+-            type = n == parent.getFirstChild()
+-                   ? Ref.Type.DIRECT_GET
+-                   : Ref.Type.ALIASING_GET;
+-            break;
++          type = n == parent.getFirstChild()
++          ? Ref.Type.DIRECT_GET
++          : Ref.Type.ALIASING_GET;
++          break;
+           case Token.OR:
+           case Token.AND:
+-            // This node is x or y in (x||y) or (x&&y). We only know that an
+-            // alias is not getting created for this name if the result is used
+-            // in a boolean context or assigned to the same name
+-            // (e.g. var a = a || {}).
+-            type = determineGetTypeForHookOrBooleanExpr(t, parent, name);
+-            break;
++          // This node is x or y in (x||y) or (x&&y). We only know that an
++          // alias is not getting created for this name if the result is used
++          // in a boolean context or assigned to the same name
++          // (e.g. var a = a || {}).
++          type = determineGetTypeForHookOrBooleanExpr(t, parent, name);
++          break;
+           case Token.HOOK:
+-            if (n != parent.getFirstChild()) {
+-              // This node is y or z in (x?y:z). We only know that an alias is
+-              // not getting created for this name if the result is assigned to
+-              // the same name (e.g. var a = a ? a : {}).
+-              type = determineGetTypeForHookOrBooleanExpr(t, parent, name);
+-            }
+-            break;
++          if (n != parent.getFirstChild()) {
++            // This node is y or z in (x?y:z). We only know that an alias is
++            // not getting created for this name if the result is assigned to
++            // the same name (e.g. var a = a ? a : {}).
++            type = determineGetTypeForHookOrBooleanExpr(t, parent, name);
++          }
++          break;
+           case Token.DELPROP:
+-            type = Ref.Type.DELETE_PROP;
+-            break;
++          type = Ref.Type.DELETE_PROP;
++          break;
+           default:
+-            type = Ref.Type.ALIASING_GET;
+-            break;
++          type = Ref.Type.ALIASING_GET;
++          break;
+         }

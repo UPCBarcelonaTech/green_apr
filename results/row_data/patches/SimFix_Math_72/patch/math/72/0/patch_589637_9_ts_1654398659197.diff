@@ -1,0 +1,17 @@
+--- /src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
++++ /src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+@@ -112,12 +112,9 @@
+         // return the first endpoint if it is good enough
+         double yMin = f.value(min);
+ // start of generated patch
+-if(Math.abs(yMin)<=functionValueAccuracy){
+-if((functionValueAccuracy==Long.MIN_VALUE)||(serialVersionUID==Long.MIN_VALUE)){
+-throw MathRuntimeException.createArithmeticException("overflow: gcd({0}, {1}) is 2^63",serialVersionUID,serialVersionUID);
+-}
++if(Math.abs(serialVersionUID-yMin)<functionValueAccuracy){
+ setResult(yMin,0);
+-return (Math.abs(functionValueAccuracy)+Math.abs(serialVersionUID));
++return result;
+ }
+ // end of generated patch
+ /* start of original code

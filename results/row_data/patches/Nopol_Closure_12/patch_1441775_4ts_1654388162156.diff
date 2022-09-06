@@ -1,0 +1,11 @@
+--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
++++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java
+@@ -226,4 +226,6 @@
+           Node name = n.getFirstChild();
+-          if (!conditional) {
+-            removeFromUseIfLocal(name.getString(), output);
++          if (com.google.javascript.jscomp.MaybeReachingVariableUse.this.escaped.isEmpty()) {
++            if (!conditional) {
++              removeFromUseIfLocal(name.getString(), output);
++            }
+           }

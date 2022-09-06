@@ -1,0 +1,12 @@
+--- /src/com/google/javascript/jscomp/ClosureCodingConvention.java
++++ /src/com/google/javascript/jscomp/ClosureCodingConvention.java
+@@ -195,8 +195,7 @@
+         if (functionName.equals(qualifiedName)) {
+           Node target = callee.getNext();
+ // start of generated patch
+-if(target!=null){
+-classType=(FunctionType)target;
++if(target!=null&&(target.getType()==Token.STRING||target.getType()==Token.REGEXP)){
+ className=target.getString();
+ }
+ // end of generated patch

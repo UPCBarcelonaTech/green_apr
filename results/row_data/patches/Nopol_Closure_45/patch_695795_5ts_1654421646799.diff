@@ -1,0 +1,14 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -215,8 +215,8 @@
+           var = scope.getVar(maybeAssign.nameNode.getString());
+-          if (var != null) {
++          if ((var != null) && ((com.google.javascript.jscomp.RemoveUnusedVars.this.preserveFunctionExpressionNames) || (com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals))) {
+             assignsByVar.put(var, maybeAssign);
+             assignsByNode.put(maybeAssign.nameNode, maybeAssign);
+-
++            
+             if (isRemovableVar(var) &&
+-                !maybeAssign.mayHaveSecondarySideEffects) {
++            !maybeAssign.mayHaveSecondarySideEffects) {
+               // If the var is unreferenced and performing this assign has

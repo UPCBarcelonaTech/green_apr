@@ -1,0 +1,22 @@
+--- a/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
++++ b/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
+@@ -347,10 +347,12 @@
+     if (!escaped.contains(var)) {
+-      if (node == null) {
+-        def.reachingDef.put(var, null);
+-      } else {
+-        Definition definition = new Definition(node);
+-        if (rValue != null) {
+-          computeDependence(definition, rValue);
++      if (com.google.javascript.jscomp.MustBeReachingVariableDef.this.escaped.isEmpty()) {
++        if (node == null) {
++          def.reachingDef.put(var, null);
++        } else {
++          Definition definition = new Definition(node);
++          if (rValue != null) {
++            computeDependence(definition, rValue);
++          }
++          def.reachingDef.put(var, definition);
+         }
+-        def.reachingDef.put(var, definition);
+       }

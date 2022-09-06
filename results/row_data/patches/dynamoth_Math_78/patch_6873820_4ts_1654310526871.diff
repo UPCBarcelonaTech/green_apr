@@ -1,0 +1,9 @@
+--- a/src/main/java/org/apache/commons/math/ConvergingAlgorithmImpl.java
++++ b/src/main/java/org/apache/commons/math/ConvergingAlgorithmImpl.java
+@@ -77,3 +77,5 @@
+     public void setAbsoluteAccuracy(double accuracy) {
+-        absoluteAccuracy = accuracy;
++        if ((accuracy * this.defaultMaximalIterationCount) <= 1) {
++            absoluteAccuracy = accuracy;
++        }
+     }

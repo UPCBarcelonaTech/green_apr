@@ -1,0 +1,13 @@
+--- /src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ /src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -336,8 +336,8 @@
+         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {
+             final double entry = tableau.getEntry(0, i);
+ // start of generated patch
+-if(Precision.compareTo(entry,0.0,maxUlps)>0){
+-minRatioPositions.add(i);
++if(Precision.compareTo(entry,0.0,epsilon)>0){
++columnsToDrop.add(i);
+ }
+ // end of generated patch
+ /* start of original code

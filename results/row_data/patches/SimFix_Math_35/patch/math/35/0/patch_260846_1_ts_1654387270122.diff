@@ -1,0 +1,13 @@
+--- /src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java
++++ /src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java
+@@ -49,7 +49,9 @@
+                                    final double elitismRate) {
+ // start of generated patch
+ super(chromosomes,populationLimit);
+-this.chromosomes=chromosomes;
++if(elitismRate<0||elitismRate>1){
++throw new OutOfRangeException(LocalizedFormats.ELITISM_RATE,elitismRate,0,1);
++}
+ this.elitismRate=elitismRate;
+ // end of generated patch
+ /* start of original code

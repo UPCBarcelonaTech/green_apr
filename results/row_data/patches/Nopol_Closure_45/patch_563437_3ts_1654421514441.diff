@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -217,3 +217,5 @@
+             assignsByVar.put(var, maybeAssign);
+-            assignsByNode.put(maybeAssign.nameNode, maybeAssign);
++            if (com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals) {
++              assignsByNode.put(maybeAssign.nameNode, maybeAssign);
++            }
+ 

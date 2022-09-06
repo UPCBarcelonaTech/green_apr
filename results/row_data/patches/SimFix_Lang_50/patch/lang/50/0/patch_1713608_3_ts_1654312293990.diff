@@ -1,0 +1,19 @@
+--- /src/java/org/apache/commons/lang/time/FastDateFormat.java
++++ /src/java/org/apache/commons/lang/time/FastDateFormat.java
+@@ -294,9 +294,16 @@
+             }
+             try {
+                 SimpleDateFormat formatter = (SimpleDateFormat) DateFormat.getDateInstance(style, locale);
++// start of generated patch
++String pattern=formatter.toPattern();
++format=getInstance(pattern,timeZone,locale);
++cTimeInstanceCache.put(key,format);
++// end of generated patch
++/* start of original code
+                 String pattern = formatter.toPattern();
+                 format = getInstance(pattern, timeZone, locale);
+                 cDateInstanceCache.put(key, format);
++ end of original code*/
+                 
+             } catch (ClassCastException ex) {
+                 throw new IllegalArgumentException("No date pattern for locale: " + locale);

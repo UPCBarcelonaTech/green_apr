@@ -1,0 +1,36 @@
+--- a/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
++++ b/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
+@@ -280,17 +280,19 @@
+         if (NodeUtil.isAssignmentOp(n)) {
+-          if (n.getFirstChild().isName()) {
+-            Node name = n.getFirstChild();
+-            computeMustDef(name.getNext(), cfgNode, output, conditional);
+-            addToDefIfLocal(name.getString(), conditional ? null : cfgNode,
++          if (com.google.javascript.jscomp.MustBeReachingVariableDef.this.escaped.isEmpty()) {
++            if (n.getFirstChild().isName()) {
++              Node name = n.getFirstChild();
++              computeMustDef(name.getNext(), cfgNode, output, conditional);
++              addToDefIfLocal(name.getString(), conditional ? null : cfgNode,
+               n.getLastChild(), output);
+-            return;
+-          } else if (NodeUtil.isGet(n.getFirstChild())) {
+-            // Treat all assignments to arguments as redefining the
+-            // parameters itself.
+-            Node obj = n.getFirstChild().getFirstChild();
+-            if (obj.isName() && "arguments".equals(obj.getString())) {
+-              // TODO(user): More accuracy can be introduced
+-              // i.e. We know exactly what arguments[x] is if x is a constant
+-              // number.
+-              escapeParameters(output);
++              return;
++            } else if (NodeUtil.isGet(n.getFirstChild())) {
++              // Treat all assignments to arguments as redefining the
++              // parameters itself.
++              Node obj = n.getFirstChild().getFirstChild();
++              if (obj.isName() && "arguments".equals(obj.getString())) {
++                // TODO(user): More accuracy can be introduced
++                // i.e. We know exactly what arguments[x] is if x is a constant
++                // number.
++                escapeParameters(output);
++              }
+             }

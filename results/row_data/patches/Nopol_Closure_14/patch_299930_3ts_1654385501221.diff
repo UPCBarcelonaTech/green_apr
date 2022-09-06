@@ -1,0 +1,22 @@
+--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java
++++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java
+@@ -645,10 +645,12 @@
+       }
+-      if (NodeUtil.hasFinally(curHandler)) {
+-        if (lastJump == null) {
+-          createEdge(node, Branch.UNCOND, curHandler.getLastChild());
+-        } else {
+-          finallyMap.put(lastJump,
+-              computeFallThrough(curHandler.getLastChild()));
++      if ((!((com.google.javascript.jscomp.ControlFlowAnalysis.this.root!=null) && ((com.google.javascript.jscomp.ControlFlowAnalysis.this.astPositionCounter) != (10)))) || (com.google.javascript.jscomp.ControlFlowAnalysis.this.shouldTraverseFunctions)) {
++        if (NodeUtil.hasFinally(curHandler)) {
++          if (lastJump == null) {
++            createEdge(node, Branch.UNCOND, curHandler.getLastChild());
++          } else {
++            finallyMap.put(lastJump,
++            computeFallThrough(curHandler.getLastChild()));
++          }
++          lastJump = curHandler;
+         }
+-        lastJump = curHandler;
+       }

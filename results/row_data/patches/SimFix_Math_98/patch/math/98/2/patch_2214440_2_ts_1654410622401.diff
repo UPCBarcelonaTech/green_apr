@@ -1,0 +1,27 @@
+--- /src/java/org/apache/commons/math/linear/BigMatrixImpl.java
++++ /src/java/org/apache/commons/math/linear/BigMatrixImpl.java
+@@ -989,6 +989,16 @@
+         final int nRows = this.getRowDimension();
+         final int nCols = this.getColumnDimension();
+         final BigDecimal[] out = new BigDecimal[v.length];
++// start of generated patch
++for(int row=0;row<nCols;row++){
++BigDecimal sum=ZERO;
++for(int i=0;i<nCols;i++){
++sum=sum.add(data[row][i].multiply(v[i]));
++}
++out[row]=sum;
++}
++// end of generated patch
++/* start of original code
+         for (int row = 0; row < nRows; row++) {
+             BigDecimal sum = ZERO;
+             for (int i = 0; i < nCols; i++) {
+@@ -996,6 +1006,7 @@
+             }
+             out[row] = sum;
+         }
++ end of original code*/
+         return out;
+     }
+     

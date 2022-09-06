@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -214,3 +214,5 @@
+           // but we won't know that until we have an index of all assigns.
+-          var = scope.getVar(maybeAssign.nameNode.getString());
++          if (com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals) {
++            var = scope.getVar(maybeAssign.nameNode.getString());
++          }
+           if (var != null) {

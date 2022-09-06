@@ -1,0 +1,29 @@
+--- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -1655,13 +1655,15 @@
+       // Check whether the extended interfaces have any conflicts
+-      if (functionType.getExtendedInterfacesCount() > 1) {
+-        // Only check when extending more than one interfaces
+-        HashMap<String, ObjectType> properties
+-            = new HashMap<String, ObjectType>();
+-        HashMap<String, ObjectType> currentProperties
+-            = new HashMap<String, ObjectType>();
+-        for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
+-          currentProperties.clear();
+-          checkInterfaceConflictProperties(t, n, functionPrivateName,
+-              properties, currentProperties, interfaceType);
+-          properties.putAll(currentProperties);
++      if (1 < functionPrivateName.length()) {
++        if (functionType.getExtendedInterfacesCount() > 1) {
++          // Only check when extending more than one interfaces
++          HashMap<String, ObjectType> properties
++          = new HashMap<String, ObjectType>();
++          HashMap<String, ObjectType> currentProperties
++          = new HashMap<String, ObjectType>();
++          for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
++            currentProperties.clear();
++            checkInterfaceConflictProperties(t, n, functionPrivateName,
++            properties, currentProperties, interfaceType);
++            properties.putAll(currentProperties);
++          }
+         }

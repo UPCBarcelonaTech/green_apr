@@ -1,0 +1,25 @@
+{
+  "VARIANT_ID": "10740",
+  "VALIDATION": "|true|0|1687|[]|",
+  "patchhunks": [
+    {
+      "LOCATION": "org.apache.commons.lang.text.StrBuilder",
+      "PATH": "\\/home\\/user\\/speedy_runner\\/scripts\\/workingdir\\/jGenProg\\/Lang_59\\/src\\/java\\/org\\/apache\\/commons\\/lang\\/text\\/StrBuilder.java",
+      "INGREDIENT_SCOPE": "LOCAL",
+      "SUSPICIOUNESS": "0.577",
+      "INGREDIENT_PARENT": "ensureCapacity(size + 5)",
+      "PATCH_HUNK_TYPE": "CtInvocationImpl|CtBlockImpl",
+      "ORIGINAL_CODE": "if (width \u003e 0) {\\n\\tensureCapacity(size + width);\\n\\tjava.lang.String str \u003d (obj \u003d\u003d null) ? getNullText() : obj.toString();\\n\\tint strLen \u003d str.length();\\n\\tif (strLen \u003e\u003d width) {\\n\\t\\tstr.getChars(0, strLen, buffer, size);\\n\\t} else {\\n\\t\\tint padLen \u003d width - strLen;\\n\\t\\tstr.getChars(0, strLen, buffer, size);\\n\\t\\tfor (int i \u003d 0; i \u003c padLen; i++) {\\n\\t\\t\\tbuffer[(size + strLen) + i] \u003d padChar;\\n\\t\\t}\\n\\t}\\n\\tsize +\u003d width;\\n}",
+      "BUGGY_CODE_TYPE": "CtIfImpl|CtBlockImpl",
+      "OPERATOR": "InsertBeforeOp",
+      "MODIFIED_FILE_PATH": "\\/home\\/user\\/speedy_runner\\/scripts\\/workingdir\\/jGenProg\\/Lang_59\\/.\\/output_astor\\/AstorMain-Lang59\\/\\/src\\/\\/variant-10740\\/org\\/apache\\/commons\\/lang\\/text\\/StrBuilder.java",
+      "LINE": "879",
+      "MP_RANKING": "0",
+      "PATCH_HUNK_CODE": "ensureCapacity(size + 5)"
+    }
+  ],
+  "TIME": "1673",
+  "GENERATION": "5370",
+  "FOLDER_SOLUTION_CODE": "\\/home\\/user\\/speedy_runner\\/scripts\\/workingdir\\/jGenProg\\/Lang_59\\/.\\/output_astor\\/AstorMain-Lang59\\/\\/src\\/\\/variant-10740",
+  "PATCH_DIFF_ORIG": "--- \\/home\\/user\\/speedy_runner\\/scripts\\/workingdir\\/jGenProg\\/Lang_59\\/src\\/java\\/org\\/apache\\/commons\\/lang\\/text\\/StrBuilderjava\\n+++ \\/home\\/user\\/speedy_runner\\/scripts\\/workingdir\\/jGenProg\\/Lang_59\\/src\\/java\\/org\\/apache\\/commons\\/lang\\/text\\/StrBuilderjava\\n@@ -880 +880 @@\\n-\\t *\\/ \\tpublic org.apache.commons.lang.text.StrBuilder appendFixedWidthPadRight(java.lang.Object obj, int width, char padChar) { \\t\\tif (width \u003e 0) { \\t\\t\\tensureCapacity(size + width);\\n+\\t *\\/ \\tpublic org.apache.commons.lang.text.StrBuilder appendFixedWidthPadRight(java.lang.Object obj, int width, char padChar) { \\t\\tensureCapacity(size + 5); \\t\\tif (width \u003e 0) { \\t\\t\\tensureCapacity(size + width);\\n\\n"
+}

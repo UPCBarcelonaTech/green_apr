@@ -1,0 +1,9 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -176,3 +176,5 @@
+     interpretAssigns();
+-    removeUnreferencedVars();
++    if ((com.google.javascript.jscomp.RemoveUnusedVars.this.assignsByNode.isEmpty()) || (com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals)) {
++      removeUnreferencedVars();
++    }
+     for (Scope fnScope : allFunctionScopes) {

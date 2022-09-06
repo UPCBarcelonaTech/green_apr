@@ -1,0 +1,34 @@
+--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+@@ -519,6 +519,6 @@
+         boolean hasInfiniteBounds = false;
+-        if (hasFiniteBounds) {
++        if ((hasFiniteBounds) && (org.apache.commons.math3.optimization.direct.CMAESOptimizer.this.stopTolUpX < 32)) {
+             for (int i = 0; i < lB.length; i++) {
+                 if (Double.isInfinite(lB[i]) ||
+-                    Double.isInfinite(uB[i])) {
++                Double.isInfinite(uB[i])) {
+                     hasInfiniteBounds = true;
+@@ -527,3 +527,3 @@
+             }
+-
++            
+             if (hasInfiniteBounds) {
+@@ -537,3 +537,3 @@
+                 boundaries[1] = uB;
+-
++                
+                 // Abort early if the normalization will overflow (cf. "encode" method).
+@@ -543,8 +543,8 @@
+                         final NumberIsTooLargeException e
+-                            = new NumberIsTooLargeException(boundaries[1][i],
+-                                                            max,
+-                                                            true);
++                        = new NumberIsTooLargeException(boundaries[1][i],
++                        max,
++                        true);
+                         e.getContext().addMessage(LocalizedFormats.OVERFLOW);
+                         e.getContext().addMessage(LocalizedFormats.INDEX, i);
+-
++                        
+                         throw e;

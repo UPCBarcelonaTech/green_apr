@@ -1,0 +1,11 @@
+--- a/src/com/google/javascript/jscomp/RemoveUnusedVars.java
++++ b/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+@@ -347,4 +347,6 @@
+       Var var = it.next();
+-      if (isRemovableVar(var)) {
+-        maybeUnreferenced.add(var);
++      if ((com.google.javascript.jscomp.RemoveUnusedVars.this.removeGlobals) || (com.google.javascript.jscomp.RemoveUnusedVars.this.assignsByNode.isEmpty())) {
++        if (isRemovableVar(var)) {
++          maybeUnreferenced.add(var);
++        }
+       }
