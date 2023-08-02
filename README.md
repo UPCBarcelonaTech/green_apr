@@ -1,4 +1,4 @@
-# Appendix of paper: Towards Energy Consumption Measurement of Automated Program Repair
+# Appendix of paper: Energy Consumption of Automated Program Repair: From Search-based to Large Language Model-based Repair Tools
 
 ## Data available in this appendix.
 
