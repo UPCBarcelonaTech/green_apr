@@ -12,6 +12,37 @@ These folders contains two subfolders: traditional-apr and llm_based, which cont
 
 
 
+
+## Data for responding RQs
+
+
+### RQ 1
+
+The RQ1 is answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
+
+
+### RQ 2
+
+The RQ2 is also answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
+
+
+### RQ 3
+
+The RQ3 is answered from:
+- The NPC metric that we computed, which is available at[results/row_data/metrics/npc](results/row_data/metrics/npc).
+- Information about difficulty of fixing bugs obtained from ´Motwani, M., Sankaranarayanan, S., Just, R. et al. Do automated program repair techniques repair hard and important bugs?. Empir Software Eng 23, 2901–2947 (2018). https://doi.org/10.1007/s10664-017-9550-0´
+The raw data is available at: https://github.com/LASER-UMASS/AutomatedRepairApplicabilityData/ 
+
+These metrics (e.g., NCP, difficulty of repairing, etc) are studied together with the energy consumption.
+The correlation between variables are available at: [results/row_data/metrics/values_correlation_LLMbased.json](results/row_data/metrics/values_correlation_LLMbased.json) and [results/row_data/metrics/values_correlation_traditionalAPR.json](results/row_data/metrics/values_correlation_traditionalAPR.json)
+
+
+### RQ 4
+
+The summary of the energy consumed during fine-tuning is available in the folder [results/energy_summary/finetune_llm](results/energy_summary/finetune_llm)
+
+
+
 ## Detailled explanation of data available in this appendix.
 
 All the results of this experiments are obtained from the data disposed in folder [results/](results/)
@@ -22,7 +53,7 @@ The scripts for computing the Tables shown in that paper  are in the python file
 
 These sumary files are computed from the raws data available at [results/row_data/](results/row_data/)
 In particular there are 3 subfolders:
-- logs: contains the log of the repair attemps (e.g., a tool executed on a particular file). Example, file [results/row_data/log/log_Avatar_Chart_1/log_out_Chart_1_Avatar.txt](results/row_data/log/log_Avatar_Chart_1/log_out_Chart_1_Avatar.txt) contains the log of the *instrumented* version of Avatar tool for `Chart 1`. The log contains all the events (type of event + timestamp) that we register.
+- logs: contains the log of the repair attemps (e.g., a tool executed on a particular file). Example, file [results/row_data/traditional-apr/log/log_Avatar_Chart_1/log_out_Chart_1_Avatar.txt](results/row_data/traditional-apr/log/log_Avatar_Chart_1/log_out_Chart_1_Avatar.txt) contains the log of the *instrumented* version of Avatar tool for `Chart 1`. The log contains all the events (type of event + timestamp) that we register.
 
 For example: the piece of log shown below display the event *[PF]*  patch found together with its timestamp *1659925031785*.
 ```
@@ -54,38 +85,11 @@ Patch_6708462_1580_ts_1657139492555.txt
 Patch_6749287_1586_ts_1657139533380.txt
 ```
 
-
+In the case of LLM based APR
 
 Due to the large scale of our experiment (many patches, large metric files), the size of all the row files is more than 100 Gb. Given the limit of the repository size from anonymous.4open.science, we pushed the files related to one repair attempts per tool-bug id (we recall that we execute at least  5 repair attempts per tool-bugid).
 We will progressively update them, pushing all data to Zenodo.
 
-## Data for responding RQs
-
-
-### RQ 1
-
-The RQ1 is answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
-
-
-### RQ 2
-
-The RQ2 is also answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
-
-
-### RQ 3
-
-The RQ3 is answered from:
-- The NPC metric that we computed, which is available at[results/row_data/metrics/npc](results/row_data/metrics/npc).
-- Information about difficulty of fixing bugs obtained from ´Motwani, M., Sankaranarayanan, S., Just, R. et al. Do automated program repair techniques repair hard and important bugs?. Empir Software Eng 23, 2901–2947 (2018). https://doi.org/10.1007/s10664-017-9550-0´
-The raw data is available at: https://github.com/LASER-UMASS/AutomatedRepairApplicabilityData/ 
-
-These metrics (e.g., NCP, difficulty of repairing, etc) are studied together with the energy consumption.
-The correlation between variables are available at: [results/row_data/metrics/values_correlation_LLMbased.json](results/row_data/metrics/values_correlation_LLMbased.json) and [results/row_data/metrics/values_correlation_traditionalAPR.json](results/row_data/metrics/values_correlation_traditionalAPR.json)
-
-
-### RQ 4
-
-The summary of the energy consumed during fine-tuning is available in the folder [results/energy_summary/finetune_llm](results/energy_summary/finetune_llm)
 
  
 
