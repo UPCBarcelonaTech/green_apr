@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688581173499",
+  "GPR[ESLB]": "1688581193519",
+  "file": "Math_101_/src/java/org/apache/commons/math/complex/ComplexFormat.java_377-378",
+  "input": {
+    "loc": "377-378",
+    "input": "<s> public Complex parse(String source, ParsePosition pos) { int initialIndex = pos.getIndex(); parseAndIgnoreWhitespace(source, pos); Number re = parseNumber(source, getRealFormat(), pos); if (re == null) { pos.setIndex(initialIndex); return null; } int startIndex = pos.getIndex(); char c = parseNextCharacter(source, pos); int sign = 0; switch (c) { case 0 : return new Complex(re.doubleValue(), 0.0); case '-' : sign = -1; break; case '+' : sign = 1; break; default : pos.setIndex(initialIndex); pos.setErrorIndex(startIndex); return null; } parseAndIgnoreWhitespace(source, pos); Number im = parseNumber(source, getRealFormat(), pos); if (im == null) { pos.setIndex(initialIndex); return null; } int n = getImaginaryCharacter().length(); startIndex = pos.getIndex(); int endIndex = startIndex + n; </s> if ( </s> source.substring(startIndex, endIndex).compareTo( getImaginaryCharacter()) != 0) { pos.setIndex(initialIndex); pos.setErrorIndex(startIndex); return null; } pos.setIndex(endIndex); return new Complex(re.doubleValue(), im.doubleValue() * sign); } </s> java",
+    "output": [
+      "if (startIndex!= endIndex) {",
+      "if (startIndex == endIndex) {",
+      "if (startIndex < endIndex) {",
+      "if (startIndex >= endIndex) {",
+      "if (index < n) {",
+      "if (startIndex > endIndex) {",
+      "if (index!= endIndex) {",
+      "if (index == endIndex) {",
+      "if (index < endIndex) {",
+      "if (startIndex == endIndex) return null;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_101_-src-java-org-apache-commons-math-complex-ComplexFormat.java_377-378.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688581193559",
+  "nrTokens": 286,
+  "status": "ok",
+  "GPR[EPS]": "1688581193685",
+  "time": 126,
+  "tokentime": 3,
+  "inferencetime": 123,
+  "output": [
+    "if (startIndex!= endIndex) {",
+    "if (startIndex == endIndex) {",
+    "if (startIndex < endIndex) {",
+    "if (startIndex >= endIndex) {",
+    "if (index < n) {",
+    "if (startIndex > endIndex) {",
+    "if (index!= endIndex) {",
+    "if (index == endIndex) {",
+    "if (index < endIndex) {",
+    "if (startIndex == endIndex) return null;"
+  ]
+}

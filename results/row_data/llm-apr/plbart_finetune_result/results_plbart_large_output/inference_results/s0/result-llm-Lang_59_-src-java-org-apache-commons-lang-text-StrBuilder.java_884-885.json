@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583293403",
+  "GPR[ESLB]": "1688583313423",
+  "file": "Lang_59_/src/java/org/apache/commons/lang/text/StrBuilder.java_884-885",
+  "input": {
+    "loc": "884-885",
+    "input": "<s> public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) { if (width > 0) { ensureCapacity(size + width); String str = (obj == null ? getNullText() : obj.toString()); int strLen = str.length(); if (strLen >= width) { </s> str.getChars(0, strLen, buffer, size); </s> } else { int padLen = width - strLen; str.getChars(0, strLen, buffer, size); for (int i = 0; i < padLen; i++) { buffer[size + strLen + i] = padChar; } } size += width; } return this; } </s> java",
+    "output": [
+      "str.getChars(strLen, size, buffer, 0);",
+      "str.getChars(strLen, buffer, size);",
+      "str.getChars(0, strLen, buffer, size);",
+      "str.getChars(0, strLen, buffer, strLen);",
+      "str.getChars(0, strLen, buffer, 0);",
+      "str.setChars(0, strLen, buffer, size);",
+      "str.getChars(0, strLen, buffer);",
+      "str.getChars(0, strLen, buffer, size + 1);",
+      "str.getChars(strLen, strLen, buffer, 0);",
+      "buffer[size] = padChar;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Lang_59_-src-java-org-apache-commons-lang-text-StrBuilder.java_884-885.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583313462",
+  "nrTokens": 147,
+  "status": "ok",
+  "GPR[EPS]": "1688583313792",
+  "time": 330,
+  "tokentime": 2,
+  "inferencetime": 328,
+  "output": [
+    "str.getChars(strLen, size, buffer, 0);",
+    "str.getChars(strLen, buffer, size);",
+    "str.getChars(0, strLen, buffer, size);",
+    "str.getChars(0, strLen, buffer, strLen);",
+    "str.getChars(0, strLen, buffer, 0);",
+    "str.setChars(0, strLen, buffer, size);",
+    "str.getChars(0, strLen, buffer);",
+    "str.getChars(0, strLen, buffer, size + 1);",
+    "str.getChars(strLen, strLen, buffer, 0);",
+    "buffer[size] = padChar;"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688581499207",
+  "GPR[ESLB]": "1688581519227",
+  "file": "Time_19_/src/main/java/org/joda/time/DateTimeZone.java_900-901",
+  "input": {
+    "loc": "900-901",
+    "input": "<s> public int getOffsetFromLocal(long instantLocal) { final int offsetLocal = getOffset(instantLocal); final long instantAdjusted = instantLocal - offsetLocal; final int offsetAdjusted = getOffset(instantAdjusted); if (offsetLocal != offsetAdjusted) { if ((offsetLocal - offsetAdjusted) < 0) { long nextLocal = nextTransition(instantAdjusted); long nextAdjusted = nextTransition(instantLocal - offsetAdjusted); if (nextLocal != nextAdjusted) { return offsetLocal; } } </s> } else if (offsetLocal > 0) { </s> long prev = previousTransition(instantAdjusted); if (prev < instantAdjusted) { int offsetPrev = getOffset(prev); int diff = offsetPrev - offsetLocal; if (instantAdjusted - prev <= diff) { return offsetPrev; } } } return offsetAdjusted; } </s> java",
+    "output": [
+      "} else if (offsetLocal >= 0) {",
+      "} else if (instantLocal > 0) {",
+      "} else if (offsetLocal > 0) {",
+      "} else if (offsetLocal <= 0) {",
+      "} else if (offsetLocal < 0) {",
+      "} else if (offsetLocal == 0) {",
+      "} else {",
+      "} else",
+      "}",
+      "{"
+    ]
+  },
+  "nvidea": "measures-nvidea-Time_19_-src-main-java-org-joda-time-DateTimeZone.java_900-901.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688581519267",
+  "nrTokens": 185,
+  "status": "ok",
+  "GPR[EPS]": "1688581519414",
+  "time": 147,
+  "tokentime": 3,
+  "inferencetime": 144,
+  "output": [
+    "} else if (offsetLocal >= 0) {",
+    "} else if (instantLocal > 0) {",
+    "} else if (offsetLocal > 0) {",
+    "} else if (offsetLocal <= 0) {",
+    "} else if (offsetLocal < 0) {",
+    "} else if (offsetLocal == 0) {",
+    "} else {",
+    "} else",
+    "}",
+    "{"
+  ]
+}

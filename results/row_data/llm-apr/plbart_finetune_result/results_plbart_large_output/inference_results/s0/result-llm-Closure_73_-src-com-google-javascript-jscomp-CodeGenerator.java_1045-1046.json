@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688582535826",
+  "GPR[ESLB]": "1688582555846",
+  "file": "Closure_73_/src/com/google/javascript/jscomp/CodeGenerator.java_1045-1046",
+  "input": {
+    "loc": "1045-1046",
+    "input": "<s> static String strEscape(String s, char quote, String doublequoteEscape, String singlequoteEscape, String backslashEscape, CharsetEncoder outputCharsetEncoder) { StringBuilder sb = new StringBuilder(s.length() + 2); sb.append(quote); for (int i = 0; i < s.length(); i++) { char c = s.charAt(i); switch (c) { case '\\0': sb.append(\"\\\\0\"); break; case '\\n': sb.append(\"\\\\n\"); break; case '\\r': sb.append(\"\\\\r\"); break; case '\\t': sb.append(\"\\\\t\"); break; case '\\\\': sb.append(backslashEscape); break; case '\\\"': sb.append(doublequoteEscape); break; case '\\'': sb.append(singlequoteEscape); break; case '>': if (i >= 2 && ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') || (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) { sb.append(\"\\\\>\"); } else { sb.append(c); } break; case '<': final String END_SCRIPT = \"/script\"; final String START_COMMENT = \"!--\"; if (s.regionMatches(true, i + 1, END_SCRIPT, 0, END_SCRIPT.length())) { sb.append(\"<\\\\\"); } else if (s.regionMatches(false, i + 1, START_COMMENT, 0, START_COMMENT.length())) { sb.append(\"<\\\\\"); } else { sb.append(c); } break; default: if (outputCharsetEncoder != null) { if (outputCharsetEncoder.canEncode(c)) { sb.append(c); } else { appendHexJavaScriptRepresentation(sb, c); } } else { </s> if (c > 0x1f && c <= 0x7f) { </s> sb.append(c); } else { appendHexJavaScriptRepresentation(sb, c); } } } } sb.append(quote); return sb.toString(); } </s> java",
+    "output": [
+      "if (c >= 0x1f && c <= 0x7f) {",
+      "if (c > 0x1f && c < 0x7f) {",
+      "if (c > 0x1F && c <= 0x7F) {",
+      "if (c > 0x1f && c <= 0x7F) {",
+      "if (c < 0x1f || c > 0x7f) {",
+      "if (c > 0x20 && c <= 0x7e) {",
+      "if (c > 0x1f && c <= 0x7d) {",
+      "if (c > 0x1f || c <= 0x7f) {",
+      "if (c > 0x1f) {",
+      "if (c <= 0x7f) {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_73_-src-com-google-javascript-jscomp-CodeGenerator.java_1045-1046.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688582555887",
+  "nrTokens": 441,
+  "status": "ok",
+  "GPR[EPS]": "1688582556194",
+  "time": 307,
+  "tokentime": 4,
+  "inferencetime": 303,
+  "output": [
+    "if (c >= 0x1f && c <= 0x7f) {",
+    "if (c > 0x1f && c < 0x7f) {",
+    "if (c > 0x1F && c <= 0x7F) {",
+    "if (c > 0x1f && c <= 0x7F) {",
+    "if (c < 0x1f || c > 0x7f) {",
+    "if (c > 0x20 && c <= 0x7e) {",
+    "if (c > 0x1f && c <= 0x7d) {",
+    "if (c > 0x1f || c <= 0x7f) {",
+    "if (c > 0x1f) {",
+    "if (c <= 0x7f) {"
+  ]
+}

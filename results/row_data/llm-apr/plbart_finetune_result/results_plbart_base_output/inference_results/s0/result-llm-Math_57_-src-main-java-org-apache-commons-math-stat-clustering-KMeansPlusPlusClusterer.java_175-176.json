@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688580888799",
+  "GPR[ESLB]": "1688580908820",
+  "file": "Math_57_/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java_175-176",
+  "input": {
+    "loc": "175-176",
+    "input": "<s> private static <T extends Clusterable<T>> List<Cluster<T>> chooseInitialCenters(final Collection<T> points, final int k, final Random random) { final List<T> pointSet = new ArrayList<T>(points); final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>(); final T firstPoint = pointSet.remove(random.nextInt(pointSet.size())); resultSet.add(new Cluster<T>(firstPoint)); final double[] dx2 = new double[pointSet.size()]; while (resultSet.size() < k) { </s> int sum = 0; </s> for (int i = 0; i < pointSet.size(); i++) { final T p = pointSet.get(i); final Cluster<T> nearest = getNearestCluster(resultSet, p); final double d = p.distanceFrom(nearest.getCenter()); sum += d * d; dx2[i] = sum; } final double r = random.nextDouble() * sum; for (int i = 0 ; i < dx2.length; i++) { if (dx2[i] >= r) { final T p = pointSet.remove(i); resultSet.add(new Cluster<T>(p)); break; } } } return resultSet; } </s> java",
+    "output": [
+      "double sum = 0;",
+      "int sum = 0;",
+      "int sum = 1;",
+      "final double sum = 0;",
+      "int sum = -1;",
+      "float sum = 0;",
+      "final int sum = 0;",
+      "long sum = 0;",
+      "int sum;",
+      "double sum = 1;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_57_-src-main-java-org-apache-commons-math-stat-clustering-KMeansPlusPlusClusterer.java_175-176.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688580908861",
+  "nrTokens": 278,
+  "status": "ok",
+  "GPR[EPS]": "1688580908946",
+  "time": 85,
+  "tokentime": 3,
+  "inferencetime": 82,
+  "output": [
+    "double sum = 0;",
+    "int sum = 0;",
+    "int sum = 1;",
+    "final double sum = 0;",
+    "int sum = -1;",
+    "float sum = 0;",
+    "final int sum = 0;",
+    "long sum = 0;",
+    "int sum;",
+    "double sum = 1;"
+  ]
+}

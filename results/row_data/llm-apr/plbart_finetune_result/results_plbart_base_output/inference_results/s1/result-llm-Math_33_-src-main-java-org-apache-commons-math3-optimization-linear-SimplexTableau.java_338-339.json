@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689798328818",
+  "GPR[ESLB]": "1689798348839",
+  "file": "Math_33_/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java_338-339",
+  "input": {
+    "loc": "338-339",
+    "input": "<s> protected void dropPhase1Objective() { if (getNumObjectiveFunctions() == 1) { return; } List<Integer> columnsToDrop = new ArrayList<Integer>(); columnsToDrop.add(0); for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) { final double entry = tableau.getEntry(0, i); </s> if (Precision.compareTo(entry, 0d, maxUlps) > 0) { </s> columnsToDrop.add(i); } } for (int i = 0; i < getNumArtificialVariables(); i++) { int col = i + getArtificialVariableOffset(); if (getBasicRow(col) == null) { columnsToDrop.add(col); } } double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()]; for (int i = 1; i < getHeight(); i++) { int col = 0; for (int j = 0; j < getWidth(); j++) { if (!columnsToDrop.contains(j)) { matrix[i - 1][col++] = tableau.getEntry(i, j); } } } for (int i = columnsToDrop.size() - 1; i >= 0; i--) { columnLabels.remove((int) columnsToDrop.get(i)); } this.tableau = new Array2DRowRealMatrix(matrix); this.numArtificialVariables = 0; } </s> java",
+    "output": [
+      "if (Precision.compareTo(entry, 0d, maxUlps) >= 0) {",
+      "if (Precision.compareTo(entry, 0d, maxUlps) < 0) {",
+      "if (Precision.compareTo(entry, 0d, maxUlps) <= 0) {",
+      "if (Precision.compareTo(entry, 0d, maxUlps) > 0) {",
+      "if (Precision.compare(entry, 0d, maxUlps) > 0) {",
+      "if (Precision.compareTo(entry, 0d, maxUlps) == 0) {",
+      "if (Precision.compareTo(entry, 0d) > 0) {",
+      "if (Precision.compareTo(entry, maxUlps) > 0) {",
+      "if (Precision.compareTo(entry, 0.0d, maxUlps) > 0) {",
+      "if (Precision.compareTo(entry, 0d, getMaxUlps()) > 0) {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_33_-src-main-java-org-apache-commons-math3-optimization-linear-SimplexTableau.java_338-339.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689798348868",
+  "nrTokens": 305,
+  "status": "ok",
+  "GPR[EPS]": "1689798349046",
+  "time": 178,
+  "tokentime": 3,
+  "inferencetime": 175,
+  "output": [
+    "if (Precision.compareTo(entry, 0d, maxUlps) >= 0) {",
+    "if (Precision.compareTo(entry, 0d, maxUlps) < 0) {",
+    "if (Precision.compareTo(entry, 0d, maxUlps) <= 0) {",
+    "if (Precision.compareTo(entry, 0d, maxUlps) > 0) {",
+    "if (Precision.compare(entry, 0d, maxUlps) > 0) {",
+    "if (Precision.compareTo(entry, 0d, maxUlps) == 0) {",
+    "if (Precision.compareTo(entry, 0d) > 0) {",
+    "if (Precision.compareTo(entry, maxUlps) > 0) {",
+    "if (Precision.compareTo(entry, 0.0d, maxUlps) > 0) {",
+    "if (Precision.compareTo(entry, 0d, getMaxUlps()) > 0) {"
+  ]
+}

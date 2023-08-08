@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688580138052",
+  "GPR[ESLB]": "1688580158054",
+  "file": "Closure_130_/src/com/google/javascript/jscomp/CollapseProperties.java_172-173",
+  "input": {
+    "loc": "172-173",
+    "input": "<s> private void inlineAliases(GlobalNamespace namespace) { Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest()); while (!workList.isEmpty()) { Name name = workList.pop(); if (name.type == Name.Type.GET || name.type == Name.Type.SET) { continue; } </s> if (name.globalSets == 1 && name.localSets == 0 && </s> name.aliasingGets > 0) { List<Ref> refs = Lists.newArrayList(name.getRefs()); for (Ref ref : refs) { if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) { if (inlineAliasIfPossible(ref, namespace)) { name.removeRef(ref); } } } } if ((name.type == Name.Type.OBJECTLIT || name.type == Name.Type.FUNCTION) && name.aliasingGets == 0 && name.props != null) { workList.addAll(name.props); } } } </s> java",
+    "output": [
+      "if (name.globalSets == 1 && name.localSets == 0) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.props!= null) {",
+      "if (name.globalSets == 1 && name.localSets == 1) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.globalSets == 0) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.props == null) {",
+      "if (name.globalSets == 1 && name.localSets == 1 && name.globalSets == 0) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.localSets == 1) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.type == Name.Type.SET) {",
+      "if (name.globalSets == 1 && name.localSets == 0 && name.type == Name.Type.GLOBAL) {",
+      "if (name.globalSets == 0 && name.localSets == 0) {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_130_-src-com-google-javascript-jscomp-CollapseProperties.java_172-173.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688580158096",
+  "nrTokens": 223,
+  "status": "ok",
+  "GPR[EPS]": "1688580158354",
+  "time": 258,
+  "tokentime": 2,
+  "inferencetime": 256,
+  "output": [
+    "if (name.globalSets == 1 && name.localSets == 0) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.props!= null) {",
+    "if (name.globalSets == 1 && name.localSets == 1) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.globalSets == 0) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.props == null) {",
+    "if (name.globalSets == 1 && name.localSets == 1 && name.globalSets == 0) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.localSets == 1) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.type == Name.Type.SET) {",
+    "if (name.globalSets == 1 && name.localSets == 0 && name.type == Name.Type.GLOBAL) {",
+    "if (name.globalSets == 0 && name.localSets == 0) {"
+  ]
+}

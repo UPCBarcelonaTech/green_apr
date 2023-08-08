@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689796926677",
+  "GPR[ESLB]": "1689796946697",
+  "file": "Closure_1_/src/com/google/javascript/jscomp/RemoveUnusedVars.java_379-380",
+  "input": {
+    "loc": "379-380",
+    "input": "<s> private void removeUnreferencedFunctionArgs(Scope fnScope) { </s>  </s> Node function = fnScope.getRootNode(); Preconditions.checkState(function.isFunction()); if (NodeUtil.isGetOrSetKey(function.getParent())) { return; } Node argList = getFunctionArgList(function); boolean modifyCallers = modifyCallSites && callSiteOptimizer.canModifyCallers(function); if (!modifyCallers) { Node lastArg; while ((lastArg = argList.getLastChild()) != null) { Var var = fnScope.getVar(lastArg.getString()); if (!referenced.contains(var)) { argList.removeChild(lastArg); compiler.reportCodeChange(); } else { break; } } } else { callSiteOptimizer.optimize(fnScope, referenced); } } </s> java",
+    "output": [
+      "removeUnreferencedFunctionArgs(fnScope);",
+      "removeUnreferencedFunctionArgs(fnScope, referenced);",
+      "callSiteOptimizer.optimize(fnScope, referenced);",
+      "Preconditions.checkState(fnScope.isFunction());",
+      "removeUnreferencedFunctionArgs(fnScope.getRootNode());",
+      "removeUnreferencedArgs(fnScope);",
+      "callSiteOptimizer.optimize(fnScope);",
+      "removeUnreferencedFunctionArgs();",
+      "removeUnreferencedArgs(fnScope, referenced);",
+      "removeFunctionArgs(fnScope);"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_1_-src-com-google-javascript-jscomp-RemoveUnusedVars.java_379-380.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689796946737",
+  "nrTokens": 179,
+  "status": "ok",
+  "GPR[EPS]": "1689796946893",
+  "time": 156,
+  "tokentime": 3,
+  "inferencetime": 153,
+  "output": [
+    "removeUnreferencedFunctionArgs(fnScope);",
+    "removeUnreferencedFunctionArgs(fnScope, referenced);",
+    "callSiteOptimizer.optimize(fnScope, referenced);",
+    "Preconditions.checkState(fnScope.isFunction());",
+    "removeUnreferencedFunctionArgs(fnScope.getRootNode());",
+    "removeUnreferencedArgs(fnScope);",
+    "callSiteOptimizer.optimize(fnScope);",
+    "removeUnreferencedFunctionArgs();",
+    "removeUnreferencedArgs(fnScope, referenced);",
+    "removeFunctionArgs(fnScope);"
+  ]
+}

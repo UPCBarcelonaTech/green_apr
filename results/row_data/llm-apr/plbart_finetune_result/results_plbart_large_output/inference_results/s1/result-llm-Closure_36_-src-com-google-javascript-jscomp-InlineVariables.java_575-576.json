@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689799893432",
+  "GPR[ESLB]": "1689799913452",
+  "file": "Closure_36_/src/com/google/javascript/jscomp/InlineVariables.java_575-576",
+  "input": {
+    "loc": "575-576",
+    "input": "<s> private boolean canInline( Reference declaration, Reference initialization, Reference reference) { if (!isValidDeclaration(declaration) || !isValidInitialization(initialization) || !isValidReference(reference)) { return false; } if (declaration != initialization && !initialization.getGrandparent().isExprResult()) { return false; } if (declaration.getBasicBlock() != initialization.getBasicBlock() || declaration.getBasicBlock() != reference.getBasicBlock()) { return false; } Node value = initialization.getAssignedValue(); Preconditions.checkState(value != null); if (value.isGetProp() && reference.getParent().isCall() && reference.getParent().getFirstChild() == reference.getNode()) { return false; } if (value.isFunction()) { Node callNode = reference.getParent(); if (reference.getParent().isCall()) { CodingConvention convention = compiler.getCodingConvention(); SubclassRelationship relationship = convention.getClassesDefinedByCall(callNode); if (relationship != null) { return false; } </s> } </s> } return canMoveAggressively(value) || canMoveModerately(initialization, reference); } </s> java",
+    "output": [
+      "} else { return false;",
+      "} else { return false; }",
+      "return canMoveAggressively(value);",
+      "} else { return true;",
+      "} else { return true; }",
+      "} else {",
+      "}",
+      "return true;",
+      "return false;",
+      "});"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_36_-src-com-google-javascript-jscomp-InlineVariables.java_575-576.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689799108245",
+  "GPR[ESLI]": "1689799138275",
+  "GPR[SPS]": "1689799913493",
+  "nrTokens": 254,
+  "status": "ok",
+  "GPR[EPS]": "1689799913686",
+  "time": 193,
+  "tokentime": 4,
+  "inferencetime": 189,
+  "output": [
+    "} else { return false;",
+    "} else { return false; }",
+    "return canMoveAggressively(value);",
+    "} else { return true;",
+    "} else { return true; }",
+    "} else {",
+    "}",
+    "return true;",
+    "return false;",
+    "});"
+  ]
+}

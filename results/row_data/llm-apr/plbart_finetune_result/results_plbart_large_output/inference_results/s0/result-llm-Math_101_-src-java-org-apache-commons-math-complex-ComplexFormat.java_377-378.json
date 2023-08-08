@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583929449",
+  "GPR[ESLB]": "1688583949469",
+  "file": "Math_101_/src/java/org/apache/commons/math/complex/ComplexFormat.java_377-378",
+  "input": {
+    "loc": "377-378",
+    "input": "<s> public Complex parse(String source, ParsePosition pos) { int initialIndex = pos.getIndex(); parseAndIgnoreWhitespace(source, pos); Number re = parseNumber(source, getRealFormat(), pos); if (re == null) { pos.setIndex(initialIndex); return null; } int startIndex = pos.getIndex(); char c = parseNextCharacter(source, pos); int sign = 0; switch (c) { case 0 : return new Complex(re.doubleValue(), 0.0); case '-' : sign = -1; break; case '+' : sign = 1; break; default : pos.setIndex(initialIndex); pos.setErrorIndex(startIndex); return null; } parseAndIgnoreWhitespace(source, pos); Number im = parseNumber(source, getRealFormat(), pos); if (im == null) { pos.setIndex(initialIndex); return null; } int n = getImaginaryCharacter().length(); startIndex = pos.getIndex(); int endIndex = startIndex + n; </s> if ( </s> source.substring(startIndex, endIndex).compareTo( getImaginaryCharacter()) != 0) { pos.setIndex(initialIndex); pos.setErrorIndex(startIndex); return null; } pos.setIndex(endIndex); return new Complex(re.doubleValue(), im.doubleValue() * sign); } </s> java",
+    "output": [
+      "if ( endIndex < source.length()) {",
+      "if ( endIndex > initialIndex)",
+      "if ( endIndex > initialIndex) {",
+      "if ( endIndex < source.length())",
+      "if (pos.getIndex() < endIndex)",
+      "if ( endIndex!= initialIndex) {",
+      "if ( endIndex < source.length() && (",
+      "if (pos.getIndex() == endIndex)",
+      "if ( endIndex!= initialIndex)",
+      "if (pos.getIndex()!= endIndex)"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_101_-src-java-org-apache-commons-math-complex-ComplexFormat.java_377-378.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583949510",
+  "nrTokens": 286,
+  "status": "ok",
+  "GPR[EPS]": "1688583949770",
+  "time": 260,
+  "tokentime": 4,
+  "inferencetime": 256,
+  "output": [
+    "if ( endIndex < source.length()) {",
+    "if ( endIndex > initialIndex)",
+    "if ( endIndex > initialIndex) {",
+    "if ( endIndex < source.length())",
+    "if (pos.getIndex() < endIndex)",
+    "if ( endIndex!= initialIndex) {",
+    "if ( endIndex < source.length() && (",
+    "if (pos.getIndex() == endIndex)",
+    "if ( endIndex!= initialIndex)",
+    "if (pos.getIndex()!= endIndex)"
+  ]
+}

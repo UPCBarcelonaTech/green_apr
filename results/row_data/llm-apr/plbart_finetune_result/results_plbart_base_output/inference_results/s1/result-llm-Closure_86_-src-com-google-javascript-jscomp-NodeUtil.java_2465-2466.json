@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689797435771",
+  "GPR[ESLB]": "1689797455791",
+  "file": "Closure_86_/src/com/google/javascript/jscomp/NodeUtil.java_2465-2466",
+  "input": {
+    "loc": "2465-2466",
+    "input": "<s> static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) { switch (value.getType()) { case Token.ASSIGN: return NodeUtil.isImmutableValue(value.getLastChild()) || (locals.apply(value) && evaluatesToLocalValue(value.getLastChild(), locals)); case Token.COMMA: return evaluatesToLocalValue(value.getLastChild(), locals); case Token.AND: case Token.OR: return evaluatesToLocalValue(value.getFirstChild(), locals) && evaluatesToLocalValue(value.getLastChild(), locals); case Token.HOOK: return evaluatesToLocalValue(value.getFirstChild().getNext(), locals) && evaluatesToLocalValue(value.getLastChild(), locals); case Token.INC: case Token.DEC: if (value.getBooleanProp(Node.INCRDECR_PROP)) { return evaluatesToLocalValue(value.getFirstChild(), locals); } else { return true; } case Token.THIS: return locals.apply(value); case Token.NAME: return isImmutableValue(value) || locals.apply(value); case Token.GETELEM: case Token.GETPROP: return locals.apply(value); case Token.CALL: return callHasLocalResult(value) || isToStringMethodCall(value) || locals.apply(value); case Token.NEW: </s> return true; </s> case Token.FUNCTION: case Token.REGEXP: case Token.ARRAYLIT: case Token.OBJECTLIT: return true; case Token.IN: return true; default: if (isAssignmentOp(value) || isSimpleOperator(value) || isImmutableValue(value)) { return true; } throw new IllegalStateException( \"Unexpected expression node\" + value + \"\\n parent:\" + value.getParent()); } } </s> java",
+    "output": [
+      "return false;",
+      "return locals.apply(value);",
+      "return value.getParent()!= null;",
+      "return isImmutableValue(value);",
+      "return!isImmutableValue(value);",
+      "return value.getParent() == null;",
+      "throw new IllegalStateException(\"Unexpected expression node\");",
+      "return value.getParent();",
+      "return value;",
+      "return null;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_86_-src-com-google-javascript-jscomp-NodeUtil.java_2465-2466.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689797455832",
+  "nrTokens": 393,
+  "status": "ok",
+  "GPR[EPS]": "1689797455958",
+  "time": 126,
+  "tokentime": 5,
+  "inferencetime": 121,
+  "output": [
+    "return false;",
+    "return locals.apply(value);",
+    "return value.getParent()!= null;",
+    "return isImmutableValue(value);",
+    "return!isImmutableValue(value);",
+    "return value.getParent() == null;",
+    "throw new IllegalStateException(\"Unexpected expression node\");",
+    "return value.getParent();",
+    "return value;",
+    "return null;"
+  ]
+}

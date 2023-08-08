@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689796946978",
+  "GPR[ESLB]": "1689796966999",
+  "file": "Closure_5_/src/com/google/javascript/jscomp/InlineObjectLiterals.java_176-177",
+  "input": {
+    "loc": "176-177",
+    "input": "<s> private boolean isInlinableObject(List<Reference> refs) { boolean ret = false; Set<String> validProperties = Sets.newHashSet(); for (Reference ref : refs) { Node name = ref.getNode(); Node parent = ref.getParent(); Node gramps = ref.getGrandparent(); if (parent.isGetProp()) { Preconditions.checkState(parent.getFirstChild() == name); if (gramps.isCall() && gramps.getFirstChild() == parent) { return false; } </s>  </s> String propName = parent.getLastChild().getString(); if (!validProperties.contains(propName)) { if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) { validProperties.add(propName); } else { return false; } } continue; } if (!isVarOrAssignExprLhs(name)) { return false; } Node val = ref.getAssignedValue(); if (val == null) { continue; } if (!val.isObjectLit()) { return false; } for (Node child = val.getFirstChild(); child != null; child = child.getNext()) { if (child.isGetterDef() || child.isSetterDef()) { return false; } validProperties.add(child.getString()); Node childVal = child.getFirstChild(); for (Reference t : refs) { Node refNode = t.getParent(); while (!NodeUtil.isStatementBlock(refNode)) { if (refNode == childVal) { return false; } refNode = refNode.getParent(); } } } ret = true; } return ret; } </s> java",
+    "output": [
+      "if (!isVarOrAssignExprLhs(name)) { return false; }",
+      "String propName = parent.getLastChild().getString();",
+      "if (!isVarOrSimpleAssignLhs(parent, gramps)) { continue;",
+      "if (parent.getLastChild()!= null) {",
+      "Node child = parent.getLastChild();",
+      "Node child = parent.getFirstChild();",
+      "return false;",
+      "return true;",
+      "continue;",
+      "boolean ret = false;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_5_-src-com-google-javascript-jscomp-InlineObjectLiterals.java_176-177.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689796967038",
+  "nrTokens": 356,
+  "status": "ok",
+  "GPR[EPS]": "1689796967238",
+  "time": 200,
+  "tokentime": 4,
+  "inferencetime": 196,
+  "output": [
+    "if (!isVarOrAssignExprLhs(name)) { return false; }",
+    "String propName = parent.getLastChild().getString();",
+    "if (!isVarOrSimpleAssignLhs(parent, gramps)) { continue;",
+    "if (parent.getLastChild()!= null) {",
+    "Node child = parent.getLastChild();",
+    "Node child = parent.getFirstChild();",
+    "return false;",
+    "return true;",
+    "continue;",
+    "boolean ret = false;"
+  ]
+}

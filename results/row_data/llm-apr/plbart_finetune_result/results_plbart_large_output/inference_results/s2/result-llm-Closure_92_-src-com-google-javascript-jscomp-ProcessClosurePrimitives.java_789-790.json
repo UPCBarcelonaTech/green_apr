@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689848904057",
+  "GPR[ESLB]": "1689848924077",
+  "file": "Closure_92_/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java_789-790",
+  "input": {
+    "loc": "789-790",
+    "input": "<s> void replace() { if (firstNode == null) { replacementNode = candidateDefinition; return; } if (candidateDefinition != null && explicitNode != null) { explicitNode.detachFromParent(); compiler.reportCodeChange(); replacementNode = candidateDefinition; if (NodeUtil.isExpressionNode(candidateDefinition)) { candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true); Node assignNode = candidateDefinition.getFirstChild(); Node nameNode = assignNode.getFirstChild(); if (nameNode.getType() == Token.NAME) { Node valueNode = nameNode.getNext(); assignNode.removeChild(nameNode); assignNode.removeChild(valueNode); nameNode.addChildToFront(valueNode); Node varNode = new Node(Token.VAR, nameNode); varNode.copyInformationFrom(candidateDefinition); candidateDefinition.getParent().replaceChild( candidateDefinition, varNode); nameNode.setJSDocInfo(assignNode.getJSDocInfo()); compiler.reportCodeChange(); replacementNode = varNode; } } } else { replacementNode = createDeclarationNode(); if (firstModule == minimumModule) { firstNode.getParent().addChildBefore(replacementNode, firstNode); } else { </s> int indexOfDot = namespace.indexOf('.'); </s> if (indexOfDot == -1) { compiler.getNodeForCodeInsertion(minimumModule) .addChildToBack(replacementNode); } else { ProvidedName parentName = providedNames.get(namespace.substring(0, indexOfDot)); Preconditions.checkNotNull(parentName); Preconditions.checkNotNull(parentName.replacementNode); parentName.replacementNode.getParent().addChildAfter( replacementNode, parentName.replacementNode); } } if (explicitNode != null) { explicitNode.detachFromParent(); } compiler.reportCodeChange(); } } </s> java",
+    "output": [
+      "int indexOfDot = namespace.indexOf('.', namespace.length());",
+      "int indexOfDot = namespace.indexOf('.');",
+      "int indexOfDot = namespace.indexOf('.') + 1;",
+      "int indexOfDot = namespace.indexOf('.', minimumModule);",
+      "int indexOfDot = namespace.indexOf(\"String_Node_Str\");",
+      "int indexOfDot = namespace.lastIndexOf('.');",
+      "int indexOfDot = namespace.indexOf('.');",
+      "int indexOfDot = namespace.indexOf('.', namespace.indexOf('.'));",
+      "int indexOfDot = namespace.indexOf('\\\\');",
+      "indexOfDot = namespace.indexOf('.');"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_92_-src-com-google-javascript-jscomp-ProcessClosurePrimitives.java_789-790.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689847813336",
+  "GPR[ESLI]": "1689847843336",
+  "GPR[SPS]": "1689848924114",
+  "nrTokens": 393,
+  "status": "ok",
+  "GPR[EPS]": "1689848924385",
+  "time": 271,
+  "tokentime": 5,
+  "inferencetime": 266,
+  "output": [
+    "int indexOfDot = namespace.indexOf('.', namespace.length());",
+    "int indexOfDot = namespace.indexOf('.');",
+    "int indexOfDot = namespace.indexOf('.') + 1;",
+    "int indexOfDot = namespace.indexOf('.', minimumModule);",
+    "int indexOfDot = namespace.indexOf(\"String_Node_Str\");",
+    "int indexOfDot = namespace.lastIndexOf('.');",
+    "int indexOfDot = namespace.indexOf('.');",
+    "int indexOfDot = namespace.indexOf('.', namespace.indexOf('.'));",
+    "int indexOfDot = namespace.indexOf('\\\\');",
+    "indexOfDot = namespace.indexOf('.');"
+  ]
+}

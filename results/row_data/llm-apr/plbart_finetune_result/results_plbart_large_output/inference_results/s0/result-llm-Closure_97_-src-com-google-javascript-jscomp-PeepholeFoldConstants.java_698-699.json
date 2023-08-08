@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688582637842",
+  "GPR[ESLB]": "1688582657860",
+  "file": "Closure_97_/src/com/google/javascript/jscomp/PeepholeFoldConstants.java_698-699",
+  "input": {
+    "loc": "698-699",
+    "input": "<s> private Node tryFoldShift(Node n, Node left, Node right) { if (left.getType() == Token.NUMBER && right.getType() == Token.NUMBER) { double result; double lval = left.getDouble(); double rval = right.getDouble(); if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) { error(BITWISE_OPERAND_OUT_OF_RANGE, left); return n; } if (!(rval >= 0 && rval < 32)) { error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right); return n; } int lvalInt = (int) lval; if (lvalInt != lval) { error(FRACTIONAL_BITWISE_OPERAND, left); return n; } int rvalInt = (int) rval; if (rvalInt != rval) { error(FRACTIONAL_BITWISE_OPERAND, right); return n; } switch (n.getType()) { case Token.LSH: result = lvalInt << rvalInt; break; case Token.RSH: result = lvalInt >> rvalInt; break; case Token.URSH: </s> result = lvalInt >>> rvalInt; </s> break; default: throw new AssertionError(\"Unknown shift operator: \" + Node.tokenToName(n.getType())); } Node newNumber = Node.newNumber(result); n.getParent().replaceChild(n, newNumber); reportCodeChange(); return newNumber; } return n; } </s> java",
+    "output": [
+      "result = lvalInt >>> rvalInt >> 1;",
+      "result = lvalInt >> rvalInt;",
+      "result = lvalInt >>> rvalInt << rvalInt;",
+      "result = lvalInt >>> rvalInt > 0;",
+      "result = lvalInt >>> rvalInt;",
+      "result = lvalInt >>> rvalInt >> rvalInt;",
+      "result = lvalInt << rvalInt;",
+      "result = lvalInt >>> rvalInt - 1;",
+      "result = lvalInt & rvalInt;",
+      "result = lvalInt >>> rvalInt & rvalInt;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_97_-src-com-google-javascript-jscomp-PeepholeFoldConstants.java_698-699.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688582657901",
+  "nrTokens": 340,
+  "status": "ok",
+  "GPR[EPS]": "1688582658198",
+  "time": 297,
+  "tokentime": 3,
+  "inferencetime": 294,
+  "output": [
+    "result = lvalInt >>> rvalInt >> 1;",
+    "result = lvalInt >> rvalInt;",
+    "result = lvalInt >>> rvalInt << rvalInt;",
+    "result = lvalInt >>> rvalInt > 0;",
+    "result = lvalInt >>> rvalInt;",
+    "result = lvalInt >>> rvalInt >> rvalInt;",
+    "result = lvalInt << rvalInt;",
+    "result = lvalInt >>> rvalInt - 1;",
+    "result = lvalInt & rvalInt;",
+    "result = lvalInt >>> rvalInt & rvalInt;"
+  ]
+}

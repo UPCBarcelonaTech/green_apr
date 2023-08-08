@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688581657499",
+  "GPR[ESLB]": "1688581677519",
+  "file": "Closure_77_src/com/google/javascript/jscomp/CodeGenerator.java_967-967",
+  "input": {
+    "loc": "967-967",
+    "input": "<s> static String strEscape(String s, char quote, String doublequoteEscape, String singlequoteEscape, String backslashEscape, CharsetEncoder outputCharsetEncoder) { StringBuilder sb = new StringBuilder(s.length() + 2); sb.append(quote); for (int i = 0; i < s.length(); i++) { char c = s.charAt(i); switch (c) { case '\\n': sb.append(\"\\\\n\"); break; </s> case '\\r': sb.append(\"\\\\r\"); break; </s> case '\\t': sb.append(\"\\\\t\"); break; case '\\\\': sb.append(backslashEscape); break; case '\\\"': sb.append(doublequoteEscape); break; case '\\'': sb.append(singlequoteEscape); break; case '>': if (i >= 2 && ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') || (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) { sb.append(\"\\\\>\"); } else { sb.append(c); } break; case '<': final String END_SCRIPT = \"/script\"; final String START_COMMENT = \"!--\"; if (s.regionMatches(true, i + 1, END_SCRIPT, 0, END_SCRIPT.length())) { sb.append(\"<\\\\\"); } else if (s.regionMatches(false, i + 1, START_COMMENT, 0, START_COMMENT.length())) { sb.append(\"<\\\\\"); } else { sb.append(c); } break; default: if (outputCharsetEncoder != null) { if (outputCharsetEncoder.canEncode(c)) { sb.append(c); } else { appendHexJavaScriptRepresentation(sb, c); } } else { if (c > 0x1f && c <= 0x7f) { sb.append(c); } else { appendHexJavaScriptRepresentation(sb, c); } } } } sb.append(quote); return sb.toString(); } </s> java",
+    "output": [
+      "case '\\n': sb.append(\"\\\\n\"); break;",
+      "case '\\\\': sb.append(backslashEscape); break;",
+      "case '\\n': sb.append(\"\\\\n\"); break;",
+      "case '\\n': sb.append('\\n'); break;",
+      "case '\\n': sb.append(backslashEscape); break;",
+      "case '\\n': sb.append(\\\\n); break;",
+      "case '\\r\\n': sb.append(\"\\\\r\"); break;",
+      "case '\\\\': sb.append(backslashEscape);",
+      "case '\\n': sb.append(\"String_Node_Str\");",
+      "case '\\n': break;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_77_src-com-google-javascript-jscomp-CodeGenerator.java_967-967.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688581677560",
+  "nrTokens": 429,
+  "status": "ok",
+  "GPR[EPS]": "1688581677902",
+  "time": 342,
+  "tokentime": 4,
+  "inferencetime": 338,
+  "output": [
+    "case '\\n': sb.append(\"\\\\n\"); break;",
+    "case '\\\\': sb.append(backslashEscape); break;",
+    "case '\\n': sb.append(\"\\\\n\"); break;",
+    "case '\\n': sb.append('\\n'); break;",
+    "case '\\n': sb.append(backslashEscape); break;",
+    "case '\\n': sb.append(\\\\n); break;",
+    "case '\\r\\n': sb.append(\"\\\\r\"); break;",
+    "case '\\\\': sb.append(backslashEscape);",
+    "case '\\n': sb.append(\"String_Node_Str\");",
+    "case '\\n': break;"
+  ]
+}

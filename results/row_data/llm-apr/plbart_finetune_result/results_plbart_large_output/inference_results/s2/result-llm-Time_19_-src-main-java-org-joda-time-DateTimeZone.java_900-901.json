@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689850537910",
+  "GPR[ESLB]": "1689850557930",
+  "file": "Time_19_/src/main/java/org/joda/time/DateTimeZone.java_900-901",
+  "input": {
+    "loc": "900-901",
+    "input": "<s> public int getOffsetFromLocal(long instantLocal) { final int offsetLocal = getOffset(instantLocal); final long instantAdjusted = instantLocal - offsetLocal; final int offsetAdjusted = getOffset(instantAdjusted); if (offsetLocal != offsetAdjusted) { if ((offsetLocal - offsetAdjusted) < 0) { long nextLocal = nextTransition(instantAdjusted); long nextAdjusted = nextTransition(instantLocal - offsetAdjusted); if (nextLocal != nextAdjusted) { return offsetLocal; } } </s> } else if (offsetLocal > 0) { </s> long prev = previousTransition(instantAdjusted); if (prev < instantAdjusted) { int offsetPrev = getOffset(prev); int diff = offsetPrev - offsetLocal; if (instantAdjusted - prev <= diff) { return offsetPrev; } } } return offsetAdjusted; } </s> java",
+    "output": [
+      "} else if (offsetLocal > 0) {",
+      "} else if (instantAdjusted > 0) {",
+      "} else if (offsetLocal >= 0) {",
+      "} else if (instantAdjusted > offsetLocal) {",
+      "} else if (offsetLocal < 0) {",
+      "} else if (instantAdjusted < offsetLocal) {",
+      "} else if (offsetLocal > 0)",
+      "} else {",
+      "} else",
+      "}"
+    ]
+  },
+  "nvidea": "measures-nvidea-Time_19_-src-main-java-org-joda-time-DateTimeZone.java_900-901.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689847813336",
+  "GPR[ESLI]": "1689847843336",
+  "GPR[SPS]": "1689850557958",
+  "nrTokens": 185,
+  "status": "ok",
+  "GPR[EPS]": "1689850558168",
+  "time": 210,
+  "tokentime": 3,
+  "inferencetime": 207,
+  "output": [
+    "} else if (offsetLocal > 0) {",
+    "} else if (instantAdjusted > 0) {",
+    "} else if (offsetLocal >= 0) {",
+    "} else if (instantAdjusted > offsetLocal) {",
+    "} else if (offsetLocal < 0) {",
+    "} else if (instantAdjusted < offsetLocal) {",
+    "} else if (offsetLocal > 0)",
+    "} else {",
+    "} else",
+    "}"
+  ]
+}

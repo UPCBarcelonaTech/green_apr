@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688579569489",
+  "GPR[ESLB]": "1688579589509",
+  "file": "Closure_36_/src/com/google/javascript/jscomp/InlineVariables.java_575-576",
+  "input": {
+    "loc": "575-576",
+    "input": "<s> private boolean canInline( Reference declaration, Reference initialization, Reference reference) { if (!isValidDeclaration(declaration) || !isValidInitialization(initialization) || !isValidReference(reference)) { return false; } if (declaration != initialization && !initialization.getGrandparent().isExprResult()) { return false; } if (declaration.getBasicBlock() != initialization.getBasicBlock() || declaration.getBasicBlock() != reference.getBasicBlock()) { return false; } Node value = initialization.getAssignedValue(); Preconditions.checkState(value != null); if (value.isGetProp() && reference.getParent().isCall() && reference.getParent().getFirstChild() == reference.getNode()) { return false; } if (value.isFunction()) { Node callNode = reference.getParent(); if (reference.getParent().isCall()) { CodingConvention convention = compiler.getCodingConvention(); SubclassRelationship relationship = convention.getClassesDefinedByCall(callNode); if (relationship != null) { return false; } </s> } </s> } return canMoveAggressively(value) || canMoveModerately(initialization, reference); } </s> java",
+    "output": [
+      "} else { return false;",
+      "} else { return true;",
+      "} else return false;",
+      "} return false;",
+      "} return true;",
+      "return false;",
+      "return true;",
+      "} else {",
+      "}",
+      "});"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_36_-src-com-google-javascript-jscomp-InlineVariables.java_575-576.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688579589548",
+  "nrTokens": 254,
+  "status": "ok",
+  "GPR[EPS]": "1688579589638",
+  "time": 90,
+  "tokentime": 3,
+  "inferencetime": 87,
+  "output": [
+    "} else { return false;",
+    "} else { return true;",
+    "} else return false;",
+    "} return false;",
+    "} return true;",
+    "return false;",
+    "return true;",
+    "} else {",
+    "}",
+    "});"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688582188071",
+  "GPR[ESLB]": "1688582208091",
+  "file": "Closure_15_/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java_102-103",
+  "input": {
+    "loc": "102-103",
+    "input": "<s> @Override public boolean apply(Node n) { if (n == null) { return false; } if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) { return true; } if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) { return true; } </s>  </s> for (Node c = n.getFirstChild(); c != null; c = c.getNext()) { if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) { return true; } } return false; } </s> java",
+    "output": [
+      "return ControlFlowGraph.isEnteringNewCfgNode(n);",
+      "return apply(n);",
+      "return apply(n.getFirstChild());",
+      "return true;",
+      "return ControlFlowGraph.isEnteringNewCfgNode(node);",
+      "return isEnteringNewCfgNode(n);",
+      "return false;",
+      "if (n.isNew()) { return true; }",
+      "return NodeUtil.isNewCfgNode(n);",
+      "return n.isNew();"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_15_-src-com-google-javascript-jscomp-FlowSensitiveInlineVariables.java_102-103.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688582208133",
+  "nrTokens": 129,
+  "status": "ok",
+  "GPR[EPS]": "1688582208386",
+  "time": 253,
+  "tokentime": 2,
+  "inferencetime": 251,
+  "output": [
+    "return ControlFlowGraph.isEnteringNewCfgNode(n);",
+    "return apply(n);",
+    "return apply(n.getFirstChild());",
+    "return true;",
+    "return ControlFlowGraph.isEnteringNewCfgNode(node);",
+    "return isEnteringNewCfgNode(n);",
+    "return false;",
+    "if (n.isNew()) { return true; }",
+    "return NodeUtil.isNewCfgNode(n);",
+    "return n.isNew();"
+  ]
+}

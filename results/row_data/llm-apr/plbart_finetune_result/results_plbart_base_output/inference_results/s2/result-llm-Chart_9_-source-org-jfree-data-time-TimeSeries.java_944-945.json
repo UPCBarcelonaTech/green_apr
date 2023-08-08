@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689845470211",
+  "GPR[ESLB]": "1689845490231",
+  "file": "Chart_9_/source/org/jfree/data/time/TimeSeries.java_944-945",
+  "input": {
+    "loc": "944-945",
+    "input": "<s> public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end) throws CloneNotSupportedException { if (start == null) { throw new IllegalArgumentException(\"Null 'start' argument.\"); } if (end == null) { throw new IllegalArgumentException(\"Null 'end' argument.\"); } if (start.compareTo(end) > 0) { throw new IllegalArgumentException( \"Requires start on or before end.\"); } boolean emptyRange = false; int startIndex = getIndex(start); if (startIndex < 0) { startIndex = -(startIndex + 1); if (startIndex == this.data.size()) { emptyRange = true; } } int endIndex = getIndex(end); if (endIndex < 0) { endIndex = -(endIndex + 1); endIndex = endIndex - 1; } </s> if (endIndex < 0) { </s> emptyRange = true; } if (emptyRange) { TimeSeries copy = (TimeSeries) super.clone(); copy.data = new java.util.ArrayList(); return copy; } else { return createCopy(startIndex, endIndex); } } </s> java",
+    "output": [
+      "if (endIndex < startIndex) {",
+      "if (endIndex < 0)",
+      "if (endIndex < this.data.size()) {",
+      "if (endIndex >= 0) {",
+      "if (endIndex == 0) {",
+      "if (endIndex < 0) {",
+      "if (endIndex > 0) {",
+      "if (endIndex <= 0) {",
+      "if (endIndex == -1) {",
+      "{"
+    ]
+  },
+  "nvidea": "measures-nvidea-Chart_9_-source-org-jfree-data-time-TimeSeries.java_944-945.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689845065326",
+  "GPR[ESLI]": "1689845095356",
+  "GPR[SPS]": "1689845490275",
+  "nrTokens": 223,
+  "status": "ok",
+  "GPR[EPS]": "1689845490412",
+  "time": 137,
+  "tokentime": 3,
+  "inferencetime": 134,
+  "output": [
+    "if (endIndex < startIndex) {",
+    "if (endIndex < 0)",
+    "if (endIndex < this.data.size()) {",
+    "if (endIndex >= 0) {",
+    "if (endIndex == 0) {",
+    "if (endIndex < 0) {",
+    "if (endIndex > 0) {",
+    "if (endIndex <= 0) {",
+    "if (endIndex == -1) {",
+    "{"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688584237580",
+  "GPR[ESLB]": "1688584257600",
+  "file": "Time_16_/src/main/java/org/joda/time/format/DateTimeFormatter.java_709-710",
+  "input": {
+    "loc": "709-710",
+    "input": "<s> public int parseInto(ReadWritableInstant instant, String text, int position) { DateTimeParser parser = requireParser(); if (instant == null) { throw new IllegalArgumentException(\"Instant must not be null\"); } long instantMillis = instant.getMillis(); Chronology chrono = instant.getChronology(); long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis); chrono = selectChronology(chrono); DateTimeParserBucket bucket = new DateTimeParserBucket( </s> instantLocal, chrono, iLocale, iPivotYear, iDefaultYear); </s> int newPos = parser.parseInto(bucket, text, position); instant.setMillis(bucket.computeMillis(false, text)); if (iOffsetParsed && bucket.getOffsetInteger() != null) { int parsedOffset = bucket.getOffsetInteger(); DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset); chrono = chrono.withZone(parsedZone); } else if (bucket.getZone() != null) { chrono = chrono.withZone(bucket.getZone()); } instant.setChronology(chrono); if (iZone != null) { instant.setZone(iZone); } return newPos; } </s> java",
+    "output": [
+      "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+      "bucket = new DateTimeParserBucket(instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+      "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear);",
+      "bucket.init(instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+      "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iDefaultYear);",
+      "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iDefaultYear, iPivotYear);",
+      "instantLocal = instantLocal + chrono.getZone().getOffset(instantMillis);",
+      "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear);",
+      "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale);",
+      "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono);"
+    ]
+  },
+  "nvidea": "measures-nvidea-Time_16_-src-main-java-org-joda-time-format-DateTimeFormatter.java_709-710.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688584257642",
+  "nrTokens": 263,
+  "status": "ok",
+  "GPR[EPS]": "1688584258169",
+  "time": 527,
+  "tokentime": 4,
+  "inferencetime": 523,
+  "output": [
+    "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+    "bucket = new DateTimeParserBucket(instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+    "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear);",
+    "bucket.init(instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);",
+    "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iDefaultYear);",
+    "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iDefaultYear, iPivotYear);",
+    "instantLocal = instantLocal + chrono.getZone().getOffset(instantMillis);",
+    "bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale, iPivotYear);",
+    "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono, iLocale);",
+    "DateTimeParserBucket bucket = new DateTimeParserBucket( instantLocal, chrono);"
+  ]
+}

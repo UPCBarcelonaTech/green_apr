@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583723587",
+  "GPR[ESLB]": "1688583743607",
+  "file": "Math_69_/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java_171-172",
+  "input": {
+    "loc": "171-172",
+    "input": "<s> public RealMatrix getCorrelationPValues() throws MathException { TDistribution tDistribution = new TDistributionImpl(nObs - 2); int nVars = correlationMatrix.getColumnDimension(); double[][] out = new double[nVars][nVars]; for (int i = 0; i < nVars; i++) { for (int j = 0; j < nVars; j++) { if (i == j) { out[i][j] = 0d; } else { double r = correlationMatrix.getEntry(i, j); double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r))); </s> out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t)); </s> } } } return new BlockRealMatrix(out); } </s> java",
+    "output": [
+      "out[i][j] = tDistribution.cumulativeProbability(t);",
+      "out[i][j] = 1 - tDistribution.cumulativeProbability(t);",
+      "out[i][j] = 2 * tDistribution.cumulativeProbability(t);",
+      "out[i][j] = 1d - tDistribution.cumulativeProbability(t);",
+      "out[i][j] = 2 * (tDistribution.cumulativeProbability(t));",
+      "out[i][j] = 2 * (tDistribution.cumulativeProbability(t) - 1);",
+      "out[i][j] = 2 * (tDistribution.cumulativeProbability(t) + 1);",
+      "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));",
+      "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t, false));",
+      "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t, true));"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_69_-src-main-java-org-apache-commons-math-stat-correlation-PearsonsCorrelation.java_171-172.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583743646",
+  "nrTokens": 174,
+  "status": "ok",
+  "GPR[EPS]": "1688583744124",
+  "time": 478,
+  "tokentime": 3,
+  "inferencetime": 475,
+  "output": [
+    "out[i][j] = tDistribution.cumulativeProbability(t);",
+    "out[i][j] = 1 - tDistribution.cumulativeProbability(t);",
+    "out[i][j] = 2 * tDistribution.cumulativeProbability(t);",
+    "out[i][j] = 1d - tDistribution.cumulativeProbability(t);",
+    "out[i][j] = 2 * (tDistribution.cumulativeProbability(t));",
+    "out[i][j] = 2 * (tDistribution.cumulativeProbability(t) - 1);",
+    "out[i][j] = 2 * (tDistribution.cumulativeProbability(t) + 1);",
+    "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));",
+    "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t, false));",
+    "out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t, true));"
+  ]
+}

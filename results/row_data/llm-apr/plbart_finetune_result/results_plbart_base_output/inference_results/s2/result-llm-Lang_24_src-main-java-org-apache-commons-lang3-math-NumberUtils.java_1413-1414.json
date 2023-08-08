@@ -1,0 +1,24 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689845287793",
+  "GPR[ESLB]": "1689845307813",
+  "file": "Lang_24_src/main/java/org/apache/commons/lang3/math/NumberUtils.java_1413-1414",
+  "input": {
+    "loc": "1413-1414",
+    "input": "<s> public static boolean isNumber(String str) { if (StringUtils.isEmpty(str)) { return false; } char[] chars = str.toCharArray(); int sz = chars.length; boolean hasExp = false; boolean hasDecPoint = false; boolean allowSigns = false; boolean foundDigit = false; int start = (chars[0] == '-') ? 1 : 0; if (sz > start + 1) { if (chars[start] == '0' && chars[start + 1] == 'x') { int i = start + 2; if (i == sz) { return false; } for (; i < chars.length; i++) { if ((chars[i] < '0' || chars[i] > '9') && (chars[i] < 'a' || chars[i] > 'f') && (chars[i] < 'A' || chars[i] > 'F')) { return false; } } return true; } } sz--; int i = start; while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) { if (chars[i] >= '0' && chars[i] <= '9') { foundDigit = true; allowSigns = false; } else if (chars[i] == '.') { if (hasDecPoint || hasExp) { return false; } hasDecPoint = true; } else if (chars[i] == 'e' || chars[i] == 'E') { if (hasExp) { return false; } if (!foundDigit) { return false; } hasExp = true; allowSigns = true; } else if (chars[i] == '+' || chars[i] == '-') { if (!allowSigns) { return false; } allowSigns = false; foundDigit = false; } else { return false; } i++; } if (i < chars.length) { if (chars[i] >= '0' && chars[i] <= '9') { return true; } if (chars[i] == 'e' || chars[i] == 'E') { return false; } if (chars[i] == '.') { if (hasDecPoint || hasExp) { return false; } return foundDigit; } if (!allowSigns && (chars[i] == 'd' || chars[i] == 'D' || chars[i] == 'f' || chars[i] == 'F')) { return foundDigit; } if (chars[i] == 'l' || chars[i] == 'L') { </s> return foundDigit && !hasExp; </s> } return false; } return !allowSigns && foundDigit; } </s> java",
+    "output": []
+  },
+  "nvidea": "measures-nvidea-Lang_24_src-main-java-org-apache-commons-lang3-math-NumberUtils.java_1413-1414.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689845065326",
+  "GPR[ESLI]": "1689845095356",
+  "GPR[SPS]": "1689845307856",
+  "nrTokens": 575,
+  "status": "error",
+  "message": "input too long:575skip",
+  "GPR[EPS]": "1689845307860",
+  "time": 4,
+  "tokentime": 4,
+  "inferencetime": 0,
+  "output": []
+}

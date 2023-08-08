@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689849903738",
+  "GPR[ESLB]": "1689849923758",
+  "file": "Math_56_/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java_237-244",
+  "input": {
+    "loc": "237-244",
+    "input": "<s> public int[] getCounts(int index) { if (index < 0 || index >= totalSize) { throw new OutOfRangeException(index, 0, totalSize); } final int[] indices = new int[dimension]; int count = 0; for (int i = 0; i < last; i++) { int idx = 0; final int offset = uniCounterOffset[i]; while (count <= index) { count += offset; ++idx; } --idx; count -= offset; indices[i] = idx; } </s> int idx = 1; while (count < index) { count += idx; ++idx; } --idx; indices[last] = idx; </s> return indices; } </s> java",
+    "output": [
+      "indices[last] = count;",
+      "indices[last] = index;",
+      "indices[last] += count;",
+      "indices[last + 1] = count;",
+      "indices[index] = count;",
+      "indices[last - 1] = count;",
+      "indices[last++] = count;",
+      "indices[last] = count; count = 0;",
+      "indices[last] = count - 1;",
+      "indices[last] = count; count = 1;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_56_-src-main-java-org-apache-commons-math-util-MultidimensionalCounter.java_237-244.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689847813336",
+  "GPR[ESLI]": "1689847843336",
+  "GPR[SPS]": "1689849923801",
+  "nrTokens": 144,
+  "status": "ok",
+  "GPR[EPS]": "1689849923997",
+  "time": 196,
+  "tokentime": 2,
+  "inferencetime": 194,
+  "output": [
+    "indices[last] = count;",
+    "indices[last] = index;",
+    "indices[last] += count;",
+    "indices[last + 1] = count;",
+    "indices[index] = count;",
+    "indices[last - 1] = count;",
+    "indices[last++] = count;",
+    "indices[last] = count; count = 0;",
+    "indices[last] = count - 1;",
+    "indices[last] = count; count = 1;"
+  ]
+}

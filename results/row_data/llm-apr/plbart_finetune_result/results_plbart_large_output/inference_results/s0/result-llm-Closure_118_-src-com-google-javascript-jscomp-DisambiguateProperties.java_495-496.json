@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688582760649",
+  "GPR[ESLB]": "1688582780663",
+  "file": "Closure_118_/src/com/google/javascript/jscomp/DisambiguateProperties.java_495-496",
+  "input": {
+    "loc": "495-496",
+    "input": "<s> private void handleObjectLit(NodeTraversal t, Node n) { for (Node child = n.getFirstChild(); child != null; child = child.getNext()) { </s>  </s> String name = child.getString(); T type = typeSystem.getType(getScope(), n, name); Property prop = getProperty(name); if (!prop.scheduleRenaming(child, processProperty(t, prop, type, null))) { if (propertiesToErrorFor.containsKey(name)) { compiler.report(JSError.make( t.getSourceName(), child, propertiesToErrorFor.get(name), Warnings.INVALIDATION, name, (type == null ? \"null\" : type.toString()), n.toString(), \"\")); } } } } </s> java",
+    "output": [
+      "processObjectLit(t, n, child);",
+      "processObjectLit(t, child);",
+      "handleObjectLit(t, n, child);",
+      "if (child.isStringKey()) {",
+      "String name = child.getString();",
+      "if (child.isName()) {",
+      "processProperty(t, child);",
+      "handleObjectLit(t, child);",
+      "processObjectLit(t, child, n);",
+      "Property prop = getProperty(child.getString());"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_118_-src-com-google-javascript-jscomp-DisambiguateProperties.java_495-496.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688582780703",
+  "nrTokens": 165,
+  "status": "ok",
+  "GPR[EPS]": "1688582780982",
+  "time": 279,
+  "tokentime": 3,
+  "inferencetime": 276,
+  "output": [
+    "processObjectLit(t, n, child);",
+    "processObjectLit(t, child);",
+    "handleObjectLit(t, n, child);",
+    "if (child.isStringKey()) {",
+    "String name = child.getString();",
+    "if (child.isName()) {",
+    "processProperty(t, child);",
+    "handleObjectLit(t, child);",
+    "processObjectLit(t, child, n);",
+    "Property prop = getProperty(child.getString());"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583539253",
+  "GPR[ESLB]": "1688583559274",
+  "file": "Math_41_/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java_520-521",
+  "input": {
+    "loc": "520-521",
+    "input": "<s> public double evaluate(final double[] values, final double[] weights, final double mean, final int begin, final int length) { double var = Double.NaN; if (test(values, weights, begin, length)) { if (length == 1) { var = 0.0; } else if (length > 1) { double accum = 0.0; double dev = 0.0; double accum2 = 0.0; for (int i = begin; i < begin + length; i++) { dev = values[i] - mean; accum += weights[i] * (dev * dev); accum2 += weights[i] * dev; } double sumWts = 0; </s> for (int i = 0; i < weights.length; i++) { </s> sumWts += weights[i]; } if (isBiasCorrected) { var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0); } else { var = (accum - (accum2 * accum2 / sumWts)) / sumWts; } } } return var; } </s> java",
+    "output": [
+      "for (int i = begin; i < begin + length; i++) {",
+      "for (int i = begin; i < begin + weights.length; i++) {",
+      "for (int i = 0; i < weights.length - 1; i++) {",
+      "for (int i = begin; i <= begin + length; i++) {",
+      "for (final int i = 0; i < weights.length; i++) {",
+      "for (int i = begin + 1; i < begin + length; i++) {",
+      "for (int i = weights.length - 1; i >= 0; i--) {",
+      "for (int i = begin; i < length; i++) {",
+      "for (int i = 0; i < weights.length; i++) {",
+      "for (int i = 0; i < weights.length / 2; i++) {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Math_41_-src-main-java-org-apache-commons-math-stat-descriptive-moment-Variance.java_520-521.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583559313",
+  "nrTokens": 230,
+  "status": "ok",
+  "GPR[EPS]": "1688583559715",
+  "time": 402,
+  "tokentime": 3,
+  "inferencetime": 399,
+  "output": [
+    "for (int i = begin; i < begin + length; i++) {",
+    "for (int i = begin; i < begin + weights.length; i++) {",
+    "for (int i = 0; i < weights.length - 1; i++) {",
+    "for (int i = begin; i <= begin + length; i++) {",
+    "for (final int i = 0; i < weights.length; i++) {",
+    "for (int i = begin + 1; i < begin + length; i++) {",
+    "for (int i = weights.length - 1; i >= 0; i--) {",
+    "for (int i = begin; i < length; i++) {",
+    "for (int i = 0; i < weights.length; i++) {",
+    "for (int i = 0; i < weights.length / 2; i++) {"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689845166282",
+  "GPR[ESLB]": "1689845186302",
+  "file": "Closure_40_src/com/google/javascript/jscomp/NameAnalyzer.java_635-636",
+  "input": {
+    "loc": "635-636",
+    "input": "<s> @Override public void visit(NodeTraversal t, Node n, Node parent) { if (t.inGlobalScope()) { if (NodeUtil.isVarDeclaration(n)) { NameInformation ns = createNameInformation(t, n, parent); Preconditions.checkNotNull(ns); recordSet(ns.name, n); } else if (NodeUtil.isFunctionDeclaration(n)) { Node nameNode = n.getFirstChild(); NameInformation ns = createNameInformation(t, nameNode, n); if (ns != null) { JsName nameInfo = getName(nameNode.getString(), true); recordSet(nameInfo.name, nameNode); } } else if (NodeUtil.isObjectLitKey(n, parent)) { NameInformation ns = createNameInformation(t, n, parent); if (ns != null) { recordSet(ns.name, n); } } } if (n.isAssign()) { Node nameNode = n.getFirstChild(); NameInformation ns = createNameInformation(t, nameNode, n); if (ns != null) { if (ns.isPrototype) { recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n); } else { recordSet(ns.name, nameNode); } } } else if (n.isCall()) { Node nameNode = n.getFirstChild(); NameInformation ns = createNameInformation(t, nameNode, n); if (ns != null && ns.onlyAffectsClassDef) { </s> JsName name = getName(ns.name, false); </s> if (name != null) { refNodes.add(new ClassDefiningFunctionNode( name, n, parent, parent.getParent())); } } } } </s> java",
+    "output": [
+      "JsName name = getName(ns.name, true);",
+      "JsName name = getName(ns.name);",
+      "Name name = getName(ns.name, false);",
+      "String name = getName(ns.name, false);",
+      "JsName name = getName(ns.getName(), false);",
+      "JsName name = getName(ns.name, null);",
+      "JsName name = getName(ns, false);",
+      "JsName name = ns.name;",
+      "JsName name = getName(ns);",
+      "String name = ns.name;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_40_src-com-google-javascript-jscomp-NameAnalyzer.java_635-636.txt",
+  "OAR_JOB_ID": "1561512",
+  "GPR[SSLI]": "1689845065326",
+  "GPR[ESLI]": "1689845095356",
+  "GPR[SPS]": "1689845186345",
+  "nrTokens": 373,
+  "status": "ok",
+  "GPR[EPS]": "1689845186491",
+  "time": 146,
+  "tokentime": 3,
+  "inferencetime": 143,
+  "output": [
+    "JsName name = getName(ns.name, true);",
+    "JsName name = getName(ns.name);",
+    "Name name = getName(ns.name, false);",
+    "String name = getName(ns.name, false);",
+    "JsName name = getName(ns.getName(), false);",
+    "JsName name = getName(ns.name, null);",
+    "JsName name = getName(ns, false);",
+    "JsName name = ns.name;",
+    "JsName name = getName(ns);",
+    "String name = ns.name;"
+  ]
+}

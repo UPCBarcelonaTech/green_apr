@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583313899",
+  "GPR[ESLB]": "1688583333919",
+  "file": "Lang_61_/src/java/org/apache/commons/lang/text/StrBuilder.java_1776-1777",
+  "input": {
+    "loc": "1776-1777",
+    "input": "<s> public int indexOf(String str, int startIndex) { startIndex = (startIndex < 0 ? 0 : startIndex); if (str == null || startIndex >= size) { return -1; } int strLen = str.length(); if (strLen == 1) { return indexOf(str.charAt(0), startIndex); } if (strLen == 0) { return startIndex; } if (strLen > size) { return -1; } char[] thisBuf = buffer; </s> int len = thisBuf.length - strLen; </s> outer: for (int i = startIndex; i < len; i++) { for (int j = 0; j < strLen; j++) { if (str.charAt(j) != thisBuf[i + j]) { continue outer; } } return i; } return -1; } </s> java",
+    "output": [
+      "int len = thisBuf.length - startIndex;",
+      "int len = thisBuf.length + strLen;",
+      "int len = thisBuf.length - strLen + 1;",
+      "int len = thisBuf.length;",
+      "int len = thisBuf.length - strLen - 1;",
+      "int len = thisBuf.length - strLen;",
+      "int len = (thisBuf.length - strLen);",
+      "int len = this.length - strLen;",
+      "int len = size - strLen;",
+      "int len = strLen;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Lang_61_-src-java-org-apache-commons-lang-text-StrBuilder.java_1776-1777.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583333960",
+  "nrTokens": 169,
+  "status": "ok",
+  "GPR[EPS]": "1688583334253",
+  "time": 293,
+  "tokentime": 2,
+  "inferencetime": 291,
+  "output": [
+    "int len = thisBuf.length - startIndex;",
+    "int len = thisBuf.length + strLen;",
+    "int len = thisBuf.length - strLen + 1;",
+    "int len = thisBuf.length;",
+    "int len = thisBuf.length - strLen - 1;",
+    "int len = thisBuf.length - strLen;",
+    "int len = (thisBuf.length - strLen);",
+    "int len = this.length - strLen;",
+    "int len = size - strLen;",
+    "int len = strLen;"
+  ]
+}

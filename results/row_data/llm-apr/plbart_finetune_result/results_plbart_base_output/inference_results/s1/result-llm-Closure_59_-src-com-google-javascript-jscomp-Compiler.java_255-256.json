@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689797252843",
+  "GPR[ESLB]": "1689797272864",
+  "file": "Closure_59_/src/com/google/javascript/jscomp/Compiler.java_255-256",
+  "input": {
+    "loc": "255-256",
+    "input": "<s> public void initOptions(CompilerOptions options) { this.options = options; if (errorManager == null) { if (outStream == null) { setErrorManager( new LoggerErrorManager(createMessageFormatter(), logger)); } else { PrintStreamErrorManager printer = new PrintStreamErrorManager(createMessageFormatter(), outStream); printer.setSummaryDetailLevel(options.summaryDetailLevel); setErrorManager(printer); } } if (options.enables(DiagnosticGroups.CHECK_TYPES)) { options.checkTypes = true; } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) { options.checkTypes = false; } else if (!options.checkTypes) { options.setWarningLevel( DiagnosticGroup.forType( RhinoErrorReporter.TYPE_PARSE_ERROR), CheckLevel.OFF); } </s> if (options.checkGlobalThisLevel.isOn()) { </s> options.setWarningLevel( DiagnosticGroups.GLOBAL_THIS, options.checkGlobalThisLevel); } if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) { options.setWarningLevel( DiagnosticGroups.ES5_STRICT, CheckLevel.ERROR); } List<WarningsGuard> guards = Lists.newArrayList(); guards.add( new SuppressDocWarningsGuard( getDiagnosticGroups().getRegisteredGroups())); guards.add(options.getWarningsGuard()); ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards); if (!options.checkSymbols && !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) { composedGuards.addGuard(new DiagnosticGroupWarningsGuard( DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF)); } this.warningsGuard = composedGuards; } </s> java",
+    "output": [
+      "if (options.checkGlobalThisLevel!= null && options.checkGlobalThisLevel.isOn()) {",
+      "if (!options.checkGlobalThisLevel.isOn()) {",
+      "if (options.checkGlobalThisLevel.isOn()) {",
+      "if (options.checkGlobalThisLevel!= CheckLevel.OFF) {",
+      "if (options.checkGlobalThisLevel && options.checkGlobalThisLevel.isOn()) {",
+      "if (options.checkGlobalThisLevel!= null) {",
+      "if (options.checkGlobalThisLevel.isOn())",
+      "if (options.checkGlobalThisLevel) {",
+      "if (options.checkGlobalThisLevel.isEnabled()) {",
+      "if (options.isGlobalThisLevel()) {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_59_-src-com-google-javascript-jscomp-Compiler.java_255-256.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689797272903",
+  "nrTokens": 376,
+  "status": "ok",
+  "GPR[EPS]": "1689797273138",
+  "time": 235,
+  "tokentime": 5,
+  "inferencetime": 230,
+  "output": [
+    "if (options.checkGlobalThisLevel!= null && options.checkGlobalThisLevel.isOn()) {",
+    "if (!options.checkGlobalThisLevel.isOn()) {",
+    "if (options.checkGlobalThisLevel.isOn()) {",
+    "if (options.checkGlobalThisLevel!= CheckLevel.OFF) {",
+    "if (options.checkGlobalThisLevel && options.checkGlobalThisLevel.isOn()) {",
+    "if (options.checkGlobalThisLevel!= null) {",
+    "if (options.checkGlobalThisLevel.isOn())",
+    "if (options.checkGlobalThisLevel) {",
+    "if (options.checkGlobalThisLevel.isEnabled()) {",
+    "if (options.isGlobalThisLevel()) {"
+  ]
+}

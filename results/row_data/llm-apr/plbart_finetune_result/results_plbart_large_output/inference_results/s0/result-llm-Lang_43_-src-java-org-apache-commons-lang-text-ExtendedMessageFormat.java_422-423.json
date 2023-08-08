@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688583211868",
+  "GPR[ESLB]": "1688583231888",
+  "file": "Lang_43_/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java_422-423",
+  "input": {
+    "loc": "422-423",
+    "input": "<s> private StringBuffer appendQuotedString(String pattern, ParsePosition pos, StringBuffer appendTo, boolean escapingOn) { int start = pos.getIndex(); char[] c = pattern.toCharArray(); if (escapingOn && c[start] == QUOTE) { </s> return appendTo == null ? null : appendTo.append(QUOTE); </s> } int lastHold = start; for (int i = pos.getIndex(); i < pattern.length(); i++) { if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) { appendTo.append(c, lastHold, pos.getIndex() - lastHold).append( QUOTE); pos.setIndex(i + ESCAPED_QUOTE.length()); lastHold = pos.getIndex(); continue; } switch (c[pos.getIndex()]) { case QUOTE: next(pos); return appendTo == null ? null : appendTo.append(c, lastHold, pos.getIndex() - lastHold); default: next(pos); } } throw new IllegalArgumentException( \"Unterminated quoted string at position \" + start); } </s> java",
+    "output": [
+      "return appendTo == null? null : appendTo.append(QUOTE);",
+      "return appendTo!= null? appendTo.append(QUOTE) : null;",
+      "return appendTo;",
+      "return appendTo.append(QUOTE);",
+      "return appendTo == null? null : appendTo.append(quote);",
+      "return appendTo == null || appendTo.append(QUOTE);",
+      "appendTo.append(QUOTE);",
+      "appendTo.append(QUOTE); return appendTo;",
+      "return null;",
+      ". return appendTo;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Lang_43_-src-java-org-apache-commons-lang-text-ExtendedMessageFormat.java_422-423.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688581525505",
+  "GPR[ESLI]": "1688581555535",
+  "GPR[SPS]": "1688583231929",
+  "nrTokens": 243,
+  "status": "ok",
+  "GPR[EPS]": "1688583232278",
+  "time": 349,
+  "tokentime": 4,
+  "inferencetime": 345,
+  "output": [
+    "return appendTo == null? null : appendTo.append(QUOTE);",
+    "return appendTo!= null? appendTo.append(QUOTE) : null;",
+    "return appendTo;",
+    "return appendTo.append(QUOTE);",
+    "return appendTo == null? null : appendTo.append(quote);",
+    "return appendTo == null || appendTo.append(QUOTE);",
+    "appendTo.append(QUOTE);",
+    "appendTo.append(QUOTE); return appendTo;",
+    "return null;",
+    ". return appendTo;"
+  ]
+}

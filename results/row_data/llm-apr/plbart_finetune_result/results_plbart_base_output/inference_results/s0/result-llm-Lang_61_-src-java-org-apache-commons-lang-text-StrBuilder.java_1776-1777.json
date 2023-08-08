@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688580564227",
+  "GPR[ESLB]": "1688580584247",
+  "file": "Lang_61_/src/java/org/apache/commons/lang/text/StrBuilder.java_1776-1777",
+  "input": {
+    "loc": "1776-1777",
+    "input": "<s> public int indexOf(String str, int startIndex) { startIndex = (startIndex < 0 ? 0 : startIndex); if (str == null || startIndex >= size) { return -1; } int strLen = str.length(); if (strLen == 1) { return indexOf(str.charAt(0), startIndex); } if (strLen == 0) { return startIndex; } if (strLen > size) { return -1; } char[] thisBuf = buffer; </s> int len = thisBuf.length - strLen; </s> outer: for (int i = startIndex; i < len; i++) { for (int j = 0; j < strLen; j++) { if (str.charAt(j) != thisBuf[i + j]) { continue outer; } } return i; } return -1; } </s> java",
+    "output": [
+      "int len = thisBuf.length - strLen + 1;",
+      "int len = thisBuf.length - strLen - 1;",
+      "int len = thisBuf.length - strLen;",
+      "int len = thisBuf.length - startIndex;",
+      "int len = thisBuf.length;",
+      "int len = thisBuf.length - str.length();",
+      "int len = thisBuf.length + strLen;",
+      "int len = buffer.length - strLen;",
+      "int len = thisBuf.length - len;",
+      "int len = thisBuf.length - 1;"
+    ]
+  },
+  "nvidea": "measures-nvidea-Lang_61_-src-java-org-apache-commons-lang-text-StrBuilder.java_1776-1777.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688580584275",
+  "nrTokens": 169,
+  "status": "ok",
+  "GPR[EPS]": "1688580584402",
+  "time": 127,
+  "tokentime": 1,
+  "inferencetime": 126,
+  "output": [
+    "int len = thisBuf.length - strLen + 1;",
+    "int len = thisBuf.length - strLen - 1;",
+    "int len = thisBuf.length - strLen;",
+    "int len = thisBuf.length - startIndex;",
+    "int len = thisBuf.length;",
+    "int len = thisBuf.length - str.length();",
+    "int len = thisBuf.length + strLen;",
+    "int len = buffer.length - strLen;",
+    "int len = thisBuf.length - len;",
+    "int len = thisBuf.length - 1;"
+  ]
+}

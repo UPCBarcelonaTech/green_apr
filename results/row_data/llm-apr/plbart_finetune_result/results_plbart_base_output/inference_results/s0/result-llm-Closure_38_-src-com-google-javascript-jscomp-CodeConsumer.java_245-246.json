@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1688579589726",
+  "GPR[ESLB]": "1688579609746",
+  "file": "Closure_38_/src/com/google/javascript/jscomp/CodeConsumer.java_245-246",
+  "input": {
+    "loc": "245-246",
+    "input": "<s> void addNumber(double x) { char prev = getLastChar(); boolean negativeZero = isNegativeZero(x); </s> if (x < 0 && prev == '-') { </s> add(\" \"); } if ((long) x == x && !negativeZero) { long value = (long) x; long mantissa = value; int exp = 0; if (Math.abs(x) >= 100) { while (mantissa / 10 * Math.pow(10, exp + 1) == value) { mantissa /= 10; exp++; } } if (exp > 2) { add(Long.toString(mantissa) + \"E\" + Integer.toString(exp)); } else { add(Long.toString(value)); } } else { add(String.valueOf(x)); } } </s> java",
+    "output": [
+      "if (x < 0 || prev == '-') {",
+      "if (x < 0 && prev == '-') {",
+      "if (x < 0 && prev == '-')",
+      "if (x < 0 && prev!= '-') {",
+      "if (x <= 0 && prev == '-') {",
+      "if (x < 0 && prev == '-' || prev == '-') {",
+      "if ((x < 0 || prev == '-') && negativeZero) {",
+      "if (x < 0) {",
+      "if (x < 0 && (prev == '-')) {",
+      "if (prev == '-') {"
+    ]
+  },
+  "nvidea": "measures-nvidea-Closure_38_-src-com-google-javascript-jscomp-CodeConsumer.java_245-246.txt",
+  "OAR_JOB_ID": "1552436",
+  "GPR[SSLI]": "1688578782087",
+  "GPR[ESLI]": "1688578812118",
+  "GPR[SPS]": "1688579609785",
+  "nrTokens": 167,
+  "status": "ok",
+  "GPR[EPS]": "1688579609944",
+  "time": 159,
+  "tokentime": 2,
+  "inferencetime": 157,
+  "output": [
+    "if (x < 0 || prev == '-') {",
+    "if (x < 0 && prev == '-') {",
+    "if (x < 0 && prev == '-')",
+    "if (x < 0 && prev!= '-') {",
+    "if (x <= 0 && prev == '-') {",
+    "if (x < 0 && prev == '-' || prev == '-') {",
+    "if ((x < 0 || prev == '-') && negativeZero) {",
+    "if (x < 0) {",
+    "if (x < 0 && (prev == '-')) {",
+    "if (prev == '-') {"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689798125782",
+  "GPR[ESLB]": "1689798145802",
+  "file": "Lang_59_/src/java/org/apache/commons/lang/text/StrBuilder.java_884-885",
+  "input": {
+    "loc": "884-885",
+    "input": "<s> public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) { if (width > 0) { ensureCapacity(size + width); String str = (obj == null ? getNullText() : obj.toString()); int strLen = str.length(); if (strLen >= width) { </s> str.getChars(0, strLen, buffer, size); </s> } else { int padLen = width - strLen; str.getChars(0, strLen, buffer, size); for (int i = 0; i < padLen; i++) { buffer[size + strLen + i] = padChar; } } size += width; } return this; } </s> java",
+    "output": [
+      "str.getChars(0, strLen - strLen, buffer, size);",
+      "str.getChars(0, strLen - 1, buffer, size);",
+      "str.getChars(0, strLen + 1, buffer, size);",
+      "str.getChars(0, strLen, buffer, size - strLen);",
+      "str.getChars(0, strLen, buffer, 0, size);",
+      "str.getChars(0, strLen, buffer, size + strLen);",
+      "str.getChars(0, 0, strLen, buffer, size - strLen);",
+      "str.setChars(0, strLen, buffer, size);",
+      "str.getChars(0, strLen, buffer, width);",
+      "str.getChars(0, 0, strLen, buffer, size + strLen);"
+    ]
+  },
+  "nvidea": "measures-nvidea-Lang_59_-src-java-org-apache-commons-lang-text-StrBuilder.java_884-885.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689796363570",
+  "GPR[ESLI]": "1689796393600",
+  "GPR[SPS]": "1689798145844",
+  "nrTokens": 147,
+  "status": "ok",
+  "GPR[EPS]": "1689798146013",
+  "time": 169,
+  "tokentime": 2,
+  "inferencetime": 167,
+  "output": [
+    "str.getChars(0, strLen - strLen, buffer, size);",
+    "str.getChars(0, strLen - 1, buffer, size);",
+    "str.getChars(0, strLen + 1, buffer, size);",
+    "str.getChars(0, strLen, buffer, size - strLen);",
+    "str.getChars(0, strLen, buffer, 0, size);",
+    "str.getChars(0, strLen, buffer, size + strLen);",
+    "str.getChars(0, 0, strLen, buffer, size - strLen);",
+    "str.setChars(0, strLen, buffer, size);",
+    "str.getChars(0, strLen, buffer, width);",
+    "str.getChars(0, 0, strLen, buffer, size + strLen);"
+  ]
+}
