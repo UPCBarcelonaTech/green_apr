@@ -1,0 +1,23 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689874667280",
+  "GPR[ESLB]": "1689874687300",
+  "file": "Closure_65_/src/com/google/javascript/jscomp/CodeGenerator.java_1015-1016",
+  "input": {
+    "loc": "1015-1016",
+    "input": "static String strEscape(String s, char quote,\n                        String doublequoteEscape,\n                        String singlequoteEscape,\n                        String backslashEscape,\n                        CharsetEncoder outputCharsetEncoder) {\n  StringBuilder sb = new StringBuilder(s.length() + 2);\n  sb.append(quote);\n  for (int i = 0; i < s.length(); i++) {\n    char c = s.charAt(i);\n    switch (c) {\n</s>      case '\\0': sb.append(\"\\\\0\"); break;\n</s>      case '\\n': sb.append(\"\\\\n\"); break;\n      case '\\r': sb.append(\"\\\\r\"); break;\n      case '\\t': sb.append(\"\\\\t\"); break;\n      case '\\\\': sb.append(backslashEscape); break;\n      case '\\\"': sb.append(doublequoteEscape); break;\n      case '\\'': sb.append(singlequoteEscape); break;\n      case '>':                       \n        if (i >= 2 &&\n            ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n             (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n          sb.append(\"\\\\>\");\n        } else {\n          sb.append(c);\n        }\n        break;\n      case '<':\n        final String END_SCRIPT = \"/script\";\n        final String START_COMMENT = \"!--\";\n        if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                            END_SCRIPT.length())) {\n          sb.append(\"<\\\\\");\n        } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                   START_COMMENT.length())) {\n          sb.append(\"<\\\\\");\n        } else {\n          sb.append(c);\n        }\n        break;\n      default:\n        if (outputCharsetEncoder != null) {\n          if (outputCharsetEncoder.canEncode(c)) {\n            sb.append(c);\n          } else {\n            appendHexJavaScriptRepresentation(sb, c);\n          }\n        } else {\n          if (c > 0x1f && c < 0x7f) {\n            sb.append(c);\n          } else {\n            appendHexJavaScriptRepresentation(sb, c);\n          }\n        }\n    }\n  }\n  sb.append(quote);\n  return sb.toString();\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_65_-src-com-google-javascript-jscomp-CodeGenerator.java_1015-1016.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689873729808",
+  "GPR[ESLI]": "1689873759838",
+  "GPR[SPS]": "1689874687341",
+  "nrTokens": 573,
+  "status": "ok",
+  "message": "input too long:573skip",
+  "GPR[EPS]": "1689874687345",
+  "time": 4,
+  "tokentime": 4,
+  "inferencetime": 0,
+  "output": []
+}

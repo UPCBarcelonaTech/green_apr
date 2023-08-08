@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687988578731",
+  "GPR[ESLB]": "1687988598751",
+  "file": "Math_41_/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java_520-521",
+  "input": {
+    "loc": "520-521",
+    "input": "public double evaluate(final double[] values, final double[] weights,\n                       final double mean, final int begin, final int length) {\n    double var = Double.NaN;\n    if (test(values, weights, begin, length)) {\n        if (length == 1) {\n            var = 0.0;\n        } else if (length > 1) {\n            double accum = 0.0;\n            double dev = 0.0;\n            double accum2 = 0.0;\n            for (int i = begin; i < begin + length; i++) {\n                dev = values[i] - mean;\n                accum += weights[i] * (dev * dev);\n                accum2 += weights[i] * dev;\n            }\n            double sumWts = 0;\n</s>            for (int i = 0; i < weights.length; i++) {\n</s>                sumWts += weights[i];\n            }\n            if (isBiasCorrected) {\n                var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n            } else {\n                var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n            }\n        }\n    }\n    return var;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_41_-src-main-java-org-apache-commons-math-stat-descriptive-moment-Variance.java_520-521.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687986534036",
+  "GPR[ESLI]": "1687986564066",
+  "GPR[SPS]": "1687988598794",
+  "nrTokens": 298,
+  "status": "ok",
+  "GPR[EPS]": "1687988599658",
+  "time": 864,
+  "tokentime": 4,
+  "inferencetime": 860,
+  "output": [
+    "<pad><s>            for (int i = begin; i < begin + length; i++) {\n</s></s></s>",
+    "<pad><s>            for (int i = 0; i < values.length; i++) {\n</s></s></s>",
+    "<pad><s>            for (int i = 0; i < length; i++) {\n</s></s></s></s></s>",
+    "<pad><s>            for (int i = begin; i <= begin + length; i++) {\n</s></s></s>",
+    "<pad><s>            for (int i = 0; i < weights.length - 1; i++) {\n</s>",
+    "<pad><s>            for (int i = 0; i < weights.length - begin; i++) {\n</s>",
+    "<pad><s>            for (int i = begin; i < length; i++) {\n</s></s></s></s></s>",
+    "<pad><s>            for (int i = 1; i < weights.length; i++) {\n</s></s></s>",
+    "<pad><s>            for (int i = begin + 1; i < begin + length; i++) {\n</s>",
+    "<pad><s>            for (int i = begin; i < begin + length - 1; i++) {\n</s>"
+  ]
+}

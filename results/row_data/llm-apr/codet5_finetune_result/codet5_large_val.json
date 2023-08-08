@@ -1,0 +1,143 @@
+{
+  "config": "finetune",
+  "data": {
+    "Chart_14_source/org/jfree/chart/plot/CategoryPlot.java_2166-2167": {
+      "loc": "2166-2167",
+      "input": "public boolean removeDomainMarker(int index, Marker marker, Layer layer,\n\t\tboolean notify) {\n    ArrayList markers;\n    if (layer == Layer.FOREGROUND) {\n        markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(\n                index));\n    }\n    else {\n        markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(\n                index));\n    }\n</s>    boolean removed = markers.remove(marker);\n</s>    if (removed && notify) {\n        fireChangeEvent();\n    }\n    return removed;\n}\n",
+      "output": [
+        {
+          "patch": "    boolean removed = this.markers.remove(marker);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = (markers!= null) && markers.remove(marker);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    boolean removed = markers!= null && markers.remove(marker);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    boolean removed = this.backgroundDomainMarkers.remove(marker);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = (markers!= null && markers.remove(marker)!= null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = (markers == null)? false : markers.remove(marker);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    boolean removed = (markers == null || markers.remove(marker) == null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers == null? false : markers.remove(marker);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    boolean removed = markers!= null? markers.remove(marker) : false;\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    boolean removed = this.domainMarkers.remove(marker);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Closure_40_src/com/google/javascript/jscomp/NameAnalyzer.java_635-636": {
+      "loc": "635-636",
+      "input": "@Override\npublic void visit(NodeTraversal t, Node n, Node parent) {\n  if (t.inGlobalScope()) {\n    if (NodeUtil.isVarDeclaration(n)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      Preconditions.checkNotNull(ns);\n      recordSet(ns.name, n);\n    } else if (NodeUtil.isFunctionDeclaration(n)) {\n      Node nameNode = n.getFirstChild();\n      NameInformation ns = createNameInformation(t, nameNode, n);\n      if (ns != null) {\n        JsName nameInfo = getName(nameNode.getString(), true);\n        recordSet(nameInfo.name, nameNode);\n      }\n    } else if (NodeUtil.isObjectLitKey(n, parent)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      if (ns != null) {\n        recordSet(ns.name, n);\n      }\n    }\n  }\n  if (n.isAssign()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null) {\n      if (ns.isPrototype) {\n        recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n      } else {\n        recordSet(ns.name, nameNode);\n      }\n    }\n  } else if (n.isCall()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null && ns.onlyAffectsClassDef) {\n</s>      JsName name = getName(ns.name, false);\n</s>      if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n      }\n    }\n  }\n}\n",
+      "output": [
+        {
+          "patch": "      JsName name = getName(ns.name, true);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, false, true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, ns.isPrototype);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, false, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, ns.isAnonymous);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name,!ns.isPrototype);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, ns.isSuper);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = getName(ns.name, false, n);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "      JsName name = (JsName) getName(ns.name, false);\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Closure_46_src/com/google/javascript/rhino/jstype/RecordType.java_142-145": {
+      "loc": "142-145",
+      "input": "@Override\npublic JSType getLeastSupertype(JSType that) {\n</s>  if (!that.isRecordType()) {\n    return super.getLeastSupertype(that);\n  }\n</s>  RecordTypeBuilder builder = new RecordTypeBuilder(registry);\n  for (String property : properties.keySet()) {\n    if (that.toMaybeRecordType().hasProperty(property) &&\n        that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(\n            getPropertyType(property))) {\n      builder.addProperty(property, getPropertyType(property),\n          getPropertyNode(property));\n    }\n  }\n  return builder.build();\n}\n",
+      "output": [
+        {
+          "patch": "    Preconditions.checkNotNull(that, \"String_Node_Str\");\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "  Preconditions.checkNotNull(that, \"String_Node_Str\");\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Preconditions.checkArgument(that.isRecordType(), \"String_Node_Str\", that);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    RecordType thatRecordType = that.toMaybeRecordType();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (that.isRecordType())\n        return super.getLeastSupertype(that);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "  if (that.isRecordType())\n        return super.getLeastSupertype(that);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Preconditions.checkArgument(that.isRecordType(), \"String_Node_Str\");\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "  Preconditions.checkArgument(that.isRecordType(), \"String_Node_Str\", that);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "  RecordType thatRecordType = that.toMaybeRecordType();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    RecordType recordType = that.toMaybeRecordType();\n",
+          "correctness": "wrong"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689920740418",
+  "GPR[ESLB]": "1689920760438",
+  "file": "Closure_1_/src/com/google/javascript/jscomp/RemoveUnusedVars.java_379-380",
+  "input": {
+    "loc": "379-380",
+    "input": "private void removeUnreferencedFunctionArgs(Scope fnScope) {\n</s>\n</s>  Node function = fnScope.getRootNode();\n  Preconditions.checkState(function.isFunction());\n  if (NodeUtil.isGetOrSetKey(function.getParent())) {\n    return;\n  }\n  Node argList = getFunctionArgList(function);\n  boolean modifyCallers = modifyCallSites\n      && callSiteOptimizer.canModifyCallers(function);\n  if (!modifyCallers) {\n    Node lastArg;\n    while ((lastArg = argList.getLastChild()) != null) {\n      Var var = fnScope.getVar(lastArg.getString());\n      if (!referenced.contains(var)) {\n        argList.removeChild(lastArg);\n        compiler.reportCodeChange();\n      } else {\n        break;\n      }\n    }\n  } else {\n    callSiteOptimizer.optimize(fnScope, referenced);\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_1_-src-com-google-javascript-jscomp-RemoveUnusedVars.java_379-380.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689920172608",
+  "GPR[ESLI]": "1689920202639",
+  "GPR[SPS]": "1689920760479",
+  "nrTokens": 222,
+  "status": "ok",
+  "GPR[EPS]": "1689920760808",
+  "time": 329,
+  "tokentime": 5,
+  "inferencetime": 324,
+  "output": [
+    "<pad><s>        removeUnreferencedFunctionArgs(fnScope);\n</s></s></s>",
+    "<pad><s>    removeUnreferencedFunctionArgs(fnScope);\n</s></s></s>",
+    "<pad><s>        removeUnreferencedFunctionArgs(fnScope, referenced);\n</s>",
+    "<pad><s>    removeUnreferencedFunctionArgs(fnScope, referenced);\n</s>",
+    "<pad><s>            removeUnreferencedFunctionArgs(fnScope);\n</s></s></s>",
+    "<pad><s>            removeUnreferencedFunctionArgs(fnScope, referenced);\n</s>",
+    "<pad><s>        compiler.reportCodeChange();\n</s></s></s></s></s></s>",
+    "<pad><s>                removeUnreferencedFunctionArgs(fnScope);\n</s></s></s>",
+    "<pad><s>        callSiteOptimizer.optimize(fnScope, referenced);\n</s>",
+    "<pad><s>        deleteUnreferencedFunctionArgs(fnScope);\n</s></s></s>"
+  ]
+}

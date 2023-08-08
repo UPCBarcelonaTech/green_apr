@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687990067438",
+  "GPR[ESLB]": "1687990087458",
+  "file": "Closure_20_/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java_220-221",
+  "input": {
+    "loc": "220-221",
+    "input": "private Node tryFoldSimpleFunctionCall(Node n) {\n  Preconditions.checkState(n.isCall());\n  Node callTarget = n.getFirstChild();\n  if (callTarget != null && callTarget.isName() &&\n        callTarget.getString().equals(\"String\")) {\n    Node value = callTarget.getNext();\n</s>    if (value != null) {\n</s>      Node addition = IR.add(\n          IR.string(\"\").srcref(callTarget),\n          value.detachFromParent());\n      n.getParent().replaceChild(n, addition);\n      reportCodeChange();\n      return addition;\n    }\n  }\n  return n;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_20_-src-com-google-javascript-jscomp-PeepholeSubstituteAlternateSyntax.java_220-221.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687990087497",
+  "nrTokens": 160,
+  "status": "ok",
+  "GPR[EPS]": "1687990088703",
+  "time": 1206,
+  "tokentime": 3,
+  "inferencetime": 1203,
+  "output": [
+    "<pad><s>    if (value!= null && value.isStringKey()) {\n</s></s>",
+    "<pad><s>    if (value!= null && value.isString()) {\n</s></s></s>",
+    "<pad><s>    if (value!= null &&!value.isStringKey()) {\n</s>",
+    "<pad><s>    if (value!= null &&!value.isEmpty()) {\n</s></s>",
+    "<pad><s>    if (value!= null && value.isName()) {\n</s></s></s>",
+    "<pad><s>    if (value!= null && value.isCall()) {\n</s></s></s>",
+    "<pad><s>    if (value!= null &&!value.isName()) {\n</s></s>",
+    "<pad><s>    if (value!= null && value.isQualifiedName()) {\n</s></s></s>",
+    "<pad><s>    if (value!= null && value.isFunction()) {\n</s></s></s>",
+    "<pad><s>    if (value!= null &&!value.isNull()) {\n</s></s>"
+  ]
+}

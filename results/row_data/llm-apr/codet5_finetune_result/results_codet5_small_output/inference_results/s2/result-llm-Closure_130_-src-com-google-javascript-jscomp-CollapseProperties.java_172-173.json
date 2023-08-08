@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689921540741",
+  "GPR[ESLB]": "1689921560761",
+  "file": "Closure_130_/src/com/google/javascript/jscomp/CollapseProperties.java_172-173",
+  "input": {
+    "loc": "172-173",
+    "input": "private void inlineAliases(GlobalNamespace namespace) {\n  Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n  while (!workList.isEmpty()) {\n    Name name = workList.pop();\n    if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n      continue;\n    }\n</s>    if (name.globalSets == 1 && name.localSets == 0 &&\n</s>        name.aliasingGets > 0) {\n      List<Ref> refs = Lists.newArrayList(name.getRefs());\n      for (Ref ref : refs) {\n        if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n          if (inlineAliasIfPossible(ref, namespace)) {\n            name.removeRef(ref);\n          }\n        }\n      }\n    }\n    if ((name.type == Name.Type.OBJECTLIT ||\n         name.type == Name.Type.FUNCTION) &&\n        name.aliasingGets == 0 && name.props != null) {\n      workList.addAll(name.props);\n    }\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_130_-src-com-google-javascript-jscomp-CollapseProperties.java_172-173.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689920172608",
+  "GPR[ESLI]": "1689920202639",
+  "GPR[SPS]": "1689921560800",
+  "nrTokens": 271,
+  "status": "ok",
+  "GPR[EPS]": "1689921561405",
+  "time": 605,
+  "tokentime": 5,
+  "inferencetime": 600,
+  "output": [
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 0) {\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 0 && name.scope.isLocal()) {\n</s>",
+    "<pad><s>    if (name.globalSets == 1 &&!name.localSets.isEmpty()) {\n</s></s></s></s></s></s>",
+    "<pad><s>    if (name.globalSets == 0 && name.localSets == 0) {\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (name.globalSets == 1 && name.globalSets == 0 && name.localSets == 0) {\n</s>",
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 0 && name.scope!= null) {\n</s></s>",
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 0 && name.localSets == 0) {\n</s>",
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 1) {\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (name.globalSets == 1) {\n</s></s></s></s></s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (name.globalSets == 1 && name.localSets == 0 &&!namespace.isLocal()) {\n</s></s>"
+  ]
+}

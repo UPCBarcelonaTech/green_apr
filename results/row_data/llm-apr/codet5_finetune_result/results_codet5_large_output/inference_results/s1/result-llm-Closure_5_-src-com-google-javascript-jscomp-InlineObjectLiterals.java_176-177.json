@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689879902725",
+  "GPR[ESLB]": "1689879922745",
+  "file": "Closure_5_/src/com/google/javascript/jscomp/InlineObjectLiterals.java_176-177",
+  "input": {
+    "loc": "176-177",
+    "input": "private boolean isInlinableObject(List<Reference> refs) {\n  boolean ret = false;\n  Set<String> validProperties = Sets.newHashSet();\n  for (Reference ref : refs) {\n    Node name = ref.getNode();\n    Node parent = ref.getParent();\n    Node gramps = ref.getGrandparent();\n    if (parent.isGetProp()) {\n      Preconditions.checkState(parent.getFirstChild() == name);\n      if (gramps.isCall()\n          && gramps.getFirstChild() == parent) {\n        return false;\n      }\n</s>\n</s>      \n      String propName = parent.getLastChild().getString();\n      if (!validProperties.contains(propName)) {\n        if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {\n          validProperties.add(propName);\n        } else {\n          return false;\n        }\n      }\n      continue;\n    }\n    if (!isVarOrAssignExprLhs(name)) {\n       return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n      continue;\n    }\n    if (!val.isObjectLit()) {\n      return false;\n    }\n    for (Node child = val.getFirstChild(); child != null;\n         child = child.getNext()) {\n      if (child.isGetterDef() ||\n          child.isSetterDef()) {\n        return false;\n      }\n      validProperties.add(child.getString());\n      Node childVal = child.getFirstChild();\n      for (Reference t : refs) {\n        Node refNode = t.getParent();\n        while (!NodeUtil.isStatementBlock(refNode)) {\n          if (refNode == childVal) {\n            return false;\n          }\n          refNode = refNode.getParent();\n        }\n      }\n    }\n    ret = true;\n  }\n  return ret;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_5_-src-com-google-javascript-jscomp-InlineObjectLiterals.java_176-177.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689879305289",
+  "GPR[ESLI]": "1689879335319",
+  "GPR[SPS]": "1689879922785",
+  "nrTokens": 465,
+  "status": "ok",
+  "GPR[EPS]": "1689879925019",
+  "time": 2234,
+  "tokentime": 4,
+  "inferencetime": 2230,
+  "output": [
+    "<pad><s>    } else if (parent.isGetProp()) {\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (gramps.isGetProp()) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else {\n</s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (parent.getLastChild()!= null) {\n</s></s></s></s></s>",
+    "<pad><s>    } else if (parent.getLastChild().isGetProp()) {\n</s></s></s></s>",
+    "<pad><s>    } else if (parent.isGetProp() && gramps.isCall()) {\n</s>",
+    "<pad><s>    } else if (parent.isGetProp() || parent.isGetProp()) {\n</s>",
+    "<pad><s>    }\n    if (parent.getLastChild()!= null) {\n</s></s></s></s>",
+    "<pad><s>    } else if (parent.isGetProp() || parent.isSetProp()) {\n</s>",
+    "<pad><s>    } else if (parent.isGetProp() && gramps!= null) {\n</s></s>"
+  ]
+}

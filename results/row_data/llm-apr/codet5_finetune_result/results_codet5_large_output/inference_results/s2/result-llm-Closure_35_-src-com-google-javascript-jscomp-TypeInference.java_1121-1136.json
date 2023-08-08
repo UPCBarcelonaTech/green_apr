@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689926541524",
+  "GPR[ESLB]": "1689926561544",
+  "file": "Closure_35_/src/com/google/javascript/jscomp/TypeInference.java_1121-1136",
+  "input": {
+    "loc": "1121-1136",
+    "input": "private void inferPropertyTypesToMatchConstraint(\n    JSType type, JSType constraint) {\n  if (type == null || constraint == null) {\n    return;\n  }\n  ObjectType constraintObj =\n      ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n</s>  if (constraintObj != null && constraintObj.isRecordType()) {\n    ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n    if (objType != null) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!objType.isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!objType.hasProperty(prop)) {\n            typeToInfer =\n                getNativeType(VOID_TYPE).getLeastSupertype(propType);\n          }\n          objType.defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n</s>  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_35_-src-com-google-javascript-jscomp-TypeInference.java_1121-1136.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689925754148",
+  "GPR[ESLI]": "1689925784178",
+  "GPR[SPS]": "1689926561585",
+  "nrTokens": 233,
+  "status": "ok",
+  "GPR[EPS]": "1689926563814",
+  "time": 2229,
+  "tokentime": 4,
+  "inferencetime": 2225,
+  "output": [
+    "<pad><s>  if (constraintObj!= null) {\n    inferPropertyTypesToMatchConstraint(type, constraintObj);\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (constraintObj == null) {\n    return;\n</s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (constraintObj!= null &&!constraintObj.isRecordType()) {\n    inferPropertyTypesToMatchConstraint(type, constraintObj);\n</s>",
+    "<pad><s>  if (constraintObj!= null && constraintObj.isRecordType()) {\n    inferPropertyTypesToMatchRecordType(type, constraintObj);\n</s>",
+    "<pad><s>  if (constraintObj == null || constraintObj.isRecordType()) {\n    return;\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (constraintObj!= null && constraintObj.isRecordType()) {\n    inferPropertyTypesToMatchConstraint(type, constraintObj);\n</s></s>",
+    "<pad><s>  ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n  if (objType == null) {\n    return;\n</s>",
+    "<pad><s>  if (constraintObj!= null) {\n    inferPropertyTypesToMatchConstraint(constraintObj, type);\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (constraintObj!= null) {\n    inferPropertyTypesToMatchConstraint(type.restrictByNotNullOrUndefined(), constraintObj);\n</s></s></s>",
+    "<pad><s>  if (constraintObj!= null && constraintObj.isRecordType()) {\n    inferPropertyTypes(type, constraintObj);\n</s></s></s></s>"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689880221132",
+  "GPR[ESLB]": "1689880241153",
+  "file": "Closure_59_/src/com/google/javascript/jscomp/Compiler.java_255-256",
+  "input": {
+    "loc": "255-256",
+    "input": "public void initOptions(CompilerOptions options) {\n  this.options = options;\n  if (errorManager == null) {\n    if (outStream == null) {\n      setErrorManager(\n          new LoggerErrorManager(createMessageFormatter(), logger));\n    } else {\n      PrintStreamErrorManager printer =\n          new PrintStreamErrorManager(createMessageFormatter(), outStream);\n      printer.setSummaryDetailLevel(options.summaryDetailLevel);\n      setErrorManager(printer);\n    }\n  }\n  if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n    options.checkTypes = true;\n  } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n    options.checkTypes = false;\n  } else if (!options.checkTypes) {\n    options.setWarningLevel(\n        DiagnosticGroup.forType(\n            RhinoErrorReporter.TYPE_PARSE_ERROR),\n        CheckLevel.OFF);\n  }\n</s>  if (options.checkGlobalThisLevel.isOn()) {\n</s>    options.setWarningLevel(\n        DiagnosticGroups.GLOBAL_THIS,\n        options.checkGlobalThisLevel);\n  }\n  if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n    options.setWarningLevel(\n        DiagnosticGroups.ES5_STRICT,\n        CheckLevel.ERROR);\n  }\n  List<WarningsGuard> guards = Lists.newArrayList();\n  guards.add(\n      new SuppressDocWarningsGuard(\n          getDiagnosticGroups().getRegisteredGroups()));\n  guards.add(options.getWarningsGuard());\n  ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n  if (!options.checkSymbols &&\n      !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n    composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n        DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n  }\n  this.warningsGuard = composedGuards;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_59_-src-com-google-javascript-jscomp-Compiler.java_255-256.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689879305289",
+  "GPR[ESLI]": "1689879335319",
+  "GPR[SPS]": "1689880241192",
+  "nrTokens": 464,
+  "status": "ok",
+  "GPR[EPS]": "1689880243434",
+  "time": 2242,
+  "tokentime": 8,
+  "inferencetime": 2234,
+  "output": [
+    "<pad><s>  if (!options.checkGlobalThisLevel.isOn()) {\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel!= CheckLevel.OFF) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel.isOn()) {\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel.isOn() &&!options.checkSymbols) {\n</s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel.isOn())\n</s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (options.checkGlobals && options.checkGlobalThisLevel.isOn()) {\n</s></s></s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel.isOn() &&!options.checkTypes) {\n</s></s>",
+    "<pad><s>  if (options.globalThisLevel.isOn()) {\n</s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (options.checkGlobalThisLevel.isOn()!= CheckLevel.OFF) {\n</s></s></s>",
+    "<pad><s>  if (options.checkThisLevel!= null && options.checkGlobalThisLevel.isOn()) {\n</s>"
+  ]
+}

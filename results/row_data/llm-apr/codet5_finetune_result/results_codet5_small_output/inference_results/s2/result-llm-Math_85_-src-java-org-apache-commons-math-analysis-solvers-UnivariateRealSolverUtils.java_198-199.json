@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689922505555",
+  "GPR[ESLB]": "1689922525575",
+  "file": "Math_85_/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java_198-199",
+  "input": {
+    "loc": "198-199",
+    "input": "public static double[] bracket(UnivariateRealFunction function,\n        double initial, double lowerBound, double upperBound, \n        int maximumIterations) throws ConvergenceException, \n        FunctionEvaluationException {\n    if (function == null) {\n        throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n    }\n    if (maximumIterations <= 0)  {\n        throw MathRuntimeException.createIllegalArgumentException(\n              \"bad value for maximum iterations number: {0}\", maximumIterations);\n    }\n    if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n        throw MathRuntimeException.createIllegalArgumentException(\n              \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n              lowerBound, initial, upperBound);\n    }\n    double a = initial;\n    double b = initial;\n    double fa;\n    double fb;\n    int numIterations = 0 ;\n    do {\n        a = Math.max(a - 1.0, lowerBound);\n        b = Math.min(b + 1.0, upperBound);\n        fa = function.value(a);\n        fb = function.value(b);\n        numIterations++ ;\n    } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n            ((a > lowerBound) || (b < upperBound)));\n</s>    if (fa * fb >= 0.0 ) {\n</s>        throw new ConvergenceException(\n                  \"number of iterations={0}, maximum iterations={1}, \" +\n                  \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                  \"final b value={6}, f(a)={7}, f(b)={8}\",\n                  numIterations, maximumIterations, initial,\n                  lowerBound, upperBound, a, b, fa, fb);\n    }\n    return new double[]{a, b};\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_85_-src-java-org-apache-commons-math-analysis-solvers-UnivariateRealSolverUtils.java_198-199.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689920172608",
+  "GPR[ESLI]": "1689920202639",
+  "GPR[SPS]": "1689922525616",
+  "nrTokens": 430,
+  "status": "ok",
+  "GPR[EPS]": "1689922526113",
+  "time": 497,
+  "tokentime": 5,
+  "inferencetime": 492,
+  "output": [
+    "<pad><s>    if (fa * fb < 0.0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    if (fa * fb >= 0.0 && numIterations < maximumIterations) {\n</s>",
+    "<pad><s>    if (fa * fb > 0.0 && numIterations < maximumIterations) {\n</s>",
+    "<pad><s>    if (fa * fb < 0.0 && numIterations < maximumIterations) {\n</s>",
+    "<pad><s>    if (fa * fb <= 0.0 && numIterations < maximumIterations) {\n</s>",
+    "<pad><s>    if (fa * fb > 0.0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    if (fa * fb <= 0.0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    if (fa * fb >= 0.0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    if (fa * fb >= 1.0 && numIterations < maximumIterations) {\n</s>",
+    "<pad><s>    if (fa * fb >= 1.0) {\n</s></s></s></s></s></s></s>"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689920944592",
+  "GPR[ESLB]": "1689920964612",
+  "file": "Closure_35_/src/com/google/javascript/jscomp/TypeInference.java_1121-1136",
+  "input": {
+    "loc": "1121-1136",
+    "input": "private void inferPropertyTypesToMatchConstraint(\n    JSType type, JSType constraint) {\n  if (type == null || constraint == null) {\n    return;\n  }\n  ObjectType constraintObj =\n      ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n</s>  if (constraintObj != null && constraintObj.isRecordType()) {\n    ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n    if (objType != null) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!objType.isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!objType.hasProperty(prop)) {\n            typeToInfer =\n                getNativeType(VOID_TYPE).getLeastSupertype(propType);\n          }\n          objType.defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n</s>  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_35_-src-com-google-javascript-jscomp-TypeInference.java_1121-1136.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689920172608",
+  "GPR[ESLI]": "1689920202639",
+  "GPR[SPS]": "1689920964653",
+  "nrTokens": 233,
+  "status": "ok",
+  "GPR[EPS]": "1689920965927",
+  "time": 1274,
+  "tokentime": 4,
+  "inferencetime": 1270,
+  "output": [
+    "<pad><s>    if (constraintObj!= null && constraintObj.isRecordType()) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n        }\n</s>",
+    "<pad><s>    if (constraintObj!= null) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n        }\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (constraintObj!= null && constraintObj.isRecordType()) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n</s></s></s></s>",
+    "<pad><s>    if (constraintObj!= null) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (constraintObj!= null && constraintObj.isRecordType()) {\n        JSType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n        }\n</s>",
+    "<pad><s>    if (constraintObj!= null) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType.getLeastSupertype(objType));\n        }\n</s></s>",
+    "<pad><s>    if (constraintObj!= null) {\n        JSType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n        }\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (constraintObj!= null && constraintObj.isRecordType()) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null, null);\n</s></s>",
+    "<pad><s>    if (constraintObj!= null) {\n        ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null, null);\n        }\n</s></s></s></s></s></s>",
+    "<pad><s>    if (constraintObj!= null) {\n        ObjectType objType = ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n        if (objType!= null) {\n            objType.defineInferredProperty(prop, objType, null);\n        }\n</s></s></s></s></s></s></s></s>"
+  ]
+}

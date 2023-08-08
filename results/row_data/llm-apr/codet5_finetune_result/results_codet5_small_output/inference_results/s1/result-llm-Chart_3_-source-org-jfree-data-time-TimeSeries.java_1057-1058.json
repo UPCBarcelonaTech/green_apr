@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689874071764",
+  "GPR[ESLB]": "1689874091784",
+  "file": "Chart_3_/source/org/jfree/data/time/TimeSeries.java_1057-1058",
+  "input": {
+    "loc": "1057-1058",
+    "input": "public TimeSeries createCopy(int start, int end)\n        throws CloneNotSupportedException {\n    if (start < 0) {\n        throw new IllegalArgumentException(\"Requires start >= 0.\");\n    }\n    if (end < start) {\n        throw new IllegalArgumentException(\"Requires start <= end.\");\n    }\n    TimeSeries copy = (TimeSeries) super.clone();\n</s>    copy.data = new java.util.ArrayList();\n</s>    if (this.data.size() > 0) {\n        for (int index = start; index <= end; index++) {\n            TimeSeriesDataItem item\n                    = (TimeSeriesDataItem) this.data.get(index);\n            TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n            try {\n                copy.add(clone);\n            }\n            catch (SeriesException e) {\n                e.printStackTrace();\n            }\n        }\n    }\n    return copy;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Chart_3_-source-org-jfree-data-time-TimeSeries.java_1057-1058.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689873729808",
+  "GPR[ESLI]": "1689873759838",
+  "GPR[SPS]": "1689874091827",
+  "nrTokens": 206,
+  "status": "ok",
+  "GPR[EPS]": "1689874092146",
+  "time": 319,
+  "tokentime": 4,
+  "inferencetime": 315,
+  "output": [
+    "<pad><s>    copy.data = new ArrayList<TimeSeriesDataItem>();\n</s>",
+    "<pad><s>    copy.data = new ArrayList();\n</s></s></s></s></s>",
+    "<pad><s>    copy.data = new ArrayList<>();\n</s></s></s></s>",
+    "<pad><s>    copy.data.clear();\n</s></s></s></s></s></s>",
+    "<pad><s>    this.data = new ArrayList<TimeSeriesDataItem>();\n</s>",
+    "<pad><s>    copy.data = new LinkedList<TimeSeriesDataItem>();\n</s>",
+    "<pad><s>    copy.data = new ArrayList(data.size());\n</s>",
+    "<pad><s>    copy.data = new List<TimeSeriesDataItem>();\n</s>",
+    "<pad><s>    copy.data = new java.util.ArrayList();\n</s>",
+    "<pad><s>    copy.data = new ArrayList<Data>();\n</s></s>"
+  ]
+}

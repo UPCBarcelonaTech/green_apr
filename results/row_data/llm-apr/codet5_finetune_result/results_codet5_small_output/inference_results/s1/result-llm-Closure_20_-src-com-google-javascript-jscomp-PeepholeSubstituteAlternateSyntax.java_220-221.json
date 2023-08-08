@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689874440594",
+  "GPR[ESLB]": "1689874460614",
+  "file": "Closure_20_/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java_220-221",
+  "input": {
+    "loc": "220-221",
+    "input": "private Node tryFoldSimpleFunctionCall(Node n) {\n  Preconditions.checkState(n.isCall());\n  Node callTarget = n.getFirstChild();\n  if (callTarget != null && callTarget.isName() &&\n        callTarget.getString().equals(\"String\")) {\n    Node value = callTarget.getNext();\n</s>    if (value != null) {\n</s>      Node addition = IR.add(\n          IR.string(\"\").srcref(callTarget),\n          value.detachFromParent());\n      n.getParent().replaceChild(n, addition);\n      reportCodeChange();\n      return addition;\n    }\n  }\n  return n;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_20_-src-com-google-javascript-jscomp-PeepholeSubstituteAlternateSyntax.java_220-221.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689873729808",
+  "GPR[ESLI]": "1689873759838",
+  "GPR[SPS]": "1689874460656",
+  "nrTokens": 160,
+  "status": "ok",
+  "GPR[EPS]": "1689874461093",
+  "time": 437,
+  "tokentime": 3,
+  "inferencetime": 434,
+  "output": [
+    "<pad><s>    if (value!= null) {\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (value!= null && value.getParent()!= null) {\n</s></s></s>",
+    "<pad><s>    if (value!= null && value.detachFromParent()!= null) {\n</s>",
+    "<pad><s>    if (value!= null && value.isName()) {\n</s></s></s></s></s></s>",
+    "<pad><s>    if (value!= null && value.detachFromParent()) {\n</s></s></s></s>",
+    "<pad><s>    if (value!= null && value.isCall()) {\n</s></s></s></s></s></s>",
+    "<pad><s>    if (value!= null && value.getString().equals(\"String\")) {\n</s>",
+    "<pad><s>    if (value!= null &&!value.isEmpty()) {\n</s></s></s></s></s>",
+    "<pad><s>    if (value!= null && value.getChildCount() > 0) {\n</s></s>",
+    "<pad><s>    if (value!= null && value.getParent().isName()) {\n</s></s></s>"
+  ]
+}

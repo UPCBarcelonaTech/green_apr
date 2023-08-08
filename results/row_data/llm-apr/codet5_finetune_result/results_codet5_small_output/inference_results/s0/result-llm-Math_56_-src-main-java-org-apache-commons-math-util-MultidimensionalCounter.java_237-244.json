@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687985870613",
+  "GPR[ESLB]": "1687985890633",
+  "file": "Math_56_/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java_237-244",
+  "input": {
+    "loc": "237-244",
+    "input": "public int[] getCounts(int index) {\n    if (index < 0 ||\n        index >= totalSize) {\n        throw new OutOfRangeException(index, 0, totalSize);\n    }\n    final int[] indices = new int[dimension];\n    int count = 0;\n    for (int i = 0; i < last; i++) {\n        int idx = 0;\n        final int offset = uniCounterOffset[i];\n        while (count <= index) {\n            count += offset;\n            ++idx;\n        }\n        --idx;\n        count -= offset;\n        indices[i] = idx;\n    }\n</s>    int idx = 1;\n    while (count < index) {\n        count += idx;\n        ++idx;\n    }\n    --idx;\n    indices[last] = idx;\n</s>\n    return indices;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_56_-src-main-java-org-apache-commons-math-util-MultidimensionalCounter.java_237-244.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687983750212",
+  "GPR[ESLI]": "1687983780242",
+  "GPR[SPS]": "1687985890673",
+  "nrTokens": 199,
+  "status": "ok",
+  "GPR[EPS]": "1687985891060",
+  "time": 387,
+  "tokentime": 4,
+  "inferencetime": 383,
+  "output": [
+    "<pad><s>    indices[last] = index;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    indices[last] = count;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    indices[last] = 0;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    indices[last] = idx;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    int idx = 1;\n    indices[last] = idx;\n</s>",
+    "<pad><s>    indices[last] = 1;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    int idx = 0;\n    indices[last] = idx;\n</s>",
+    "<pad><s>    indices[last] = -1;\n</s></s></s></s></s></s></s>",
+    "<pad><s>    count -= index;\n    indices[last] = count;\n</s></s>",
+    "<pad><s>    int idx = index;\n    indices[last] = idx;\n</s>"
+  ]
+}

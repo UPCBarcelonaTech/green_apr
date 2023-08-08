@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687986727508",
+  "GPR[ESLB]": "1687986747528",
+  "file": "Lang_10_src/main/java/org/apache/commons/lang3/time/FastDateParser.java_307-314",
+  "input": {
+    "loc": "307-314",
+    "input": "private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n    boolean wasWhite= false;\n    for(int i= 0; i<value.length(); ++i) {\n        char c= value.charAt(i);\n</s>        if(Character.isWhitespace(c)) {\n            if(!wasWhite) {\n                wasWhite= true;\n                regex.append(\"\\\\s*+\");\n            }\n            continue;\n        }\n</s>        wasWhite= false;\n        switch(c) {\n        case '\\'':\n            if(unquote) {\n                if(++i==value.length()) {\n                    return regex;\n                }\n                c= value.charAt(i);\n            }\n            break;\n        case '?':\n        case '[':\n        case ']':\n        case '(':\n        case ')':\n        case '{':\n        case '}':\n        case '\\\\':\n        case '|':\n        case '*':\n        case '+':\n        case '^':\n        case '$':\n        case '.':\n            regex.append('\\\\');\n        }\n        regex.append(c);\n    }\n    return regex;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Lang_10_src-main-java-org-apache-commons-lang3-time-FastDateParser.java_307-314.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687986534036",
+  "GPR[ESLI]": "1687986564066",
+  "GPR[SPS]": "1687986747570",
+  "nrTokens": 273,
+  "status": "ok",
+  "GPR[EPS]": "1687986748463",
+  "time": 893,
+  "tokentime": 4,
+  "inferencetime": 889,
+  "output": [
+    "<pad><s>        if (Character.isWhitespace(c)) {\n            return regex;\n        }\n</s></s></s>",
+    "<pad><s>        if (!Character.isWhitespace(c)) {\n            return regex;\n        }\n</s></s></s>",
+    "<pad><s>        if (Character.isWhitespace(c)) {\n            continue;\n        }\n</s></s></s></s>",
+    "<pad><s>        if (Character.isWhitespace(c)) {\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>        if (Character.isWhitespace(c)) {\n            break;\n        }\n</s></s></s></s>",
+    "<pad><s>        if (!wasWhite) {\n            regex.append(\"\\\\s*+\");\n        }\n</s>",
+    "<pad><s>        if (Character.isWhitespace(c)) {\n            regex.append('\\\\s*');\n</s>",
+    "<pad><s>        if (!Character.isWhitespace(c)) {\n            continue;\n        }\n</s></s></s></s>",
+    "<pad><s>        if (!Character.isWhitespace(c)) {\n            break;\n        }\n</s></s></s></s>",
+    "<pad><s>        if (!Character.isWhitespace(c)) {\n</s></s></s></s></s></s></s></s></s></s></s>"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687985460847",
+  "GPR[ESLB]": "1687985480867",
+  "file": "Lang_43_/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java_422-423",
+  "input": {
+    "loc": "422-423",
+    "input": "private StringBuffer appendQuotedString(String pattern, ParsePosition pos,\n        StringBuffer appendTo, boolean escapingOn) {\n    int start = pos.getIndex();\n    char[] c = pattern.toCharArray();\n    if (escapingOn && c[start] == QUOTE) {\n</s>        return appendTo == null ? null : appendTo.append(QUOTE);\n</s>    }\n    int lastHold = start;\n    for (int i = pos.getIndex(); i < pattern.length(); i++) {\n        if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) {\n            appendTo.append(c, lastHold, pos.getIndex() - lastHold).append(\n                    QUOTE);\n            pos.setIndex(i + ESCAPED_QUOTE.length());\n            lastHold = pos.getIndex();\n            continue;\n        }\n        switch (c[pos.getIndex()]) {\n        case QUOTE:\n            next(pos);\n            return appendTo == null ? null : appendTo.append(c, lastHold,\n                    pos.getIndex() - lastHold);\n        default:\n            next(pos);\n        }\n    }\n    throw new IllegalArgumentException(\n            \"Unterminated quoted string at position \" + start);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Lang_43_-src-java-org-apache-commons-lang-text-ExtendedMessageFormat.java_422-423.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687983750212",
+  "GPR[ESLI]": "1687983780242",
+  "GPR[SPS]": "1687985480904",
+  "nrTokens": 284,
+  "status": "ok",
+  "GPR[EPS]": "1687985481283",
+  "time": 379,
+  "tokentime": 4,
+  "inferencetime": 375,
+  "output": [
+    "<pad><s>        return appendTo == null? null : appendTo.append(QUOTE);\n</s>",
+    "<pad><s>        return appendTo!= null? null : appendTo.append(QUOTE);\n</s>",
+    "<pad><s>        return appendTo == null? null : appendTo.append(quote);\n</s>",
+    "<pad><s>        return appendTo;\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>        return appendTo == null? null : appendTo.append(ESCAPE);\n</s>",
+    "<pad><s>        return appendTo == null? null : appendTo.append(c);\n</s>",
+    "<pad><s>        return appendQuoted(c, pos, appendTo, escapingOn);\n</s>",
+    "<pad><s>        return appendTo == null? c : appendTo.append(QUOTE);\n</s>",
+    "<pad><s>        return appendTo!= null? null : appendTo.append(quote);\n</s>",
+    "<pad><s>        return appendTo!= null? appendTo.append(QUOTE);\n</s></s></s>"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687990494893",
+  "GPR[ESLB]": "1687990514914",
+  "file": "Closure_97_/src/com/google/javascript/jscomp/PeepholeFoldConstants.java_698-699",
+  "input": {
+    "loc": "698-699",
+    "input": "private Node tryFoldShift(Node n, Node left, Node right) {\n  if (left.getType() == Token.NUMBER &&\n      right.getType() == Token.NUMBER) {\n    double result;\n    double lval = left.getDouble();\n    double rval = right.getDouble();\n    if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n      error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n      return n;\n    }\n    if (!(rval >= 0 && rval < 32)) {\n      error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n      return n;\n    }\n    int lvalInt = (int) lval;\n    if (lvalInt != lval) {\n      error(FRACTIONAL_BITWISE_OPERAND, left);\n      return n;\n    }\n    int rvalInt = (int) rval;\n    if (rvalInt != rval) {\n      error(FRACTIONAL_BITWISE_OPERAND, right);\n      return n;\n    }\n    switch (n.getType()) {\n      case Token.LSH:\n        result = lvalInt << rvalInt;\n        break;\n      case Token.RSH:\n        result = lvalInt >> rvalInt;\n        break;\n      case Token.URSH:\n</s>        result = lvalInt >>> rvalInt;\n</s>        break;\n      default:\n        throw new AssertionError(\"Unknown shift operator: \" +\n            Node.tokenToName(n.getType()));\n    }\n    Node newNumber = Node.newNumber(result);\n    n.getParent().replaceChild(n, newNumber);\n    reportCodeChange();\n    return newNumber;\n  }\n  return n;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_97_-src-com-google-javascript-jscomp-PeepholeFoldConstants.java_698-699.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687990514954",
+  "nrTokens": 425,
+  "status": "ok",
+  "GPR[EPS]": "1687990516416",
+  "time": 1462,
+  "tokentime": 5,
+  "inferencetime": 1457,
+  "output": [
+    "<pad><s>        result = rvalInt >>> lvalInt;\n</s></s></s>",
+    "<pad><s>        result = lvalInt >>> rvalInt;\n</s></s></s></s>",
+    "<pad><s>        result = (long) lvalInt >>> rvalInt;\n</s>",
+    "<pad><s>        result = ((long) lval) >>> rvalInt;\n</s>",
+    "<pad><s>        result = rvalInt << lvalInt;\n</s></s></s>",
+    "<pad><s>        result = rvalInt >>> lvalInt;\n</s></s></s></s>",
+    "<pad><s>        result = lvalInt | rvalInt;\n</s></s></s></s>",
+    "<pad><s>        result = rvalInt;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>        result = rvalInt << lvalInt;\n</s></s></s></s>",
+    "<pad><s>        result = ((long) lval) << rvalInt;\n</s>"
+  ]
+}

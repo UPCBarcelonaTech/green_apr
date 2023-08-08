@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689878728180",
+  "GPR[ESLB]": "1689878748200",
+  "file": "Math_69_/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java_171-172",
+  "input": {
+    "loc": "171-172",
+    "input": "public RealMatrix getCorrelationPValues() throws MathException {\n    TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n    int nVars = correlationMatrix.getColumnDimension();\n    double[][] out = new double[nVars][nVars];\n    for (int i = 0; i < nVars; i++) {\n        for (int j = 0; j < nVars; j++) {\n            if (i == j) {\n                out[i][j] = 0d;\n            } else {\n                double r = correlationMatrix.getEntry(i, j);\n                double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n</s>                out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n</s>            }\n        }\n    }\n    return new BlockRealMatrix(out);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_69_-src-main-java-org-apache-commons-math-stat-correlation-PearsonsCorrelation.java_171-172.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689876498197",
+  "GPR[ESLI]": "1689876528227",
+  "GPR[SPS]": "1689878748241",
+  "nrTokens": 211,
+  "status": "ok",
+  "GPR[EPS]": "1689878749144",
+  "time": 903,
+  "tokentime": 4,
+  "inferencetime": 899,
+  "output": [
+    "<pad><s>                out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(r));\n</s></s></s>",
+    "<pad><s>                out[i][j] = 2 * tDistribution.cumulativeProbability(t);\n</s></s></s></s></s></s>",
+    "<pad><s>                out[i][j] = tDistribution.cumulativeProbability(t);\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>                out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n</s></s></s>",
+    "<pad><s>                out[i][j] = 2 * tDistribution.cumulativeProbability(r);\n</s></s></s></s></s></s>",
+    "<pad><s>                out[i][j] = 2 * (1.0 - tDistribution.cumulativeProbability(t));\n</s>",
+    "<pad><s>                out[i][j] = 1 - tDistribution.cumulativeProbability(t);\n</s></s></s></s></s></s>",
+    "<pad><s>                out[i][j] = 2d * (1 - tDistribution.cumulativeProbability(t));\n</s></s>",
+    "<pad><s>                out[i][j] = 2 * tDistribution.cumulativeProbability(t - 1);\n</s></s></s></s>",
+    "<pad><s>                out[i][j] = 2 * tDistribution.cumulativeProbability(t / nObs);\n</s></s></s>"
+  ]
+}

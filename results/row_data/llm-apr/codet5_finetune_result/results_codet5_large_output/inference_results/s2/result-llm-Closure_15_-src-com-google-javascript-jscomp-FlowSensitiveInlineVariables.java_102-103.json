@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689926437370",
+  "GPR[ESLB]": "1689926457390",
+  "file": "Closure_15_/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java_102-103",
+  "input": {
+    "loc": "102-103",
+    "input": "@Override\npublic boolean apply(Node n) {\n  if (n == null) {\n    return false;\n  }\n  if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n    return true;\n  }\n  if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n    return true;\n  }\n</s>\n</s>  for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n    if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n      return true;\n    }\n  }\n  return false;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_15_-src-com-google-javascript-jscomp-FlowSensitiveInlineVariables.java_102-103.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689925754148",
+  "GPR[ESLI]": "1689925784178",
+  "GPR[SPS]": "1689926457431",
+  "nrTokens": 157,
+  "status": "ok",
+  "GPR[EPS]": "1689926458614",
+  "time": 1183,
+  "tokentime": 4,
+  "inferencetime": 1179,
+  "output": [
+    "<pad><s>  if (n.isNew()) {\n    return true;\n  }\n</s>",
+    "<pad><s>  if (n.isCall()) {\n    return true;\n  }\n</s>",
+    "<pad><s>  if (n.isNew()) {\n    return false;\n  }\n</s>",
+    "<pad><s>  boolean hasSideEffects = false;\n</s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (n.isFunction()) {\n    return true;\n  }\n</s>",
+    "<pad><s>  if (n.isNew()) {\n    return true;\n    }\n</s>",
+    "<pad><s>  if (n.isName()) {\n    return true;\n  }\n</s>",
+    "<pad><s>  if (n.isCall()) {\n    return false;\n  }\n</s>",
+    "<pad><s>  if (n.isName()) {\n    return false;\n  }\n</s>",
+    "<pad><s>  if (n.isConst()) {\n    return true;\n  }\n</s>"
+  ]
+}

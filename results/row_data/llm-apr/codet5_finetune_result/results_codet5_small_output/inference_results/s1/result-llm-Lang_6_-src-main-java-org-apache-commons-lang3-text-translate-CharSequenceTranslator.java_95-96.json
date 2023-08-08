@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689875261392",
+  "GPR[ESLB]": "1689875281412",
+  "file": "Lang_6_/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java_95-96",
+  "input": {
+    "loc": "95-96",
+    "input": "public final void translate(CharSequence input, Writer out) throws IOException {\n    if (out == null) {\n        throw new IllegalArgumentException(\"The Writer must not be null\");\n    }\n    if (input == null) {\n        return;\n    }\n    int pos = 0;\n    int len = input.length();\n    while (pos < len) {\n        int consumed = translate(input, pos, out);\n        if (consumed == 0) {\n            char[] c = Character.toChars(Character.codePointAt(input, pos));\n            out.write(c);\n            pos+= c.length;\n            continue;\n        }\n        for (int pt = 0; pt < consumed; pt++) {\n</s>            pos += Character.charCount(Character.codePointAt(input, pos));\n</s>        }\n    }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Lang_6_-src-main-java-org-apache-commons-lang3-text-translate-CharSequenceTranslator.java_95-96.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689873729808",
+  "GPR[ESLI]": "1689873759838",
+  "GPR[SPS]": "1689875281454",
+  "nrTokens": 196,
+  "status": "ok",
+  "GPR[EPS]": "1689875281893",
+  "time": 439,
+  "tokentime": 4,
+  "inferencetime": 435,
+  "output": [
+    "<pad><s>            pos += Character.charCount(Character.codePointAt(input, pos));\n</s></s>",
+    "<pad><s>            pos += Character.toChars(Character.codePointAt(input, pos));\n</s></s>",
+    "<pad><s>            pos += Character.charCount(Character.codePointAt(input, pt));\n</s></s>",
+    "<pad><s>            pos += Character.charCount(input, pos + 1);\n</s></s></s></s></s></s>",
+    "<pad><s>            pos += charCount(Character.codePointAt(input, pos));\n</s></s></s></s>",
+    "<pad><s>            pos += CharUtil.charCount(Character.codePointAt(input, pos));\n</s>",
+    "<pad><s>            pos += Char.charCount(Character.codePointAt(input, pos));\n</s></s>",
+    "<pad><s>            pos += Character.toChars(Character.codePointAt(input, pt));\n</s></s>",
+    "<pad><s>            pos += Character.charCount(input, pos);\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>            pos += Character.charCount(input.charAt(pos));\n</s></s></s></s></s>"
+  ]
+}

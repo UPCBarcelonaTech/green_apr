@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689876472990",
+  "GPR[ESLB]": "1689876493010",
+  "file": "Time_19_/src/main/java/org/joda/time/DateTimeZone.java_900-901",
+  "input": {
+    "loc": "900-901",
+    "input": "public int getOffsetFromLocal(long instantLocal) {\n    final int offsetLocal = getOffset(instantLocal);\n    final long instantAdjusted = instantLocal - offsetLocal;\n    final int offsetAdjusted = getOffset(instantAdjusted);\n    if (offsetLocal != offsetAdjusted) {\n        if ((offsetLocal - offsetAdjusted) < 0) {\n            long nextLocal = nextTransition(instantAdjusted);\n            long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n            if (nextLocal != nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n</s>    } else if (offsetLocal > 0) {\n</s>        long prev = previousTransition(instantAdjusted);\n        if (prev < instantAdjusted) {\n            int offsetPrev = getOffset(prev);\n            int diff = offsetPrev - offsetLocal;\n            if (instantAdjusted - prev <= diff) {\n                return offsetPrev;\n            }\n        }\n    }\n    return offsetAdjusted;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Time_19_-src-main-java-org-joda-time-DateTimeZone.java_900-901.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689873729808",
+  "GPR[ESLI]": "1689873759838",
+  "GPR[SPS]": "1689876493050",
+  "nrTokens": 230,
+  "status": "ok",
+  "GPR[EPS]": "1689876493465",
+  "time": 415,
+  "tokentime": 4,
+  "inferencetime": 411,
+  "output": [
+    "<pad><s>    } else if (offsetLocal < 0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal > 0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal > 0 && offsetAdjusted > 0) {\n</s>",
+    "<pad><s>    } else if (offsetLocal >= 0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal < 0 && offsetAdjusted > 0) {\n</s>",
+    "<pad><s>    } else if (offsetLocal < offsetAdjusted) {\n</s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal == 0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal <= 0) {\n</s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal < offsetLocal) {\n</s></s></s></s></s></s>",
+    "<pad><s>    } else if (offsetLocal > offsetAdjusted) {\n</s></s></s></s></s>"
+  ]
+}

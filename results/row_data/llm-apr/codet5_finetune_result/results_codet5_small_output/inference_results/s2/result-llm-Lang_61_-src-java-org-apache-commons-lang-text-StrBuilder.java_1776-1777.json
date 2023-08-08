@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689921971242",
+  "GPR[ESLB]": "1689921991262",
+  "file": "Lang_61_/src/java/org/apache/commons/lang/text/StrBuilder.java_1776-1777",
+  "input": {
+    "loc": "1776-1777",
+    "input": "public int indexOf(String str, int startIndex) {\n    startIndex = (startIndex < 0 ? 0 : startIndex);\n    if (str == null || startIndex >= size) {\n        return -1;\n    }\n    int strLen = str.length();\n    if (strLen == 1) {\n        return indexOf(str.charAt(0), startIndex);\n    }\n    if (strLen == 0) {\n        return startIndex;\n    }\n    if (strLen > size) {\n        return -1;\n    }\n    char[] thisBuf = buffer;\n</s>    int len = thisBuf.length - strLen;\n</s>    outer:\n    for (int i = startIndex; i < len; i++) {\n        for (int j = 0; j < strLen; j++) {\n            if (str.charAt(j) != thisBuf[i + j]) {\n                continue outer;\n            }\n        }\n        return i;\n    }\n    return -1;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Lang_61_-src-java-org-apache-commons-lang-text-StrBuilder.java_1776-1777.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689920172608",
+  "GPR[ESLI]": "1689920202639",
+  "GPR[SPS]": "1689921991309",
+  "nrTokens": 232,
+  "status": "ok",
+  "GPR[EPS]": "1689921991704",
+  "time": 395,
+  "tokentime": 3,
+  "inferencetime": 392,
+  "output": [
+    "<pad><s>    int len = thisBuf.length - strLen;\n</s></s></s>",
+    "<pad><s>    int len = thisBuf.length + strLen;\n</s></s></s>",
+    "<pad><s>    int len = thisBuf.length;\n</s></s></s></s></s></s>",
+    "<pad><s>    int len = thisBuf.length - strLen - 1;\n</s>",
+    "<pad><s>    int len = thisBuf.length - startIndex;\n</s></s></s></s>",
+    "<pad><s>    int len = thisBuf.length - strLen + 1;\n</s>",
+    "<pad><s>    int len = thisBuf.length - 1;\n</s></s></s></s>",
+    "<pad><s>    int len = thisBuf.length + strLen - 1;\n</s>",
+    "<pad><s>    int len = thisBuf.length - 1 - strLen;\n</s>",
+    "<pad><s>    int len = thisBuf.length + strLen + 1;\n</s>"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687986625236",
+  "GPR[ESLB]": "1687986645257",
+  "file": "Closure_40_src/com/google/javascript/jscomp/NameAnalyzer.java_635-636",
+  "input": {
+    "loc": "635-636",
+    "input": "@Override\npublic void visit(NodeTraversal t, Node n, Node parent) {\n  if (t.inGlobalScope()) {\n    if (NodeUtil.isVarDeclaration(n)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      Preconditions.checkNotNull(ns);\n      recordSet(ns.name, n);\n    } else if (NodeUtil.isFunctionDeclaration(n)) {\n      Node nameNode = n.getFirstChild();\n      NameInformation ns = createNameInformation(t, nameNode, n);\n      if (ns != null) {\n        JsName nameInfo = getName(nameNode.getString(), true);\n        recordSet(nameInfo.name, nameNode);\n      }\n    } else if (NodeUtil.isObjectLitKey(n, parent)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      if (ns != null) {\n        recordSet(ns.name, n);\n      }\n    }\n  }\n  if (n.isAssign()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null) {\n      if (ns.isPrototype) {\n        recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n      } else {\n        recordSet(ns.name, nameNode);\n      }\n    }\n  } else if (n.isCall()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null && ns.onlyAffectsClassDef) {\n</s>      JsName name = getName(ns.name, false);\n</s>      if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n      }\n    }\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_40_src-com-google-javascript-jscomp-NameAnalyzer.java_635-636.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687986534036",
+  "GPR[ESLI]": "1687986564066",
+  "GPR[SPS]": "1687986645296",
+  "nrTokens": 455,
+  "status": "ok",
+  "GPR[EPS]": "1687986646100",
+  "time": 804,
+  "tokentime": 7,
+  "inferencetime": 797,
+  "output": [
+    "<pad><s>      JsName name = getName(ns.name, true);\n</s></s></s>",
+    "<pad><s>      JsName name = getName(nameNode.getString(), false);\n</s>",
+    "<pad><s>      JsName name = getName(ns.name);\n</s></s></s></s></s>",
+    "<pad><s>      JsName name = getName(ns.name, false, true);\n</s>",
+    "<pad><s>      JsName name = getName(n.getString(), false);\n</s></s>",
+    "<pad><s>      JsName name = getName(ns.name, false, false);\n</s>",
+    "<pad><s>      JsName name = getName(ns.name, parent);\n</s></s></s>",
+    "<pad><s>      String name = getName(ns.name, false);\n</s></s></s></s>",
+    "<pad><s>      JsName name = getName(ns.name, false, t);\n</s>",
+    "<pad><s>      JsName name = getName(ns.getString(), false);\n</s></s>"
+  ]
+}

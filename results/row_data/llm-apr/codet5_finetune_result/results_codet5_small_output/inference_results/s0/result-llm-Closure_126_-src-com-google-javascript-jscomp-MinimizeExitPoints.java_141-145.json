@@ -1,0 +1,23 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687985091619",
+  "GPR[ESLB]": "1687985111639",
+  "file": "Closure_126_/src/com/google/javascript/jscomp/MinimizeExitPoints.java_141-145",
+  "input": {
+    "loc": "141-145",
+    "input": "void tryMinimizeExits(Node n, int exitType, String labelName) {\n  if (matchingExitNode(n, exitType, labelName)) {\n    NodeUtil.removeChild(n.getParent(), n);\n    compiler.reportCodeChange();\n    return;\n  }\n  if (n.isIf()) {\n    Node ifBlock = n.getFirstChild().getNext();\n    tryMinimizeExits(ifBlock, exitType, labelName);\n    Node elseBlock = ifBlock.getNext();\n    if (elseBlock != null) {\n      tryMinimizeExits(elseBlock, exitType, labelName);\n    }\n    return;\n  }\n  if (n.isTry()) {\n    Node tryBlock = n.getFirstChild();\n    tryMinimizeExits(tryBlock, exitType, labelName);\n    Node allCatchNodes = NodeUtil.getCatchBlock(n);\n    if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n      Preconditions.checkState(allCatchNodes.hasOneChild());\n      Node catchNode = allCatchNodes.getFirstChild();\n      Node catchCodeBlock = catchNode.getLastChild();\n      tryMinimizeExits(catchCodeBlock, exitType, labelName);\n    }\n</s>    if (NodeUtil.hasFinally(n)) {\n      Node finallyBlock = n.getLastChild();\n      tryMinimizeExits(finallyBlock, exitType, labelName);\n    }\n</s>  }\n  if (n.isLabel()) {\n    Node labelBlock = n.getLastChild();\n    tryMinimizeExits(labelBlock, exitType, labelName);\n  }\n  if (!n.isBlock() || n.getLastChild() == null) {\n    return;\n  }\n  for (Node c : n.children()) {\n    if (c.isIf()) {\n      Node ifTree = c;\n      Node trueBlock, falseBlock;\n      trueBlock = ifTree.getFirstChild().getNext();\n      falseBlock = trueBlock.getNext();\n      tryMinimizeIfBlockExits(trueBlock, falseBlock,\n          ifTree, exitType, labelName);\n      trueBlock = ifTree.getFirstChild().getNext();\n      falseBlock = trueBlock.getNext();\n      if (falseBlock != null) {\n        tryMinimizeIfBlockExits(falseBlock, trueBlock,\n            ifTree, exitType, labelName);\n      }\n    }\n    if (c == n.getLastChild()) {\n      break;\n    }\n  }\n  for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n    tryMinimizeExits(c, exitType, labelName);\n    if (c == n.getLastChild()) {\n      break;\n    }\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_126_-src-com-google-javascript-jscomp-MinimizeExitPoints.java_141-145.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687983750212",
+  "GPR[ESLI]": "1687983780242",
+  "GPR[SPS]": "1687985111679",
+  "nrTokens": 663,
+  "status": "ok",
+  "message": "input too long:663skip",
+  "GPR[EPS]": "1687985111685",
+  "time": 6,
+  "tokentime": 6,
+  "inferencetime": 0,
+  "output": []
+}

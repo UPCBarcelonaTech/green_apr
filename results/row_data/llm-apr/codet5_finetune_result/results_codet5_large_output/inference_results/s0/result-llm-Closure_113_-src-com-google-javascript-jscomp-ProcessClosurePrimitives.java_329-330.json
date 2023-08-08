@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687990579692",
+  "GPR[ESLB]": "1687990599712",
+  "file": "Closure_113_/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java_329-330",
+  "input": {
+    "loc": "329-330",
+    "input": "private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n  Node left = n.getFirstChild();\n  Node arg = left.getNext();\n  if (verifyLastArgumentIsString(t, left, arg)) {\n    String ns = arg.getString();\n    ProvidedName provided = providedNames.get(ns);\n    if (provided == null || !provided.isExplicitlyProvided()) {\n      unrecognizedRequires.add(\n          new UnrecognizedRequire(n, ns, t.getSourceName()));\n    } else {\n      JSModule providedModule = provided.explicitModule;\n      Preconditions.checkNotNull(providedModule);\n      JSModule module = t.getModule();\n      if (moduleGraph != null &&\n          module != providedModule &&\n          !moduleGraph.dependsOn(module, providedModule)) {\n        compiler.report(\n            t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                providedModule.getName(),\n                module.getName()));\n      }\n    }\n    maybeAddToSymbolTable(left);\n    maybeAddStringNodeToSymbolTable(arg);\n</s>    if (provided != null) {\n</s>      parent.detachFromParent();\n      compiler.reportCodeChange();\n    }\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_113_-src-com-google-javascript-jscomp-ProcessClosurePrimitives.java_329-330.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687990599751",
+  "nrTokens": 296,
+  "status": "ok",
+  "GPR[EPS]": "1687990601166",
+  "time": 1415,
+  "tokentime": 6,
+  "inferencetime": 1409,
+  "output": [
+    "<pad><s>    if (provided!= null &&!provided.isExplicitlyProvided()) {\n</s>",
+    "<pad><s>    if (provided == null) {\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    if (provided.isExplicitlyProvided()) {\n</s></s></s></s></s></s>",
+    "<pad><s>    if (!provided.isExplicitlyProvided()) {\n</s></s></s></s></s></s>",
+    "<pad><s>    if (provided == null ||!provided.isExplicitlyProvided()) {\n</s>",
+    "<pad><s>    if (provided!= null && provided.isExplicitlyProvided()) {\n</s></s>",
+    "<pad><s>    if (provided!= null && parent!= null) {\n</s></s></s></s></s>",
+    "<pad><s>    if (provided == null || provided.isExplicitlyProvided()) {\n</s></s>",
+    "<pad><s>    if (provided.isExplicitlyProvided() && parent!= null) {\n</s>",
+    "<pad><s>    if (parent!= null) {\n</s></s></s></s></s></s></s></s></s>"
+  ]
+}

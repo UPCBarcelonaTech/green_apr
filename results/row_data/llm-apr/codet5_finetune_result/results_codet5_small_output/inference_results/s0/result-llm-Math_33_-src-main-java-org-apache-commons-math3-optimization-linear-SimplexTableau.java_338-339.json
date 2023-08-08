@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687985747899",
+  "GPR[ESLB]": "1687985767919",
+  "file": "Math_33_/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java_338-339",
+  "input": {
+    "loc": "338-339",
+    "input": "protected void dropPhase1Objective() {\n    if (getNumObjectiveFunctions() == 1) {\n        return;\n    }\n    List<Integer> columnsToDrop = new ArrayList<Integer>();\n    columnsToDrop.add(0);\n    for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n        final double entry = tableau.getEntry(0, i);\n</s>        if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n</s>            columnsToDrop.add(i);\n        }\n    }\n    for (int i = 0; i < getNumArtificialVariables(); i++) {\n      int col = i + getArtificialVariableOffset();\n      if (getBasicRow(col) == null) {\n        columnsToDrop.add(col);\n      }\n    }\n    double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n    for (int i = 1; i < getHeight(); i++) {\n      int col = 0;\n      for (int j = 0; j < getWidth(); j++) {\n        if (!columnsToDrop.contains(j)) {\n          matrix[i - 1][col++] = tableau.getEntry(i, j);\n        }\n      }\n    }\n    for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n      columnLabels.remove((int) columnsToDrop.get(i));\n    }\n    this.tableau = new Array2DRowRealMatrix(matrix);\n    this.numArtificialVariables = 0;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_33_-src-main-java-org-apache-commons-math3-optimization-linear-SimplexTableau.java_338-339.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687983750212",
+  "GPR[ESLI]": "1687983780242",
+  "GPR[SPS]": "1687985767958",
+  "nrTokens": 390,
+  "status": "ok",
+  "GPR[EPS]": "1687985768522",
+  "time": 564,
+  "tokentime": 6,
+  "inferencetime": 558,
+  "output": [
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps) < 0) {\n</s>",
+    "<pad><s>        if (precision.compareTo(entry, 0d, maxUlps) > 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps) >= 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps)) {\n</s></s></s></s>",
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps) <= 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, 1d, maxUlps) > 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, 0d, maxUlps) == 0) {\n</s>",
+    "<pad><s>        if (precision.compareTo(entry, 0d, maxUlps) < 0) {\n</s>",
+    "<pad><s>        if (Precision.compareTo(entry, maxUlps) > 0) {\n</s></s></s></s>"
+  ]
+}

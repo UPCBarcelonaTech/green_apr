@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689877294508",
+  "GPR[ESLB]": "1689877314528",
+  "file": "Closure_36_/src/com/google/javascript/jscomp/InlineVariables.java_575-576",
+  "input": {
+    "loc": "575-576",
+    "input": "private boolean canInline(\n    Reference declaration,\n    Reference initialization,\n    Reference reference) {\n  if (!isValidDeclaration(declaration)\n      || !isValidInitialization(initialization)\n      || !isValidReference(reference)) {\n    return false;\n  }\n  if (declaration != initialization &&\n      !initialization.getGrandparent().isExprResult()) {\n    return false;\n  }\n  if (declaration.getBasicBlock() != initialization.getBasicBlock()\n      || declaration.getBasicBlock() != reference.getBasicBlock()) {\n    return false;\n  }\n  Node value = initialization.getAssignedValue();\n  Preconditions.checkState(value != null);\n  if (value.isGetProp()\n      && reference.getParent().isCall()\n      && reference.getParent().getFirstChild() == reference.getNode()) {\n    return false;\n  }\n  if (value.isFunction()) {\n    Node callNode = reference.getParent();\n    if (reference.getParent().isCall()) {\n      CodingConvention convention = compiler.getCodingConvention();\n      SubclassRelationship relationship =\n          convention.getClassesDefinedByCall(callNode);\n      if (relationship != null) {\n        return false;\n      }\n</s>    }\n</s>  }\n  return canMoveAggressively(value) ||\n      canMoveModerately(initialization, reference);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_36_-src-com-google-javascript-jscomp-InlineVariables.java_575-576.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689876498197",
+  "GPR[ESLI]": "1689876528227",
+  "GPR[SPS]": "1689877314569",
+  "nrTokens": 324,
+  "status": "ok",
+  "GPR[EPS]": "1689877315393",
+  "time": 824,
+  "tokentime": 6,
+  "inferencetime": 818,
+  "output": [
+    "<pad><s>    } else {\n        return false;\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else {\n        return canMoveAggressively(value);\n</s></s></s></s></s>",
+    "<pad><s>    } else if (reference.getParent().isCall()) {\n        return false;\n</s>",
+    "<pad><s>    } else {\n        return false;\n    }\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else {\n        return canMoveAggressively(value);\n    }\n</s></s>",
+    "<pad><s>    } else {\n        return true;\n</s></s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (reference.getParent().isFunction()) {\n        return false;\n</s>",
+    "<pad><s>    } else {\n        return canMoveAggressively(value, reference);\n</s></s></s>",
+    "<pad><s>    } else {\n        return canMoveModerately(initialization, reference);\n</s></s>",
+    "<pad><s>    } else {\n    }\n</s></s></s></s></s></s></s></s></s></s></s></s></s>"
+  ]
+}

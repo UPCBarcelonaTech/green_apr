@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687988974729",
+  "GPR[ESLB]": "1687988994749",
+  "file": "Math_101_/src/java/org/apache/commons/math/complex/ComplexFormat.java_377-378",
+  "input": {
+    "loc": "377-378",
+    "input": "public Complex parse(String source, ParsePosition pos) {\n    int initialIndex = pos.getIndex();\n    parseAndIgnoreWhitespace(source, pos);\n    Number re = parseNumber(source, getRealFormat(), pos);\n    if (re == null) {\n        pos.setIndex(initialIndex);\n        return null;\n    }\n    int startIndex = pos.getIndex();\n    char c = parseNextCharacter(source, pos);\n    int sign = 0;\n    switch (c) {\n    case 0 :\n        return new Complex(re.doubleValue(), 0.0);\n    case '-' :\n        sign = -1;\n        break;\n    case '+' :\n        sign = 1;\n        break;\n    default :\n        pos.setIndex(initialIndex);\n        pos.setErrorIndex(startIndex);\n        return null;\n    }\n    parseAndIgnoreWhitespace(source, pos);\n    Number im = parseNumber(source, getRealFormat(), pos);\n    if (im == null) {\n        pos.setIndex(initialIndex);\n        return null;\n    }\n    int n = getImaginaryCharacter().length();\n    startIndex = pos.getIndex();\n    int endIndex = startIndex + n;\n</s>    if (\n</s>        source.substring(startIndex, endIndex).compareTo(\n        getImaginaryCharacter()) != 0) {\n        pos.setIndex(initialIndex);\n        pos.setErrorIndex(startIndex);\n        return null;\n    }\n    pos.setIndex(endIndex);\n    return new Complex(re.doubleValue(), im.doubleValue() * sign);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_101_-src-java-org-apache-commons-math-complex-ComplexFormat.java_377-378.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687986534036",
+  "GPR[ESLI]": "1687986564066",
+  "GPR[SPS]": "1687988994791",
+  "nrTokens": 374,
+  "status": "ok",
+  "GPR[EPS]": "1687988995452",
+  "time": 661,
+  "tokentime": 4,
+  "inferencetime": 657,
+  "output": [
+    "<pad><s>    if (startIndex < endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (startIndex!= endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (startIndex >= endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (endIndex >= source.length()) {\n</s></s>",
+    "<pad><s>    if (startIndex <= endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (startIndex == endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (getImaginaryCharacter()!= null) {\n</s>",
+    "<pad><s>    if (startIndex > endIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (endIndex < startIndex) {\n</s></s></s></s>",
+    "<pad><s>    if (endIndex > source.length()) {\n</s></s>"
+  ]
+}

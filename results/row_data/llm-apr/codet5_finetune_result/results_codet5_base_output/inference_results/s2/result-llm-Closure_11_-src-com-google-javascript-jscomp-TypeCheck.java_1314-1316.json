@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-2.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689923572305",
+  "GPR[ESLB]": "1689923592325",
+  "file": "Closure_11_/src/com/google/javascript/jscomp/TypeCheck.java_1314-1316",
+  "input": {
+    "loc": "1314-1316",
+    "input": "private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n  Node property = n.getLastChild();\n  Node objNode = n.getFirstChild();\n  JSType childType = getJSType(objNode);\n  if (childType.isDict()) {\n    report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n</s>  } else if (n.getJSType() != null && parent.isAssign()) {\n    return;\n</s>  } else if (validator.expectNotNullOrUndefined(t, n, childType,\n      \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n    checkPropertyAccess(childType, property.getString(), t, n);\n  }\n  ensureTyped(t, n);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_11_-src-com-google-javascript-jscomp-TypeCheck.java_1314-1316.txt",
+  "OAR_JOB_ID": "1561662",
+  "GPR[SSLI]": "1689922943068",
+  "GPR[ESLI]": "1689922973098",
+  "GPR[SPS]": "1689923592365",
+  "nrTokens": 187,
+  "status": "ok",
+  "GPR[EPS]": "1689923593200",
+  "time": 835,
+  "tokentime": 4,
+  "inferencetime": 831,
+  "output": [
+    "<pad><s>    } else if (n.getJSType()!= null) {\n        return;\n</s></s></s></s>",
+    "<pad><s>    } else if (n.getJSType()!= null && parent.isAssign()) {\n</s></s></s>",
+    "<pad><s>    } else if (parent.isAssign()) {\n        return;\n</s></s></s></s></s></s></s></s>",
+    "<pad><s>    } else if (n.getJSType() == null) {\n        return;\n</s></s></s></s>",
+    "<pad><s>    } else if (n.getJSType()!= null &&!parent.isAssign()) {\n</s></s>",
+    "<pad><s>    } else if (n.getJSType()!= null) {\n    return;\n</s></s></s></s>",
+    "<pad><s>    } else if (n.getJSType() == null && parent.isAssign()) {\n</s></s></s>",
+    "<pad><s>    } else if (n.isGetProp() && parent.isAssign()) {\n        return;\n</s>",
+    "<pad><s>    } else if (parent!= null && parent.isAssign()) {\n        return;\n</s></s></s></s>",
+    "<pad><s>    } else if (parent.isAssign()) {\n    return;\n</s></s></s></s></s></s></s></s>"
+  ]
+}

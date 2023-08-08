@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687989918956",
+  "GPR[ESLB]": "1687989938976",
+  "file": "Closure_1_/src/com/google/javascript/jscomp/RemoveUnusedVars.java_379-380",
+  "input": {
+    "loc": "379-380",
+    "input": "private void removeUnreferencedFunctionArgs(Scope fnScope) {\n</s>\n</s>  Node function = fnScope.getRootNode();\n  Preconditions.checkState(function.isFunction());\n  if (NodeUtil.isGetOrSetKey(function.getParent())) {\n    return;\n  }\n  Node argList = getFunctionArgList(function);\n  boolean modifyCallers = modifyCallSites\n      && callSiteOptimizer.canModifyCallers(function);\n  if (!modifyCallers) {\n    Node lastArg;\n    while ((lastArg = argList.getLastChild()) != null) {\n      Var var = fnScope.getVar(lastArg.getString());\n      if (!referenced.contains(var)) {\n        argList.removeChild(lastArg);\n        compiler.reportCodeChange();\n      } else {\n        break;\n      }\n    }\n  } else {\n    callSiteOptimizer.optimize(fnScope, referenced);\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_1_-src-com-google-javascript-jscomp-RemoveUnusedVars.java_379-380.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687989939017",
+  "nrTokens": 222,
+  "status": "ok",
+  "GPR[EPS]": "1687989940257",
+  "time": 1240,
+  "tokentime": 4,
+  "inferencetime": 1236,
+  "output": [
+    "<pad><s>  checkNotNull(fnScope, \"String_Node_Str\");\n</s></s></s>",
+    "<pad><s>  Preconditions.checkState(fnScope.isFunction());\n</s></s></s></s>",
+    "<pad><s>  Preconditions.checkState(fnScope.isFunctionScope());\n</s></s></s>",
+    "<pad><s>  Preconditions.checkState(fnScope.getParent().isFunction());\n</s>",
+    "<pad><s>  checkNotNull(fnScope);\n</s></s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  Preconditions.checkState(fnScope.getRootNode().isFunction());\n</s>",
+    "<pad><s>  List<Var> referenced = new ArrayList<Var>();\n</s></s></s>",
+    "<pad><s>  Preconditions.checkState(fnScope.getParent()!= null);\n</s>",
+    "<pad><s>  Set<Var> referenced = new HashSet<Var>();\n</s></s></s>",
+    "<pad><s>    checkNotNull(fnScope, \"String_Node_Str\");\n</s></s></s>"
+  ]
+}

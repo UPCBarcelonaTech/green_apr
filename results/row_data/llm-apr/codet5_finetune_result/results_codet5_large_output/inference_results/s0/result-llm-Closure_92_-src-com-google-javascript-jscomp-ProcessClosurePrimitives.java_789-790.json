@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687990472446",
+  "GPR[ESLB]": "1687990492448",
+  "file": "Closure_92_/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java_789-790",
+  "input": {
+    "loc": "789-790",
+    "input": "void replace() {\n  if (firstNode == null) {\n    replacementNode = candidateDefinition;\n    return;\n  }\n  if (candidateDefinition != null && explicitNode != null) {\n    explicitNode.detachFromParent();\n    compiler.reportCodeChange();\n    replacementNode = candidateDefinition;\n    if (NodeUtil.isExpressionNode(candidateDefinition)) {\n      candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n      Node assignNode = candidateDefinition.getFirstChild();\n      Node nameNode = assignNode.getFirstChild();\n      if (nameNode.getType() == Token.NAME) {\n        Node valueNode = nameNode.getNext();\n        assignNode.removeChild(nameNode);\n        assignNode.removeChild(valueNode);\n        nameNode.addChildToFront(valueNode);\n        Node varNode = new Node(Token.VAR, nameNode);\n        varNode.copyInformationFrom(candidateDefinition);\n        candidateDefinition.getParent().replaceChild(\n            candidateDefinition, varNode);\n        nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n        compiler.reportCodeChange();\n        replacementNode = varNode;\n      }\n    }\n  } else {\n    replacementNode = createDeclarationNode();\n    if (firstModule == minimumModule) {\n      firstNode.getParent().addChildBefore(replacementNode, firstNode);\n    } else {\n</s>      int indexOfDot = namespace.indexOf('.');\n</s>      if (indexOfDot == -1) {\n        compiler.getNodeForCodeInsertion(minimumModule)\n            .addChildToBack(replacementNode);\n      } else {\n        ProvidedName parentName =\n            providedNames.get(namespace.substring(0, indexOfDot));\n        Preconditions.checkNotNull(parentName);\n        Preconditions.checkNotNull(parentName.replacementNode);\n        parentName.replacementNode.getParent().addChildAfter(\n            replacementNode, parentName.replacementNode);\n      }\n    }\n    if (explicitNode != null) {\n      explicitNode.detachFromParent();\n    }\n    compiler.reportCodeChange();\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_92_-src-com-google-javascript-jscomp-ProcessClosurePrimitives.java_789-790.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687990492489",
+  "nrTokens": 493,
+  "status": "ok",
+  "GPR[EPS]": "1687990494764",
+  "time": 2275,
+  "tokentime": 6,
+  "inferencetime": 2269,
+  "output": [
+    "<pad><s>      int indexOfDot = namespace.lastIndexOf('.');\n</s></s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('.');\n</s></s></s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('/');\n</s></s></s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('.', 1);\n</s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('.', 0);\n</s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('.') + 1;\n</s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('$');\n</s></s></s></s></s>",
+    "<pad><s>      int indexOfDot = namespace.toLowerCase().indexOf('.');\n</s></s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf(\"String_Node_Str\");\n</s>",
+    "<pad><s>      int indexOfDot = namespace.indexOf('.', 0, 1);\n</s>"
+  ]
+}

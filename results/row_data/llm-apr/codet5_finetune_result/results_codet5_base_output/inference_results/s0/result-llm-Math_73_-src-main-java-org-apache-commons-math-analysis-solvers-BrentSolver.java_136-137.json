@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687988806721",
+  "GPR[ESLB]": "1687988826742",
+  "file": "Math_73_/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java_136-137",
+  "input": {
+    "loc": "136-137",
+    "input": "public double solve(final UnivariateRealFunction f,\n                    final double min, final double max, final double initial)\n    throws MaxIterationsExceededException, FunctionEvaluationException {\n    clearResult();\n    verifySequence(min, initial, max);\n    double yInitial = f.value(initial);\n    if (Math.abs(yInitial) <= functionValueAccuracy) {\n        setResult(initial, 0);\n        return result;\n    }\n    double yMin = f.value(min);\n    if (Math.abs(yMin) <= functionValueAccuracy) {\n        setResult(yMin, 0);\n        return result;\n    }\n    if (yInitial * yMin < 0) {\n        return solve(f, min, yMin, initial, yInitial, min, yMin);\n    }\n    double yMax = f.value(max);\n    if (Math.abs(yMax) <= functionValueAccuracy) {\n        setResult(yMax, 0);\n        return result;\n    }\n    if (yInitial * yMax < 0) {\n        return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n    }\n</s>\n</s>    \n    return solve(f, min, yMin, max, yMax, initial, yInitial);\n}\n"
+  },
+  "nvidea": "measures-nvidea-Math_73_-src-main-java-org-apache-commons-math-analysis-solvers-BrentSolver.java_136-137.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687986534036",
+  "GPR[ESLI]": "1687986564066",
+  "GPR[SPS]": "1687988826784",
+  "nrTokens": 300,
+  "status": "ok",
+  "GPR[EPS]": "1687988827648",
+  "time": 864,
+  "tokentime": 3,
+  "inferencetime": 861,
+  "output": [
+    "<pad><s>    return solve(f, min, yMin, max, yInitial, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yInitial, max, yInitial, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yInitial, max, yMax, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yMin, max, initial, yInitial);\n</s></s></s></s>",
+    "<pad><s>    return solve(f, initial, yInitial, min, yMax, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yMin, yMax, initial, yInitial);\n</s></s></s>",
+    "<pad><s>    return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yInitial, max, initial, yInitial);\n</s></s></s></s>",
+    "<pad><s>    return solve(f, min, yInitial, min, yMax, initial, yInitial);\n</s>",
+    "<pad><s>    return solve(f, min, yMin, initial, yInitial, max, yInitial);\n</s>"
+  ]
+}

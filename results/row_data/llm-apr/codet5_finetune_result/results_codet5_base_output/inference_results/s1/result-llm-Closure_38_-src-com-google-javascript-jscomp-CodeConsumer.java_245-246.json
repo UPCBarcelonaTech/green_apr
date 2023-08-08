@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689877315476",
+  "GPR[ESLB]": "1689877335496",
+  "file": "Closure_38_/src/com/google/javascript/jscomp/CodeConsumer.java_245-246",
+  "input": {
+    "loc": "245-246",
+    "input": "void addNumber(double x) {\n  char prev = getLastChar();\n  boolean negativeZero = isNegativeZero(x);\n</s>  if (x < 0 && prev == '-') {\n</s>    add(\" \");\n  }\n  if ((long) x == x && !negativeZero) {\n    long value = (long) x;\n    long mantissa = value;\n    int exp = 0;\n    if (Math.abs(x) >= 100) {\n      while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n        mantissa /= 10;\n        exp++;\n      }\n    }\n    if (exp > 2) {\n      add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n    } else {\n      add(Long.toString(value));\n    }\n  } else {\n    add(String.valueOf(x));\n  }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Closure_38_-src-com-google-javascript-jscomp-CodeConsumer.java_245-246.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689876498197",
+  "GPR[ESLI]": "1689876528227",
+  "GPR[SPS]": "1689877335540",
+  "nrTokens": 219,
+  "status": "ok",
+  "GPR[EPS]": "1689877336198",
+  "time": 658,
+  "tokentime": 3,
+  "inferencetime": 655,
+  "output": [
+    "<pad><s>  if (x < 0 && prev!= '-') {\n</s></s></s></s></s>",
+    "<pad><s>  if (x < 0 && prev == '-') {\n</s></s></s></s></s>",
+    "<pad><s>  if (x < 0) {\n</s></s></s></s></s></s></s></s></s>",
+    "<pad><s>  if (x < 0 && prev == '-' &&!negativeZero) {\n</s>",
+    "<pad><s>  if (!negativeZero && prev == '-') {\n</s></s></s></s></s></s>",
+    "<pad><s>  if (x < 0 &&!negativeZero && prev == '-') {\n</s>",
+    "<pad><s>  if (negativeZero && prev == '-') {\n</s></s></s></s></s></s>",
+    "<pad><s>  if (x < 0 &&!negativeZero) {\n</s></s></s></s></s>",
+    "<pad><s>  if (x <= 0 && prev == '-') {\n</s></s></s></s></s>",
+    "<pad><s>  if (x < 0 && prev == '-' && negativeZero) {\n</s></s>"
+  ]
+}

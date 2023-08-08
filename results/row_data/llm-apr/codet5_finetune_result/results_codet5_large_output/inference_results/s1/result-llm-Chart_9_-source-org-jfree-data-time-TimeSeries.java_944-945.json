@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689879711659",
+  "GPR[ESLB]": "1689879731679",
+  "file": "Chart_9_/source/org/jfree/data/time/TimeSeries.java_944-945",
+  "input": {
+    "loc": "944-945",
+    "input": "public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end)\n    throws CloneNotSupportedException {\n    if (start == null) {\n        throw new IllegalArgumentException(\"Null 'start' argument.\");\n    }\n    if (end == null) {\n        throw new IllegalArgumentException(\"Null 'end' argument.\");\n    }\n    if (start.compareTo(end) > 0) {\n        throw new IllegalArgumentException(\n                \"Requires start on or before end.\");\n    }\n    boolean emptyRange = false;\n    int startIndex = getIndex(start);\n    if (startIndex < 0) {\n        startIndex = -(startIndex + 1);\n        if (startIndex == this.data.size()) {\n            emptyRange = true;  \n        }\n    }\n    int endIndex = getIndex(end);\n    if (endIndex < 0) {             \n        endIndex = -(endIndex + 1); \n        endIndex = endIndex - 1;    \n    }\n</s>    if (endIndex < 0) {\n</s>        emptyRange = true;\n    }\n    if (emptyRange) {\n        TimeSeries copy = (TimeSeries) super.clone();\n        copy.data = new java.util.ArrayList();\n        return copy;\n    }\n    else {\n        return createCopy(startIndex, endIndex);\n    }\n}\n"
+  },
+  "nvidea": "measures-nvidea-Chart_9_-source-org-jfree-data-time-TimeSeries.java_944-945.txt",
+  "OAR_JOB_ID": "1561319",
+  "GPR[SSLI]": "1689879305289",
+  "GPR[ESLI]": "1689879335319",
+  "GPR[SPS]": "1689879731720",
+  "nrTokens": 298,
+  "status": "ok",
+  "GPR[EPS]": "1689879733014",
+  "time": 1294,
+  "tokentime": 4,
+  "inferencetime": 1290,
+  "output": [
+    "<pad><s>    if (endIndex < startIndex) {\n</s></s></s></s></s>",
+    "<pad><s>    if (endIndex == 0) {\n</s></s></s></s></s>",
+    "<pad><s>    if (endIndex == this.data.size()) {\n</s>",
+    "<pad><s>    if (endIndex >= this.data.size()) {\n</s>",
+    "<pad><s>    if (endIndex > this.data.size()) {\n</s>",
+    "<pad><s>    if (endIndex <= 0) {\n</s></s></s></s></s>",
+    "<pad><s>    if (endIndex == -1) {\n</s></s></s></s>",
+    "<pad><s>    if (endIndex < 0)\n</s></s></s></s></s></s>",
+    "<pad><s>    if (startIndex < 0 || endIndex < 0) {\n</s>",
+    "<pad><s>    if (endIndex < 0 || startIndex < 0) {\n</s>"
+  ]
+}

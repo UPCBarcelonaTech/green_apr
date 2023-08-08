@@ -1,0 +1,33 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1687992163884",
+  "GPR[ESLB]": "1687992183904",
+  "file": "Time_16_/src/main/java/org/joda/time/format/DateTimeFormatter.java_709-710",
+  "input": {
+    "loc": "709-710",
+    "input": "public int parseInto(ReadWritableInstant instant, String text, int position) {\n    DateTimeParser parser = requireParser();\n    if (instant == null) {\n        throw new IllegalArgumentException(\"Instant must not be null\");\n    }\n    long instantMillis = instant.getMillis();\n    Chronology chrono = instant.getChronology();\n    long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n    chrono = selectChronology(chrono);\n    DateTimeParserBucket bucket = new DateTimeParserBucket(\n</s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);\n</s>    int newPos = parser.parseInto(bucket, text, position);\n    instant.setMillis(bucket.computeMillis(false, text));\n    if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n        int parsedOffset = bucket.getOffsetInteger();\n        DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n        chrono = chrono.withZone(parsedZone);\n    } else if (bucket.getZone() != null) {\n        chrono = chrono.withZone(bucket.getZone());\n    }\n    instant.setChronology(chrono);\n    if (iZone != null) {\n        instant.setZone(iZone);\n    }\n    return newPos;\n}\n"
+  },
+  "nvidea": "measures-nvidea-Time_16_-src-main-java-org-joda-time-format-DateTimeFormatter.java_709-710.txt",
+  "OAR_JOB_ID": "1548579",
+  "GPR[SSLI]": "1687989341629",
+  "GPR[ESLI]": "1687989371659",
+  "GPR[SPS]": "1687992183945",
+  "nrTokens": 300,
+  "status": "ok",
+  "GPR[EPS]": "1687992185624",
+  "time": 1679,
+  "tokentime": 5,
+  "inferencetime": 1674,
+  "output": [
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, iOffsetParsed);\n</s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, iZone);\n</s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, iTimeZone);\n</s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, false);\n</s></s></s>",
+    "<pad><s>        instantMillis, chrono, iLocale, iPivotYear, iDefaultYear);\n</s></s></s></s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, iTimezone);\n</s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iDefaultYear, iPivotYear);\n</s></s></s></s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, true);\n</s></s></s>",
+    "<pad><s>        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear, iUTC);\n</s></s>",
+    "<pad><s>        instantLocal, chrono, locale, iPivotYear, defaultYear);\n</s></s></s></s></s></s></s>"
+  ]
+}
