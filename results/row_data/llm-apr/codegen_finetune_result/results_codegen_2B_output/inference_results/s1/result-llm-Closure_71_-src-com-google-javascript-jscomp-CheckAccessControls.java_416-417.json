@@ -1,0 +1,23 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689796420543",
+  "GPR[ESLB]": "1689796440563",
+  "file": "Closure_71_/src/com/google/javascript/jscomp/CheckAccessControls.java_416-417",
+  "input": {
+    "loc": "416-417",
+    "input": "private void checkPropertyVisibility(NodeTraversal t,\n    Node getprop, Node parent) {\n  ObjectType objectType =\n      ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n  String propertyName = getprop.getLastChild().getString();\n  if (objectType != null) {\n// buggy lines start:\n    boolean isOverride = t.inGlobalScope() &&\n// buggy lines end:\n        parent.getType() == Token.ASSIGN &&\n        parent.getFirstChild() == getprop;\n    if (isOverride) {\n      objectType = objectType.getImplicitPrototype();\n    }\n    JSDocInfo docInfo = null;\n    for (; objectType != null;\n         objectType = objectType.getImplicitPrototype()) {\n      docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n      if (docInfo != null &&\n          docInfo.getVisibility() != Visibility.INHERITED) {\n        break;\n      }\n    }\n    if (objectType == null) {\n      return;\n    }\n    boolean sameInput =\n        t.getInput().getName().equals(docInfo.getSourceName());\n    Visibility visibility = docInfo.getVisibility();\n    JSType ownerType = normalizeClassType(objectType);\n    if (isOverride) {\n      JSDocInfo overridingInfo = parent.getJSDocInfo();\n      Visibility overridingVisibility = overridingInfo == null ?\n          Visibility.INHERITED : overridingInfo.getVisibility();\n      if (visibility == Visibility.PRIVATE && !sameInput) {\n        compiler.report(\n            t.makeError(getprop, PRIVATE_OVERRIDE,\n                objectType.toString()));\n      } else if (overridingVisibility != Visibility.INHERITED &&\n          overridingVisibility != visibility) {\n        compiler.report(\n            t.makeError(getprop, VISIBILITY_MISMATCH,\n                visibility.name(), objectType.toString(),\n                overridingVisibility.name()));\n      }\n    } else {\n      if (sameInput) {\n        return;\n      } else if (visibility == Visibility.PRIVATE &&\n          (currentClass == null || ownerType.differsFrom(currentClass))) {\n        if (docInfo.isConstructor() &&\n            isValidPrivateConstructorAccess(parent)) {\n          return;\n        }\n        compiler.report(\n            t.makeError(getprop,\n                BAD_PRIVATE_PROPERTY_ACCESS,\n                propertyName,\n                validator.getReadableJSTypeName(\n                    getprop.getFirstChild(), true)));\n      } else if (visibility == Visibility.PROTECTED) {\n        if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n          compiler.report(\n              t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        }\n      }\n    }\n  }\n}\n// fixed lines: \n"
+  },
+  "nvidea": "measures-nvidea-Closure_71_-src-com-google-javascript-jscomp-CheckAccessControls.java_416-417.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689795274792",
+  "GPR[ESLI]": "1689795304822",
+  "GPR[SPS]": "1689796440607",
+  "nrTokens": 779,
+  "status": "error",
+  "message": "input too long:779skip",
+  "GPR[EPS]": "1689796440612",
+  "time": 5,
+  "tokentime": 5,
+  "inferencetime": 0,
+  "output": []
+}

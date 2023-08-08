@@ -1,0 +1,23 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689798698079",
+  "GPR[ESLB]": "1689798718099",
+  "file": "Closure_119_src/com/google/javascript/jscomp/GlobalNamespace.java_366-366",
+  "input": {
+    "loc": "366-366",
+    "input": "public void collect(JSModule module, Scope scope, Node n) {\n  Node parent = n.getParent();\n  String name;\n  boolean isSet = false;\n  Name.Type type = Name.Type.OTHER;\n  boolean isPropAssign = false;\n  switch (n.getType()) {\n    case Token.GETTER_DEF:\n    case Token.SETTER_DEF:\n    case Token.STRING_KEY:\n      name = null;\n      if (parent != null && parent.isObjectLit()) {\n        name = getNameForObjLitKey(n);\n      }\n      if (name == null) {\n        return;\n      }\n      isSet = true;\n      switch (n.getType()) {\n        case Token.STRING_KEY:\n          type = getValueType(n.getFirstChild());\n          break;\n        case Token.GETTER_DEF:\n          type = Name.Type.GET;\n          break;\n        case Token.SETTER_DEF:\n          type = Name.Type.SET;\n          break;\n        default:\n          throw new IllegalStateException(\"unexpected:\" + n);\n      }\n      break;\n    case Token.NAME:\n      if (parent != null) {\n        switch (parent.getType()) {\n          case Token.VAR:\n            isSet = true;\n            Node rvalue = n.getFirstChild();\n            type = rvalue == null ? Name.Type.OTHER : getValueType(rvalue);\n            break;\n          case Token.ASSIGN:\n            if (parent.getFirstChild() == n) {\n              isSet = true;\n              type = getValueType(n.getNext());\n            }\n            break;\n          case Token.GETPROP:\n            return;\n          case Token.FUNCTION:\n            Node gramps = parent.getParent();\n            if (gramps == null || NodeUtil.isFunctionExpression(parent)) {\n              return;\n            }\n            isSet = true;\n            type = Name.Type.FUNCTION;\n            break;\n// buggy lines start:\n          case Token.INC:\n// buggy lines end:\n          case Token.DEC:\n            isSet = true;\n            type = Name.Type.OTHER;\n            break;\n          default:\n            if (NodeUtil.isAssignmentOp(parent) &&\n                parent.getFirstChild() == n) {\n              isSet = true;\n              type = Name.Type.OTHER;\n            }\n        }\n      }\n      name = n.getString();\n      break;\n    case Token.GETPROP:\n      if (parent != null) {\n        switch (parent.getType()) {\n          case Token.ASSIGN:\n            if (parent.getFirstChild() == n) {\n              isSet = true;\n              type = getValueType(n.getNext());\n              isPropAssign = true;\n            }\n            break;\n          case Token.INC:\n          case Token.DEC:\n            isSet = true;\n            type = Name.Type.OTHER;\n            break;\n          case Token.GETPROP:\n            return;\n          default:\n            if (NodeUtil.isAssignmentOp(parent) &&\n                parent.getFirstChild() == n) {\n              isSet = true;\n              type = Name.Type.OTHER;\n            }\n        }\n      }\n      name = n.getQualifiedName();\n      if (name == null) {\n        return;\n      }\n      break;\n    default:\n      return;\n  }\n  if (!isGlobalNameReference(name, scope)) {\n    return;\n  }\n  if (isSet) {\n    if (isGlobalScope(scope)) {\n      handleSetFromGlobal(module, scope, n, parent, name, isPropAssign, type);\n    } else {\n      handleSetFromLocal(module, scope, n, parent, name);\n    }\n  } else {\n    handleGet(module, scope, n, parent, name);\n  }\n}\n// fixed lines: \n"
+  },
+  "nvidea": "measures-nvidea-Closure_119_src-com-google-javascript-jscomp-GlobalNamespace.java_366-366.txt",
+  "OAR_JOB_ID": "1560165",
+  "GPR[SSLI]": "1689798519512",
+  "GPR[ESLI]": "1689798549542",
+  "GPR[SPS]": "1689798718148",
+  "nrTokens": 961,
+  "status": "error",
+  "message": "input too long:961skip",
+  "GPR[EPS]": "1689798718153",
+  "time": 5,
+  "tokentime": 5,
+  "inferencetime": 0,
+  "output": []
+}

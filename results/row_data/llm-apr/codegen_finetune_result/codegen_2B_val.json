@@ -1,0 +1,1103 @@
+{
+  "config": "finetune",
+  "data": {
+    "Chart_14_source/org/jfree/chart/plot/CategoryPlot.java_2166-2167": {
+      "loc": "2166-2167",
+      "input": "public boolean removeDomainMarker(int index, Marker marker, Layer layer,\n\t\tboolean notify) {\n    ArrayList markers;\n    if (layer == Layer.FOREGROUND) {\n        markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(\n                index));\n    }\n    else {\n        markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(\n                index));\n    }\n// buggy lines start:\n    boolean removed = markers.remove(marker);\n// buggy lines end:\n    if (removed && notify) {\n        fireChangeEvent();\n    }\n    return removed;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    boolean removed = markers.remove(0);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers.remove(index);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers.remove(marker.getId());\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers.remove(new Integer(marker.getId()));\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers.remove(0);\n    if (removed) {\n        fireChangeEvent();\n    }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers!= null? markers.remove(marker) : false;\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    int removed = markers.remove(marker);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = this.domainMarkers.remove(marker);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    markers.remove(marker);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean removed = markers.remove(layer);\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Closure_40_src/com/google/javascript/jscomp/NameAnalyzer.java_635-636": {
+      "loc": "635-636",
+      "input": "@Override\npublic void visit(NodeTraversal t, Node n, Node parent) {\n  if (t.inGlobalScope()) {\n    if (NodeUtil.isVarDeclaration(n)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      Preconditions.checkNotNull(ns);\n      recordSet(ns.name, n);\n    } else if (NodeUtil.isFunctionDeclaration(n)) {\n      Node nameNode = n.getFirstChild();\n      NameInformation ns = createNameInformation(t, nameNode, n);\n      if (ns != null) {\n        JsName nameInfo = getName(nameNode.getString(), true);\n        recordSet(nameInfo.name, nameNode);\n      }\n    } else if (NodeUtil.isObjectLitKey(n, parent)) {\n      NameInformation ns = createNameInformation(t, n, parent);\n      if (ns != null) {\n        recordSet(ns.name, n);\n      }\n    }\n  }\n  if (n.isAssign()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null) {\n      if (ns.isPrototype) {\n        recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n      } else {\n        recordSet(ns.name, nameNode);\n      }\n    }\n  } else if (n.isCall()) {\n    Node nameNode = n.getFirstChild();\n    NameInformation ns = createNameInformation(t, nameNode, n);\n    if (ns != null && ns.onlyAffectsClassDef) {\n// buggy lines start:\n      JsName name = getName(ns.name, false);\n// buggy lines end:\n      if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n      }\n    }\n  }\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "        JsName name = getName(ns.name, true);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name, false, true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name, false, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name, false, parent);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    JsName name = getName(ns.name, true);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name, false);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        JsName name = getName(ns.getName(), false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        JsName name = getName(ns.name, false, n);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    JsName name = getName(ns.name, false, true);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Closure_46_src/com/google/javascript/rhino/jstype/RecordType.java_142-145": {
+      "loc": "142-145",
+      "input": "@Override\npublic JSType getLeastSupertype(JSType that) {\n// buggy lines start:\n  if (!that.isRecordType()) {\n    return super.getLeastSupertype(that);\n  }\n// buggy lines end:\n  RecordTypeBuilder builder = new RecordTypeBuilder(registry);\n  for (String property : properties.keySet()) {\n    if (that.toMaybeRecordType().hasProperty(property) &&\n        that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(\n            getPropertyType(property))) {\n      builder.addProperty(property, getPropertyType(property),\n          getPropertyNode(property));\n    }\n  }\n  return builder.build();\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    RecordType thatRecordType = that.toMaybeRecordType();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Preconditions.checkState(!that.isRecordType(), \"String_Node_Str\", that);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (!that.isRecordType()) {\n        return that;\n    }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (that.isRecordType()) {\n        return super.getLeastSupertype(that);\n    }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return super.getLeastSupertype(that);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Preconditions.checkNotNull(that);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (!that.isRecordType() || that.toMaybeRecordType().isEmpty()) {\n        return that;\n    }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (that.isRecordType()) {\n        return that;\n    }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    JSType thatRecordType = that.toMaybeRecordType();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Preconditions.checkNotNull(that.isRecordType());\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Closure_77_src/com/google/javascript/jscomp/CodeGenerator.java_967-967": {
+      "loc": "967-967",
+      "input": "static String strEscape(String s, char quote,\n                        String doublequoteEscape,\n                        String singlequoteEscape,\n                        String backslashEscape,\n                        CharsetEncoder outputCharsetEncoder) {\n  StringBuilder sb = new StringBuilder(s.length() + 2);\n  sb.append(quote);\n  for (int i = 0; i < s.length(); i++) {\n    char c = s.charAt(i);\n    switch (c) {\n      case '\\n': sb.append(\"\\\\n\"); break;\n// buggy lines start:\n      case '\\r': sb.append(\"\\\\r\"); break;\n// buggy lines end:\n      case '\\t': sb.append(\"\\\\t\"); break;\n      case '\\\\': sb.append(backslashEscape); break;\n      case '\\\"': sb.append(doublequoteEscape); break;\n      case '\\'': sb.append(singlequoteEscape); break;\n      case '>':                       \n        if (i >= 2 &&\n            ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n             (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n          sb.append(\"\\\\>\");\n        } else {\n          sb.append(c);\n        }\n        break;\n      case '<':\n        final String END_SCRIPT = \"/script\";\n        final String START_COMMENT = \"!--\";\n        if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                            END_SCRIPT.length())) {\n          sb.append(\"<\\\\\");\n        } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                   START_COMMENT.length())) {\n          sb.append(\"<\\\\\");\n        } else {\n          sb.append(c);\n        }\n        break;\n      default:\n        if (outputCharsetEncoder != null) {\n          if (outputCharsetEncoder.canEncode(c)) {\n            sb.append(c);\n          } else {\n            appendHexJavaScriptRepresentation(sb, c);\n          }\n        } else {\n          if (c > 0x1f && c <= 0x7f) {\n            sb.append(c);\n          } else {\n            appendHexJavaScriptRepresentation(sb, c);\n          }\n        }\n    }\n  }\n  sb.append(quote);\n  return sb.toString();\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "        case '\\r': sb.append(\"\\\\r\"); break;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        case '\\r':\n            sb.append(\"\\\\r\");\n            break;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        case '\\r': sb.append(\"\\\\r\");\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        case '\\\\': sb.append(backslashEscape); break;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    case '\\r':\n        sb.append(\"\\\\r\");\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    case '\\r': sb.append(\"\\\\r\");\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    case '\\r': sb.append(\"\\\\r\"); break;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    case '\\r':\n        sb.append(\"\\\\r\");\n        break;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        case '\\\\': sb.append(\"\\\\\"); break;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    case '\\\\': sb.append(backslashEscape); break;\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Lang_10_src/main/java/org/apache/commons/lang3/time/FastDateParser.java_307-314": {
+      "loc": "307-314",
+      "input": "private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n    boolean wasWhite= false;\n    for(int i= 0; i<value.length(); ++i) {\n        char c= value.charAt(i);\n// buggy lines start:\n        if(Character.isWhitespace(c)) {\n            if(!wasWhite) {\n                wasWhite= true;\n                regex.append(\"\\\\s*+\");\n            }\n            continue;\n        }\n// buggy lines end:\n        wasWhite= false;\n        switch(c) {\n        case '\\'':\n            if(unquote) {\n                if(++i==value.length()) {\n                    return regex;\n                }\n                c= value.charAt(i);\n            }\n            break;\n        case '?':\n        case '[':\n        case ']':\n        case '(':\n        case ')':\n        case '{':\n        case '}':\n        case '\\\\':\n        case '|':\n        case '*':\n        case '+':\n        case '^':\n        case '$':\n        case '.':\n            regex.append('\\\\');\n        }\n        regex.append(c);\n    }\n    return regex;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "        if (isWhitespace(c)) {\n            continue;\n        }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (Character.isWhitespace(c)) {\n            continue;\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if (Character.isWhitespace(c))\n            continue;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if(isWhitespace(c)) {\n            continue;\n        }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (!whitespace.contains(c)) {\n            continue;\n        }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (!Character.isWhitespace(c)) {\n            continue;\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if (Character.isWhitespace(c) &&!wasWhite) {\n            continue;\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if (!whitespace(c)) {\n            continue;\n        }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if(Character.isWhitespace(c))\n            continue;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if (!Character.isWhitespace(c)) {\n            regex.append(c);\n        }\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Lang_38_src/java/org/apache/commons/lang3/time/FastDateFormat.java_872-872": {
+      "loc": "872-872",
+      "input": "public StringBuffer format(Calendar calendar, StringBuffer buf) {\n    if (mTimeZoneForced) {\n// buggy lines start:\n        calendar = (Calendar) calendar.clone();\n// buggy lines end:\n        calendar.setTimeZone(mTimeZone);\n    }\n    return applyRules(calendar, buf);\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "        calendar = calendar.clone();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone(false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone(true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone(mTimeZone);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone(0);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        Calendar calendar = (Calendar) calendar.clone();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.cloneCalendar();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        calendar = Calendar.getInstance(calendar.getTimeZone());\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        calendar = (Calendar) calendar.clone(timeZone);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Math_65_src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java_258-259": {
+      "loc": "258-259",
+      "input": "public double getChiSquare() {\n    double chiSquare = 0;\n    for (int i = 0; i < rows; ++i) {\n        final double residual = residuals[i];\n// buggy lines start:\n        chiSquare += residual * residual / residualsWeights[i];\n// buggy lines end:\n    }\n    return chiSquare;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "        chiSquare += residual * residual / residualWeights[i];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (residual!= 0) {\n            chiSquare += residual * residual / residualsWeights[i];\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        chiSquare += residual * residual / residualsWeights[i] + 1.0 / residualsWeights[i];\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        chiSquare += residual / residualsWeights[i];\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        chiSquare += residual * residual / residualsWeights[i] + 1;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "         chiSquare += residual * residual / residualWeights[i];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (residual!= 0) {\n             chiSquare += residual * residual / residualsWeights[i];\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        chiSquare += residual * residual / residualsWeights[i] + 1.0d;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        chiSquare += residual * residual / ( residualsWeights[i] + 1.0);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "         chiSquare += residual * residual / residualsWeights[i] + 1.0 / residualsWeights[i];\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Math_79_src/main/java/org/apache/commons/math/util/MathUtils.java_1624-1625": {
+      "loc": "1624-1625",
+      "input": "public static double distance(int[] p1, int[] p2) {\n// buggy lines start:\n  int sum = 0;\n// buggy lines end:\n  for (int i = 0; i < p1.length; i++) {\n      final int dp = p1[i] - p2[i];\n      sum += dp * dp;\n  }\n  return Math.sqrt(sum);\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    double sum = 0;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "double sum = 0;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": " double sum = 0;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    int sum = 1;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    final double sum = 0;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double sum = 0.0;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    double distance = 0;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "\tdouble sum = 0;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    final int sum = 0;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    float sum = 0;\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Math_98_src/java/org/apache/commons/math/linear/BigMatrixImpl.java_991-992": {
+      "loc": "991-992",
+      "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n// buggy lines start:\n    final BigDecimal[] out = new BigDecimal[v.length];\n// buggy lines end:\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[nRows];\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[nCols];\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[this.rowDimension];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[this.nRows];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[2 * nRows];\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    BigDecimal[] out = new BigDecimal[v.length];\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[size];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    final double[] out = new double[v.length];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[columns];\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    final BigDecimal[] out = new BigDecimal[this.size];\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_1_/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java_1797-1798": {
+      "loc": "1797-1798",
+      "input": "public LegendItemCollection getLegendItems() {\n    LegendItemCollection result = new LegendItemCollection();\n    if (this.plot == null) {\n        return result;\n    }\n    int index = this.plot.getIndexOf(this);\n    CategoryDataset dataset = this.plot.getDataset(index);\n// buggy lines start:\n    if (dataset != null) {\n// buggy lines end:\n        return result;\n    }\n    int seriesCount = dataset.getRowCount();\n    if (plot.getRowRenderingOrder().equals(SortOrder.ASCENDING)) {\n        for (int i = 0; i < seriesCount; i++) {\n            if (isSeriesVisibleInLegend(i)) {\n                LegendItem item = getLegendItem(index, i);\n                if (item != null) {\n                    result.add(item);\n                }\n            }\n        }\n    }\n    else {\n        for (int i = seriesCount - 1; i >= 0; i--) {\n            if (isSeriesVisibleInLegend(i)) {\n                LegendItem item = getLegendItem(index, i);\n                if (item != null) {\n                    result.add(item);\n                }\n            }\n        }\n    }\n    return result;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    if (dataset!= null && dataset.getRowCount() > 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (dataset == null) {\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.getRowCount()!= 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.isValid()) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.isSuccess()) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset instanceof CategoryDataset) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.isSupportedRowCount()) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.isRowCount() > 0) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.isSupportedCategory()) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    if (dataset!= null && dataset.getRowCount() >= 0) {\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Chart_3_/source/org/jfree/data/time/TimeSeries.java_1057-1058": {
+      "loc": "1057-1058",
+      "input": "public TimeSeries createCopy(int start, int end)\n        throws CloneNotSupportedException {\n    if (start < 0) {\n        throw new IllegalArgumentException(\"Requires start >= 0.\");\n    }\n    if (end < start) {\n        throw new IllegalArgumentException(\"Requires start <= end.\");\n    }\n    TimeSeries copy = (TimeSeries) super.clone();\n// buggy lines start:\n    copy.data = new java.util.ArrayList();\n// buggy lines end:\n    if (this.data.size() > 0) {\n        for (int index = start; index <= end; index++) {\n            TimeSeriesDataItem item\n                    = (TimeSeriesDataItem) this.data.get(index);\n            TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n            try {\n                copy.add(clone);\n            }\n            catch (SeriesException e) {\n                e.printStackTrace();\n            }\n        }\n    }\n    return copy;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    copy.data = new java.util.ArrayList<TimeSeriesDataItem>();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.data = new java.util.LinkedList();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    copy.data = new ArrayList<TimeSeriesDataItem>();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.data = new LinkedList<TimeSeriesDataItem>();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.data = new ArrayList();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.data = new java.util.LinkedList<TimeSeriesDataItem>();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.data = new LinkedList();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.setData(new java.util.ArrayList());\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    copy.clear();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    copy.data = newjava.util.ArrayList<TimeSeriesDataItem>();\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_6_/source/org/jfree/chart/util/ShapeList.java_111-112": {
+      "loc": "111-112",
+      "input": "public boolean equals(Object obj) {\n    if (obj == this) {\n        return true;\n    }\n    if (!(obj instanceof ShapeList)) {\n        return false;\n    }\n// buggy lines start:\n    return super.equals(obj);\n// buggy lines end:\n\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    return ShapeList.this.equals(obj);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return true;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return ShapeList.this.equals(o);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    ShapeList other = (ShapeList) obj;\n    return other.size() == this.size();\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    ShapeList other = (ShapeList) obj;\n    return super.equals(other);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    ShapeList that = (ShapeList) obj;\n    return super.equals(that);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    ShapeList other = (ShapeList) obj;\n    return true;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return new ShapeList().equals(obj);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return obj.equals(this);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    return ShapeListUtil.equals(this, (ShapeList) obj);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_8_/source/org/jfree/data/time/Week.java_175-176": {
+      "loc": "175-176",
+      "input": "public Week(Date time, TimeZone zone) {\n// buggy lines start:\n    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());\n// buggy lines end:\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, zone);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, timeZone, locale);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, zone, Locale.getDefault());\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, null);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, getDefaultLocale());\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.ONE_WEEK, Locale.getDefault());\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, timeZone);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, timeZone, Locale.getDefault());\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.US);\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Chart_9_/source/org/jfree/data/time/TimeSeries.java_944-945": {
+      "loc": "944-945",
+      "input": "public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end)\n    throws CloneNotSupportedException {\n    if (start == null) {\n        throw new IllegalArgumentException(\"Null 'start' argument.\");\n    }\n    if (end == null) {\n        throw new IllegalArgumentException(\"Null 'end' argument.\");\n    }\n    if (start.compareTo(end) > 0) {\n        throw new IllegalArgumentException(\n                \"Requires start on or before end.\");\n    }\n    boolean emptyRange = false;\n    int startIndex = getIndex(start);\n    if (startIndex < 0) {\n        startIndex = -(startIndex + 1);\n        if (startIndex == this.data.size()) {\n            emptyRange = true;  \n        }\n    }\n    int endIndex = getIndex(end);\n    if (endIndex < 0) {             \n        endIndex = -(endIndex + 1); \n        endIndex = endIndex - 1;    \n    }\n// buggy lines start:\n    if (endIndex < 0) {\n// buggy lines end:\n        emptyRange = true;\n    }\n    if (emptyRange) {\n        TimeSeries copy = (TimeSeries) super.clone();\n        copy.data = new java.util.ArrayList();\n        return copy;\n    }\n    else {\n        return createCopy(startIndex, endIndex);\n    }\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    if (endIndex == this.data.size()) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex <= 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex >= 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex > 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex < this.data.size()) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex == 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex < startIndex) {\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    if (endIndex!= this.data.size()) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (startIndex < 0) {\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    if (endIndex == this.data.size() - 1) {\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Chart_10_/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java_65-66": {
+      "loc": "65-66",
+      "input": "public String generateToolTipFragment(String toolTipText) {\n// buggy lines start:\n    return \" title=\\\"\" + toolTipText\n// buggy lines end:\n        + \"\\\" alt=\\\"\\\"\";\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    return \" title=\\\"\" + toolTipText + \"\\\"\";\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \" title\\\"\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \"String_Node_Str\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \" title='\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \"\\\" title=\\\"\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \" title\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \" title='\" + toolTipText + \"';\";\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \" title\\\"\" + toolTipText + \"\\\"\";\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \"\\\"\" + toolTipText;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return \"String_Node_Str\" + toolTipText + \"String_Node_Str\";\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_11_/source/org/jfree/chart/util/ShapeUtilities.java_275-276": {
+      "loc": "275-276",
+      "input": "public static boolean equal(GeneralPath p1, GeneralPath p2) {\n    if (p1 == null) {\n        return (p2 == null);\n    }\n    if (p2 == null) {\n        return false;\n    }\n    if (p1.getWindingRule() != p2.getWindingRule()) {\n        return false;\n    }\n    PathIterator iterator1 = p1.getPathIterator(null);\n// buggy lines start:\n    PathIterator iterator2 = p1.getPathIterator(null);\n// buggy lines end:\n    double[] d1 = new double[6];\n    double[] d2 = new double[6];\n    boolean done = iterator1.isDone() && iterator2.isDone();\n    while (!done) {\n        if (iterator1.isDone() != iterator2.isDone()) {\n            return false;\n        }\n        int seg1 = iterator1.currentSegment(d1);\n        int seg2 = iterator2.currentSegment(d2);\n        if (seg1 != seg2) {\n            return false;\n        }\n        if (!Arrays.equals(d1, d2)) {\n            return false;\n        }\n        iterator1.next();\n        iterator2.next();\n        done = iterator1.isDone() && iterator2.isDone();\n    }\n    return true;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    PathIterator iterator2 = p2.getPathIterator(null);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    PathIterator iterator2 = (PathIterator) p2.getPathIterator(null);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    Iterator iterator2 = p2.getPathIterator(null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    PathIterator iterator2 = p1.getPathIterator(null, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    PathIterator iterator2 = (new GeneralPath(p2)).getPathIterator(null);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    iterator2 = p2.getPathIterator(null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    PathIterator iterator2 = p1.getPathIterator(null);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    PathIterator iterator2 = path2.getPathIterator(null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    PathIterator iterator2 = path.getPathIterator(null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    PathIterator iterator2 = p1.getPathIterator();\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_12_/source/org/jfree/chart/plot/MultiplePiePlot.java_145-146": {
+      "loc": "145-146",
+      "input": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n// buggy lines start:\n    this.dataset = dataset;\n// buggy lines end:\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    this.dataset = dataset;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    setDataset(dataset);\n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    dataset = dataset;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    this.dataset = dataset.copy();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    dataset = dataset.copyInstance();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    dataset = dataset.copy();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this.dataset = dataset;\n    initDataset();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this.categoryDataset = dataset;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    initDataset();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    this.dataset = dataset.copyInstance();\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_17_/source/org/jfree/data/time/TimeSeries.java_857-858": {
+      "loc": "857-858",
+      "input": "public Object clone() throws CloneNotSupportedException {\n// buggy lines start:\n    Object clone = createCopy(0, getItemCount() - 1);\n// buggy lines end:\n    return clone;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    Object clone = createCopy(0, getItemCount());\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, getItemCount() - 1, true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(0);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, getItemCount() + 1);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, getItemCount() - 1, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, size);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, itemCount - 1);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, getItemCount() - 2);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    Object clone = createCopy(0, itemCount() - 1);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Object clone = createCopy(1, getItemCount() - 1);\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Chart_20_/source/org/jfree/chart/plot/ValueMarker.java_95-96": {
+      "loc": "95-96",
+      "input": "public ValueMarker(double value, Paint paint, Stroke stroke, \n                   Paint outlinePaint, Stroke outlineStroke, float alpha) {\n// buggy lines start:\n    super(paint, stroke, paint, stroke, alpha);\n// buggy lines end:\n    this.value = value;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    super(paint, stroke, paint, paint, alpha);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, alpha, value);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, alpha, alpha);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, 1.0f);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    super.initPaint(paint, stroke, paint, stroke, alpha);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, alpha, 0);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, alpha, paint);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    super(paint, stroke, paint, stroke, 1);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    super(value, paint, stroke, paint, alpha);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Chart_24_/source/org/jfree/chart/renderer/GrayPaintScale.java_126-127": {
+      "loc": "126-127",
+      "input": "public Paint getPaint(double value) {\n    double v = Math.max(value, this.lowerBound);\n    v = Math.min(v, this.upperBound);\n// buggy lines start:\n    int g = (int) ((value - this.lowerBound) / (this.upperBound \n// buggy lines end:\n            - this.lowerBound) * 255.0);\n    return new Color(g, g, g);\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    int g = (int) ((v - this.lowerBound) / (this.upperBound \n",
+          "correctness": "plausible"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    float g = (float) ((value - this.lowerBound) / (this.upperBound));\n    g = g < 0.0f? g + 255.0f : g;\n    g = g < 0.0f? g + 255.0f : g;\n    g = g < 0.0f? g + 255.0f : g;\n    g = g < 0.0f? g + 255.0f : g;\n    g = g < 0.0f? g + 255.0f : g;\n    g = g <",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    int g = (int) (value - this.lowerBound) / (this.upperBound);\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0?",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    int g = (int) ((v - this.lowerBound) / (this.upperBound));\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0? g + 255 : g;\n    g = g < 0?",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    if (g < 0.0)\n        g += 255.0;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    if (g < 0.0) {\n        g += 255.0;\n    }\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g < 0.0? g + 255.0 : g;\n    g = g > 0.0? g + 255.0 : g;\n    g = g > 0.0? g + 255.0 : g;\n    g = g > 0.0? g + 255.0 : g;\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    double g = (value - this.lowerBound) / (this.upperBound);\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g < 0.0? g + 255 : g;\n    g = g > 0.0? g + 255 : g;\n    g = g > 0.0? g + 255 : g;\n    g = g > 0.0? g + 255 : g;\n    g = g > 0.0? g + 255",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Cli_4_/src/java/org/apache/commons/cli/Parser.java_298-299": {
+      "loc": "298-299",
+      "input": "private void checkRequiredOptions()\n    throws MissingOptionException\n{\n    if (requiredOptions.size() > 0)\n    {\n        Iterator iter = requiredOptions.iterator();\n// buggy lines start:\n        StringBuffer buff = new StringBuffer();\n// buggy lines end:\n\n        while (iter.hasNext())\n        {\n            buff.append(iter.next());\n        }\n        throw new MissingOptionException(buff.toString());\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_8_/src/java/org/apache/commons/cli/HelpFormatter.java_812-813": {
+      "loc": "812-813",
+      "input": "protected StringBuffer renderWrappedText(StringBuffer sb, int width, \n                                         int nextLineTabStop, String text)\n{\n    int pos = findWrapPos(text, width, 0);\n    if (pos == -1)\n    {\n        sb.append(rtrim(text));\n        return sb;\n    }\n    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    final String padding = createPadding(nextLineTabStop);\n    while (true)\n    {\n        text = padding + text.substring(pos).trim();\n// buggy lines start:\n        pos = findWrapPos(text, width, nextLineTabStop);\n// buggy lines end:\n\n        if (pos == -1)\n        {\n            sb.append(text);\n            return sb;\n        }\n        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_11_/src/java/org/apache/commons/cli/HelpFormatter.java_632-633": {
+      "loc": "632-633",
+      "input": "private static void appendOption(final StringBuffer buff, \n                                 final Option option, \n                                 final boolean required)\n{\n    if (!required)\n    {\n        buff.append(\"[\");\n    }\n    if (option.getOpt() != null)\n    {\n        buff.append(\"-\").append(option.getOpt());\n    }\n    else\n    {\n        buff.append(\"--\").append(option.getLongOpt());\n    }\n// buggy lines start:\n    if (option.hasArg() && (option.getArgName() != null))\n// buggy lines end:\n    {\n        buff.append(\" <\").append(option.getArgName()).append(\">\");\n    }\n    if (!required)\n    {\n        buff.append(\"]\");\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_24_/src/java/org/apache/commons/cli/HelpFormatter.java_825-827": {
+      "loc": "825-827",
+      "input": "protected StringBuffer renderWrappedText(StringBuffer sb, int width, \n                                         int nextLineTabStop, String text)\n{\n    int pos = findWrapPos(text, width, 0);\n    if (pos == -1)\n    {\n        sb.append(rtrim(text));\n        return sb;\n    }\n    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    if (nextLineTabStop >= width)\n    {\n// buggy lines start:\n        throw new IllegalStateException(\"Total width is less than the width of the argument and indent \" + \n                                        \"- no room for the description\");\n// buggy lines end:\n    }\n    final String padding = createPadding(nextLineTabStop);\n    while (true)\n    {\n        text = padding + text.substring(pos).trim();\n        pos = findWrapPos(text, width, 0);\n        if (pos == -1)\n        {\n            sb.append(text);\n            return sb;\n        }\n        if ( (text.length() > width) && (pos == nextLineTabStop - 1) ) \n        {\n            pos = width;\n        }\n        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_25_/src/java/org/apache/commons/cli/HelpFormatter.java_825-826": {
+      "loc": "825-826",
+      "input": "protected StringBuffer renderWrappedText(StringBuffer sb, int width, \n                                         int nextLineTabStop, String text)\n{\n    int pos = findWrapPos(text, width, 0);\n    if (pos == -1)\n    {\n        sb.append(rtrim(text));\n        return sb;\n    }\n    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    if (nextLineTabStop >= width)\n    {\n// buggy lines start:\n        nextLineTabStop = width - 1;\n// buggy lines end:\n    }\n    final String padding = createPadding(nextLineTabStop);\n    while (true)\n    {\n        text = padding + text.substring(pos).trim();\n        pos = findWrapPos(text, width, 0);\n        if (pos == -1)\n        {\n            sb.append(text);\n            return sb;\n        }\n        if ( (text.length() > width) && (pos == nextLineTabStop - 1) ) \n        {\n            pos = width;\n        }\n        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_28_/src/java/org/apache/commons/cli/Parser.java_290-291": {
+      "loc": "290-291",
+      "input": "protected void processProperties(Properties properties)\n{\n    if (properties == null)\n    {\n        return;\n    }\n    for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)\n    {\n        String option = e.nextElement().toString();\n        if (!cmd.hasOption(option))\n        {\n            Option opt = getOptions().getOption(option);\n            String value = properties.getProperty(option);\n            if (opt.hasArg())\n            {\n                if (opt.getValues() == null || opt.getValues().length == 0)\n                {\n                    try\n                    {\n                        opt.addValueForProcessing(value);\n                    }\n                    catch (RuntimeException exp)\n                    {\n                    }\n                }\n            }\n            else if (!(\"yes\".equalsIgnoreCase(value)\n                    || \"true\".equalsIgnoreCase(value)\n                    || \"1\".equalsIgnoreCase(value)))\n            {\n// buggy lines start:\n                break;\n// buggy lines end:\n            }\n            cmd.addOption(opt);\n        }\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_32_/src/main/java/org/apache/commons/cli/HelpFormatter.java_937-942": {
+      "loc": "937-942",
+      "input": "protected int findWrapPos(String text, int width, int startPos)\n{\n    int pos;\n    if (((pos = text.indexOf('\\n', startPos)) != -1 && pos <= width)\n            || ((pos = text.indexOf('\\t', startPos)) != -1 && pos <= width))\n    {\n        return pos + 1;\n    }\n    else if (startPos + width >= text.length())\n    {\n        return -1;\n    }\n    pos = startPos + width;\n    char c;\n    while ((pos >= startPos) && ((c = text.charAt(pos)) != ' ')\n            && (c != '\\n') && (c != '\\r'))\n    {\n        --pos;\n    }\n    if (pos > startPos)\n    {\n        return pos;\n    }\n    pos = startPos + width;\n// buggy lines start:\n    while ((pos <= text.length()) && ((c = text.charAt(pos)) != ' ')\n           && (c != '\\n') && (c != '\\r'))\n    {\n        ++pos;\n    }        \n// buggy lines end:\n    return pos == text.length() ? -1 : pos;\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Cli_40_/src/main/java/org/apache/commons/cli/TypeHandler.java_103-104": {
+      "loc": "103-104",
+      "input": "@SuppressWarnings(\"unchecked\") \npublic static <T> T createValue(final String str, final Class<T> clazz) throws ParseException\n{\n    if (PatternOptionBuilder.STRING_VALUE == clazz)\n    {\n        return (T) str;\n    }\n    else if (PatternOptionBuilder.OBJECT_VALUE == clazz)\n    {\n        return (T) createObject(str);\n    }\n    else if (PatternOptionBuilder.NUMBER_VALUE == clazz)\n    {\n        return (T) createNumber(str);\n    }\n    else if (PatternOptionBuilder.DATE_VALUE == clazz)\n    {\n        return (T) createDate(str);\n    }\n    else if (PatternOptionBuilder.CLASS_VALUE == clazz)\n    {\n        return (T) createClass(str);\n    }\n    else if (PatternOptionBuilder.FILE_VALUE == clazz)\n    {\n        return (T) createFile(str);\n    }\n    else if (PatternOptionBuilder.EXISTING_FILE_VALUE == clazz)\n    {\n        return (T) openFile(str);\n    }\n    else if (PatternOptionBuilder.FILES_VALUE == clazz)\n    {\n        return (T) createFiles(str);\n    }\n    else if (PatternOptionBuilder.URL_VALUE == clazz)\n    {\n        return (T) createURL(str);\n    }\n    else\n    {\n// buggy lines start:\n        return null;\n// buggy lines end:\n    }\n}\n// fixed lines: \n",
+      "output": []
+    },
+    "Closure_1_/src/com/google/javascript/jscomp/RemoveUnusedVars.java_379-380": {
+      "loc": "379-380",
+      "input": "private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy lines start:\n\n// buggy lines end:\n  Node function = fnScope.getRootNode();\n  Preconditions.checkState(function.isFunction());\n  if (NodeUtil.isGetOrSetKey(function.getParent())) {\n    return;\n  }\n  Node argList = getFunctionArgList(function);\n  boolean modifyCallers = modifyCallSites\n      && callSiteOptimizer.canModifyCallers(function);\n  if (!modifyCallers) {\n    Node lastArg;\n    while ((lastArg = argList.getLastChild()) != null) {\n      Var var = fnScope.getVar(lastArg.getString());\n      if (!referenced.contains(var)) {\n        argList.removeChild(lastArg);\n        compiler.reportCodeChange();\n      } else {\n        break;\n      }\n    }\n  } else {\n    callSiteOptimizer.optimize(fnScope, referenced);\n  }\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    removeUnreferencedFunctionArgs(fnScope, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    removeUnreferencedFunctionArgs0(fnScope);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    collectReferences(fnScope);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    removeUnreferencedFunctionArgs(fnScope, true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    removeUnreferencedFunctions(fnScope);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    Preconditions.checkState(!referenced.contains(fnScope.getRootNode()));\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    compiler.reportChangeToEnclosingScope(fnScope);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    boolean changed = false;\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    removeUnreferencedFunctionArgs(fnScope);\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "    removeUnreferencedFunctions(fnScope, false);\n",
+          "correctness": "uncompilable"
+        }
+      ]
+    },
+    "Closure_5_/src/com/google/javascript/jscomp/InlineObjectLiterals.java_176-177": {
+      "loc": "176-177",
+      "input": "private boolean isInlinableObject(List<Reference> refs) {\n  boolean ret = false;\n  Set<String> validProperties = Sets.newHashSet();\n  for (Reference ref : refs) {\n    Node name = ref.getNode();\n    Node parent = ref.getParent();\n    Node gramps = ref.getGrandparent();\n    if (parent.isGetProp()) {\n      Preconditions.checkState(parent.getFirstChild() == name);\n      if (gramps.isCall()\n          && gramps.getFirstChild() == parent) {\n        return false;\n      }\n// buggy lines start:\n\n// buggy lines end:\n      \n      String propName = parent.getLastChild().getString();\n      if (!validProperties.contains(propName)) {\n        if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {\n          validProperties.add(propName);\n        } else {\n          return false;\n        }\n      }\n      continue;\n    }\n    if (!isVarOrAssignExprLhs(name)) {\n       return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n      continue;\n    }\n    if (!val.isObjectLit()) {\n      return false;\n    }\n    for (Node child = val.getFirstChild(); child != null;\n         child = child.getNext()) {\n      if (child.isGetterDef() ||\n          child.isSetterDef()) {\n        return false;\n      }\n      validProperties.add(child.getString());\n      Node childVal = child.getFirstChild();\n      for (Reference t : refs) {\n        Node refNode = t.getParent();\n        while (!NodeUtil.isStatementBlock(refNode)) {\n          if (refNode == childVal) {\n            return false;\n          }\n          refNode = refNode.getParent();\n        }\n      }\n    }\n    ret = true;\n  }\n  return ret;\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        validProperties.add(parent.getLastChild().getString());\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        Node propName = parent.getLastChild();\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    }\n    if (!isVarOrSimpleAssignLhs(name)) {\n        return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n        continue;\n    }\n    if (!val.isObjectLit()) {\n        return false;\n    }\n    for (Node child = val.getFirstChild(); child!= null; child = child.getNext()) {\n        if (child.isGetterDef() || child.isSetterDef()) {\n            return false;\n        }\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        if (parent.getLastChild() == gramps) {\n            return false;\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        propName = parent.getLastChild().getString();\n    }\n    if (!validProperties.contains(propName)) {\n        if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {\n            validProperties.add(propName);\n        } else {\n            return false;\n        }\n    }\n    if (!isVarOrAssignExprLhs(name)) {\n        return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    }\n    if (!NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {\n        return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n        continue;\n    }\n    if (!val.isObjectLit()) {\n        return false;\n    }\n    for (Node child = val.getFirstChild(); child!= null; child = child.getNext()) {\n        if (child.isGetterDef() || child.isSetterDef()) {\n            ",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "        validProperties.add(parent.getLastChild().getString());\n        continue;\n    }\n    if (!isVarOrSimpleAssignLhs(name)) {\n        return false;\n    }\n    Node val = ref.getAssignedValue();\n    if (val == null) {\n        continue;\n    }\n    if (!val.isObjectLit()) {\n        return false;\n    }\n    for (Node child = val.getFirstChild(); child!= null; child = child.getNext()) {\n        if (child.isGet",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    }\n    if (parent.isGetProp()) {\n        Preconditions.checkState(parent.getFirstChild() == name);\n        if (gramps.isCall() && gramps.getFirstChild() == parent) {\n            return false;\n        }\n",
+          "correctness": "wrong"
+        },
+        {
+          "patch": "        if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {\n            validProperties.add(parent.getLastChild().getString());\n        }\n",
+          "correctness": "wrong"
+        }
+      ]
+    },
+    "Closure_10_/src/com/google/javascript/jscomp/NodeUtil.java_1417-1418": {
+      "loc": "1417-1418",
+      "input": "static boolean mayBeString(Node n, boolean recurse) {\n  if (recurse) {\n// buggy lines start:\n    return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n// buggy lines end:\n  } else {\n    return mayBeStringHelper(n);\n  }\n}\n// fixed lines: \n",
+      "output": [
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE, false);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n,mayBeStringPredicate);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE, true);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE, recurse);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, mayBeStringPredicate);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE, null);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE_EXACT);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MayBeStringPredicate.INSTANCE);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE, predicate);\n",
+          "correctness": "uncompilable"
+        },
+        {
+          "patch": "    return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n",
+          "correctness": "wrong"
+        }
+      ]
+    }
+  }
+}

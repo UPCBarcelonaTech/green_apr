@@ -1,0 +1,23 @@
+{
+  "hostname": "gemini-1.lyon.grid5000.fr",
+  "GPR[SSLB]": "1689750198488",
+  "GPR[ESLB]": "1689750218509",
+  "file": "Chart_4_source/org/jfree/chart/plot/XYPlot.java_4493-4493",
+  "input": {
+    "loc": "4493-4493",
+    "input": "public Range getDataRange(ValueAxis axis) {\n    Range result = null;\n    List mappedDatasets = new ArrayList();\n    List includedAnnotations = new ArrayList();\n    boolean isDomainAxis = true;\n    int domainIndex = getDomainAxisIndex(axis);\n    if (domainIndex >= 0) {\n        isDomainAxis = true;\n        mappedDatasets.addAll(getDatasetsMappedToDomainAxis(\n                new Integer(domainIndex)));\n        if (domainIndex == 0) {\n            Iterator iterator = this.annotations.iterator();\n            while (iterator.hasNext()) {\n                XYAnnotation annotation = (XYAnnotation) iterator.next();\n                if (annotation instanceof XYAnnotationBoundsInfo) {\n                    includedAnnotations.add(annotation);\n                }\n            }\n        }\n    }\n    int rangeIndex = getRangeAxisIndex(axis);\n    if (rangeIndex >= 0) {\n        isDomainAxis = false;\n        mappedDatasets.addAll(getDatasetsMappedToRangeAxis(\n                new Integer(rangeIndex)));\n        if (rangeIndex == 0) {\n            Iterator iterator = this.annotations.iterator();\n            while (iterator.hasNext()) {\n                XYAnnotation annotation = (XYAnnotation) iterator.next();\n                if (annotation instanceof XYAnnotationBoundsInfo) {\n                    includedAnnotations.add(annotation);\n                }\n            }\n        }\n    }\n    Iterator iterator = mappedDatasets.iterator();\n    while (iterator.hasNext()) {\n        XYDataset d = (XYDataset) iterator.next();\n        if (d != null) {\n            XYItemRenderer r = getRendererForDataset(d);\n            if (isDomainAxis) {\n                if (r != null) {\n                    result = Range.combine(result, r.findDomainBounds(d));\n                }\n                else {\n                    result = Range.combine(result,\n                            DatasetUtilities.findDomainBounds(d));\n                }\n            }\n            else {\n                if (r != null) {\n                    result = Range.combine(result, r.findRangeBounds(d));\n                }\n                else {\n                    result = Range.combine(result,\n                            DatasetUtilities.findRangeBounds(d));\n                }\n            }\n// buggy lines start:\n                Collection c = r.getAnnotations();\n// buggy lines end:\n                Iterator i = c.iterator();\n                while (i.hasNext()) {\n                    XYAnnotation a = (XYAnnotation) i.next();\n                    if (a instanceof XYAnnotationBoundsInfo) {\n                        includedAnnotations.add(a);\n                    }\n                }\n        }\n    }\n    Iterator it = includedAnnotations.iterator();\n    while (it.hasNext()) {\n        XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();\n        if (xyabi.getIncludeInDataBounds()) {\n            if (isDomainAxis) {\n                result = Range.combine(result, xyabi.getXRange());\n            }\n            else {\n                result = Range.combine(result, xyabi.getYRange());\n            }\n        }\n    }\n    return result;\n}\n// fixed lines: \n"
+  },
+  "nvidea": "measures-nvidea-Chart_4_source-org-jfree-chart-plot-XYPlot.java_4493-4493.txt",
+  "OAR_JOB_ID": "1561075",
+  "GPR[SSLI]": "1689750168385",
+  "GPR[ESLI]": "1689750198415",
+  "GPR[SPS]": "1689750218548",
+  "nrTokens": 811,
+  "status": "error",
+  "message": "input too long:811skip",
+  "GPR[EPS]": "1689750218656",
+  "time": 108,
+  "tokentime": 108,
+  "inferencetime": 0,
+  "output": []
+}
