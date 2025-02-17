@@ -1,4 +1,4 @@
-# Appendix of paper: Energy Consumption of Automated Program Repair: From Search-based to Large Language Model-based Repair Tools
+# Appendix of paper: An Empirical Study on the Sustainability Face of Automated Program Repair Tools
 
 ## Summary
 
