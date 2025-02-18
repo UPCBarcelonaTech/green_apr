@@ -1,4 +1,4 @@
-# Appendix of paper: An Empirical Study on the Sustainability Face of Automated Program Repair Tools
+# Appendix of paper: The Sustainability Face of Automated Program Repair Tools
 
 ## Summary
 
@@ -11,22 +11,15 @@ Basically, each of these files summarises all the data (e.g., energy consumed, n
 These folders contains two subfolders: traditional-apr and llm_based, which contain the data from traditional APR (e.g., TBar, kPar, etc) and LLM based APR, respectively.
 
 
-
-
 ## Data for responding RQs
 
 
-### RQ 1
+### RQ 1, 2, 3 
 
-The RQ1 is answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
+The RQ1, 2 and 3 are answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
+The correctness of patches (required to compute the answer from RQ2 and RQ3) is also included  the summary files [results/energy_summary/](results/energy_summary/). See [Patch assessment section](#patch-assessment) for detailed information.
 
-
-### RQ 2
-
-The RQ2 is also answered from the data provided in the summary files [results/energy_summary/](results/energy_summary/) and [results/row_data/](results/row_data/).
-
-
-### RQ 3
+### RQ 4
 
 The RQ3 is answered from:
 - The NPC metric that we computed, which is available at[results/row_data/metrics/npc](results/row_data/metrics/npc).
@@ -35,12 +28,6 @@ The raw data is available at: https://github.com/LASER-UMASS/AutomatedRepairAppl
 
 These metrics (e.g., NCP, difficulty of repairing, etc) are studied together with the energy consumption.
 The correlation between variables are available at: [results/row_data/metrics/values_correlation_LLMbased.json](results/row_data/metrics/values_correlation_LLMbased.json) and [results/row_data/metrics/values_correlation_traditionalAPR.json](results/row_data/metrics/values_correlation_traditionalAPR.json)
-
-
-### RQ 4
-
-The summary of the energy consumed during fine-tuning is available in the folder [results/energy_summary/finetune_llm](results/energy_summary/finetune_llm)
-
 
 
 ## Detailled explanation of data available in this appendix.
@@ -92,12 +79,10 @@ We will progressively update them, pushing all data to Zenodo.
 
 
  
-
-
 ## More documentations
 
 
-#### Patch assessment:
+#### Patch assessment
 The labels of the patches are put in the summary files, in particular, under the array element called `Correctness_Per_Patch`: the i-th element of that array indicates the correctness of the i-th patch (chronologically sorted). A 'C' means *Correct*, other annotations such as 'I' or 'na' mean *incorrect*.
 For example,  the summary of Avatar repairing Chart-1  [results/energy_summary/energy_summary_Avatar-Chart-1.json](results/energy_summary/energy_summary_Avatar-Chart-1.json)
 indicates that the first patch [results/energy_summary/energy_summary_Avatar-Chart-1.json#L70](results/energy_summary/energy_summary_Avatar-Chart-1.json#L70) is correct. We recall that the patches from  [results/row_data/patches/Avatar_Chart_1](results/row_data/patches/Avatar_Chart_1) have the the time of generation in their file names.
