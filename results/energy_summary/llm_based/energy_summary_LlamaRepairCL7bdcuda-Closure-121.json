@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-121",
+    "Time": {
+        "mean": 494.3626961708069,
+        "median": 494.3626961708069,
+        "std": 0,
+        "max": 494.3626961708069,
+        "min": 494.3626961708069,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 64031.6242253184,
+        "median": 64031.6242253184,
+        "std": 0,
+        "max": 64031.6242253184,
+        "min": 64031.6242253184,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28746.52416495681,
+        "median": 28746.52416495681,
+        "std": 0,
+        "max": 28746.52416495681,
+        "min": 28746.52416495681,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        75.20991659164429,
+        145.0687131881714,
+        214.9275097846985,
+        284.7863063812256,
+        354.6451029777527,
+        424.5038995742798,
+        494.3626961708069
+    ],
+    "Joules_Per_PatchMedian": [
+        13612.669399178027,
+        22015.82853686809,
+        30418.987674558157,
+        38822.14681224822,
+        47225.30594993828,
+        55628.46508762834,
+        64031.6242253184
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5090.328778606654,
+        9033.028009665013,
+        12975.727240723372,
+        16918.42647178173,
+        20861.12570284009,
+        24803.82493389845,
+        28746.52416495681
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.353873443603516,
+        "median": 5.3511199951171875,
+        "std": 0.020252894511059112,
+        "max": 5.3792619705200195,
+        "min": 5.3308351039886475,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5227.619586803913,
+        "median": 5209.5102614879615,
+        "std": 55.67128840369017,
+        "max": 5319.341807126999,
+        "min": 5176.611120402813,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1179.9979712557792,
+        "median": 1147.6295475482952,
+        "std": 67.50957245050809,
+        "max": 1294.56130361557,
+        "min": 1126.6212291121487,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        69.8587965965271,
+        139.7175931930542,
+        209.5763897895813,
+        279.4351863861084,
+        349.2939829826355,
+        419.1527795791626,
+        489.0115761756897
+    ],
+    "Val_Joules": [
+        8403.159137690065,
+        16806.31827538013,
+        25209.477413070195,
+        33612.63655076026,
+        42015.79568845032,
+        50418.95482614038,
+        58822.113963830445
+    ],
+    "Val_JoulesNormalized": [
+        3942.6992310583587,
+        7885.398462116718,
+        11828.097693175077,
+        15770.796924233437,
+        19713.496155291796,
+        23656.195386350155,
+        27598.894617408514
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       !referenceInfo.isAssignedOnceInLifetime()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime() &&\n        !isVarInlineForbidden(v)) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime() &&\n        referenceInfo.references.size() > 1) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       !maybeModifiedArguments &&\n        referenceInfo.isAssignedOnceInLifetime()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n         referenceInfo.isAssignedOnceInLifetime() &&\n          !isVarInlineForbidden(v)) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime() &&\n        !referenceInfo.isAliased()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime() &&\n        !referenceInfo.mayBeAliased()) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n",
+        "    private void inlineNonConstants(\n        Var v, ReferenceCollection referenceInfo,\n        boolean maybeModifiedArguments) {\n      int refCount = referenceInfo.references.size();\n      Reference declaration = referenceInfo.references.get(0);\n      Reference init = referenceInfo.getInitializingReference();\n      int firstRefAfterInit = (declaration == init) ? 2 : 3;\n      if (refCount > 1 &&\n          isImmutableAndWellDefinedVariable(v, referenceInfo)) {\n        Node value;\n        if (init != null) {\n          value = init.getAssignedValue();\n        } else {\n          Node srcLocation = declaration.getNode();\n          value = NodeUtil.newUndefinedNode(srcLocation);\n        }\n        Preconditions.checkNotNull(value);\n        inlineWellDefinedVariable(v, value, referenceInfo.references);\n        staleVars.add(v);\n      } else if (refCount == firstRefAfterInit) {\n        Reference reference = referenceInfo.references.get(\n            firstRefAfterInit - 1);\n        if (canInline(declaration, init, reference)) {\n          inline(v, declaration, init, reference);\n          staleVars.add(v);\n        }\n      } else if (declaration != init && refCount == 2) {\n        if (isValidDeclaration(declaration) && isValidInitialization(init)) {\n          Node value = init.getAssignedValue();\n          Preconditions.checkNotNull(value);\n          inlineWellDefinedVariable(v, value, referenceInfo.references);\n          staleVars.add(v);\n        }\n      }\n      if (!maybeModifiedArguments &&\n          !staleVars.contains(v) &&\n          referenceInfo.isWellDefined() &&\n// buggy code\n//           referenceInfo.isAssignedOnceInLifetime()) {\n       referenceInfo.isAssignedOnceInLifetime() &&\n        referenceInfo.references.size() > 2) {\n        List<Reference> refs = referenceInfo.references;\n        for (int i = 1 ; i < refs.size(); i++) {\n          Node nameNode = refs.get(i).getNode();\n          if (aliasCandidates.containsKey(nameNode)) {\n            AliasCandidate candidate = aliasCandidates.get(nameNode);\n            if (!staleVars.contains(candidate.alias) &&\n                !isVarInlineForbidden(candidate.alias)) {\n              Reference aliasInit;\n              aliasInit = candidate.refInfo.getInitializingReference();\n              Node value = aliasInit.getAssignedValue();\n              Preconditions.checkNotNull(value);\n              inlineWellDefinedVariable(candidate.alias,\n                  value,\n                  candidate.refInfo.references);\n              staleVars.add(candidate.alias);\n            }\n          }\n        }\n      }\n    }\n"
+    ]
+}

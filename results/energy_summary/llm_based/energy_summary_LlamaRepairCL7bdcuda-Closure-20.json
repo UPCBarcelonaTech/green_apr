@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-20",
+    "Time": {
+        "mean": 387.8206387758255,
+        "median": 387.8206387758255,
+        "std": 0,
+        "max": 387.8206387758255,
+        "min": 387.8206387758255,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 47989.63919847607,
+        "median": 47989.63919847607,
+        "std": 0,
+        "max": 47989.63919847607,
+        "min": 47989.63919847607,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 22174.832250928877,
+        "median": 22174.832250928877,
+        "std": 0,
+        "max": 22174.832250928877,
+        "min": 22174.832250928877,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        56.56772744655609,
+        111.77654600143433,
+        166.98536455631256,
+        222.1941831111908,
+        277.40300166606903,
+        332.61182022094727,
+        387.8206387758255
+    ],
+    "Joules_Per_PatchMedian": [
+        7964.335262364149,
+        14635.219251716135,
+        21306.103241068122,
+        27976.98723042011,
+        34647.871219772096,
+        41318.75520912408,
+        47989.63919847607
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3394.1855680465696,
+        6524.293348526954,
+        9654.40112900734,
+        12784.508909487724,
+        15914.616689968108,
+        19044.72447044849,
+        22174.832250928877
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3619309425354005,
+        "median": 1.3589088916778564,
+        "std": 0.02395105706164205,
+        "max": 1.3903138637542725,
+        "min": 1.330089807510376,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1293.458112626076,
+        "median": 1293.4512730121614,
+        "std": 19.00911752804144,
+        "max": 1316.710350108147,
+        "min": 1269.8961815118791,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 264.11368168830876,
+        "median": 264.0777875661852,
+        "std": 2.501738592006426,
+        "max": 267.5795085191728,
+        "min": 260.75262984037386,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.208818554878235,
+        110.41763710975647,
+        165.6264556646347,
+        220.83527421951294,
+        276.0440927743912,
+        331.2529113292694,
+        386.46172988414764
+    ],
+    "Val_Joules": [
+        6670.883989351987,
+        13341.767978703974,
+        20012.65196805596,
+        26683.53595740795,
+        33354.41994675993,
+        40025.303936111915,
+        46696.187925463906
+    ],
+    "Val_JoulesNormalized": [
+        3130.1077804803845,
+        6260.215560960769,
+        9390.323341441155,
+        12520.431121921538,
+        15650.538902401924,
+        18780.646682882307,
+        21910.754463362693
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && value.isString()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && value.getNext() == null) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && value.isStringLit()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && value.isNumber()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && !value.hasChildren()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && !value.isEmpty()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && !value.isSpread()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null && value.isName()) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldSimpleFunctionCall(Node n) {\n    Preconditions.checkState(n.isCall());\n    Node callTarget = n.getFirstChild();\n    if (callTarget != null && callTarget.isName() &&\n          callTarget.getString().equals(\"String\")) {\n      Node value = callTarget.getNext();\n// buggy code\n//       if (value != null) {\n     if (value != null &&\n          (value.isString() || value.isNumber())) {\n        Node addition = IR.add(\n            IR.string(\"\").srcref(callTarget),\n            value.detachFromParent());\n        n.getParent().replaceChild(n, addition);\n        reportCodeChange();\n        return addition;\n      }\n    }\n    return n;\n  }\n"
+    ]
+}

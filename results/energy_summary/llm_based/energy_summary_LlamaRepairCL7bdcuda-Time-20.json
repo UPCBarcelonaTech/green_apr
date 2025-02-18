@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-20",
+    "Time": {
+        "mean": 54.05731976032257,
+        "median": 54.05731976032257,
+        "std": 0,
+        "max": 54.05731976032257,
+        "min": 54.05731976032257,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8271.244220411778,
+        "median": 8271.244220411778,
+        "std": 0,
+        "max": 8271.244220411778,
+        "min": 8271.244220411778,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3022.005117601157,
+        "median": 3022.005117601157,
+        "std": 0,
+        "max": 3022.005117601157,
+        "min": 3022.005117601157,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.059329628944397,
+        23.30882716178894,
+        33.558324694633484,
+        43.80782222747803,
+        54.05731976032257
+    ],
+    "Joules_Per_PatchMedian": [
+        3696.5591382622715,
+        4840.230408799648,
+        5983.901679337025,
+        7127.572949874401,
+        8271.244220411778
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        940.8870737254624,
+        1461.166584694386,
+        1981.4460956633097,
+        2501.7256066322334,
+        3022.005117601157
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9696044445037844,
+        "median": 2.8098320960998535,
+        "std": 0.38126240143480167,
+        "max": 3.648077964782715,
+        "min": 2.7590019702911377,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2686.5756135463716,
+        "median": 2552.8878677248954,
+        "std": 303.8948665107961,
+        "max": 3228.0930902004243,
+        "min": 2527.6573674678802,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 428.6292792248726,
+        "median": 420.60756275653875,
+        "std": 23.973796329800518,
+        "max": 471.2405722141266,
+        "min": 414.61812390089017,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.249497532844543,
+        20.498995065689087,
+        30.74849259853363,
+        40.997990131378174,
+        51.24748766422272
+    ],
+    "Val_Joules": [
+        1143.6712705373761,
+        2287.3425410747527,
+        3431.0138116121293,
+        4574.685082149506,
+        5718.356352686882
+    ],
+    "Val_JoulesNormalized": [
+        520.2795109689237,
+        1040.5590219378473,
+        1560.838532906771,
+        2081.1180438756946,
+        2601.3975548446183
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           int len = str.length();\n            for (String id : ALL_IDS) {\n                if (len >= id.length() && str.startsWith(id)) {\n                    bucket.setZone(DateTimeZone.forID(id));\n                    return position + id.length();\n                }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           int length = str.length();\n            for (String id : ALL_IDS) {\n                if (length >= id.length() && str.startsWith(id)) {\n                    bucket.setZone(DateTimeZone.forID(id));\n                    return position + id.length();\n                }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           for (int i = 0; i < ALL_IDS.length; i++) {\n                String id = ALL_IDS[i];\n                if (str.startsWith(id)) {\n                    bucket.setZone(DateTimeZone.forID(id));\n                    return position + id.length();\n                }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n       for (String id : ALL_IDS) {\n            if (str.startsWith(id)) {\n                bucket.setZone(DateTimeZone.forID(id));\n                return position + id.length();\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           for (int i = str.length() - 1; i >= 0; i--) {\n                String id = str.substring(0, i + 1);\n                if (ALL_IDS.contains(id)) {\n                    bucket.setZone(DateTimeZone.forID(id));\n                    return position + id.length();\n                }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           for (int i = 0; i < ALL_IDS.length; i++) {\n                String id = ALL_IDS[i];\n                if (str.startsWith(id)) {\n                    bucket.setZone(DateTimeZone.forID(ALL_IDS[i]));\n                    return position + id.length();\n                }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n       for (String id : ALL_IDS) {\n            if (str.startsWith(id)) {\n                bucket.setZone(DateTimeZone.forID(id));\n                return position + id.length();\n            }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n       for (String id : ALL_IDS) {\n            if (str.startsWith(id)) {\n                bucket.setZone(DateTimeZone.forID(id));\n                return position + id.length();\n            }\n        }\n            }\n            return ~position;\n        }\n",
+        "        public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n            String str = text.substring(position);\n// buggy code\n//             for (String id : ALL_IDS) {\n//                 if (str.startsWith(id)) {\n//                     bucket.setZone(DateTimeZone.forID(id));\n//                     return position + id.length();\n//                 }\n           int len = str.length();\n            for (String id : ALL_IDS) {\n                if (len >= id.length() && str.startsWith(id)) {\n                    bucket.setZone(DateTimeZone.forID(id));\n                    return position + id.length();\n                }\n                len--;\n            }\n            return ~position;\n        }\n"
+    ]
+}

@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-5",
+    "Time": {
+        "mean": 480.7777829170227,
+        "median": 480.7777829170227,
+        "std": 0,
+        "max": 480.7777829170227,
+        "min": 480.7777829170227,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 54585.44364186525,
+        "median": 54585.44364186525,
+        "std": 0,
+        "max": 54585.44364186525,
+        "min": 54585.44364186525,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 23794.843135523795,
+        "median": 23794.843135523795,
+        "std": 0,
+        "max": 23794.843135523795,
+        "min": 23794.843135523795,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        69.84827709197998,
+        138.33652806282043,
+        206.8247790336609,
+        275.31303000450134,
+        343.8012809753418,
+        412.28953194618225,
+        480.7777829170227
+    ],
+    "Joules_Per_PatchMedian": [
+        8904.810643446446,
+        16518.24947651625,
+        24131.68830958605,
+        31745.127142655852,
+        39358.56597572565,
+        46972.00480879545,
+        54585.44364186525
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3624.3997025966646,
+        6986.140274751187,
+        10347.880846905708,
+        13709.62141906023,
+        17071.36199121475,
+        20433.102563369273,
+        23794.843135523795
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3579448223114015,
+        "median": 1.3600261211395264,
+        "std": 0.023605047440054865,
+        "max": 1.3901550769805908,
+        "min": 1.3307819366455078,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1291.0865856719017,
+        "median": 1291.3718103766441,
+        "std": 19.133048048751036,
+        "max": 1319.445806980133,
+        "min": 1269.7638063669206,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 259.1930628561975,
+        "median": 262.65913044214267,
+        "std": 10.341606747953579,
+        "max": 267.43313513994235,
+        "min": 241.43164485692978,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        68.48825097084045,
+        136.9765019416809,
+        205.46475291252136,
+        273.9530038833618,
+        342.44125485420227,
+        410.9295058250427,
+        479.4177567958832
+    ],
+    "Val_Joules": [
+        7613.438833069802,
+        15226.877666139604,
+        22840.316499209406,
+        30453.75533227921,
+        38067.19416534901,
+        45680.632998418805,
+        53294.0718314886
+    ],
+    "Val_JoulesNormalized": [
+        3361.740572154522,
+        6723.481144309044,
+        10085.221716463566,
+        13446.962288618088,
+        16808.70286077261,
+        20170.44343292713,
+        23532.184005081654
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return ZERO;\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return createComplex(Double.NaN, Double.NaN);\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return new Complex(Double.NaN, Double.NaN);\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return this;\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return NAN;\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return ONE;\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return INFINITY;\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return NaN.createComplex();\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return createComplex(0.0, Double.NaN);\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n",
+        "    public Complex reciprocal() {\n        if (isNaN) {\n            return NaN;\n        }\n        if (real == 0.0 && imaginary == 0.0) {\n// buggy code\n//             return NaN;\n           return new Complex(Double.NaN,Double.NaN);\n        }\n        if (isInfinite) {\n            return ZERO;\n        }\n        if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n            double q = real / imaginary;\n            double scale = 1. / (real * q + imaginary);\n            return createComplex(scale * q, -scale);\n        } else {\n            double q = imaginary / real;\n            double scale = 1. / (imaginary * q + real);\n            return createComplex(scale, -scale * q);\n        }\n    }\n"
+    ]
+}

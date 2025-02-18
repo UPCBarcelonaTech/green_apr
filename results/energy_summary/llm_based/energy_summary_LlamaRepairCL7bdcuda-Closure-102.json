@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-102",
+    "Time": {
+        "mean": 163.12275576591492,
+        "median": 163.12275576591492,
+        "std": 0,
+        "max": 163.12275576591492,
+        "min": 163.12275576591492,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 19502.677589130402,
+        "median": 19502.677589130402,
+        "std": 0,
+        "max": 19502.677589130402,
+        "min": 19502.677589130402,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 8446.038673126695,
+        "median": 8446.038673126695,
+        "std": 0,
+        "max": 8446.038673126695,
+        "min": 8446.038673126695,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        28.478033423423767,
+        55.406977891922,
+        82.33592236042023,
+        109.26486682891846,
+        136.1938112974167,
+        163.12275576591492
+    ],
+    "Joules_Per_PatchMedian": [
+        4398.037947130203,
+        7418.965875530243,
+        10439.893803930281,
+        13460.821732330322,
+        16481.749660730362,
+        19502.677589130402
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1563.2599921464916,
+        2939.8157283425326,
+        4316.3714645385735,
+        5692.927200734614,
+        7069.482936930655,
+        8446.038673126695
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.4482378005981444,
+        "median": 1.549088954925537,
+        "std": 0.17248196275602756,
+        "max": 1.6000189781188965,
+        "min": 1.2508220672607422,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1298.1845267558099,
+        "median": 1377.1100187301636,
+        "std": 138.96030282528594,
+        "max": 1423.0184052467348,
+        "min": 1141.3316576838492,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 192.37684962511062,
+        "median": 186.70425595045072,
+        "std": 21.67777992388358,
+        "max": 221.5641545772553,
+        "min": 166.2981453061102,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        26.92894446849823,
+        53.85788893699646,
+        80.78683340549469,
+        107.71577787399292,
+        134.64472234249115,
+        161.57366681098938
+    ],
+    "Val_Joules": [
+        3020.9279284000395,
+        6041.855856800079,
+        9062.783785200118,
+        12083.711713600158,
+        15104.639642000198,
+        18125.56757040024
+    ],
+    "Val_JoulesNormalized": [
+        1376.555736196041,
+        2753.111472392082,
+        4129.667208588123,
+        5506.222944784164,
+        6882.778680980205,
+        8259.334417176244
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   removeDuplicateDeclarations(root);\n    if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n }\n  removeDuplicateDeclarations(root);\n  if (MAKE_LOCAL_NAMES_UNIQUE) {\n    MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n    NodeTraversal t = new NodeTraversal(compiler, renamer);\n    t.traverseRoots(externs, root);\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n      removeDuplicateDeclarations(root);\n    }\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   if (MAKE_LOCAL_NAMES_UNIQUE) {\n      removeDuplicateDeclarations(root);\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n }\n  if (MAKE_LOCAL_NAMES_UNIQUE) {\n    MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n    NodeTraversal t = new NodeTraversal(compiler, renamer);\n    t.traverseRoots(externs, root);\n  }\n  removeDuplicateDeclarations(root);\n  if (assertOnChange) {\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    removeDuplicateDeclarations(externs, root);\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n   NodeTraversal t = new NodeTraversal(compiler, this);\n    t.traverseRoots(externs, root);\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n",
+        "  public void process(Node externs, Node root) {\n    NodeTraversal.traverse(compiler, root, this);\n// buggy code\n//     if (MAKE_LOCAL_NAMES_UNIQUE) {\n//       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n//       NodeTraversal t = new NodeTraversal(compiler, renamer);\n//       t.traverseRoots(externs, root);\n//     }\n//     removeDuplicateDeclarations(root);\n }\n  if (MAKE_LOCAL_NAMES_UNIQUE) {\n    MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n    NodeTraversal t = new NodeTraversal(compiler, renamer);\n    t.traverseRoots(externs, root);\n  }\n  removeDuplicateDeclarations(root);\n  if (!assertOnChange) {\n    new PropogateConstantAnnotations(compiler, assertOnChange)\n        .process(externs, root);\n  }\n"
+    ]
+}

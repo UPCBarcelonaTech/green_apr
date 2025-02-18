@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-4",
+    "Time": {
+        "mean": 548.038432598114,
+        "median": 548.038432598114,
+        "std": 0,
+        "max": 548.038432598114,
+        "min": 548.038432598114,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 66645.10488507748,
+        "median": 66645.10488507748,
+        "std": 0,
+        "max": 66645.10488507748,
+        "min": 66645.10488507748,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 30481.113365721707,
+        "median": 30481.113365721707,
+        "std": 0,
+        "max": 30481.113365721707,
+        "min": 30481.113365721707,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        69.73785507678986,
+        138.0665090084076,
+        206.39516294002533,
+        274.72381687164307,
+        343.0524708032608,
+        411.38112473487854,
+        479.7097786664963,
+        548.038432598114
+    ],
+    "Joules_Per_PatchMedian": [
+        9478.15368885398,
+        17644.86100260019,
+        25811.568316346405,
+        33978.27563009262,
+        42144.98294383883,
+        50311.69025758505,
+        58478.39757133126,
+        66645.10488507748
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4026.0783412992955,
+        7805.369059073925,
+        11584.659776848555,
+        15363.950494623185,
+        19143.241212397814,
+        22922.531930172445,
+        26701.822647947076,
+        30481.113365721707
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.476293420791626,
+        "median": 1.4092011451721191,
+        "std": 0.16629666858297384,
+        "max": 1.7702078819274902,
+        "min": 1.3698899745941162,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1366.3090497350693,
+        "median": 1311.4463751077653,
+        "std": 133.68737682971172,
+        "max": 1602.9642615914345,
+        "min": 1282.1504663228989,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 249.55812345981607,
+        "median": 246.78762352466583,
+        "std": 8.622459199758403,
+        "max": 264.1560404896736,
+        "min": 241.4728463292122,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        68.32865393161774,
+        136.65730786323547,
+        204.9859617948532,
+        273.31461572647095,
+        341.6432696580887,
+        409.9719235897064,
+        478.30057752132416,
+        546.6292314529419
+    ],
+    "Val_Joules": [
+        8166.707313746214,
+        16333.414627492426,
+        24500.12194123864,
+        32666.829254984856,
+        40833.53656873107,
+        49000.24388247728,
+        57166.9511962235,
+        65333.65850996972
+    ],
+    "Val_JoulesNormalized": [
+        3779.2907177746297,
+        7558.581435549259,
+        11337.87215332389,
+        15117.162871098519,
+        18896.453588873148,
+        22675.74430664778,
+        26455.03502442241,
+        30234.32574219704
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (resolved && detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved && detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (detectImplicitPrototypeCycle() && !resolved) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved) {\n      if (detectImplicitPrototypeCycle()) {\n        handleTypeCycle(t);\n      }\n      resolveViaProperties(t, enclosing);\n    }\n    if (detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved) {\n      resolved = resolveViaProperties(t, enclosing);\n    }\n    if (resolved && detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (resolved) {\n      super.resolveInternal(t, enclosing);\n      finishPropertyContinuations();\n      return registry.isLastGeneration() ?\n          getReferencedType() : this;\n    }\n    if (detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (resolved) {\n      super.resolveInternal(t, enclosing);\n      finishPropertyContinuations();\n      return registry.isLastGeneration() ?\n          getReferencedType() : this;\n    }\n    resolveViaProperties(t, enclosing);\n    if (detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved) {\n      resolveViaProperties(t, enclosing);\n    }\n    if (detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved) {\n      if (detectImplicitPrototypeCycle()) {\n        handleTypeCycle(t);\n      }\n      resolveViaProperties(t, enclosing);\n    }\n    if (!resolved && detectImplicitPrototypeCycle()) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> enclosing) {\n    boolean resolved = resolveViaRegistry(t, enclosing);\n// buggy code\n//     if (detectImplicitPrototypeCycle()) {\n//       handleTypeCycle(t);\n//     }\n//     if (resolved) {\n//       super.resolveInternal(t, enclosing);\n//       finishPropertyContinuations();\n//       return registry.isLastGeneration() ?\n//           getReferencedType() : this;\n//     }\n//     resolveViaProperties(t, enclosing);\n//     if (detectImplicitPrototypeCycle()) {\n   if (!resolved) {\n      resolved = resolveViaProperties(t, enclosing);\n    }\n    if (detectImplicitPrototypeCycle() && !resolved) {\n      handleTypeCycle(t);\n    }\n    super.resolveInternal(t, enclosing);\n    if (isResolved()) {\n      finishPropertyContinuations();\n    }\n    return registry.isLastGeneration() ?\n        getReferencedType() : this;\n  }\n"
+    ]
+}

@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-86",
+    "Time": {
+        "mean": 78.61148595809937,
+        "median": 78.61148595809937,
+        "std": 0,
+        "max": 78.61148595809937,
+        "min": 78.61148595809937,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 19712.1142401576,
+        "median": 19712.1142401576,
+        "std": 0,
+        "max": 19712.1142401576,
+        "min": 19712.1142401576,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 6351.560663723945,
+        "median": 6351.560663723945,
+        "std": 0,
+        "max": 6351.560663723945,
+        "min": 6351.560663723945,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        18.850285530090332,
+        25.490418910980225,
+        32.13055229187012,
+        38.77068567276001,
+        45.4108190536499,
+        52.050952434539795,
+        58.69108581542969,
+        65.33121919631958,
+        71.97135257720947,
+        78.61148595809937
+    ],
+    "Joules_Per_PatchMedian": [
+        12756.129517906904,
+        13529.016709268093,
+        14301.903900629282,
+        15074.791091990472,
+        15847.67828335166,
+        16620.56547471285,
+        17393.452666074038,
+        18166.339857435225,
+        18939.227048796412,
+        19712.1142401576
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3033.7461889386154,
+        3402.3922416925407,
+        3771.038294446466,
+        4139.684347200391,
+        4508.330399954317,
+        4876.9764527082425,
+        5245.622505462168,
+        5614.268558216094,
+        5982.91461097002,
+        6351.560663723945
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 12.213157033920288,
+        "median": 12.21015214920044,
+        "std": 0.01329075702707361,
+        "max": 12.227216958999634,
+        "min": 12.196285963058472,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 12016.171377608776,
+        "median": 11983.242326545715,
+        "std": 91.70917055701447,
+        "max": 12177.747683906557,
+        "min": 11955.425031518938,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2681.150587646961,
+        "median": 2665.10013618469,
+        "std": 69.91808742655351,
+        "max": 2753.750118410586,
+        "min": 2583.263232445719,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.640133380889893,
+        13.280266761779785,
+        19.920400142669678,
+        26.56053352355957,
+        33.20066690444946,
+        39.840800285339355,
+        46.48093366622925,
+        53.12106704711914,
+        59.76120042800903,
+        66.40133380889893
+    ],
+    "Val_Joules": [
+        772.8871913611893,
+        1545.7743827223785,
+        2318.6615740835678,
+        3091.548765444757,
+        3864.4359568059463,
+        4637.3231481671355,
+        5410.210339528323,
+        6183.09753088951,
+        6955.984722250698,
+        7728.871913611885
+    ],
+    "Val_JoulesNormalized": [
+        368.64605275392523,
+        737.2921055078505,
+        1105.9381582617757,
+        1474.584211015701,
+        1843.2302637696266,
+        2211.8763165235523,
+        2580.522369277478,
+        2949.1684220314037,
+        3317.8144747853294,
+        3686.460527539255
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n            }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            if (ltI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n           }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n           }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            if (ltI[i] <= 0) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n            }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = 1;\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n            }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            if (ltI[i] <= 0) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n           }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = 1;\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           final double lII = lI[i];\n            if (lII < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n            }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            final double lII = ltI[i];\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n            }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = ltI[i] - 1;\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n           }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = ltI[i] - 1;\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n",
+        "    public CholeskyDecompositionImpl(final RealMatrix matrix,\n                                     final double relativeSymmetryThreshold,\n                                     final double absolutePositivityThreshold)\n        throws NonSquareMatrixException,\n               NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {\n        if (!matrix.isSquare()) {\n            throw new NonSquareMatrixException(matrix.getRowDimension(),\n                                               matrix.getColumnDimension());\n        }\n        final int order = matrix.getRowDimension();\n        lTData   = matrix.getData();\n        cachedL  = null;\n        cachedLT = null;\n        for (int i = 0; i < order; ++i) {\n            final double[] lI = lTData[i];\n// buggy code\n//             if (lTData[i][i] < absolutePositivityThreshold) {\n//                 throw new NotPositiveDefiniteMatrixException();\n//             }\n//             for (int j = i + 1; j < order; ++j) {\n//                 final double[] lJ = lTData[j];\n//                 final double lIJ = lI[j];\n//                 final double lJI = lJ[i];\n//                 final double maxDelta =\n//                     relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n//                 if (Math.abs(lIJ - lJI) > maxDelta) {\n//                     throw new NotSymmetricMatrixException();\n//                 }\n//                 lJ[i] = 0;\n//            }\n//         }\n//         for (int i = 0; i < order; ++i) {\n//             final double[] ltI = lTData[i];\n           if (lI[i] < absolutePositivityThreshold) {\n                throw new NotPositiveDefiniteMatrixException();\n            }\n            for (int j = i + 1; j < order; ++j) {\n                final double[] lJ = lTData[j];\n                final double lIJ = lI[j];\n                final double lJI = lJ[i];\n                final double maxDelta =\n                    relativeSymmetryThreshold * Math.max(Math.abs(lIJ), Math.abs(lJI));\n                if (Math.abs(lIJ - lJI) > maxDelta) {\n                    throw new NotSymmetricMatrixException();\n                }\n                lJ[i] = 0;\n           }\n        }\n        for (int i = 0; i < order; ++i) {\n            final double[] ltI = lTData[i];\n            ltI[i] = ltI[i] - 1.0;\n            ltI[i] = Math.sqrt(ltI[i]);\n            final double inverse = 1.0 / ltI[i];\n            for (int q = order - 1; q > i; --q) {\n                ltI[q] *= inverse;\n                final double[] ltQ = lTData[q];\n                for (int p = q; p < order; ++p) {\n                    ltQ[p] -= ltI[q] * ltI[p];\n                }\n            }\n        }\n    }\n"
+    ]
+}

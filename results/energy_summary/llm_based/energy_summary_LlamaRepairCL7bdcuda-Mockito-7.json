@@ -1,0 +1,135 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-7",
+    "Time": {
+        "mean": 124.50575888156891,
+        "median": 124.50575888156891,
+        "std": 0,
+        "max": 124.50575888156891,
+        "min": 124.50575888156891,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 19805.47145159841,
+        "median": 19805.47145159841,
+        "std": 0,
+        "max": 19805.47145159841,
+        "min": 19805.47145159841,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7938.4763029813785,
+        "median": 7938.4763029813785,
+        "std": 0,
+        "max": 7938.4763029813785,
+        "min": 7938.4763029813785,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        45.36728894710541,
+        84.93652391433716,
+        124.50575888156891
+    ],
+    "Joules_Per_PatchMedian": [
+        10183.282852882148,
+        14994.377152240279,
+        19805.47145159841
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3256.119365215303,
+        5597.297834098341,
+        7938.4763029813785
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.824049949645996,
+        "median": 5.798053979873657,
+        "std": 0.14534719902984677,
+        "max": 6.000018835067749,
+        "min": 5.640033960342407,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5392.107745583057,
+        "median": 5372.188553524018,
+        "std": 139.91688816954732,
+        "max": 5572.000205898285,
+        "min": 5205.974595177174,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 933.8137513995174,
+        "median": 914.9408963322649,
+        "std": 59.86994890185763,
+        "max": 1003.885865819454,
+        "min": 874.428513634205,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        39.56923496723175,
+        79.1384699344635,
+        118.70770490169525
+    ],
+    "Val_Joules": [
+        4811.09429935813,
+        9622.18859871626,
+        14433.28289807439
+    ],
+    "Val_JoulesNormalized": [
+        2341.178468883038,
+        4682.356937766076,
+        7023.535406649114
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n           if (typeVariable.getBounds().length == 0) {\n                registerTypeVariablesOn(Object.class);\n            }\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n       }\n        if (getActualTypeArgumentFor(typeVariable) != null) {\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n           if (getActualTypeArgumentFor(typeVariable) == null) {\n                return;\n            }\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n           if (typeVariable.getBounds().isEmpty()) {\n                registerTypeVariablesOn(Object.class);\n            }\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n       }\n        if (!typeVariable.getBounds().isEmpty()) {\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n       }\n        if (typeVariable.getBounds().length == 0) {\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n       }\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n       }\n        if (typeVariable.getBounds().length > 0) {\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n",
+        "        private void readTypeVariables() {\n            for (Type type : typeVariable.getBounds()) {\n                registerTypeVariablesOn(type);\n            }\n// buggy code\n// \n           if (!typeVariable.getBounds().isEmpty()) {\n                return;\n            }\n            registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));\n        }\n"
+    ]
+}

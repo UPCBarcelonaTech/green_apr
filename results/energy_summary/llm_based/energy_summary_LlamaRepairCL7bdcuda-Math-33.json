@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-33",
+    "Time": {
+        "mean": 349.21956992149353,
+        "median": 349.21956992149353,
+        "std": 0,
+        "max": 349.21956992149353,
+        "min": 349.21956992149353,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 38601.323299896714,
+        "median": 38601.323299896714,
+        "std": 0,
+        "max": 38601.323299896714,
+        "min": 38601.323299896714,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 15527.536688041688,
+        "median": 15527.536688041688,
+        "std": 0,
+        "max": 15527.536688041688,
+        "min": 15527.536688041688,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        36.55998396873474,
+        71.29993796348572,
+        106.0398919582367,
+        140.77984595298767,
+        175.51979994773865,
+        210.25975394248962,
+        244.9997079372406,
+        279.7396619319916,
+        314.47961592674255,
+        349.21956992149353
+    ],
+    "Joules_Per_PatchMedian": [
+        5463.494181394577,
+        9145.47519456148,
+        12827.456207728384,
+        16509.43722089529,
+        20191.418234062192,
+        23873.399247229096,
+        27555.380260396,
+        31237.361273562903,
+        34919.34228672981,
+        38601.323299896714
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1879.4750527262688,
+        3395.926345539093,
+        4912.377638351917,
+        6428.828931164741,
+        7945.280223977566,
+        9461.73151679039,
+        10978.182809603215,
+        12494.63410241604,
+        14011.085395228863,
+        15527.536688041688
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8701945781707763,
+        "median": 1.8200299739837646,
+        "std": 0.07883244583351764,
+        "max": 1.9727110862731934,
+        "min": 1.8099799156188965,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1817.3832953619958,
+        "median": 1781.5131682276726,
+        "std": 60.522876411561704,
+        "max": 1892.4666651010514,
+        "min": 1767.725522506237,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 350.9045650529862,
+        "median": 363.02375991344456,
+        "std": 19.16680799667315,
+        "max": 365.4225122690202,
+        "min": 323.3961545705795,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.73995399475098,
+        69.47990798950195,
+        104.21986198425293,
+        138.9598159790039,
+        173.69976997375488,
+        208.43972396850586,
+        243.17967796325684,
+        277.9196319580078,
+        312.6595859527588,
+        347.39953994750977
+    ],
+    "Val_Joules": [
+        3681.9810131669046,
+        7363.962026333808,
+        11045.943039500711,
+        14727.924052667615,
+        18409.90506583452,
+        22091.886079001422,
+        25773.867092168326,
+        29455.84810533523,
+        33137.82911850214,
+        36819.810131669044
+    ],
+    "Val_JoulesNormalized": [
+        1516.4512928128242,
+        3032.9025856256485,
+        4549.353878438473,
+        6065.805171251297,
+        7582.256464064121,
+        9098.707756876945,
+        10615.15904968977,
+        12131.610342502594,
+        13648.061635315418,
+        15164.512928128242
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, maxUlps) >= 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, maxUlps) < 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (entry > 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, maxUlps) <= 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0, maxUlps) > 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, maxUlps) != 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, 10) > 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (Precision.compareTo(entry, 0d, maxUlps) == 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (entry > 0d) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n",
+        "    protected void dropPhase1Objective() {\n        if (getNumObjectiveFunctions() == 1) {\n            return;\n        }\n        List<Integer> columnsToDrop = new ArrayList<Integer>();\n        columnsToDrop.add(0);\n        for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n            final double entry = tableau.getEntry(0, i);\n// buggy code\n//             if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n           if (entry != 0) {\n                columnsToDrop.add(i);\n            }\n        }\n        for (int i = 0; i < getNumArtificialVariables(); i++) {\n          int col = i + getArtificialVariableOffset();\n          if (getBasicRow(col) == null) {\n            columnsToDrop.add(col);\n          }\n        }\n        double[][] matrix = new double[getHeight() - 1][getWidth() - columnsToDrop.size()];\n        for (int i = 1; i < getHeight(); i++) {\n          int col = 0;\n          for (int j = 0; j < getWidth(); j++) {\n            if (!columnsToDrop.contains(j)) {\n              matrix[i - 1][col++] = tableau.getEntry(i, j);\n            }\n          }\n        }\n        for (int i = columnsToDrop.size() - 1; i >= 0; i--) {\n          columnLabels.remove((int) columnsToDrop.get(i));\n        }\n        this.tableau = new Array2DRowRealMatrix(matrix);\n        this.numArtificialVariables = 0;\n    }\n"
+    ]
+}

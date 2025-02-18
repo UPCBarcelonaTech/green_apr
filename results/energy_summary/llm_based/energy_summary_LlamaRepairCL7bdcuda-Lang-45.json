@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-45",
+    "Time": {
+        "mean": 106.9636299610138,
+        "median": 106.9636299610138,
+        "std": 0,
+        "max": 106.9636299610138,
+        "min": 106.9636299610138,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 12217.919298052786,
+        "median": 12217.919298052786,
+        "std": 0,
+        "max": 12217.919298052786,
+        "min": 12217.919298052786,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3665.281058561801,
+        "median": 3665.281058561801,
+        "std": 0,
+        "max": 3665.281058561801,
+        "min": 3665.281058561801,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.009453058242798,
+        23.448806047439575,
+        33.88815903663635,
+        44.32751202583313,
+        54.76686501502991,
+        65.20621800422668,
+        75.64557099342346,
+        86.08492398262024,
+        96.52427697181702,
+        106.9636299610138
+    ],
+    "Joules_Per_PatchMedian": [
+        3447.537495279312,
+        4422.024362254143,
+        5396.511229228974,
+        6370.998096203804,
+        7345.484963178635,
+        8319.971830153465,
+        9294.458697128295,
+        10268.945564103125,
+        11243.432431077956,
+        12217.919298052786
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        843.0892842948435,
+        1156.6661481022834,
+        1470.2430119097232,
+        1783.819875717163,
+        2097.3967395246027,
+        2410.9736033320423,
+        2724.550467139482,
+        3038.1273309469216,
+        3351.704194754361,
+        3665.281058561801
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.748005819320679,
+        "median": 2.5701000690460205,
+        "std": 0.24868594377976477,
+        "max": 3.021044969558716,
+        "min": 2.560825824737549,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2611.7958260774612,
+        "median": 2473.0506283044815,
+        "std": 205.10276089578457,
+        "max": 2843.7905723690988,
+        "min": 2456.2814224004746,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 526.1759355163573,
+        "median": 529.5124204874037,
+        "std": 26.71223282055055,
+        "max": 555.4194159150125,
+        "min": 493.15234515666975,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.439352989196777,
+        20.878705978393555,
+        31.318058967590332,
+        41.75741195678711,
+        52.19676494598389,
+        62.636117935180664,
+        73.07547092437744,
+        83.51482391357422,
+        93.954176902771,
+        104.39352989196777
+    ],
+    "Val_Joules": [
+        974.4868669748307,
+        1948.9737339496614,
+        2923.4606009244926,
+        3897.947467899323,
+        4872.434334874153,
+        5846.921201848983,
+        6821.408068823814,
+        7795.894935798644,
+        8770.381802773474,
+        9744.868669748304
+    ],
+    "Val_JoulesNormalized": [
+        313.57686380743985,
+        627.1537276148797,
+        940.7305914223195,
+        1254.3074552297594,
+        1567.884319037199,
+        1881.4611828446386,
+        2195.0380466520783,
+        2508.614910459518,
+        2822.1917742669575,
+        3135.768638074397
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong"
+    ],
+    "patches": [
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower == -1 || lower > str.length()) {\n            lower = str.length();\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower == -1) {\n            lower = 0;\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower < 0) {\n            lower = 0;\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower > str.length()) {\n            lower = str.length();\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (appendToEnd == null) {\n            appendToEnd = StringUtils.EMPTY;\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower == -1) {\n            lower = str.length();\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (appendToEnd == null) {\n            appendToEnd = \"\";\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower > str.length()) {\n            return str;\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n",
+        "    public static String abbreviate(String str, int lower, int upper, String appendToEnd) {\n        if (str == null) {\n            return null;\n        }\n        if (str.length() == 0) {\n            return StringUtils.EMPTY;\n// buggy code\n// \n       }\n        if (lower == -1 || lower > str.length()) {\n            lower = 0;\n        }\n        if (upper == -1 || upper > str.length()) {\n            upper = str.length();\n        }\n        if (upper < lower) {\n            upper = lower;\n        }\n        StringBuffer result = new StringBuffer();\n        int index = StringUtils.indexOf(str, \" \", lower);\n        if (index == -1) {\n            result.append(str.substring(0, upper));\n            if (upper != str.length()) {\n                result.append(StringUtils.defaultString(appendToEnd));\n            }\n        } else if (index > upper) {\n            result.append(str.substring(0, upper));\n            result.append(StringUtils.defaultString(appendToEnd));\n        } else {\n            result.append(str.substring(0, index));\n            result.append(StringUtils.defaultString(appendToEnd));\n        }\n        return result.toString();\n    }\n"
+    ]
+}

@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-29",
+    "Time": {
+        "mean": 220.52482628822327,
+        "median": 220.52482628822327,
+        "std": 0,
+        "max": 220.52482628822327,
+        "min": 220.52482628822327,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 28456.061766040326,
+        "median": 28456.061766040326,
+        "std": 0,
+        "max": 28456.061766040326,
+        "min": 28456.061766040326,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 12770.057549178604,
+        "median": 12770.057549178604,
+        "std": 0,
+        "max": 12770.057549178604,
+        "min": 12770.057549178604,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        56.78885197639465,
+        111.36751008033752,
+        165.9461681842804,
+        220.52482628822327
+    ],
+    "Joules_Per_PatchMedian": [
+        8651.165170055629,
+        15252.797368717194,
+        21854.42956737876,
+        28456.061766040326
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3483.9154913306247,
+        6579.296177279951,
+        9674.676863229277,
+        12770.057549178604
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.3020281314849855,
+        "median": 2.2101938724517822,
+        "std": 0.25842780391524406,
+        "max": 2.760200023651123,
+        "min": 2.1406760215759277,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2131.8137827682494,
+        "median": 2049.532971394062,
+        "std": 208.38140273092378,
+        "max": 2501.279800987244,
+        "min": 1995.1969463586806,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 385.43791790008544,
+        "median": 388.5348053812984,
+        "std": 9.655532758146304,
+        "max": 398.28340296745364,
+        "min": 375.1333332300187,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        54.57865810394287,
+        109.15731620788574,
+        163.7359743118286,
+        218.31463241577148
+    ],
+    "Val_Joules": [
+        6601.632198661567,
+        13203.264397323132,
+        19804.896595984697,
+        26406.528794646263
+    ],
+    "Val_JoulesNormalized": [
+        3095.380685949326,
+        6190.761371898652,
+        9286.14205784798,
+        12381.522743797306
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false;\n          }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     for (int i = 0; i < refs.size(); i++) {\n        Reference ref = refs.get(i);\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     if (!refs.isEmpty()) {\n        for (Reference ref : refs) {\n          Node name = ref.getNode();\n          Node parent = ref.getParent();\n          Node gramps = ref.getGrandparent();\n          if (parent.isGetProp()) {\n            Preconditions.checkState(parent.getFirstChild() == name);\n            if (gramps.isCall()\n                && gramps.getFirstChild() == parent) {\n              return false;\n            }\n            continue;\n          }\n          if (!isVarOrAssignExprLhs(name)) {\n             return false;\n          }\n          Node val = ref.getAssignedValue();\n          if (val == null) {\n            continue;\n          }\n          if (!val.isObjectLit()) {\n            return false;\n          }\n          for (Node child = val.getFirstChild(); child != null;\n               child = child.getNext()) {\n            if (child.isGetterDef() ||\n                child.isSetterDef()) {\n              return false;\n            }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     if (refs.size() > 1) {\n        return false;\n      }\n      for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     if (refs.size() == 0) {\n        return false;\n      }\n      for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     ret = true;\n      for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false;\n          }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     Preconditions.checkState(!refs.isEmpty());\n      for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false;\n          }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     Preconditions.checkArgument(!refs.isEmpty());\n      for (Reference ref : refs) {\n        Node name = ref.getNode();\n        Node parent = ref.getParent();\n        Node gramps = ref.getGrandparent();\n        if (parent.isGetProp()) {\n          Preconditions.checkState(parent.getFirstChild() == name);\n          if (gramps.isCall()\n              && gramps.getFirstChild() == parent) {\n            return false;\n          }\n          continue;\n        }\n        if (!isVarOrAssignExprLhs(name)) {\n           return false;\n        }\n        Node val = ref.getAssignedValue();\n        if (val == null) {\n          continue;\n        }\n        if (!val.isObjectLit()) {\n          return false;\n        }\n        for (Node child = val.getFirstChild(); child != null;\n             child = child.getNext()) {\n          if (child.isGetterDef() ||\n              child.isSetterDef()) {\n            return false;\n          }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n",
+        "    private boolean isInlinableObject(List<Reference> refs) {\n      boolean ret = false;\n// buggy code\n//       for (Reference ref : refs) {\n//         Node name = ref.getNode();\n//         Node parent = ref.getParent();\n//         Node gramps = ref.getGrandparent();\n//         if (parent.isGetProp()) {\n//           Preconditions.checkState(parent.getFirstChild() == name);\n//           if (gramps.isCall()\n//               && gramps.getFirstChild() == parent) {\n//             return false;\n//           }\n//           continue;\n//         }\n//         if (!isVarOrAssignExprLhs(name)) {\n//            return false;\n//         }\n//         Node val = ref.getAssignedValue();\n//         if (val == null) {\n//           continue;\n//         }\n//         if (!val.isObjectLit()) {\n//           return false;\n//         }\n//         for (Node child = val.getFirstChild(); child != null;\n//              child = child.getNext()) {\n//           if (child.isGetterDef() ||\n//               child.isSetterDef()) {\n//             return false;\n//           }\n     if (!refs.isEmpty()) {\n        for (Reference ref : refs) {\n          Node name = ref.getNode();\n          Node parent = ref.getParent();\n          Node gramps = ref.getGrandparent();\n          if (parent.isGetProp()) {\n            Preconditions.checkState(parent.getFirstChild() == name);\n            if (gramps.isCall()\n                && gramps.getFirstChild() == parent) {\n              return false;\n            }\n            continue;\n          }\n          if (!isVarOrAssignExprLhs(name)) {\n            return false;\n          }\n          Node val = ref.getAssignedValue();\n          if (val == null) {\n            continue;\n          }\n          if (!val.isObjectLit()) {\n            return false;\n          }\n          for (Node child = val.getFirstChild(); child != null;\n               child = child.getNext()) {\n            if (child.isGetterDef() ||\n                child.isSetterDef()) {\n              return false;\n            }\n          Node childVal = child.getFirstChild();\n          for (Reference t : refs) {\n            Node refNode = t.getParent();\n            while (!NodeUtil.isStatementBlock(refNode)) {\n              if (refNode == childVal) {\n                return false;\n              }\n              refNode = refNode.getParent();\n            }\n          }\n        }\n        ret = true;\n      }\n      return ret;\n    }\n"
+    ]
+}

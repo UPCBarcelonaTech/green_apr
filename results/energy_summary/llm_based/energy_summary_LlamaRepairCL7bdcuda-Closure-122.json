@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-122",
+    "Time": {
+        "mean": 820.5225102901459,
+        "median": 820.5225102901459,
+        "std": 0,
+        "max": 820.5225102901459,
+        "min": 820.5225102901459,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 96287.95522477628,
+        "median": 96287.95522477628,
+        "std": 0,
+        "max": 96287.95522477628,
+        "min": 96287.95522477628,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 43147.14202507733,
+        "median": 43147.14202507733,
+        "std": 0,
+        "max": 43147.14202507733,
+        "min": 43147.14202507733,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        84.60826468467712,
+        166.37651419639587,
+        248.14476370811462,
+        329.9130132198334,
+        411.6812627315521,
+        493.4495122432709,
+        575.2177617549896,
+        656.9860112667084,
+        738.7542607784271,
+        820.5225102901459
+    ],
+    "Joules_Per_PatchMedian": [
+        11963.378810566663,
+        21332.776189923286,
+        30702.17356927991,
+        40071.57094863653,
+        49440.96832799315,
+        58810.365707349774,
+        68179.7630867064,
+        77549.16046606303,
+        86918.55784541965,
+        96287.95522477628
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4745.306321907043,
+        9012.17695559263,
+        13279.047589278216,
+        17545.918222963803,
+        21812.78885664939,
+        26079.659490334976,
+        30346.530124020563,
+        34613.40075770615,
+        38880.27139139174,
+        43147.14202507733
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.155577611923218,
+        "median": 2.840015172958374,
+        "std": 0.46375754939836994,
+        "max": 3.6659810543060303,
+        "min": 2.7820348739624023,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2856.522409579754,
+        "median": 2593.981431210041,
+        "std": 385.78956410004054,
+        "max": 3280.893309533596,
+        "min": 2542.119794404507,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 484.46588157415397,
+        "median": 478.43568822145517,
+        "std": 26.038967316154697,
+        "max": 515.2772021651263,
+        "min": 452.02747030258206,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        81.76824951171875,
+        163.5364990234375,
+        245.30474853515625,
+        327.072998046875,
+        408.84124755859375,
+        490.6094970703125,
+        572.3777465820312,
+        654.14599609375,
+        735.9142456054688,
+        817.6824951171875
+    ],
+    "Val_Joules": [
+        9369.397379356622,
+        18738.794758713244,
+        28108.192138069866,
+        37477.58951742649,
+        46846.986896783106,
+        56216.38427613973,
+        65585.78165549636,
+        74955.17903485299,
+        84324.57641420962,
+        93693.97379356624
+    ],
+    "Val_JoulesNormalized": [
+        4266.870633685588,
+        8533.741267371173,
+        12800.61190105676,
+        17067.482534742347,
+        21334.353168427933,
+        25601.22380211352,
+        29868.094435799107,
+        34134.96506948469,
+        38401.83570317028,
+        42668.706336855874
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") != -1\n        || comment.getValue().indexOf(\"\\n * @\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") != -1 ||\n        comment.getValue().indexOf(\"\\n * @\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") >= 0 || comment.getValue().indexOf(\"\\n * @\") >= 0) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/*@\") != -1 || comment.getValue().indexOf(\"\\n *@\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n@\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") > -1 || comment.getValue().indexOf(\"\\n * @\") > -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().contains(\"/* @\") || comment.getValue().contains(\"\\n * @\")) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\r\\n * @\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n",
+        "  private void handleBlockComment(Comment comment) {\n// buggy code\n//     if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n   if (comment.getValue().indexOf(\"\\n * @\") != -1) {\n      errorReporter.warning(\n          SUSPICIOUS_COMMENT_WARNING,\n          sourceName,\n          comment.getLineno(), \"\", 0);\n    }\n  }\n"
+    ]
+}

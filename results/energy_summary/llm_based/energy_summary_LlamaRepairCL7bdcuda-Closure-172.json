@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-172",
+    "Time": {
+        "mean": 2.338057041168213,
+        "median": 2.338057041168213,
+        "std": 0,
+        "max": 2.338057041168213,
+        "min": 2.338057041168213,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 2257.9200434207914,
+        "median": 2257.9200434207914,
+        "std": 0,
+        "max": 2257.9200434207914,
+        "min": 2257.9200434207914,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 448.99271676540343,
+        "median": 448.99271676540343,
+        "std": 0,
+        "max": 448.99271676540343,
+        "min": 448.99271676540343,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 2.335724210739136,
+        "median": 2.338057041168213,
+        "std": 0.004981473624664518,
+        "max": 2.3410840034484863,
+        "min": 2.330122947692871,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2259.929891076088,
+        "median": 2257.9200434207914,
+        "std": 4.32935307622439,
+        "max": 2266.591612660885,
+        "min": 2255.770050406456,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 446.86024749517435,
+        "median": 448.99271676540343,
+        "std": 11.245969582657018,
+        "max": 458.2432410955432,
+        "min": 434.92748836278906,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       return true;\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       return false;\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       qName = qName.substring(0, qName.length() - \".prototype\".length());\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       if (info != null && info.hasType()) {\n          return false;\n        }\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       if (info != null) {\n          return false;\n        }\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       if (rhsValue != null && rhsValue.isFunction()) {\n          return false;\n        }\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n     }\n      if (qName == null) {\n        return false;\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n     } else if (qName != null && qName.endsWith(\".call\")) {\n        return false;\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n",
+        "    private boolean isQualifiedNameInferred(\n        String qName, Node n, JSDocInfo info,\n        Node rhsValue, JSType valueType) {\n      if (valueType == null) {\n        return true;\n      }\n      if (qName != null && qName.endsWith(\".prototype\")) {\n// buggy code\n//           return false;\n       qName = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n      }\n      boolean inferred = true;\n      if (info != null) {\n        inferred = !(info.hasType()\n            || info.hasEnumParameterType()\n            || (isConstantSymbol(info, n) && valueType != null\n                && !valueType.isUnknownType())\n            || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n      }\n      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n        if (info != null) {\n          return false;\n        } else if (!scope.isDeclared(qName, false) &&\n            n.isUnscopedQualifiedName()) {\n          for (Node current = n.getParent();\n               !(current.isScript() || current.isFunction());\n               current = current.getParent()) {\n            if (NodeUtil.isControlStructure(current)) {\n              return true;\n            }\n          }\n          AstFunctionContents contents =\n              getFunctionAnalysisResults(scope.getRootNode());\n          if (contents == null ||\n              !contents.getEscapedQualifiedNames().contains(qName)) {\n            return false;\n          }\n        }\n      }\n      return inferred;\n    }\n"
+    ]
+}

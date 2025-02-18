@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-8",
+    "Time": {
+        "mean": 111.43825554847717,
+        "median": 111.43825554847717,
+        "std": 0,
+        "max": 111.43825554847717,
+        "min": 111.43825554847717,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 16805.756467330448,
+        "median": 16805.756467330448,
+        "std": 0,
+        "max": 16805.756467330448,
+        "min": 16805.756467330448,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 6302.427242612839,
+        "median": 6302.427242612839,
+        "std": 0,
+        "max": 6302.427242612839,
+        "min": 6302.427242612839,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.951091051101685,
+        26.560775995254517,
+        37.17046093940735,
+        47.78014588356018,
+        58.38983082771301,
+        68.99951577186584,
+        79.60920071601868,
+        90.21888566017151,
+        100.82857060432434,
+        111.43825554847717
+    ],
+    "Joules_Per_PatchMedian": [
+        6266.328383392094,
+        7437.375948274133,
+        8608.423513156173,
+        9779.471078038212,
+        10950.518642920251,
+        12121.56620780229,
+        13292.61377268433,
+        14463.66133756637,
+        15634.708902448408,
+        16805.756467330448
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1551.5619449138644,
+        2079.435866880417,
+        2607.3097888469697,
+        3135.1837108135223,
+        3663.057632780075,
+        4190.931554746628,
+        4718.80547671318,
+        5246.679398679733,
+        5774.553320646286,
+        6302.427242612839
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.3523060321807865,
+        "median": 5.3414061069488525,
+        "std": 0.06886804191489822,
+        "max": 5.441926002502441,
+        "min": 5.270050048828125,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5094.048424422741,
+        "median": 5095.280818510055,
+        "std": 60.808051837667236,
+        "max": 5171.524022054673,
+        "min": 5014.289877963066,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1014.8448258233072,
+        "median": 1023.6880229473118,
+        "std": 42.98594817546603,
+        "max": 1062.9787000536926,
+        "min": 960.8050189733503,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.609684944152832,
+        21.219369888305664,
+        31.829054832458496,
+        42.43873977661133,
+        53.04842472076416,
+        63.65810966491699,
+        74.26779460906982,
+        84.87747955322266,
+        95.48716449737549,
+        106.09684944152832
+    ],
+    "Val_Joules": [
+        1171.0475648820393,
+        2342.0951297640786,
+        3513.142694646118,
+        4684.190259528157,
+        5855.2378244101965,
+        7026.285389292236,
+        8197.332954174275,
+        9368.380519056314,
+        10539.428083938354,
+        11710.475648820393
+    ],
+    "Val_JoulesNormalized": [
+        527.8739219665526,
+        1055.7478439331053,
+        1583.621765899658,
+        2111.4956878662106,
+        2639.369609832763,
+        3167.243531799316,
+        3695.117453765868,
+        4222.991375732421,
+        4750.865297698974,
+        5278.739219665527
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = -minutesOffset;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = -hoursInMinutes - minutesOffset;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = minutesOffset - hoursInMinutes;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset -= hoursInMinutes;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = -hoursInMinutes + minutesOffset;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = minutesOffset + hoursInMinutes;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = hoursInMinutes - minutesOffset + 60;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = Math.abs(hoursInMinutes) + minutesOffset;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n",
+        "    public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n        if (hoursOffset == 0 && minutesOffset == 0) {\n            return DateTimeZone.UTC;\n        }\n        if (hoursOffset < -23 || hoursOffset > 23) {\n            throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n        }\n// buggy code\n//         if (minutesOffset < 0 || minutesOffset > 59) {\n//             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n//         }\n//         int offset = 0;\n//         try {\n//             int hoursInMinutes = hoursOffset * 60;\n//             if (hoursInMinutes < 0) {\n//                 minutesOffset = hoursInMinutes - minutesOffset;\n       if (minutesOffset < -59 || minutesOffset > 59) {\n            throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n        }\n        int offset = 0;\n        try {\n            int hoursInMinutes = hoursOffset * 60;\n            if (hoursInMinutes < 0) {\n                minutesOffset = hoursInMinutes - minutesOffset + 1440;\n            } else {\n                minutesOffset = hoursInMinutes + minutesOffset;\n            }\n            offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n        } catch (ArithmeticException ex) {\n            throw new IllegalArgumentException(\"Offset is too large\");\n        }\n        return forOffsetMillis(offset);\n    }\n"
+    ]
+}

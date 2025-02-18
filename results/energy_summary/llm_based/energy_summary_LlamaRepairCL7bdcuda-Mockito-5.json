@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-5",
+    "Time": {
+        "mean": 84.45603609085083,
+        "median": 84.45603609085083,
+        "std": 0,
+        "max": 84.45603609085083,
+        "min": 84.45603609085083,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 14831.529128229618,
+        "median": 14831.529128229618,
+        "std": 0,
+        "max": 14831.529128229618,
+        "min": 14831.529128229618,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5647.123869764804,
+        "median": 5647.123869764804,
+        "std": 0,
+        "max": 5647.123869764804,
+        "min": 5647.123869764804,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        45.0470255613327,
+        84.45603609085083
+    ],
+    "Joules_Per_PatchMedian": [
+        10077.675809454919,
+        14831.529128229618
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3354.2058525800703,
+        5647.123869764804
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.931848430633545,
+        "median": 5.638015031814575,
+        "std": 0.6902890753968588,
+        "max": 7.158061981201172,
+        "min": 5.519040107727051,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5552.390288207531,
+        "median": 5323.822490680218,
+        "std": 568.2666420465397,
+        "max": 6566.69957036972,
+        "min": 5244.344214379787,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1052.9075302767756,
+        "median": 1061.2878353953365,
+        "std": 70.61178514644212,
+        "max": 1155.9205187797543,
+        "min": 979.4552138090139,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        39.40901052951813,
+        78.81802105903625
+    ],
+    "Val_Joules": [
+        4753.853318774701,
+        9507.7066375494
+    ],
+    "Val_JoulesNormalized": [
+        2292.918017184734,
+        4585.836034369468
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "correct",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (org.mockito.exceptions.verification.VerificationInOrderFailure e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (org.mockito.exceptions.verification.ArgumentsAreDifferent e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n       catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (ArgumentsAreDifferent e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (org.mockito.exceptions.verification.WantedButNotInvoked e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (org.mockito.exceptions.verification.api.ArgumentsAreDifferent e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (AssertionError e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (Exception e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n",
+        "    public void verify(VerificationData data) {\n        AssertionError error = null;\n        timer.start();\n        while (timer.isCounting()) {\n            try {\n                delegate.verify(data);\n                if (returnOnSuccess) {\n                    return;\n                } else {\n                    error = null;\n                }\n            } catch (MockitoAssertionError e) {\n                error = handleVerifyException(e);\n            }\n// buggy code\n//             catch (org.mockito.exceptions.verification.junit.ArgumentsAreDifferent e) {\n           catch (Throwable e) {\n                error = handleVerifyException(e);\n            }\n        }\n        if (error != null) {\n            throw error;\n        }\n    }\n"
+    ]
+}

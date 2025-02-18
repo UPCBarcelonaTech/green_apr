@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-61",
+    "Time": {
+        "mean": 73.69794368743896,
+        "median": 73.69794368743896,
+        "std": 0,
+        "max": 73.69794368743896,
+        "min": 73.69794368743896,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 7399.576501643658,
+        "median": 7399.576501643658,
+        "std": 0,
+        "max": 7399.576501643658,
+        "min": 7399.576501643658,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2068.4575834393495,
+        "median": 2068.4575834393495,
+        "std": 0,
+        "max": 2068.4575834393495,
+        "min": 2068.4575834393495,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        10.139750003814697,
+        19.219491958618164,
+        28.29923391342163,
+        37.3789758682251,
+        46.458717823028564,
+        55.53845977783203,
+        64.6182017326355,
+        73.69794368743896
+    ],
+    "Joules_Per_PatchMedian": [
+        1821.3901699244975,
+        2618.2739315986632,
+        3415.157693272829,
+        4212.041454946995,
+        5008.925216621161,
+        5805.808978295327,
+        6602.692739969492,
+        7399.576501643658
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        454.35410976409906,
+        684.9403202891349,
+        915.5265308141707,
+        1146.1127413392064,
+        1376.6989518642422,
+        1607.285162389278,
+        1837.8713729143137,
+        2068.4575834393495
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.088019895553589,
+        "median": 1.0600080490112305,
+        "std": 0.06865714959491581,
+        "max": 1.2100648880004883,
+        "min": 1.0499482154846191,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1048.2520835256576,
+        "median": 1024.5064082503318,
+        "std": 57.19191326527277,
+        "max": 1150.217062628269,
+        "min": 1017.8642342925071,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 223.26448933601375,
+        "median": 223.76789923906324,
+        "std": 9.9352357892014,
+        "max": 235.69740748405445,
+        "min": 209.02859274148932,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        9.079741954803467,
+        18.159483909606934,
+        27.2392258644104,
+        36.31896781921387,
+        45.398709774017334,
+        54.4784517288208,
+        63.55819368362427,
+        72.63793563842773
+    ],
+    "Val_Joules": [
+        796.8837616741657,
+        1593.7675233483315,
+        2390.651285022497,
+        3187.5350466966634,
+        3984.418808370829,
+        4781.302570044994,
+        5578.18633171916,
+        6375.070093393326
+    ],
+    "Val_JoulesNormalized": [
+        230.58621052503582,
+        461.17242105007165,
+        691.7586315751074,
+        922.3448421001432,
+        1152.9310526251788,
+        1383.5172631502146,
+        1614.1034736752504,
+        1844.6896842002861
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = size - strLen;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = thisBuf.length - strLen + 1;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = size - strLen + 1;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = length - strLen;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = buffer.length - strLen;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = size() - strLen;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = (size - strLen) + 1;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = bufferEnd - strLen;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = thisBuf.length - strLen + startIndex;\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n",
+        "    public int indexOf(String str, int startIndex) {\n        startIndex = (startIndex < 0 ? 0 : startIndex);\n        if (str == null || startIndex >= size) {\n            return -1;\n        }\n        int strLen = str.length();\n        if (strLen == 1) {\n            return indexOf(str.charAt(0), startIndex);\n        }\n        if (strLen == 0) {\n            return startIndex;\n        }\n        if (strLen > size) {\n            return -1;\n        }\n        char[] thisBuf = buffer;\n// buggy code\n//         int len = thisBuf.length - strLen;\n       int len = (thisBuf.length - strLen);\n        outer:\n        for (int i = startIndex; i < len; i++) {\n            for (int j = 0; j < strLen; j++) {\n                if (str.charAt(j) != thisBuf[i + j]) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n        return -1;\n    }\n"
+    ]
+}

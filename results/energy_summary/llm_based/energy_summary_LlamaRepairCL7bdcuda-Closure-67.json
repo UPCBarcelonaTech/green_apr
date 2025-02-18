@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-67",
+    "Time": {
+        "mean": 420.9548660516739,
+        "median": 420.9548660516739,
+        "std": 0,
+        "max": 420.9548660516739,
+        "min": 420.9548660516739,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 49865.9648707509,
+        "median": 49865.9648707509,
+        "std": 0,
+        "max": 49865.9648707509,
+        "min": 49865.9648707509,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 22550.32592129111,
+        "median": 22550.32592129111,
+        "std": 0,
+        "max": 22550.32592129111,
+        "min": 22550.32592129111,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        48.087374329566956,
+        94.69581079483032,
+        141.3042472600937,
+        187.91268372535706,
+        234.52112019062042,
+        281.1295566558838,
+        327.73799312114716,
+        374.3464295864105,
+        420.9548660516739
+    ],
+    "Joules_Per_PatchMedian": [
+        6758.920472347736,
+        12147.30102214813,
+        17535.681571948528,
+        22924.062121748924,
+        28312.44267154932,
+        33700.82322134972,
+        39089.20377115011,
+        44477.584320950504,
+        49865.9648707509
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2729.5686990678314,
+        5207.163351845742,
+        7684.758004623653,
+        10162.352657401563,
+        12639.947310179474,
+        15117.541962957384,
+        17595.136615735293,
+        20072.731268513202,
+        22550.32592129111
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.39963641166687,
+        "median": 1.4789378643035889,
+        "std": 0.13374345552998546,
+        "max": 1.520298957824707,
+        "min": 1.2399351596832275,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1300.1255015325546,
+        "median": 1370.5399225473404,
+        "std": 108.29841501768539,
+        "max": 1394.166126358509,
+        "min": 1166.1396840572356,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 252.69320695877082,
+        "median": 251.97404628992103,
+        "std": 13.864952744591147,
+        "max": 269.02700121402745,
+        "min": 232.34451529979708,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        46.60843646526337,
+        93.21687293052673,
+        139.8253093957901,
+        186.43374586105347,
+        233.04218232631683,
+        279.6506187915802,
+        326.25905525684357,
+        372.86749172210693,
+        419.4759281873703
+    ],
+    "Val_Joules": [
+        5388.380549800396,
+        10776.76109960079,
+        16165.141649401186,
+        21553.522199201583,
+        26941.90274900198,
+        32330.283298802377,
+        37718.66384860277,
+        43107.044398403166,
+        48495.42494820356
+    ],
+    "Val_JoulesNormalized": [
+        2477.5946527779106,
+        4955.189305555821,
+        7432.783958333732,
+        9910.378611111642,
+        12387.973263889553,
+        14865.567916667464,
+        17343.162569445372,
+        19820.75722222328,
+        22298.35187500119
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getLastChild().getType() == Token.STRING) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         ) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getFirstChild().isQualifiedName()) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getParent() == assign) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getJSDocInfo() == null) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getLastChild().getString().equals(\"prototype\")) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getFirstFirstChild().getType() == Token.THIS) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getFirstChild().getFirstChild().isQualifiedName()) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getFirstChild().getType() == Token.GETPROP) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n",
+        "    private boolean isPrototypePropertyAssign(Node assign) {\n      Node n = assign.getFirstChild();\n      if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n          && n.getType() == Token.GETPROP\n// buggy code\n//           ) {\n         && n.getLastChild().getString().equals(\"prototype\")\n          ) {\n        boolean isChainedProperty =\n            n.getFirstChild().getType() == Token.GETPROP;\n        if (isChainedProperty) {\n          Node child = n.getFirstChild().getFirstChild().getNext();\n          if (child.getType() == Token.STRING &&\n              child.getString().equals(\"prototype\")) {\n            return true;\n          }\n        }\n      }\n      return false;\n    }\n"
+    ]
+}

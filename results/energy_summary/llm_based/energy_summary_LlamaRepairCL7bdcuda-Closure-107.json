@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-107",
+    "Time": {
+        "mean": 360.55567610263824,
+        "median": 360.55567610263824,
+        "std": 0,
+        "max": 360.55567610263824,
+        "min": 360.55567610263824,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 45633.03458711505,
+        "median": 45633.03458711505,
+        "std": 0,
+        "max": 45633.03458711505,
+        "min": 45633.03458711505,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 20330.745986473565,
+        "median": 20330.745986473565,
+        "std": 0,
+        "max": 20330.745986473565,
+        "min": 20330.745986473565,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        74.7223664522171,
+        146.1806938648224,
+        217.63902127742767,
+        289.09734869003296,
+        360.55567610263824
+    ],
+    "Joules_Per_PatchMedian": [
+        11659.016890615225,
+        20152.52131474018,
+        28646.025738865137,
+        37139.53016299009,
+        45633.03458711505
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4569.298898327351,
+        8509.660670363905,
+        12450.022442400457,
+        16390.38421443701,
+        20330.745986473565
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.305962610244751,
+        "median": 3.2640390396118164,
+        "std": 0.09741789966402077,
+        "max": 3.4800078868865967,
+        "min": 3.257966995239258,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3198.212935476303,
+        "median": 3165.5124664902687,
+        "std": 78.75711412186659,
+        "max": 3338.819478082657,
+        "min": 3154.543451821804,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 613.5239572429657,
+        "median": 628.937126290798,
+        "std": 39.108385484024424,
+        "max": 646.6853767871858,
+        "min": 549.7016004204752,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        71.45832741260529,
+        142.91665482521057,
+        214.37498223781586,
+        285.83330965042114,
+        357.2916370630264
+    ],
+    "Val_Joules": [
+        8493.504424124956,
+        16987.008848249912,
+        25480.51327237487,
+        33974.017696499825,
+        42467.52212062478
+    ],
+    "Val_JoulesNormalized": [
+        3940.361772036553,
+        7880.7235440731065,
+        11821.08531610966,
+        15761.447088146211,
+        19701.808860182766
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.setCheckGlobalThisLevel(CheckGlobalThisLevel.OFF);\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.setPrettyPrint(true);\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.angularPass = false;\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.thirdParty = true;\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.setCheckGlobalThisLevel(CheckGlobalThisLevel.ERROR);\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.setCheckGlobalThisLevel(CheckLevel.OFF);\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.messageBundle.setLocale(\"en\");\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.messageBundle.setLocale(flags.locale);\n    }\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    if (flags.processJqueryPrimitives) {\n      options.setCodingConvention(new JqueryCodingConvention());\n    } else {\n      options.setCodingConvention(new ClosureCodingConvention());\n    }\n    options.setExtraAnnotationNames(flags.extraAnnotationName);\n    CompilationLevel level = flags.compilationLevel;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    if (flags.useTypesForOptimization) {\n      level.setTypeBasedOptimizationOptions(options);\n    }\n    if (flags.generateExports) {\n      options.setGenerateExports(flags.generateExports);\n    }\n    WarningLevel wLevel = flags.warningLevel;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n    options.closurePass = flags.processClosurePrimitives;\n    options.jqueryPass = CompilationLevel.ADVANCED_OPTIMIZATIONS == level &&\n        flags.processJqueryPrimitives;\n    options.angularPass = flags.angularPass;\n    if (!flags.translationsFile.isEmpty()) {\n      try {\n        options.messageBundle = new XtbMessageBundle(\n            new FileInputStream(flags.translationsFile),\n            flags.translationsProject);\n      } catch (IOException e) {\n        throw new RuntimeException(\"Reading XTB file\", e);\n      }\n    } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {\n      options.messageBundle = new EmptyMessageBundle();\n// buggy code\n// \n     options.setCheckGlobalThisLevel(CheckLevel.ERROR);\n    }\n    return options;\n  }\n"
+    ]
+}

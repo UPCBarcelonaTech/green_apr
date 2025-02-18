@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-31",
+    "Time": {
+        "mean": 87.22941219806671,
+        "median": 87.22941219806671,
+        "std": 0,
+        "max": 87.22941219806671,
+        "min": 87.22941219806671,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 14609.788729065664,
+        "median": 14609.788729065664,
+        "std": 0,
+        "max": 14609.788729065664,
+        "min": 14609.788729065664,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3039.7573327302935,
+        "median": 3039.7573327302935,
+        "std": 0,
+        "max": 3039.7573327302935,
+        "min": 3039.7573327302935,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.2290278673172,
+        25.97907590866089,
+        34.72912395000458,
+        43.47917199134827,
+        52.229220032691956,
+        60.979268074035645,
+        69.72931611537933,
+        78.47936415672302,
+        87.22941219806671
+    ],
+    "Joules_Per_PatchMedian": [
+        8841.494655627013,
+        9562.531414806845,
+        10283.568173986676,
+        11004.604933166507,
+        11725.641692346338,
+        12446.67845152617,
+        13167.715210706001,
+        13888.751969885832,
+        14609.788729065664
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1614.1506433725351,
+        1792.3514795422548,
+        1970.5523157119744,
+        2148.753151881694,
+        2326.953988051414,
+        2505.154824221134,
+        2683.3556603908537,
+        2861.5564965605736,
+        3039.7573327302935
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 8.94369797706604,
+        "median": 8.47897982597351,
+        "std": 1.0448049978115237,
+        "max": 10.807132005691528,
+        "min": 8.399857997894287,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 8420.090579564572,
+        "median": 8120.457896447182,
+        "std": 828.8537694409717,
+        "max": 9896.909549725056,
+        "min": 7959.013523828983,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1495.058119943142,
+        "median": 1435.9498072028155,
+        "std": 140.18618811750665,
+        "max": 1664.0363877892505,
+        "min": 1373.3997880935667,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.750048041343689,
+        17.500096082687378,
+        26.250144124031067,
+        35.000192165374756,
+        43.750240206718445,
+        52.500288248062134,
+        61.25033628940582,
+        70.00038433074951,
+        78.7504323720932
+    ],
+    "Val_Joules": [
+        721.0367591798313,
+        1442.0735183596626,
+        2163.110277539494,
+        2884.147036719325,
+        3605.1837958991564,
+        4326.220555078988,
+        5047.257314258819,
+        5768.29407343865,
+        6489.3308326184815
+    ],
+    "Val_JoulesNormalized": [
+        178.20083616971965,
+        356.4016723394393,
+        534.602508509159,
+        712.8033446788786,
+        891.0041808485985,
+        1069.2050170183184,
+        1247.4058531880382,
+        1425.6066893577581,
+        1603.807525527478
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < csLength; i++) {\n\t\t\tchar ch = cs.charAt(i);\n\t\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\t\tif (searchChars[j] == ch) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < searchLength; i++) {\n\t\t\tchar ch = searchChars[i];\n\t\t\tfor (int j = 0; j < csLength; j++) {\n\t\t\t\tif (cs.charAt(j) == ch) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < searchLength; i++) {\n\t\t\tchar ch = searchChars[i];\n\t\t\tfor (int j = 0; j < csLength; j++) {\n\t\t\t\tif (ch == cs.charAt(j)) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < csLength; i++) {\n\t\t\tchar ch = cs.charAt(i);\n\t\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\t\tif (ch == searchChars[j]) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\tchar ch = searchChars[j];\n\t\t\tfor (int i = 0; i < csLength; i++) {\n\t\t\t\tif (ch == cs.charAt(i)) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\tchar ch = searchChars[j];\n\t\t\tfor (int i = 0; i < csLength; i++) {\n\t\t\t\tif (cs.charAt(i) == ch) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < searchLength; i++) {\n\t\t\tchar searchChar = searchChars[i];\n\t\t\tfor (int j = 0; j < csLength; j++) {\n\t\t\t\tif (searchChar == cs.charAt(j)) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\tfor (int i = 0; i < csLength; i++) {\n\t\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\t\tif (searchChars[j] == cs.charAt(i)) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n",
+        "\tpublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\t\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\t\treturn false;\n\t\t}\n\t\tint csLength = cs.length();\n\t\tint searchLength = searchChars.length;\n// buggy code\n// \t\tfor (int i = 0; i < csLength; i++) {\n// \t\t\tchar ch = cs.charAt(i);\n// \t\t\tfor (int j = 0; j < searchLength; j++) {\n// \t\t\t\tif (searchChars[j] == ch) {\n// \t\t\t\t\t\treturn true;\n\t\touter: for (int i = 0; i < csLength; i++) {\n\t\t\tchar ch = cs.charAt(i);\n\t\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\t\tif (searchChars[j] == ch) {\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\treturn false;\n\t}\n"
+    ]
+}

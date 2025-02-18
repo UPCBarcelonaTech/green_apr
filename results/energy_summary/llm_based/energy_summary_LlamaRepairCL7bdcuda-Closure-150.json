@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-150",
+    "Time": {
+        "mean": 413.9822406768799,
+        "median": 413.9822406768799,
+        "std": 0,
+        "max": 413.9822406768799,
+        "min": 413.9822406768799,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 50778.04934568405,
+        "median": 50778.04934568405,
+        "std": 0,
+        "max": 50778.04934568405,
+        "min": 50778.04934568405,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 21195.336906814573,
+        "median": 21195.336906814573,
+        "std": 0,
+        "max": 21195.336906814573,
+        "min": 21195.336906814573,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        46.2481575012207,
+        87.10750007629395,
+        127.96684265136719,
+        168.82618522644043,
+        209.68552780151367,
+        250.5448703765869,
+        291.40421295166016,
+        332.2635555267334,
+        373.12289810180664,
+        413.9822406768799
+    ],
+    "Joules_Per_PatchMedian": [
+        9572.202899438144,
+        14150.630282354356,
+        18729.057665270568,
+        23307.48504818678,
+        27885.912431102992,
+        32464.339814019204,
+        37042.76719693541,
+        41621.194579851624,
+        46199.62196276784,
+        50778.04934568405
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2867.747466188669,
+        4904.146292924881,
+        6940.545119661093,
+        8976.943946397305,
+        11013.342773133518,
+        13049.741599869729,
+        15086.14042660594,
+        17122.53925334215,
+        19158.938080078362,
+        21195.336906814573
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.390239715576172,
+        "median": 5.388814926147461,
+        "std": 0.1171639596754406,
+        "max": 5.504990816116333,
+        "min": 5.230102062225342,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5001.024858772755,
+        "median": 4993.7755165219305,
+        "std": 52.707030327525,
+        "max": 5054.989044344426,
+        "min": 4934.846924483776,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 835.3921662259099,
+        "median": 831.3486394524571,
+        "std": 35.43609072584507,
+        "max": 892.3294793248169,
+        "min": 795.0890809535977,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        40.85934257507324,
+        81.71868515014648,
+        122.57802772521973,
+        163.43737030029297,
+        204.2967128753662,
+        245.15605545043945,
+        286.0153980255127,
+        326.87474060058594,
+        367.7340831756592,
+        408.5934257507324
+    ],
+    "Val_Joules": [
+        4578.427382916213,
+        9156.854765832424,
+        13735.282148748636,
+        18313.70953166485,
+        22892.13691458106,
+        27470.564297497272,
+        32048.99168041348,
+        36627.4190633297,
+        41205.84644624591,
+        45784.27382916212
+    ],
+    "Val_JoulesNormalized": [
+        2036.398826736212,
+        4072.797653472424,
+        6109.196480208636,
+        8145.595306944848,
+        10181.99413368106,
+        12218.392960417272,
+        14254.791787153483,
+        16291.190613889694,
+        18327.589440625903,
+        20363.988267362118
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     switch (n.getType()) {\n        case Token.FUNCTION:\n          if (parent.getType() == Token.NAME) {\n            return;\n          }\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n      }\n      attachLiteralTypes(n);\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     switch (n.getType()) {\n        case Token.FUNCTION:\n          if (parent.getType() == Token.NAME) {\n            return;\n          }\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n        default:\n          attachLiteralTypes(n);\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     switch (n.getType()) {\n        case Token.FUNCTION:\n          if (parent.getType() == Token.NAME) {\n            return;\n          }\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n        default:\n          attachLiteralTypes(n);\n          break;\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     if (n.getType() == Token.FUNCTION) {\n        if (parent.getType() == Token.NAME) {\n          return;\n        }\n        defineDeclaredFunction(n, parent);\n      } else if (n.getType() == Token.CATCH) {\n        defineCatch(n, parent);\n      } else if (n.getType() == Token.VAR) {\n        defineVar(n, parent);\n      }\n      attachLiteralTypes(n);\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     attachLiteralTypes(parent);\n      switch (n.getType()) {\n        case Token.FUNCTION:\n          if (parent.getType() == Token.NAME) {\n            return;\n          }\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n      }\n      attachLiteralTypes(n);\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     switch (n.getType()) {\n        case Token.FUNCTION:\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n      }\n      attachLiteralTypes(n);\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     if (n.getType() == Token.FUNCTION && parent.getType() == Token.NAME) {\n        return;\n      }\n      attachLiteralTypes(n);\n      switch (n.getType()) {\n        case Token.FUNCTION:\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     if (n.getType() == Token.FUNCTION) {\n        if (parent.getType() == Token.NAME) {\n          return;\n        }\n        defineDeclaredFunction(n, parent);\n      } else if (n.getType() == Token.CATCH) {\n        defineCatch(n, parent);\n      } else if (n.getType() == Token.VAR) {\n        defineVar(n, parent);\n      } else {\n        attachLiteralTypes(n);\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (n == scope.getRootNode()) return;\n      if (n.getType() == Token.LP && parent == scope.getRootNode()) {\n        handleFunctionInputs(parent);\n        return;\n      }\n// buggy code\n//       attachLiteralTypes(n);\n//       switch (n.getType()) {\n//         case Token.FUNCTION:\n//           if (parent.getType() == Token.NAME) {\n//             return;\n//           }\n//           defineDeclaredFunction(n, parent);\n//           break;\n//         case Token.CATCH:\n//           defineCatch(n, parent);\n//           break;\n//         case Token.VAR:\n//           defineVar(n, parent);\n//           break;\n//       }\n     switch (n.getType()) {\n        case Token.FUNCTION:\n          if (parent.getType() == Token.NAME) {\n            return;\n          }\n          defineDeclaredFunction(n, parent);\n          break;\n        case Token.CATCH:\n          defineCatch(n, parent);\n          break;\n        case Token.VAR:\n          defineVar(n, parent);\n          break;\n        case Token.NAME:\n          attachLiteralTypes(n);\n          break;\n      }\n    }\n"
+    ]
+}

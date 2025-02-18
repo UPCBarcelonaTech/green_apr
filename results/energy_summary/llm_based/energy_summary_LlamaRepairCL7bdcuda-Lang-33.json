@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-33",
+    "Time": {
+        "mean": 88.52453255653381,
+        "median": 88.52453255653381,
+        "std": 0,
+        "max": 88.52453255653381,
+        "min": 88.52453255653381,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8692.887412679194,
+        "median": 8692.887412679194,
+        "std": 0,
+        "max": 8692.887412679194,
+        "min": 8692.887412679194,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2178.927386462689,
+        "median": 2178.927386462689,
+        "std": 0,
+        "max": 2178.927386462689,
+        "min": 2178.927386462689,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        10.048754096031189,
+        18.768285036087036,
+        27.487815976142883,
+        36.20734691619873,
+        44.92687785625458,
+        53.646408796310425,
+        62.36593973636627,
+        71.08547067642212,
+        79.80500161647797,
+        88.52453255653381
+    ],
+    "Joules_Per_PatchMedian": [
+        1974.491140836477,
+        2720.9796154856676,
+        3467.4680901348584,
+        4213.956564784049,
+        4960.44503943324,
+        5706.9335140824305,
+        6453.421988731621,
+        7199.910463380812,
+        7946.398938030003,
+        8692.887412679194
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        419.9706349611282,
+        615.4102740168571,
+        810.849913072586,
+        1006.2895521283149,
+        1201.7291911840439,
+        1397.168830239773,
+        1592.608469295502,
+        1788.048108351231,
+        1983.48774740696,
+        2178.927386462689
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3317036151885986,
+        "median": 1.3292231559753418,
+        "std": 0.024840050441998423,
+        "max": 1.361057996749878,
+        "min": 1.2981159687042236,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1228.574803903103,
+        "median": 1228.0026661872862,
+        "std": 16.997547544345686,
+        "max": 1248.8632442593573,
+        "min": 1207.2306941747665,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 227.2864939188958,
+        "median": 224.53099590539932,
+        "std": 5.386263111425216,
+        "max": 235.47173562049852,
+        "min": 222.7428342103958,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.719530940055847,
+        17.439061880111694,
+        26.15859282016754,
+        34.87812376022339,
+        43.597654700279236,
+        52.31718564033508,
+        61.03671658039093,
+        69.75624752044678,
+        78.47577846050262,
+        87.19530940055847
+    ],
+    "Val_Joules": [
+        746.4884746491907,
+        1492.9769492983814,
+        2239.465423947572,
+        2985.953898596763,
+        3732.4423732459536,
+        4478.930847895144,
+        5225.419322544335,
+        5971.907797193526,
+        6718.3962718427165,
+        7464.884746491908
+    ],
+    "Val_JoulesNormalized": [
+        195.4396390557289,
+        390.8792781114578,
+        586.3189171671867,
+        781.7585562229156,
+        977.1981952786446,
+        1172.6378343343736,
+        1368.0774733901026,
+        1563.5171124458316,
+        1758.9567515015606,
+        1954.3963905572896
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "C",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           if (array[i] != null) {\n                classes[i] = array[i].getClass();\n            }\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           classes[i] = array[i] == null ? null : array[i].getClass();\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           Object object = array[i];\n            if (object != null) {\n                classes[i] = object.getClass();\n            }\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           classes[i] = array[i] != null ? array[i].getClass() : null;\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           Object object = array[i];\n            if (object != null) {\n                classes[i] = array[i].getClass();\n            }\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           classes[i] = (array[i] != null ? array[i].getClass() : null);\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           Object value = array[i];\n            if (value != null) {\n                classes[i] = value.getClass();\n            }\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           Object object = array[i];\n            classes[i] = object == null ? null : object.getClass();\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           Object object = array[i];\n            classes[i] = (object != null ? object.getClass() : null);\n        }\n        return classes;\n    }\n",
+        "    public static Class<?>[] toClass(Object[] array) {\n        if (array == null) {\n            return null;\n        } else if (array.length == 0) {\n            return ArrayUtils.EMPTY_CLASS_ARRAY;\n        }\n        Class<?>[] classes = new Class[array.length];\n        for (int i = 0; i < array.length; i++) {\n// buggy code\n//             classes[i] = array[i].getClass();\n           if (array[i] != null) {\n                classes[i] = array[i].getClass();\n            } \n        }\n        return classes;\n    }\n"
+    ]
+}

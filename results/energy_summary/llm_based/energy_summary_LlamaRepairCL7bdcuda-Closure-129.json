@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-129",
+    "Time": {
+        "mean": 629.2772397994995,
+        "median": 629.2772397994995,
+        "std": 0,
+        "max": 629.2772397994995,
+        "min": 629.2772397994995,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 76747.70950269698,
+        "median": 76747.70950269698,
+        "std": 0,
+        "max": 76747.70950269698,
+        "min": 76747.70950269698,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 35710.480125546455,
+        "median": 35710.480125546455,
+        "std": 0,
+        "max": 35710.480125546455,
+        "min": 35710.480125546455,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        64.178755402565,
+        126.96747589111328,
+        189.75619637966156,
+        252.54491686820984,
+        315.3336373567581,
+        378.1223578453064,
+        440.9110783338547,
+        503.69979882240295,
+        566.4885193109512,
+        629.2772397994995
+    ],
+    "Joules_Per_PatchMedian": [
+        8833.040826004744,
+        16379.115123414995,
+        23925.189420825245,
+        31471.263718235496,
+        39017.33801564574,
+        46563.41231305599,
+        54109.486610466236,
+        61655.56090787648,
+        69201.63520528673,
+        76747.70950269698
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3781.6497961163523,
+        7329.297610497475,
+        10876.945424878599,
+        14424.59323925972,
+        17972.241053640842,
+        21519.888868021964,
+        25067.536682403086,
+        28615.184496784208,
+        32162.83231116533,
+        35710.480125546455
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3898379325866699,
+        "median": 1.3900349140167236,
+        "std": 0.02568266873023838,
+        "max": 1.4209699630737305,
+        "min": 1.3603148460388184,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1290.1263166284562,
+        "median": 1286.9665285944939,
+        "std": 18.901450304299527,
+        "max": 1312.2248415470124,
+        "min": 1264.5765090942382,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 231.88000602245324,
+        "median": 234.00198173522926,
+        "std": 15.173083062960096,
+        "max": 244.72115678787236,
+        "min": 206.43542631864534,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        62.78872048854828,
+        125.57744097709656,
+        188.36616146564484,
+        251.15488195419312,
+        313.9436024427414,
+        376.7323229312897,
+        439.52104341983795,
+        502.30976390838623,
+        565.0984843969345,
+        627.8872048854828
+    ],
+    "Val_Joules": [
+        7546.07429741025,
+        15092.1485948205,
+        22638.22289223075,
+        30184.297189641,
+        37730.37148705125,
+        45276.445784461495,
+        52822.52008187174,
+        60368.59437928199,
+        67914.66867669224,
+        75460.74297410248
+    ],
+    "Val_JoulesNormalized": [
+        3547.6478143811228,
+        7095.2956287622455,
+        10642.94344314337,
+        14190.591257524491,
+        17738.239071905613,
+        21285.886886286735,
+        24833.534700667857,
+        28381.18251504898,
+        31928.8303294301,
+        35476.478143811226
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     if (first == null) {\n        return;\n      }\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkNotNull(first);\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkState(first != null);\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     first = first.getFirstChild();\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkState(first.isName() || NodeUtil.isGet(first));\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     if (first == null) {\n        return; \n      }\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkState(first.isName() || first.isGetProp());\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkState(first.isGetProp() || first.isGetElem());\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n",
+        "    private void annotateCalls(Node n) {\n      Preconditions.checkState(n.isCall());\n      Node first = n.getFirstChild();\n// buggy code\n// \n     Preconditions.checkState(first.isGetProp() || first.isName());\n      if (!NodeUtil.isGet(first)) {\n        n.putBooleanProp(Node.FREE_CALL, true);\n      }\n      if (first.isName() &&\n          \"eval\".equals(first.getString())) {\n        first.putBooleanProp(Node.DIRECT_EVAL, true);\n      }\n    }\n"
+    ]
+}

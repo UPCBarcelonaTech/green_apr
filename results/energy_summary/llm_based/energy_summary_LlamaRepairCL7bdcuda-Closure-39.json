@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-39",
+    "Time": {
+        "mean": 3.1810309886932373,
+        "median": 3.1810309886932373,
+        "std": 0,
+        "max": 3.1810309886932373,
+        "min": 3.1810309886932373,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 3014.4454387784003,
+        "median": 3014.4454387784003,
+        "std": 0,
+        "max": 3014.4454387784003,
+        "min": 3014.4454387784003,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 600.0956546306606,
+        "median": 600.0956546306606,
+        "std": 0,
+        "max": 600.0956546306606,
+        "min": 600.0956546306606,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 3.3224234104156496,
+        "median": 3.1810309886932373,
+        "std": 0.3294663798046682,
+        "max": 3.9111340045928955,
+        "min": 3.1600351333618164,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3137.9394495916363,
+        "median": 3014.4454387784003,
+        "std": 270.22143188965623,
+        "max": 3620.8600030779835,
+        "min": 3004.138651752472,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 601.9031750535962,
+        "median": 600.0956546306606,
+        "std": 28.45616488273662,
+        "max": 631.2170220494268,
+        "min": 557.1629178762432,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        } else {\n          sb.append(\"?\");\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType == null) {\n          sb.append(\"?\");\n        } else {\n          sb.append(propertyType.toString());\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        } else {\n          sb.append(\"null\");\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        } else {\n          sb.append(\"?\");\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType == null) {\n          sb.append(\"?\");\n        } else {\n          sb.append(propertyType.toString());\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       JSType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n    } else {\n      return \"{...}\";\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        } else {\n          sb.append(\"?\");\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n    }\n  }\n",
+        "  String toStringHelper(boolean forAnnotations) {\n    if (hasReferenceName()) {\n      return getReferenceName();\n    } else if (prettyPrint) {\n      prettyPrint = false;\n      Set<String> propertyNames = Sets.newTreeSet();\n      for (ObjectType current = this;\n           current != null && !current.isNativeObjectType() &&\n               propertyNames.size() <= MAX_PRETTY_PRINTED_PROPERTIES;\n           current = current.getImplicitPrototype()) {\n        propertyNames.addAll(current.getOwnPropertyNames());\n      }\n      StringBuilder sb = new StringBuilder();\n      sb.append(\"{\");\n      int i = 0;\n      for (String property : propertyNames) {\n        if (i > 0) {\n          sb.append(\", \");\n        }\n        sb.append(property);\n        sb.append(\": \");\n// buggy code\n//         sb.append(getPropertyType(property).toString());\n//         ++i;\n//         if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n//           sb.append(\", ...\");\n//           break;\n//         }\n//       }\n//       sb.append(\"}\");\n//       prettyPrint = true;\n//       return sb.toString();\n//     } else {\n//       return \"{...}\";\n       ObjectType propertyType = getPropertyType(property);\n        if (propertyType != null) {\n          sb.append(propertyType.toString());\n        } else {\n          sb.append(\"?\");\n        }\n        ++i;\n        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n          sb.append(\", ...\");\n          break;\n        }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else {\n      return \"{...}\";\n    }\n  }\n      }\n      sb.append(\"}\");\n      prettyPrint = true;\n      return sb.toString();\n    } else if (forAnnotations) {\n      return \"{...}\";\n    } else {\n      return \"\";\n    }\n  }\n"
+    ]
+}

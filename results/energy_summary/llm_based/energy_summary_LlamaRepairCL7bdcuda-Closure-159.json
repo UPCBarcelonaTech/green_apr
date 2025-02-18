@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-159",
+    "Time": {
+        "mean": 429.09391474723816,
+        "median": 429.09391474723816,
+        "std": 0,
+        "max": 429.09391474723816,
+        "min": 429.09391474723816,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 49894.83865401745,
+        "median": 49894.83865401745,
+        "std": 0,
+        "max": 49894.83865401745,
+        "min": 49894.83865401745,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 21349.05333390236,
+        "median": 21349.05333390236,
+        "std": 0,
+        "max": 21349.05333390236,
+        "min": 21349.05333390236,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        55.858383774757385,
+        109.17774534225464,
+        162.4971069097519,
+        215.81646847724915,
+        269.1358300447464,
+        322.45519161224365,
+        375.7745531797409,
+        429.09391474723816
+    ],
+    "Joules_Per_PatchMedian": [
+        8272.333543074132,
+        14218.40570178032,
+        20164.47786048651,
+        26110.5500191927,
+        32056.622177898887,
+        38002.69433660508,
+        43948.76649531126,
+        49894.83865401745
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3007.357573002577,
+        5627.599824559688,
+        8247.8420761168,
+        10868.08432767391,
+        13488.326579231023,
+        16108.568830788136,
+        18728.811082345248,
+        21349.05333390236
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.6719319820404053,
+        "median": 2.539022207260132,
+        "std": 0.3329071393579841,
+        "max": 3.26074481010437,
+        "min": 2.4509639739990234,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2436.31343416214,
+        "median": 2326.261384367943,
+        "std": 264.9100653972463,
+        "max": 2906.593352854252,
+        "min": 2270.693364739418,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 402.0648168325424,
+        "median": 387.11532144546504,
+        "std": 37.99254931639389,
+        "max": 463.64334112405777,
+        "min": 364.1050225973131,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        53.31936156749725,
+        106.6387231349945,
+        159.95808470249176,
+        213.277446269989,
+        266.59680783748627,
+        319.9161694049835,
+        373.2355309724808,
+        426.554892539978
+    ],
+    "Val_Joules": [
+        5946.072158706189,
+        11892.144317412378,
+        17838.216476118567,
+        23784.288634824756,
+        29730.360793530945,
+        35676.43295223713,
+        41622.50511094332,
+        47568.577269649504
+    ],
+    "Val_JoulesNormalized": [
+        2620.2422515571116,
+        5240.484503114223,
+        7860.726754671335,
+        10480.969006228446,
+        13101.211257785559,
+        15721.453509342671,
+        18341.695760899784,
+        20961.938012456896
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node != null && node.getType() == Token.CALL) {\n      Node child = node.getFirstChild();\n      if (child != null && child.getType() == Token.NAME) {\n        changed.add(child.getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.isCall()) {\n      Node child = node.getFirstChild();\n      if (child.isName()) {\n        changed.add(child.getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL) {\n      Node child = node.getFirstChild();\n      if (child != null && child.getType() == Token.NAME) {\n        changed.add(child.getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL) {\n      Node child = node.getFirstChild();\n      if (child.getType() == Token.NAME) {\n        changed.add(child.getString().toLowerCase());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node != null && node.getType() == Token.CALL) {\n      Node child = node.getFirstChild();\n      if (child != null && child.getType() == Token.NAME) {\n        changed.add(child.getString());\n        return;\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL && node.getFirstChild() != null) {\n      Node child = node.getFirstChild();\n      if (child.getType() == Token.NAME) {\n        changed.add(child.getString());\n        return;\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL) {\n      Node child = node.getFirstChild();\n      if (child != null && child.getType() == Token.NAME) {\n        changed.add(child.getString());\n        return;\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL && node.getFirstChild() != null) {\n      Node child = node.getFirstChild();\n      if (child.getType() == Token.NAME) {\n        changed.add(child.getFirstChild().getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n",
+        "  private void findCalledFunctions(\n      Node node, Set<String> changed) {\n    Preconditions.checkArgument(changed != null);\n// buggy code\n//     if (node.getType() == Token.CALL) {\n//       Node child = node.getFirstChild();\n//       if (child.getType() == Token.NAME) {\n//         changed.add(child.getString());\n   if (node.getType() == Token.CALL && node.getFirstChild() != null\n        && node.getFirstChild().getType() == Token.NAME) {\n      Node child = node.getFirstChild();\n      if (child.getType() == Token.NAME) {\n        changed.add(child.getString());\n      }\n    }\n    for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n      findCalledFunctions(c, changed);\n    }\n  }\n"
+    ]
+}

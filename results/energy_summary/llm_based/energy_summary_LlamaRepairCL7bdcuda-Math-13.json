@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-13",
+    "Time": {
+        "mean": 471.69178652763367,
+        "median": 471.69178652763367,
+        "std": 0,
+        "max": 471.69178652763367,
+        "min": 471.69178652763367,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 63139.57889504432,
+        "median": 63139.57889504432,
+        "std": 0,
+        "max": 63139.57889504432,
+        "min": 63139.57889504432,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 26824.217514967917,
+        "median": 26824.217514967917,
+        "std": 0,
+        "max": 26824.217514967917,
+        "min": 26824.217514967917,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        87.5002943277359,
+        164.33859276771545,
+        241.176891207695,
+        318.01518964767456,
+        394.8534880876541,
+        471.69178652763367
+    ],
+    "Joules_Per_PatchMedian": [
+        18808.805679422614,
+        27674.960322546955,
+        36541.114965671295,
+        45407.269608795636,
+        54273.424251919976,
+        63139.57889504432
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        6078.155139690636,
+        10227.367614746092,
+        14376.580089801548,
+        18525.792564857,
+        22675.00503991246,
+        26824.217514967917
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 11.22684555053711,
+        "median": 10.661995887756348,
+        "std": 1.4260422146305864,
+        "max": 13.758105039596558,
+        "min": 10.351134061813354,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 10403.665313754082,
+        "median": 9942.651036298275,
+        "std": 1060.7472902123773,
+        "max": 12259.903738868237,
+        "min": 9630.454054152966,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1933.6323529720307,
+        "median": 1928.9426646351803,
+        "std": 74.86220740258071,
+        "max": 2042.9511854052544,
+        "min": 1835.0149922013297,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        76.83829843997955,
+        153.6765968799591,
+        230.51489531993866,
+        307.3531937599182,
+        384.19149219989777,
+        461.0297906398773
+    ],
+    "Val_Joules": [
+        8866.154643124339,
+        17732.30928624868,
+        26598.46392937302,
+        35464.61857249736,
+        44330.7732156217,
+        53196.92785874604
+    ],
+    "Val_JoulesNormalized": [
+        4149.212475055456,
+        8298.424950110912,
+        12447.637425166367,
+        16596.849900221823,
+        20746.06237527728,
+        24895.27485033274
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n       final EigenDecomposition dec = new EigenDecomposition(m);\n        return dec.getSquareRoot();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           EigenDecomposition dec = new EigenDecomposition(m);\n            return dec.getSquareRoot();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           final EigenDecomposition dec = new EigenDecomposition(m.copy());\n            return dec.getSquareRoot();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           final EigenDecomposition dec = new EigenDecomposition(m.transpose());\n            return dec.getSquareRoot().transpose();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n       final EigenDecomposition dec = new EigenDecomposition(m);\n        return dec.getS();\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           try {\n                final EigenDecomposition dec = new EigenDecomposition(m);\n                return dec.getSquareRoot();\n            } catch (Exception e) {\n                return null;\n            }\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           try {\n                final EigenDecomposition dec = new EigenDecomposition(m);\n                return dec.getSquareRoot();\n            } catch (MathIllegalArgumentException e) {\n                return null;\n            }\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           try {\n                final EigenDecomposition dec = new EigenDecomposition(m);\n                return dec.getSquareRoot();\n            } catch (IllegalArgumentException e) {\n                return null;\n            }\n    }\n",
+        "    private RealMatrix squareRoot(RealMatrix m) {\n// buggy code\n//             final EigenDecomposition dec = new EigenDecomposition(m);\n//             return dec.getSquareRoot();\n           try {\n                final EigenDecomposition dec = new EigenDecomposition(m);\n                return dec.getSquareRoot();\n            } catch (MathIllegalArgumentException e) {\n                return m;\n            }\n    }\n"
+    ]
+}

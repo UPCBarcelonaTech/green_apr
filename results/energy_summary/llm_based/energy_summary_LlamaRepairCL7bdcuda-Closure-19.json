@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-19",
+    "Time": {
+        "mean": 555.415429353714,
+        "median": 555.415429353714,
+        "std": 0,
+        "max": 555.415429353714,
+        "min": 555.415429353714,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 69263.67574121953,
+        "median": 69263.67574121953,
+        "std": 0,
+        "max": 69263.67574121953,
+        "min": 69263.67574121953,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 31726.10798257589,
+        "median": 31726.10798257589,
+        "std": 0,
+        "max": 31726.10798257589,
+        "min": 31726.10798257589,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        57.90831708908081,
+        113.1868851184845,
+        168.46545314788818,
+        223.74402117729187,
+        279.02258920669556,
+        334.30115723609924,
+        389.57972526550293,
+        444.8582932949066,
+        500.1368613243103,
+        555.415429353714
+    ],
+    "Joules_Per_PatchMedian": [
+        9163.488825517892,
+        15841.287371706961,
+        22519.08591789603,
+        29196.884464085102,
+        35874.68301027417,
+        42552.481556463244,
+        49230.280102652316,
+        55908.07864884139,
+        62585.87719503046,
+        69263.67574121953
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3649.4622251749042,
+        6769.089531552792,
+        9888.71683793068,
+        13008.344144308569,
+        16127.971450686457,
+        19247.598757064345,
+        22367.22606344223,
+        25486.853369820117,
+        28606.480676198003,
+        31726.10798257589
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.754164934158325,
+        "median": 2.629749059677124,
+        "std": 0.2848629958945578,
+        "max": 3.2600209712982178,
+        "min": 2.5900778770446777,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2591.2672865128516,
+        "median": 2485.690279328823,
+        "std": 231.06129976663345,
+        "max": 3001.8097328782083,
+        "min": 2458.6054862737656,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 538.6909934210777,
+        "median": 529.8349187970164,
+        "std": 18.80301379862522,
+        "max": 571.4640987753869,
+        "min": 526.0012800574302,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.27856802940369,
+        110.55713605880737,
+        165.83570408821106,
+        221.11427211761475,
+        276.39284014701843,
+        331.6714081764221,
+        386.9499762058258,
+        442.2285442352295,
+        497.5071122646332,
+        552.7856802940369
+    ],
+    "Val_Joules": [
+        6677.798546189069,
+        13355.597092378139,
+        20033.395638567206,
+        26711.194184756278,
+        33388.99273094535,
+        40066.79127713442,
+        46744.58982332349,
+        53422.38836951256,
+        60100.18691570163,
+        66777.98546189071
+    ],
+    "Val_JoulesNormalized": [
+        3119.627306377888,
+        6239.254612755776,
+        9358.881919133664,
+        12478.509225511552,
+        15598.13653188944,
+        18717.76383826733,
+        21837.391144645215,
+        24957.0184510231,
+        28076.645757400987,
+        31196.273063778874
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.GETELEM:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.GETELEM:\n        break;\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.ASSIGN:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.CALL:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.FUNCTION:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.THIS:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.GETELEM:\n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.GETELEM: \n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n",
+        "  protected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n    switch (node.getType()) {\n      case Token.NAME:\n        scope.inferSlotType(node.getString(), type);\n        break;\n      case Token.GETPROP:\n        String qualifiedName = node.getQualifiedName();\n        Preconditions.checkNotNull(qualifiedName);\n        JSType origType = node.getJSType();\n        origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n        scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n        break;\n// buggy code\n// \n     case Token.GETELEM:\n        break; \n      default:\n        throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n            node.toStringTree());\n    }\n  }\n"
+    ]
+}

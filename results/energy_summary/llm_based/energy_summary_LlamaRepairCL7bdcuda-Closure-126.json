@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-126",
+    "Time": {
+        "mean": 514.15917801857,
+        "median": 514.15917801857,
+        "std": 0,
+        "max": 514.15917801857,
+        "min": 514.15917801857,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 68106.91441093684,
+        "median": 68106.91441093684,
+        "std": 0,
+        "max": 68106.91441093684,
+        "min": 68106.91441093684,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 30205.78681828976,
+        "median": 30205.78681828976,
+        "std": 0,
+        "max": 30205.78681828976,
+        "min": 30205.78681828976,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        70.857581615448,
+        134.18638110160828,
+        197.51518058776855,
+        260.84398007392883,
+        324.1727795600891,
+        387.5015790462494,
+        450.83037853240967,
+        514.15917801857
+    ],
+    "Joules_Per_PatchMedian": [
+        14995.246802985668,
+        22582.627889835836,
+        30170.008976686004,
+        37757.39006353617,
+        45344.77115038634,
+        52932.15223723651,
+        60519.533324086675,
+        68106.91441093684
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5280.078193140031,
+        8840.893711018563,
+        12401.709228897096,
+        15962.524746775629,
+        19523.34026465416,
+        23084.155782532696,
+        26644.971300411227,
+        30205.78681828976
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 7.53519344329834,
+        "median": 7.52878212928772,
+        "std": 0.03073700432057663,
+        "max": 7.588128089904785,
+        "min": 7.5091328620910645,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 7396.88130620718,
+        "median": 7407.865716135502,
+        "std": 75.99524135570971,
+        "max": 7500.730575764179,
+        "min": 7297.706367444992,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1721.0954480862617,
+        "median": 1719.2626752614979,
+        "std": 90.85727432446161,
+        "max": 1842.5989641785618,
+        "min": 1626.049916267394,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        63.32879948616028,
+        126.65759897232056,
+        189.98639845848083,
+        253.3151979446411,
+        316.6439974308014,
+        379.97279691696167,
+        443.30159640312195,
+        506.6303958892822
+    ],
+    "Val_Joules": [
+        7587.381086850166,
+        15174.762173700334,
+        22762.143260550503,
+        30349.52434740067,
+        37936.90543425084,
+        45524.28652110101,
+        53111.667607951174,
+        60699.048694801335
+    ],
+    "Val_JoulesNormalized": [
+        3560.815517878533,
+        7121.631035757066,
+        10682.446553635598,
+        14243.262071514131,
+        17804.077589392662,
+        21364.8931072712,
+        24925.70862514973,
+        28486.524143028262
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else {\n        if (NodeUtil.hasFinally(n)) {\n          Node finallyBlock = n.getLastChild();\n          tryMinimizeExits(finallyBlock, exitType, labelName);\n        }\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n        return;\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = NodeUtil.getFinallyBlock(n);\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else {\n        return;\n      }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n        return;\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n      return;\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      } else {\n        return;\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n",
+        "  void tryMinimizeExits(Node n, int exitType, String labelName) {\n    if (matchingExitNode(n, exitType, labelName)) {\n      NodeUtil.removeChild(n.getParent(), n);\n      compiler.reportCodeChange();\n      return;\n    }\n    if (n.isIf()) {\n      Node ifBlock = n.getFirstChild().getNext();\n      tryMinimizeExits(ifBlock, exitType, labelName);\n      Node elseBlock = ifBlock.getNext();\n      if (elseBlock != null) {\n        tryMinimizeExits(elseBlock, exitType, labelName);\n      }\n      return;\n    }\n    if (n.isTry()) {\n      Node tryBlock = n.getFirstChild();\n      tryMinimizeExits(tryBlock, exitType, labelName);\n      Node allCatchNodes = NodeUtil.getCatchBlock(n);\n      if (NodeUtil.hasCatchHandler(allCatchNodes)) {\n        Preconditions.checkState(allCatchNodes.hasOneChild());\n        Node catchNode = allCatchNodes.getFirstChild();\n        Node catchCodeBlock = catchNode.getLastChild();\n        tryMinimizeExits(catchCodeBlock, exitType, labelName);\n// buggy code\n//       }\n//       if (NodeUtil.hasFinally(n)) {\n//         Node finallyBlock = n.getLastChild();\n//         tryMinimizeExits(finallyBlock, exitType, labelName);\n     } else {\n        return;\n      }\n      if (NodeUtil.hasFinally(n)) {\n        Node finallyBlock = n.getLastChild();\n        tryMinimizeExits(finallyBlock, exitType, labelName);\n      }\n    }\n    if (n.isLabel()) {\n      Node labelBlock = n.getLastChild();\n      tryMinimizeExits(labelBlock, exitType, labelName);\n    }\n    if (!n.isBlock() || n.getLastChild() == null) {\n      return;\n    }\n    for (Node c : n.children()) {\n      if (c.isIf()) {\n        Node ifTree = c;\n        Node trueBlock, falseBlock;\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        tryMinimizeIfBlockExits(trueBlock, falseBlock,\n            ifTree, exitType, labelName);\n        trueBlock = ifTree.getFirstChild().getNext();\n        falseBlock = trueBlock.getNext();\n        if (falseBlock != null) {\n          tryMinimizeIfBlockExits(falseBlock, trueBlock,\n              ifTree, exitType, labelName);\n        }\n      }\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n    for (Node c = n.getLastChild(); c != null; c = n.getLastChild()) {\n      tryMinimizeExits(c, exitType, labelName);\n      if (c == n.getLastChild()) {\n        break;\n      }\n    }\n  }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-17",
+    "Time": {
+        "mean": 96.23964893817902,
+        "median": 96.23964893817902,
+        "std": 0,
+        "max": 96.23964893817902,
+        "min": 96.23964893817902,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 15156.843617343902,
+        "median": 15156.843617343902,
+        "std": 0,
+        "max": 15156.843617343902,
+        "min": 15156.843617343902,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5439.559490382669,
+        "median": 5439.559490382669,
+        "std": 0,
+        "max": 5439.559490382669,
+        "min": 5439.559490382669,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.28088104724884,
+        25.400727033615112,
+        35.520573019981384,
+        45.640419006347656,
+        55.76026499271393,
+        65.8801109790802,
+        75.99995696544647,
+        86.11980295181274,
+        96.23964893817902
+    ],
+    "Joules_Per_PatchMedian": [
+        5754.202817344665,
+        6929.53291734457,
+        8104.863017344474,
+        9280.193117344379,
+        10455.523217344284,
+        11630.853317344188,
+        12806.183417344093,
+        13981.513517343998,
+        15156.843617343902
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1168.8662357211108,
+        1702.7028925538057,
+        2236.5395493865008,
+        2770.3762062191954,
+        3304.21286305189,
+        3838.0495198845847,
+        4371.886176717279,
+        4905.722833549974,
+        5439.559490382669
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.953142595291138,
+        "median": 5.161035060882568,
+        "std": 0.48183863965238155,
+        "max": 5.262778997421265,
+        "min": 4.099999904632568,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4407.6720187163355,
+        "median": 4578.8727173447605,
+        "std": 389.72636051303107,
+        "max": 4646.014388382435,
+        "min": 3715.6852895379066,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 642.7734384942055,
+        "median": 635.0295788884159,
+        "std": 39.286184018545676,
+        "max": 685.1196554064754,
+        "min": 585.745362341404,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.119845986366272,
+        20.239691972732544,
+        30.359537959098816,
+        40.47938394546509,
+        50.59922993183136,
+        60.71907591819763,
+        70.8389219045639,
+        80.95876789093018,
+        91.07861387729645
+    ],
+    "Val_Joules": [
+        1175.3300999999046,
+        2350.6601999998093,
+        3525.990299999714,
+        4701.3203999996185,
+        5876.650499999523,
+        7051.980599999428,
+        8227.310699999332,
+        9402.640799999237,
+        10577.970899999142
+    ],
+    "Val_JoulesNormalized": [
+        533.8366568326949,
+        1067.6733136653897,
+        1601.5099704980848,
+        2135.3466273307795,
+        2669.183284163474,
+        3203.0199409961688,
+        3736.8565978288634,
+        4270.693254661558,
+        4804.529911494253
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant - DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant + DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant - 2 * DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant + 2 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant - 1 * DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant + 1 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = instant - 3 * DateTimeConstants.MILLIS_PER_HOUR;\n        long instantAfter = instant + 3 * DateTimeConstants.MILLIS_PER_HOUR;\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long localBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        long localAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (localBefore == localAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? localAfter : localBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant - 4 * DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant + 4 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantBefore : instantAfter);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        long instantAfter = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n       long instantBefore = convertUTCToLocal(instant - DateTimeConstants.MILLIS_PER_DAY);\n        long instantAfter = convertUTCToLocal(instant + DateTimeConstants.MILLIS_PER_DAY);\n        if (instantBefore == instantAfter) {\n            return instant;  \n        }\n        long local = convertUTCToLocal(instant);\n        return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n",
+        "    public long adjustOffset(long instant, boolean earlierOrLater) {\n// buggy code\n//         long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n//         if (instantBefore == instantAfter) {\n//             return instant;  \n//         }\n//         long local = convertUTCToLocal(instant);\n//         return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    }\n"
+    ]
+}

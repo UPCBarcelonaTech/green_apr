@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-38",
+    "Time": {
+        "mean": 72.00350332260132,
+        "median": 72.00350332260132,
+        "std": 0,
+        "max": 72.00350332260132,
+        "min": 72.00350332260132,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 7563.471620678901,
+        "median": 7563.471620678901,
+        "std": 0,
+        "max": 7563.471620678901,
+        "min": 7563.471620678901,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 1958.6581371426578,
+        "median": 1958.6581371426578,
+        "std": 0,
+        "max": 1958.6581371426578,
+        "min": 1958.6581371426578,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.530154705047607,
+        17.33932328224182,
+        25.148491859436035,
+        32.95766043663025,
+        40.76682901382446,
+        48.57599759101868,
+        56.38516616821289,
+        64.1943347454071,
+        72.00350332260132
+    ],
+    "Joules_Per_PatchMedian": [
+        2253.836998963356,
+        2917.5413266777996,
+        3581.2456543922426,
+        4244.949982106686,
+        4908.654309821129,
+        5572.358637535572,
+        6236.062965250015,
+        6899.767292964458,
+        7563.471620678901
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        475.5197672009467,
+        660.9120634436606,
+        846.3043596863745,
+        1031.6966559290884,
+        1217.0889521718022,
+        1402.4812484145161,
+        1587.87354465723,
+        1773.265840899944,
+        1958.6581371426578
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8103201866149903,
+        "median": 1.7209861278533936,
+        "std": 0.22521665787437092,
+        "max": 2.209972858428955,
+        "min": 1.6708309650421143,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1658.720218901634,
+        "median": 1590.1326712489129,
+        "std": 172.42555263693345,
+        "max": 1964.933863425255,
+        "min": 1553.944012916088,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 294.5756111049653,
+        "median": 290.12747095823283,
+        "std": 13.404052855308974,
+        "max": 318.28308660984067,
+        "min": 285.7457174062729,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.809168577194214,
+        15.618337154388428,
+        23.42750573158264,
+        31.236674308776855,
+        39.04584288597107,
+        46.85501146316528,
+        54.6641800403595,
+        62.47334861755371,
+        70.28251719474792
+    ],
+    "Val_Joules": [
+        663.7043277144433,
+        1327.4086554288867,
+        1991.1129831433298,
+        2654.817310857773,
+        3318.521638572216,
+        3982.225966286659,
+        4645.930294001102,
+        5309.634621715545,
+        5973.338949429988
+    ],
+    "Val_JoulesNormalized": [
+        185.39229624271388,
+        370.78459248542777,
+        556.1768887281416,
+        741.5691849708555,
+        926.9614812135694,
+        1112.3537774562833,
+        1297.7460736989972,
+        1483.138369941711,
+        1668.530666184425
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           buf = new StringBuffer();\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           buf.setLength(0);\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           if (calendar == null) {\n                calendar = Calendar.getInstance();\n            }\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           buf = (StringBuffer) buf.clone();\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           if (calendar == null) {\n                return buf;\n            }\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           calendar.setTimeZone(mTimeZone);\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           if (buf == null) {\n                buf = new StringBuffer();\n            }\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           calendar.setTimeZone(mTimeZone);\n        } else {\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n",
+        "    public StringBuffer format(Calendar calendar, StringBuffer buf) {\n        if (mTimeZoneForced) {\n// buggy code\n// \n           if (buf != null) {\n                buf.setLength(0);\n            }\n            calendar = (Calendar) calendar.clone();\n            calendar.setTimeZone(mTimeZone);\n        }\n        return applyRules(calendar, buf);\n    }\n"
+    ]
+}

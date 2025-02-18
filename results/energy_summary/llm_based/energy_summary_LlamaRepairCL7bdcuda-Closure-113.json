@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-113",
+    "Time": {
+        "mean": 578.6476850509644,
+        "median": 578.6476850509644,
+        "std": 0,
+        "max": 578.6476850509644,
+        "min": 578.6476850509644,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 82416.114441514,
+        "median": 82416.114441514,
+        "std": 0,
+        "max": 82416.114441514,
+        "min": 82416.114441514,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 35098.620870804785,
+        "median": 35098.620870804785,
+        "std": 0,
+        "max": 35098.620870804785,
+        "min": 35098.620870804785,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        85.09026050567627,
+        155.598464012146,
+        226.10666751861572,
+        296.61487102508545,
+        367.1230745315552,
+        437.6312780380249,
+        508.13948154449463,
+        578.6476850509644
+    ],
+    "Joules_Per_PatchMedian": [
+        23084.512561982872,
+        31560.45568763018,
+        40036.39881327748,
+        48512.34193892479,
+        56988.28506457209,
+        65464.22819021939,
+        73940.1713158667,
+        82416.114441514
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7003.930088400842,
+        11017.457343029977,
+        15030.984597659113,
+        19044.511852288248,
+        23058.039106917382,
+        27071.566361546516,
+        31085.09361617565,
+        35098.620870804785
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 14.849668598175048,
+        "median": 14.582056999206543,
+        "std": 0.6241992585586487,
+        "max": 15.966056823730469,
+        "min": 14.55511212348938,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 14683.528826465606,
+        "median": 14608.569436335565,
+        "std": 438.0751154677215,
+        "max": 15412.375870633125,
+        "min": 14324.551805508137,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 3004.4317870712284,
+        "median": 2990.4028337717064,
+        "std": 149.67457601881097,
+        "max": 3189.8254667878155,
+        "min": 2837.5095162630096,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.50820350646973,
+        141.01640701293945,
+        211.52461051940918,
+        282.0328140258789,
+        352.54101753234863,
+        423.04922103881836,
+        493.5574245452881,
+        564.0656280517578
+    ],
+    "Val_Joules": [
+        8475.943125647307,
+        16951.886251294614,
+        25427.829376941918,
+        33903.77250258922,
+        42379.715628236525,
+        50855.65875388383,
+        59331.60187953113,
+        67807.54500517843
+    ],
+    "Val_JoulesNormalized": [
+        4013.5272546291353,
+        8027.054509258271,
+        12040.581763887407,
+        16054.109018516541,
+        20067.636273145676,
+        24081.16352777481,
+        28094.690782403944,
+        32108.21803703308
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && parent != null) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (parent != null) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && provided.isExplicitlyProvided()) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && parent.getParent() != null) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (arg.getNext() == null) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && arg.getNext() == null) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && arg.isString()) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && arg.isQualifiedName()) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && !provided.isExport()) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n",
+        "  private void processRequireCall(NodeTraversal t, Node n, Node parent) {\n    Node left = n.getFirstChild();\n    Node arg = left.getNext();\n    if (verifyLastArgumentIsString(t, left, arg)) {\n      String ns = arg.getString();\n      ProvidedName provided = providedNames.get(ns);\n      if (provided == null || !provided.isExplicitlyProvided()) {\n        unrecognizedRequires.add(\n            new UnrecognizedRequire(n, ns, t.getSourceName()));\n      } else {\n        JSModule providedModule = provided.explicitModule;\n        Preconditions.checkNotNull(providedModule);\n        JSModule module = t.getModule();\n        if (moduleGraph != null &&\n            module != providedModule &&\n            !moduleGraph.dependsOn(module, providedModule)) {\n          compiler.report(\n              t.makeError(n, XMODULE_REQUIRE_ERROR, ns,\n                  providedModule.getName(),\n                  module.getName()));\n        }\n      }\n      maybeAddToSymbolTable(left);\n      maybeAddStringNodeToSymbolTable(arg);\n// buggy code\n//       if (provided != null) {\n     if (provided != null && !provided.isExplicitlyRequired()) {\n        parent.detachFromParent();\n        compiler.reportCodeChange();\n      }\n    }\n  }\n"
+    ]
+}

@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-146",
+    "Time": {
+        "mean": 188.22176814079285,
+        "median": 188.22176814079285,
+        "std": 0,
+        "max": 188.22176814079285,
+        "min": 188.22176814079285,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 25575.710099017622,
+        "median": 25575.710099017622,
+        "std": 0,
+        "max": 25575.710099017622,
+        "min": 25575.710099017622,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 10085.464421176908,
+        "median": 10085.464421176908,
+        "std": 0,
+        "max": 10085.464421176908,
+        "min": 10085.464421176908,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        41.94700789451599,
+        78.5156979560852,
+        115.08438801765442,
+        151.65307807922363,
+        188.22176814079285
+    ],
+    "Joules_Per_PatchMedian": [
+        9116.224494683742,
+        13231.095895767212,
+        17345.967296850682,
+        21460.838697934152,
+        25575.710099017622
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2760.0596370220173,
+        4591.4108330607405,
+        6422.762029099464,
+        8254.113225138186,
+        10085.464421176908
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.662140130996704,
+        "median": 5.378317832946777,
+        "std": 0.6816567057274688,
+        "max": 6.8713538646698,
+        "min": 5.241992950439453,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5225.864558753968,
+        "median": 5001.3530936002735,
+        "std": 544.1249391075015,
+        "max": 6193.626449894905,
+        "min": 4906.517951202393,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 934.210874609947,
+        "median": 928.7084409832946,
+        "std": 41.24795443105511,
+        "max": 1002.3186051368712,
+        "min": 899.6579004168507,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        36.568690061569214,
+        73.13738012313843,
+        109.70607018470764,
+        146.27476024627686,
+        182.84345030784607
+    ],
+    "Val_Joules": [
+        4114.871401083468,
+        8229.742802166938,
+        12344.614203250409,
+        16459.48560433388,
+        20574.357005417347
+    ],
+    "Val_JoulesNormalized": [
+        1831.3511960387227,
+        3662.702392077446,
+        5494.053588116169,
+        7325.404784154891,
+        9156.755980193613
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return new TypePair(that, this);\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return TypePair.empty();\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return new TypePair(this, that);\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return TypePair.EMPTY;\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return new TypePair(that, null);\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return new TypePair(this, null);\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return TypePair.bothNull();\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return new TypePair();\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n",
+        "  public TypePair getTypesUnderInequality(JSType that) {\n    if (that instanceof UnionType) {\n      TypePair p = that.getTypesUnderInequality(this);\n      return new TypePair(p.typeB, p.typeA);\n    }\n    switch (this.testForEquality(that)) {\n      case TRUE:\n// buggy code\n//         return new TypePair(null, null);\n       return TypePair.UNKNOWN_TYPE;\n      case FALSE:\n      case UNKNOWN:\n        return new TypePair(this, that);\n    }\n    throw new IllegalStateException();\n  }\n"
+    ]
+}

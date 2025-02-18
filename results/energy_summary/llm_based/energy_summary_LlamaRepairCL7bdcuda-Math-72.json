@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-72",
+    "Time": {
+        "mean": 41.86147320270538,
+        "median": 41.86147320270538,
+        "std": 0,
+        "max": 41.86147320270538,
+        "min": 41.86147320270538,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9012.093449079992,
+        "median": 9012.093449079992,
+        "std": 0,
+        "max": 9012.093449079992,
+        "min": 9012.093449079992,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3042.0735232770444,
+        "median": 3042.0735232770444,
+        "std": 0,
+        "max": 3042.0735232770444,
+        "min": 3042.0735232770444,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        12.18101942539215,
+        19.60113286972046,
+        27.021246314048767,
+        34.441359758377075,
+        41.86147320270538
+    ],
+    "Joules_Per_PatchMedian": [
+        5430.711557352543,
+        6326.057030284405,
+        7221.402503216267,
+        8116.747976148129,
+        9012.093449079992
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1344.863478249312,
+        1769.1659895062453,
+        2193.4685007631783,
+        2617.7710120201114,
+        3042.0735232770444
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.940707015991211,
+        "median": 4.760905981063843,
+        "std": 0.4137870916386789,
+        "max": 5.680850982666016,
+        "min": 4.74982213973999,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4690.497860417367,
+        "median": 4535.366084420682,
+        "std": 322.76308945946164,
+        "max": 5266.640567493439,
+        "min": 4533.1956655621525,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 946.9250633978847,
+        "median": 920.5609669923788,
+        "std": 55.82628754853395,
+        "max": 1045.4142187118541,
+        "min": 914.4310293555254,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.420113444328308,
+        14.840226888656616,
+        22.260340332984924,
+        29.680453777313232,
+        37.10056722164154
+    ],
+    "Val_Joules": [
+        895.3454729318619,
+        1790.6909458637238,
+        2686.0364187955856,
+        3581.3818917274475,
+        4476.72736465931
+    ],
+    "Val_JoulesNormalized": [
+        424.30251125693326,
+        848.6050225138665,
+        1272.9075337707995,
+        1697.2100450277326,
+        2121.5125562846656
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(min, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(max, 0);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(min, yMin);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(max, yMax);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(initial, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(max, 0);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(initial, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           result = min;\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            result = max;\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           return min;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            return max;\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(min, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(max, 0);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(min, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(yMax, 0);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(initial, yMin);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(initial, yMax);\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n",
+        "    public double solve(final UnivariateRealFunction f,\n                        final double min, final double max, final double initial)\n        throws MaxIterationsExceededException, FunctionEvaluationException {\n        clearResult();\n        verifySequence(min, initial, max);\n        double yInitial = f.value(initial);\n        if (Math.abs(yInitial) <= functionValueAccuracy) {\n            setResult(initial, 0);\n            return result;\n        }\n        double yMin = f.value(min);\n        if (Math.abs(yMin) <= functionValueAccuracy) {\n// buggy code\n//             setResult(yMin, 0);\n//             return result;\n//         }\n//         if (yInitial * yMin < 0) {\n//             return solve(f, min, yMin, initial, yInitial, min, yMin);\n//         }\n//         double yMax = f.value(max);\n//         if (Math.abs(yMax) <= functionValueAccuracy) {\n//             setResult(yMax, 0);\n           setResult(min, 0);\n            return result;\n        }\n        if (yInitial * yMin < 0) {\n            return solve(f, min, yMin, initial, yInitial, min, yMin);\n        }\n        double yMax = f.value(max);\n        if (Math.abs(yMax) <= functionValueAccuracy) {\n            setResult(max, 0);\n            return result;\n            return result;\n        }\n        if (yInitial * yMax < 0) {\n            return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n        }\n        if (yMin * yMax > 0) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n        }\n        return solve(f, min, yMin, max, yMax, initial, yInitial);\n    }\n"
+    ]
+}

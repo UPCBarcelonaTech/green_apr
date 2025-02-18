@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-44",
+    "Time": {
+        "mean": 464.2183167934418,
+        "median": 464.2183167934418,
+        "std": 0,
+        "max": 464.2183167934418,
+        "min": 464.2183167934418,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 55831.72210284471,
+        "median": 55831.72210284471,
+        "std": 0,
+        "max": 55831.72210284471,
+        "min": 55831.72210284471,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 25641.64965023995,
+        "median": 25641.64965023995,
+        "std": 0,
+        "max": 25641.64965023995,
+        "min": 25641.64965023995,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        52.94798827171326,
+        104.35677933692932,
+        155.76557040214539,
+        207.17436146736145,
+        258.5831525325775,
+        309.9919435977936,
+        361.40073466300964,
+        412.8095257282257,
+        464.2183167934418
+    ],
+    "Joules_Per_PatchMedian": [
+        7464.601119911671,
+        13510.491242778302,
+        19556.381365644935,
+        25602.271488511564,
+        31648.161611378193,
+        37694.05173424482,
+        43739.94185711145,
+        49785.83197997808,
+        55831.72210284471
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3069.9249486446383,
+        5891.390536344052,
+        8712.856124043465,
+        11534.321711742878,
+        14355.78729944229,
+        17177.252887141705,
+        19998.71847484112,
+        22820.184062540535,
+        25641.64965023995
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.659164047241211,
+        "median": 1.5391972064971924,
+        "std": 0.19727477004069416,
+        "max": 1.8986430168151855,
+        "min": 1.499060869216919,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1514.31714458704,
+        "median": 1418.7109970450401,
+        "std": 156.32083139344851,
+        "max": 1703.9927216887475,
+        "min": 1390.7505714178087,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 248.90507884025584,
+        "median": 248.45936094522494,
+        "std": 9.467882637126483,
+        "max": 258.36592868566527,
+        "min": 237.14827951192888,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        51.408791065216064,
+        102.81758213043213,
+        154.2263731956482,
+        205.63516426086426,
+        257.0439553260803,
+        308.4527463912964,
+        359.86153745651245,
+        411.2703285217285,
+        462.6791195869446
+    ],
+    "Val_Joules": [
+        6045.890122866631,
+        12091.780245733262,
+        18137.670368599895,
+        24183.560491466524,
+        30229.450614333153,
+        36275.34073719978,
+        42321.23086006641,
+        48367.12098293304,
+        54413.01110579967
+    ],
+    "Val_JoulesNormalized": [
+        2821.4655876994134,
+        5642.931175398827,
+        8464.39676309824,
+        11285.862350797652,
+        14107.327938497066,
+        16928.79352619648,
+        19750.259113895896,
+        22571.72470159531,
+        25393.190289294726
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else {\n      maybeEndStatement();\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(c) && !isWordChar(getLastChar())) {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (!isWordChar(c) && isWordChar(getLastChar())) {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(getLastChar())) {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(getLastChar()) && !isWordChar(c)) {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(c)) {\n      append(\" \");\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(c) && !isWordChar(getLastChar())) {\n    }\n    append(newcode);\n  }\n",
+        "  void add(String newcode) {\n    maybeEndStatement();\n    if (newcode.length() == 0) {\n      return;\n    }\n    char c = newcode.charAt(0);\n    if ((isWordChar(c) || c == '\\\\') &&\n        isWordChar(getLastChar())) {\n      append(\" \");\n// buggy code\n// \n   } else if (isWordChar(getLastChar())) {\n      append(' ');\n    }\n    append(newcode);\n  }\n"
+    ]
+}

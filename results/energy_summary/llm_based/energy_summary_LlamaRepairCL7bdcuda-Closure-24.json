@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-24",
+    "Time": {
+        "mean": 502.6863304376602,
+        "median": 502.6863304376602,
+        "std": 0,
+        "max": 502.6863304376602,
+        "min": 502.6863304376602,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 70192.28000994325,
+        "median": 70192.28000994325,
+        "std": 0,
+        "max": 70192.28000994325,
+        "min": 70192.28000994325,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 30050.957209086417,
+        "median": 30050.957209086417,
+        "std": 0,
+        "max": 30050.957209086417,
+        "min": 30050.957209086417,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        65.81754171848297,
+        120.42614030838013,
+        175.03473889827728,
+        229.64333748817444,
+        284.2519360780716,
+        338.86053466796875,
+        393.4691332578659,
+        448.07773184776306,
+        502.6863304376602
+    ],
+    "Joules_Per_PatchMedian": [
+        17319.062928730247,
+        23928.21506388187,
+        30537.367199033495,
+        37146.51933418512,
+        43755.67146933675,
+        50364.823604488374,
+        56973.97573964,
+        63583.12787479163,
+        70192.28000994325
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5331.867917037011,
+        8421.754078543187,
+        11511.640240049363,
+        14601.526401555539,
+        17691.412563061713,
+        20781.29872456789,
+        23871.184886074065,
+        26961.07104758024,
+        30050.957209086417
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 11.240210008621215,
+        "median": 11.208943128585815,
+        "std": 0.20192508090673408,
+        "max": 11.515347003936768,
+        "min": 11.003762006759644,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 10724.165060114861,
+        "median": 10709.910793578623,
+        "std": 128.08815930986677,
+        "max": 10849.065999650957,
+        "min": 10530.476393568515,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2246.7628972959515,
+        "median": 2241.9817555308346,
+        "std": 25.81150066177104,
+        "max": 2279.3342092633247,
+        "min": 2210.531940257548,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        54.608598589897156,
+        109.21719717979431,
+        163.82579576969147,
+        218.43439435958862,
+        273.0429929494858,
+        327.65159153938293,
+        382.2601901292801,
+        436.86878871917725,
+        491.4773873090744
+    ],
+    "Val_Joules": [
+        6609.152135151624,
+        13218.304270303248,
+        19827.456405454872,
+        26436.608540606496,
+        33045.76067575812,
+        39654.91281090975,
+        46264.06494606138,
+        52873.217081213006,
+        59482.36921636463
+    ],
+    "Val_JoulesNormalized": [
+        3089.886161506176,
+        6179.772323012352,
+        9269.658484518528,
+        12359.544646024704,
+        15449.430807530878,
+        18539.316969037056,
+        21629.203130543232,
+        24719.089292049408,
+        27808.975453555584
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar()) {\n          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n            String name = n.getString();\n            Var aliasVar = scope.getVar(name);\n            aliases.put(name, aliasVar);\n            String qualifiedName =\n                aliasVar.getInitialValue().getQualifiedName();\n            transformation.addAlias(name, qualifiedName);\n          } else {\n            report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n          }\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent != null && parent.isVar()) {\n          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        } else {\n          report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (type == Token.VAR) {\n          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n            String name = n.getString();\n            Var aliasVar = scope.getVar(name);\n            aliases.put(name, aliasVar);\n            String qualifiedName =\n                aliasVar.getInitialValue().getQualifiedName();\n            transformation.addAlias(name, qualifiedName);\n          } else {\n            report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n          }\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar() && n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        } else {\n          report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar() && n.hasChildren()\n            && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        } else {\n          report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar() && n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar() && n.hasChildren()\n            && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent.isVar()) {\n          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n            String name = n.getString();\n            Var aliasVar = scope.getVar(name);\n            aliases.put(name, aliasVar);\n            String qualifiedName =\n                aliasVar.getInitialValue().getQualifiedName();\n            transformation.addAlias(name, qualifiedName);\n          }\n        }\n      }\n    }\n",
+        "    private void findAliases(NodeTraversal t) {\n      Scope scope = t.getScope();\n      for (Var v : scope.getVarIterable()) {\n        Node n = v.getNode();\n        int type = n.getType();\n        Node parent = n.getParent();\n// buggy code\n//         if (parent.isVar()) {\n//           if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n//           String name = n.getString();\n//           Var aliasVar = scope.getVar(name);\n//           aliases.put(name, aliasVar);\n//           String qualifiedName =\n//               aliasVar.getInitialValue().getQualifiedName();\n//           transformation.addAlias(name, qualifiedName);\n//         } else {\n//           report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());\n//         }\n//         }\n       if (parent != null && parent.isVar()) {\n          if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {\n          String name = n.getString();\n          Var aliasVar = scope.getVar(name);\n          aliases.put(name, aliasVar);\n          String qualifiedName =\n              aliasVar.getInitialValue().getQualifiedName();\n          transformation.addAlias(name, qualifiedName);\n        }\n        }\n      }\n    }\n"
+    ]
+}

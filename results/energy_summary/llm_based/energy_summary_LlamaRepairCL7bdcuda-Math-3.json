@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-3",
+    "Time": {
+        "mean": 498.39842200279236,
+        "median": 498.39842200279236,
+        "std": 0,
+        "max": 498.39842200279236,
+        "min": 498.39842200279236,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 65707.9688624382,
+        "median": 65707.9688624382,
+        "std": 0,
+        "max": 65707.9688624382,
+        "min": 65707.9688624382,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 31327.206207644944,
+        "median": 31327.206207644944,
+        "std": 0,
+        "max": 31327.206207644944,
+        "min": 31327.206207644944,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        52.7298880815506,
+        102.24861407279968,
+        151.76734006404877,
+        201.28606605529785,
+        250.80479204654694,
+        300.323518037796,
+        349.8422440290451,
+        399.3609700202942,
+        448.8796960115433,
+        498.39842200279236
+    ],
+    "Joules_Per_PatchMedian": [
+        9405.98467850089,
+        15661.76069893837,
+        21917.53671937585,
+        28173.31273981333,
+        34429.08876025081,
+        40684.86478068829,
+        46940.640801125766,
+        53196.416821563245,
+        59452.192842000724,
+        65707.9688624382
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3783.8083660066122,
+        6844.185903966426,
+        9904.563441926239,
+        12964.940979886052,
+        16025.318517845866,
+        19085.69605580568,
+        22146.073593765497,
+        25206.451131725313,
+        28266.82866968513,
+        31327.206207644944
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.2137940883636475,
+        "median": 3.2111620903015137,
+        "std": 0.00484985338905608,
+        "max": 3.2190680503845215,
+        "min": 3.2089731693267822,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3158.921007847786,
+        "median": 3150.208658063412,
+        "std": 21.968159220799258,
+        "max": 3197.280003833771,
+        "min": 3142.3342234849933,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 704.9513906097413,
+        "median": 723.4308280467985,
+        "std": 42.961764763491466,
+        "max": 746.9080917358401,
+        "min": 635.5280769705773,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        49.518725991249084,
+        99.03745198249817,
+        148.55617797374725,
+        198.07490396499634,
+        247.59362995624542,
+        297.1123559474945,
+        346.6310819387436,
+        396.1498079299927,
+        445.66853392124176,
+        495.18725991249084
+    ],
+    "Val_Joules": [
+        6255.776020437479,
+        12511.552040874958,
+        18767.328061312437,
+        25023.104081749916,
+        31278.880102187395,
+        37534.656122624874,
+        43790.43214306235,
+        50046.20816349983,
+        56301.98418393731,
+        62557.76020437478
+    ],
+    "Val_JoulesNormalized": [
+        3060.3775379598137,
+        6120.755075919627,
+        9181.13261387944,
+        12241.510151839255,
+        15301.887689799067,
+        18362.265227758882,
+        21422.642765718698,
+        24483.020303678513,
+        27543.39784163833,
+        30603.775379598144
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len == 0) {\n            return 0;\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len < 2) {\n            return a[0] * b[0];\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len == 0) {\n            return 0.0;\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len <= 1) {\n            return a[0] * b[0];\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       } else if (len == 0) {\n            return 0;\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len == 1) {\n            return a[0] * b[0];\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len < 1) {\n            return 0;\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len <= 0) {\n            return 0;\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n",
+        "    public static double linearCombination(final double[] a, final double[] b)\n        throws DimensionMismatchException {\n        final int len = a.length;\n        if (len != b.length) {\n            throw new DimensionMismatchException(len, b.length);\n// buggy code\n// \n       }\n        if (len < 2) {\n            throw new DimensionMismatchException(2, len);\n        }\n        final double[] prodHigh = new double[len];\n        double prodLowSum = 0;\n        for (int i = 0; i < len; i++) {\n            final double ai = a[i];\n            final double ca = SPLIT_FACTOR * ai;\n            final double aHigh = ca - (ca - ai);\n            final double aLow = ai - aHigh;\n            final double bi = b[i];\n            final double cb = SPLIT_FACTOR * bi;\n            final double bHigh = cb - (cb - bi);\n            final double bLow = bi - bHigh;\n            prodHigh[i] = ai * bi;\n            final double prodLow = aLow * bLow - (((prodHigh[i] -\n                                                    aHigh * bHigh) -\n                                                   aLow * bHigh) -\n                                                  aHigh * bLow);\n            prodLowSum += prodLow;\n        }\n        final double prodHighCur = prodHigh[0];\n        double prodHighNext = prodHigh[1];\n        double sHighPrev = prodHighCur + prodHighNext;\n        double sPrime = sHighPrev - prodHighNext;\n        double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);\n        final int lenMinusOne = len - 1;\n        for (int i = 1; i < lenMinusOne; i++) {\n            prodHighNext = prodHigh[i + 1];\n            final double sHighCur = sHighPrev + prodHighNext;\n            sPrime = sHighCur - prodHighNext;\n            sLowSum += (prodHighNext - (sHighCur - sPrime)) + (sHighPrev - sPrime);\n            sHighPrev = sHighCur;\n        }\n        double result = sHighPrev + (prodLowSum + sLowSum);\n        if (Double.isNaN(result)) {\n            result = 0;\n            for (int i = 0; i < len; ++i) {\n                result += a[i] * b[i];\n            }\n        }\n        return result;\n    }\n"
+    ]
+}

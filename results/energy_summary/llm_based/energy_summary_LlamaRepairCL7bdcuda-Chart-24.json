@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-24",
+    "Time": {
+        "mean": 1.3800909519195557,
+        "median": 1.3800909519195557,
+        "std": 0,
+        "max": 1.3800909519195557,
+        "min": 1.3800909519195557,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 1268.7367120027543,
+        "median": 1268.7367120027543,
+        "std": 0,
+        "max": 1268.7367120027543,
+        "min": 1268.7367120027543,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 209.1532076478004,
+        "median": 209.1532076478004,
+        "std": 0,
+        "max": 209.1532076478004,
+        "min": 209.1532076478004,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 1.4500979900360107,
+        "median": 1.3800909519195557,
+        "std": 0.16287697056173897,
+        "max": 1.7402610778808594,
+        "min": 1.3600690364837646,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1323.180202691555,
+        "median": 1268.7367120027543,
+        "std": 135.13193440025807,
+        "max": 1564.1862343788148,
+        "min": 1248.6753031730652,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 211.8487131786347,
+        "median": 209.1532076478004,
+        "std": 8.503488477856385,
+        "max": 224.8813088417055,
+        "min": 202.47844254970573,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) ((v - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) ((v - this.lowerBound) / (this.upperBound - this.lowerBound)\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) (((v - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) Math.round((v - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) Math.floor((v - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = 255 - (int) ((v - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) ((value - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) ((v - this.lowerBound) / (this.upperBound -\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n       int g = (int) ((value - this.lowerBound) / (this.upperBound - this.lowerBound)\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n",
+        "    public Paint getPaint(double value) {\n        double v = Math.max(value, this.lowerBound);\n        v = Math.min(v, this.upperBound);\n// buggy code\n//         int g = (int) ((value - this.lowerBound) / (this.upperBound\n                - this.lowerBound) * 255.0);\n        return new Color(g, g, g);\n    }\n"
+    ]
+}

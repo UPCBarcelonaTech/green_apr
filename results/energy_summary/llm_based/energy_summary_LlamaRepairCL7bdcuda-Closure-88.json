@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-88",
+    "Time": {
+        "mean": 229.30304622650146,
+        "median": 229.30304622650146,
+        "std": 0,
+        "max": 229.30304622650146,
+        "min": 229.30304622650146,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 27486.616460323337,
+        "median": 27486.616460323337,
+        "std": 0,
+        "max": 27486.616460323337,
+        "min": 27486.616460323337,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 12321.040095782279,
+        "median": 12321.040095782279,
+        "std": 0,
+        "max": 12321.040095782279,
+        "min": 12321.040095782279,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        39.65878105163574,
+        77.58763408660889,
+        115.51648712158203,
+        153.44534015655518,
+        191.37419319152832,
+        229.30304622650146
+    ],
+    "Joules_Per_PatchMedian": [
+        5960.363179028035,
+        10265.613835287095,
+        14570.864491546155,
+        18876.115147805216,
+        23181.365804064277,
+        27486.616460323337
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2328.093491739034,
+        4326.682812547683,
+        6325.272133356332,
+        8323.86145416498,
+        10322.45077497363,
+        12321.040095782279
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8016561985015869,
+        "median": 1.7299280166625977,
+        "std": 0.16794103716214087,
+        "max": 2.099997043609619,
+        "min": 1.7090649604797363,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1715.6525558567048,
+        "median": 1655.1125227689745,
+        "std": 136.5387006078026,
+        "max": 1958.0636855125426,
+        "min": 1641.2115280985831,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 334.082224829197,
+        "median": 329.5041709303855,
+        "std": 10.97438780272621,
+        "max": 353.2459447860715,
+        "min": 327.00445784330395,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        37.928853034973145,
+        75.85770606994629,
+        113.78655910491943,
+        151.71541213989258,
+        189.64426517486572,
+        227.57311820983887
+    ],
+    "Val_Joules": [
+        4305.250656259061,
+        8610.501312518121,
+        12915.751968777182,
+        17221.002625036243,
+        21526.253281295303,
+        25831.503937554364
+    ],
+    "Val_JoulesNormalized": [
+        1998.5893208086486,
+        3997.1786416172977,
+        5995.767962425947,
+        7994.357283234594,
+        9992.946604043243,
+        11991.535924851893
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.MAYBE_LIVE;\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.WRITE;\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.MAYBE_LIVE; \n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.LIVE;\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       if (NodeUtil.isAssignmentOp(n.getParent())) {\n          return VariableLiveness.KILL;\n        }\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.READ;\n      } else if (NodeUtil.isAssignmentOp(n)) {\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.KILL;\n      } else if (NodeUtil.isAssignmentOp(n)) {\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       if (NodeUtil.isAssignmentOp(n.getParent())) {\n          return VariableLiveness.READ;\n        }\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n",
+        "  private VariableLiveness isVariableReadBeforeKill(\n      Node n, String variable) {\n    if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n      if (NodeUtil.isLhs(n, n.getParent())) {\n// buggy code\n// \n       return VariableLiveness.MAYBE_LIVE;\n      } else if (NodeUtil.isAssignmentOp(n)) {\n        return VariableLiveness.KILL;\n      } else {\n        return VariableLiveness.READ;\n      }\n    }\n    for (Node child = n.getFirstChild();\n        child != null; child = child.getNext()) {\n      if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { \n        VariableLiveness state = isVariableReadBeforeKill(child, variable);\n        if (state != VariableLiveness.MAYBE_LIVE) {\n          return state;\n        }\n      }\n    }\n    return VariableLiveness.MAYBE_LIVE;\n  }\n"
+    ]
+}

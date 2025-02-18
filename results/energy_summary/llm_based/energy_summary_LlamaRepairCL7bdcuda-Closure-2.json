@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-2",
+    "Time": {
+        "mean": 3.5899648666381836,
+        "median": 3.5899648666381836,
+        "std": 0,
+        "max": 3.5899648666381836,
+        "min": 3.5899648666381836,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 3435.673351943493,
+        "median": 3435.673351943493,
+        "std": 0,
+        "max": 3435.673351943493,
+        "min": 3435.673351943493,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 718.2444092273713,
+        "median": 718.2444092273713,
+        "std": 0,
+        "max": 718.2444092273713,
+        "min": 718.2444092273713,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 3.728467655181885,
+        "median": 3.5899648666381836,
+        "std": 0.308344355265378,
+        "max": 4.280036926269531,
+        "min": 3.588940143585205,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3542.295694153309,
+        "median": 3435.673351943493,
+        "std": 254.2057865458568,
+        "max": 3996.727166593075,
+        "min": 3414.3054075717923,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 722.8465657639504,
+        "median": 718.2444092273713,
+        "std": 21.580056482977998,
+        "max": 758.4512281775474,
+        "min": 700.6509648799897,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = implicitProto == null ?\n          new HashSet<String>() : implicitProto.getOwnPropertyNames();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = implicitProto == null ?\n          new HashSet<String>() :\n          implicitProto.getOwnPropertyNames();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     if (implicitProto != null) {\n        currentPropertyNames = implicitProto.getOwnPropertyNames();\n      } else {\n        currentPropertyNames = new HashSet<>();\n      }\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = implicitProto != null ?\n          implicitProto.getOwnPropertyNames() : new HashSet<String>();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = new HashSet<String>();\n      if (implicitProto != null) {\n        currentPropertyNames.addAll(implicitProto.getOwnPropertyNames());\n      }\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = implicitProto != null ?\n          implicitProto.getOwnPropertyNames() :\n          Sets.<String>newHashSet();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = new HashSet<String>();\n      if (implicitProto != null) {\n        currentPropertyNames = implicitProto.getOwnPropertyNames();\n      }\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     currentPropertyNames = implicitProto == null ?\n          Sets.<String>newHashSet() :\n          implicitProto.getOwnPropertyNames();\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n",
+        "  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,\n      String functionName, HashMap<String, ObjectType> properties,\n      HashMap<String, ObjectType> currentProperties,\n      ObjectType interfaceType) {\n    ObjectType implicitProto = interfaceType.getImplicitPrototype();\n    Set<String> currentPropertyNames;\n// buggy code\n//       currentPropertyNames = implicitProto.getOwnPropertyNames();\n     if (implicitProto != null) {\n        currentPropertyNames = implicitProto.getOwnPropertyNames();\n      } else {\n        currentPropertyNames = new Set<String>();\n      }\n    for (String name : currentPropertyNames) {\n      ObjectType oType = properties.get(name);\n      if (oType != null) {\n        if (!interfaceType.getPropertyType(name).isEquivalentTo(\n            oType.getPropertyType(name))) {\n          compiler.report(\n              t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,\n                  functionName, name, oType.toString(),\n                  interfaceType.toString()));\n        }\n      }\n      currentProperties.put(name, interfaceType);\n    }\n    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {\n      checkInterfaceConflictProperties(t, n, functionName, properties,\n          currentProperties, iType);\n    }\n  }\n"
+    ]
+}

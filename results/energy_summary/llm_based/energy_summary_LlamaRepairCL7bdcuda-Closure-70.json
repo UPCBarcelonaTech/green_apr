@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-70",
+    "Time": {
+        "mean": 187.97344326972961,
+        "median": 187.97344326972961,
+        "std": 0,
+        "max": 187.97344326972961,
+        "min": 187.97344326972961,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 23347.881517803668,
+        "median": 23347.881517803668,
+        "std": 0,
+        "max": 23347.881517803668,
+        "min": 23347.881517803668,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 10581.983006894592,
+        "median": 10581.983006894592,
+        "std": 0,
+        "max": 10581.983006894592,
+        "min": 10581.983006894592,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        47.87823712825775,
+        94.57663917541504,
+        141.27504122257233,
+        187.97344326972961
+    ],
+    "Joules_Per_PatchMedian": [
+        6687.269588881731,
+        12240.806898522376,
+        17794.34420816302,
+        23347.881517803668
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2821.8824152708057,
+        5408.5826124787345,
+        7995.282809686663,
+        10581.983006894592
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.2258950233459474,
+        "median": 1.1798350811004639,
+        "std": 0.10368514047865915,
+        "max": 1.4098148345947266,
+        "min": 1.1610519886016846,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1167.8326532244682,
+        "median": 1133.732279241085,
+        "std": 84.99968666274748,
+        "max": 1318.9026634573938,
+        "min": 1114.7093334913254,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 228.7420216059684,
+        "median": 235.1822180628775,
+        "std": 19.104776403316926,
+        "max": 254.06951888799676,
+        "min": 209.26898732185327,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        46.69840204715729,
+        93.39680409431458,
+        140.09520614147186,
+        186.79360818862915
+    ],
+    "Val_Joules": [
+        5553.537309640646,
+        11107.074619281291,
+        16660.611928921935,
+        22214.149238562582
+    ],
+    "Val_JoulesNormalized": [
+        2586.7001972079283,
+        5173.400394415857,
+        7760.1005916237855,
+        10346.800788831715
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "correct",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter.getJSType());\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter.getJSType(), false);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter.getJSType(), true);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter.getJSType(), true, false);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter.getJSType(), true, true);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n                 jsDocParameter.getJSType());\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n                 jsDocParameter.getJSType(), false);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               null, true);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n",
+        "    private void declareArguments(Node functionNode) {\n      Node astParameters = functionNode.getFirstChild().getNext();\n      Node body = astParameters.getNext();\n      FunctionType functionType = (FunctionType) functionNode.getJSType();\n      if (functionType != null) {\n        Node jsDocParameters = functionType.getParametersNode();\n        if (jsDocParameters != null) {\n          Node jsDocParameter = jsDocParameters.getFirstChild();\n          for (Node astParameter : astParameters.children()) {\n            if (jsDocParameter != null) {\n              defineSlot(astParameter, functionNode,\n// buggy code\n//                   jsDocParameter.getJSType(), true);\n               jsDocParameter);\n              jsDocParameter = jsDocParameter.getNext();\n            } else {\n              defineSlot(astParameter, functionNode, null, true);\n            }\n          }\n        }\n      }\n    } \n"
+    ]
+}

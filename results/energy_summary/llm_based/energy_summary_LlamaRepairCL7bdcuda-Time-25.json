@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-25",
+    "Time": {
+        "mean": 105.91263008117676,
+        "median": 105.91263008117676,
+        "std": 0,
+        "max": 105.91263008117676,
+        "min": 105.91263008117676,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 14535.958760929105,
+        "median": 14535.958760929105,
+        "std": 0,
+        "max": 14535.958760929105,
+        "min": 14535.958760929105,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5815.904096519946,
+        "median": 5815.904096519946,
+        "std": 0,
+        "max": 5815.904096519946,
+        "min": 5815.904096519946,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.49013614654541,
+        23.759302139282227,
+        34.02846813201904,
+        44.29763412475586,
+        54.566800117492676,
+        64.83596611022949,
+        75.10513210296631,
+        85.37429809570312,
+        95.64346408843994,
+        105.91263008117676
+    ],
+    "Joules_Per_PatchMedian": [
+        4199.975271612406,
+        5348.417881536484,
+        6496.860491460562,
+        7645.30310138464,
+        8793.745711308718,
+        9942.188321232796,
+        11090.630931156873,
+        12239.07354108095,
+        13387.516151005027,
+        14535.958760929105
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1114.3461606383325,
+        1636.7414868474007,
+        2159.136813056469,
+        2681.532139265537,
+        3203.927465474605,
+        3726.322791683673,
+        4248.718117892741,
+        4771.113444101809,
+        5293.5087703108775,
+        5815.904096519946
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.2250560760498046,
+        "median": 3.2209701538085938,
+        "std": 0.06009497963895586,
+        "max": 3.288115978240967,
+        "min": 3.146955966949463,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3047.2927193284036,
+        "median": 3051.5326616883276,
+        "std": 46.24747341331885,
+        "max": 3098.919877493381,
+        "min": 2988.9871944546703,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 596.4205167222021,
+        "median": 591.9508344292644,
+        "std": 15.005821605890226,
+        "max": 620.6682519555088,
+        "min": 582.1114462614055,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.269165992736816,
+        20.538331985473633,
+        30.80749797821045,
+        41.076663970947266,
+        51.34582996368408,
+        61.6149959564209,
+        71.88416194915771,
+        82.15332794189453,
+        92.42249393463135,
+        102.69165992736816
+    ],
+    "Val_Joules": [
+        1148.4426099240782,
+        2296.8852198481563,
+        3445.3278297722345,
+        4593.770439696313,
+        5742.213049620391,
+        6890.655659544468,
+        8039.098269468545,
+        9187.540879392622,
+        10335.983489316699,
+        11484.426099240776
+    ],
+    "Val_JoulesNormalized": [
+        522.3953262090681,
+        1044.7906524181362,
+        1567.1859786272043,
+        2089.5813048362725,
+        2611.9766310453406,
+        3134.3719572544087,
+        3656.767283463477,
+        4179.162609672545,
+        4701.557935881613,
+        5223.953262090681
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long nextLocal = nextTransition(instantAdjusted);\n            long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n            if (nextLocal != nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long previousLocal = previousTransition(instantAdjusted);\n            long previousAdjusted = previousTransition(instantLocal - offsetAdjusted);\n            if (previousLocal != previousAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long nextLocal = nextTransition(instantAdjusted);\n            long nextAdjusted = nextTransition(instantLocal);\n            if (nextLocal != nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long prevLocal = previousTransition(instantAdjusted);\n            long prevAdjusted = previousTransition(instantLocal - offsetAdjusted);\n            if (prevLocal != prevAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long nextLocal = nextTransition(instantAdjusted);\n            long nextAdjusted = nextTransition(instantLocal - offsetLocal);\n            if (nextLocal != nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long nextLocal = nextTransition(instantAdjusted);\n            long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n            if (nextLocal == nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            return offsetLocal;\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long nextLocal = nextTransition(instantLocal);\n            long nextAdjusted = nextTransition(instantAdjusted);\n            if (nextLocal != nextAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n",
+        "    public int getOffsetFromLocal(long instantLocal) {\n        final int offsetLocal = getOffset(instantLocal);\n        final long instantAdjusted = instantLocal - offsetLocal;\n        final int offsetAdjusted = getOffset(instantAdjusted);\n        if (offsetLocal != offsetAdjusted) {\n            if ((offsetLocal - offsetAdjusted) < 0) {\n                long nextLocal = nextTransition(instantAdjusted);\n                long nextAdjusted = nextTransition(instantLocal - offsetAdjusted);\n                if (nextLocal != nextAdjusted) {\n                    return offsetLocal;\n                }\n            }\n// buggy code\n// \n       } else {\n            long previousLocal = previousTransition(instantAdjusted);\n            long previousAdjusted = previousTransition(instantLocal - offsetLocal);\n            if (previousLocal != previousAdjusted) {\n                return offsetLocal;\n            }\n        }\n        return offsetAdjusted;\n    }\n"
+    ]
+}

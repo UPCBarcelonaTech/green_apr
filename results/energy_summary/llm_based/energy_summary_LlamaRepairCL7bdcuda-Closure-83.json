@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-83",
+    "Time": {
+        "mean": 95.80853414535522,
+        "median": 95.80853414535522,
+        "std": 0,
+        "max": 95.80853414535522,
+        "min": 95.80853414535522,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 11517.336960816385,
+        "median": 11517.336960816385,
+        "std": 0,
+        "max": 11517.336960816385,
+        "min": 11517.336960816385,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4915.499956893922,
+        "median": 4915.499956893922,
+        "std": 0,
+        "max": 4915.499956893922,
+        "min": 4915.499956893922,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        48.34927713871002,
+        95.80853414535522
+    ],
+    "Joules_Per_PatchMedian": [
+        6180.802642774583,
+        11517.336960816385
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2543.6790359258657,
+        4915.499956893922
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 0.92164306640625,
+        "median": 0.8900201320648193,
+        "std": 0.0832263194926429,
+        "max": 1.069253921508789,
+        "min": 0.8700380325317383,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 866.6746068334579,
+        "median": 844.2683247327806,
+        "std": 64.0300226731671,
+        "max": 980.6717650771141,
+        "min": 831.058717572689,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 171.0427920627594,
+        "median": 171.85811495780956,
+        "std": 3.096665606793774,
+        "max": 174.28513580560684,
+        "min": 167.71284548044207,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        47.4592570066452,
+        94.9185140132904
+    ],
+    "Val_Joules": [
+        5336.534318041802,
+        10673.068636083604
+    ],
+    "Val_JoulesNormalized": [
+        2371.8209209680563,
+        4743.6418419361125
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(0);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(1);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(0, null);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(index);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(0, \"\");\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(0, true);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(0, false);\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     String param = params.getParameter(getIndex());\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n",
+        "      public int parseArguments(Parameters params) throws CmdLineException {\n// buggy code\n//         String param = params.getParameter(0);\n     return 0;\n        if (param == null) {\n          setter.addValue(true);\n          return 0;\n        } else {\n          String lowerParam = param.toLowerCase();\n          if (TRUES.contains(lowerParam)) {\n            setter.addValue(true);\n          } else if (FALSES.contains(lowerParam)) {\n            setter.addValue(false);\n          } else {\n            setter.addValue(true);\n            return 0;\n          }\n          return 1;\n        }\n      }\n"
+    ]
+}

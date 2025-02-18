@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-43",
+    "Time": {
+        "mean": 158.21580231189728,
+        "median": 158.21580231189728,
+        "std": 0,
+        "max": 158.21580231189728,
+        "min": 158.21580231189728,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 20425.68499279618,
+        "median": 20425.68499279618,
+        "std": 0,
+        "max": 20425.68499279618,
+        "min": 20425.68499279618,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 9148.617513644695,
+        "median": 9148.617513644695,
+        "std": 0,
+        "max": 9148.617513644695,
+        "min": 9148.617513644695,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        24.059441447257996,
+        46.418834924697876,
+        68.77822840213776,
+        91.13762187957764,
+        113.49701535701752,
+        135.8564088344574,
+        158.21580231189728
+    ],
+    "Joules_Per_PatchMedian": [
+        4223.267848438025,
+        6923.670705831051,
+        9624.073563224078,
+        12324.476420617104,
+        15024.87927801013,
+        17725.282135403155,
+        20425.68499279618
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1508.7327849507335,
+        2782.046906399727,
+        4055.361027848721,
+        5328.675149297715,
+        6601.989270746708,
+        7875.303392195701,
+        9148.617513644695
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.6020155906677247,
+        "median": 1.7000479698181152,
+        "std": 0.18237801267270687,
+        "max": 1.7698900699615479,
+        "min": 1.389803171157837,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1448.2121171450615,
+        "median": 1522.8649910449983,
+        "std": 145.62173285755014,
+        "max": 1580.3810658454895,
+        "min": 1278.6221185803415,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 233.0820647430421,
+        "median": 235.41866350173973,
+        "std": 19.70689876912929,
+        "max": 250.13168926238995,
+        "min": 201.73313140869163,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        22.35939347743988,
+        44.71878695487976,
+        67.07818043231964,
+        89.43757390975952,
+        111.7969673871994,
+        134.15636086463928,
+        156.51575434207916
+    ],
+    "Val_Joules": [
+        2700.4028573930264,
+        5400.805714786053,
+        8101.208572179079,
+        10801.611429572105,
+        13502.014286965132,
+        16202.417144358156,
+        18902.820001751184
+    ],
+    "Val_JoulesNormalized": [
+        1273.3141214489938,
+        2546.6282428979875,
+        3819.942364346981,
+        5093.256485795975,
+        6366.570607244968,
+        7639.884728693962,
+        8913.198850142955
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       if (meanImpl instanceof Mean) {\n            meanImpl.increment(value);\n        }\n        if (varianceImpl instanceof Variance) {\n            varianceImpl.increment(value);\n        }\n        if (geoMeanImpl instanceof GeometricMean) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       if (meanImpl != null) {\n            meanImpl.increment(value);\n        }\n        if (varianceImpl != null) {\n            varianceImpl.increment(value);\n        }\n        if (geoMeanImpl != null) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        if (!(varianceImpl instanceof Variance)) {\n            varianceImpl.increment(value);\n        }\n        if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       if (!(meanImpl instanceof GeometricMean)) {\n            meanImpl.increment(value);\n        }\n        if (!(varianceImpl instanceof Variance)) {\n            varianceImpl.increment(value);\n        }\n        if (!(geoMeanImpl instanceof Mean)) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        if (!(varianceImpl instanceof Variance)) {\n            varianceImpl.increment(value);\n        }\n        if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        varianceImpl.increment(value);\n        geoMeanImpl.increment(value);\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        varianceImpl.increment(value);\n        if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        varianceImpl.increment(value);\n        if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n",
+        "    public void addValue(double value) {\n        sumImpl.increment(value);\n        sumsqImpl.increment(value);\n        minImpl.increment(value);\n        maxImpl.increment(value);\n        sumLogImpl.increment(value);\n        secondMoment.increment(value);\n// buggy code\n//         if (!(meanImpl instanceof Mean)) {\n//             meanImpl.increment(value);\n//         }\n//         if (!(varianceImpl instanceof Variance)) {\n//             varianceImpl.increment(value);\n//         }\n//         if (!(geoMeanImpl instanceof GeometricMean)) {\n       meanImpl.increment(value);\n        if (!(varianceImpl instanceof Variance)) {\n            varianceImpl.increment(value);\n        }\n        if (!(geoMeanImpl instanceof GeometricMean)) {\n            geoMeanImpl.increment(value);\n        }\n            geoMeanImpl.increment(value);\n        }\n        n++;\n    }\n"
+    ]
+}

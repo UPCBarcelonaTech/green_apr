@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-99",
+    "Time": {
+        "mean": 60.04896783828735,
+        "median": 60.04896783828735,
+        "std": 0,
+        "max": 60.04896783828735,
+        "min": 60.04896783828735,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 7976.795387089252,
+        "median": 7976.795387089252,
+        "std": 0,
+        "max": 7976.795387089252,
+        "min": 7976.795387089252,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3292.2963454365736,
+        "median": 3292.2963454365736,
+        "std": 0,
+        "max": 3292.2963454365736,
+        "min": 3292.2963454365736,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        30.769525408744812,
+        60.04896783828735
+    ],
+    "Joules_Per_PatchMedian": [
+        4658.5377986311905,
+        7976.795387089252
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1755.3623211741449,
+        3292.2963454365736
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.406416416168213,
+        "median": 1.4900829792022705,
+        "std": 0.15779781199433213,
+        "max": 1.549941062927246,
+        "min": 1.2210168838500977,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1269.2562085795403,
+        "median": 1340.28021017313,
+        "std": 128.5802956144387,
+        "max": 1383.2827994346617,
+        "min": 1119.6001098036766,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 211.31165362596505,
+        "median": 218.42829691171642,
+        "std": 13.965599834367653,
+        "max": 225.84715002775192,
+        "min": 192.77504689693455,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        29.27944242954254,
+        58.55888485908508
+    ],
+    "Val_Joules": [
+        3318.2575884580606,
+        6636.515176916122
+    ],
+    "Val_JoulesNormalized": [
+        1536.9340242624285,
+        3073.868048524857
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n           (jsDoc.hasThisType() || jsDoc.isOverride()))) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n          jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (parent != null &&      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n           jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (parent != null &&      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n           (jsDoc.hasThisType() || jsDoc.isOverride()))) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n          if (      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n         jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (parent != null &&      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n          jsDoc.hasThisType())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (parent != null      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n           jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n           jsDoc.hasThisType())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (jsDoc !=      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n          jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n      }\n    }\n    return true;\n  }\n",
+        "  public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {\n    if (n.getType() == Token.FUNCTION) {\n      JSDocInfo jsDoc = getFunctionJsDocInfo(n);\n      if (jsDoc != null &&\n          (jsDoc.isConstructor() ||\n// buggy code\n//            jsDoc.hasThisType() ||\n//            jsDoc.isOverride())) {\n//         return false;\n//       }\n//       int pType = parent.getType();\n//       if (!(pType == Token.BLOCK ||\n//             pType == Token.SCRIPT ||\n//             pType == Token.NAME ||\n//             pType == Token.ASSIGN)) {\n//         return false;\n//       }\n//     }\n//     if (parent != null && parent.getType() == Token.ASSIGN) {\n//       Node lhs = parent.getFirstChild();\n//       Node rhs = lhs.getNext();\n//       if (n == lhs) {\n//         if (assignLhsChild == null) {\n//           assignLhsChild = lhs;\n//         }\n//       } else {\n//           if (lhs.getType() == Token.GETPROP &&\n//               lhs.getLastChild().getString().equals(\"prototype\")) {\n//             return false;\n//           }\n//           if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n//             return false;\n//           }\n          jsDoc.isOverride())) {\n        return false;\n      }\n      int pType = parent.getType();\n      if (!(pType == Token.BLOCK ||\n            pType == Token.SCRIPT ||\n            pType == Token.NAME ||\n            pType == Token.ASSIGN)) {\n        return false;\n      }\n    }\n    if (parent != null && parent.getType() == Token.ASSIGN) {\n      Node lhs = parent.getFirstChild();\n      Node rhs = lhs.getNext();\n      if (n == lhs) {\n        if (assignLhsChild == null) {\n          assignLhsChild = lhs;\n        }\n      } else {\n          if (lhs.getType() == Token.GETPROP &&\n              lhs.getLastChild().getString().equals(\"prototype\")) {\n            return false;\n          }\n          if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(\".prototype.\")) {\n            return false;\n          }\n      }\n    }\n    if (parent != null)      }\n    }\n    return true;\n  }\n"
+    ]
+}

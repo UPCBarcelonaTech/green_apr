@@ -1,0 +1,123 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-58",
+    "Time": {
+        "mean": 24.1586856842041,
+        "median": 24.1586856842041,
+        "std": 0,
+        "max": 24.1586856842041,
+        "min": 24.1586856842041,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 6630.741936701536,
+        "median": 6630.741936701536,
+        "std": 0,
+        "max": 6630.741936701536,
+        "min": 6630.741936701536,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 1667.854311263562,
+        "median": 1667.854311263562,
+        "std": 0,
+        "max": 1667.854311263562,
+        "min": 1667.854311263562,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        24.1586856842041
+    ],
+    "Joules_Per_PatchMedian": [
+        6630.741936701536
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1667.854311263562
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.210408306121826,
+        "median": 4.939024209976196,
+        "std": 0.6831494979858924,
+        "max": 6.420843124389648,
+        "min": 4.778961181640625,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4741.603595147132,
+        "median": 4507.032412660123,
+        "std": 536.2070945921499,
+        "max": 5696.14428936243,
+        "min": 4454.789140713215,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 755.975975604057,
+        "median": 741.026452553273,
+        "std": 41.192303914906645,
+        "max": 814.1765125393867,
+        "min": 707.9226431727398,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        19.219661474227905
+    ],
+    "Val_Joules": [
+        2123.7095240414137
+    ],
+    "Val_JoulesNormalized": [
+        926.8278587102891
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "correct",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian(), guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian(guess), getObservations());\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian(guess), guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(Gaussian.Parametric.class, guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian.Parametric(), guess, getObservations());\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(this, guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian(guess[0], guess[1]), guess);\n    }\n",
+        "    public double[] fit() {\n        final double[] guess = (new ParameterGuesser(getObservations())).guess();\n// buggy code\n//         return fit(new Gaussian.Parametric(), guess);\n       return fit(new Gaussian.Parametric(guess), guess);\n    }\n"
+    ]
+}

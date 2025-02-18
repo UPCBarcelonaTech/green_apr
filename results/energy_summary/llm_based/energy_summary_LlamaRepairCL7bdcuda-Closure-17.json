@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-17",
+    "Time": {
+        "mean": 502.2294008731842,
+        "median": 502.2294008731842,
+        "std": 0,
+        "max": 502.2294008731842,
+        "min": 502.2294008731842,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 62871.73700835704,
+        "median": 62871.73700835704,
+        "std": 0,
+        "max": 62871.73700835704,
+        "min": 62871.73700835704,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28869.09138067961,
+        "median": 28869.09138067961,
+        "std": 0,
+        "max": 28869.09138067961,
+        "min": 28869.09138067961,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        58.39904808998108,
+        113.87784218788147,
+        169.35663628578186,
+        224.83543038368225,
+        280.31422448158264,
+        335.79301857948303,
+        391.2718126773834,
+        446.7506067752838,
+        502.2294008731842
+    ],
+    "Joules_Per_PatchMedian": [
+        9505.76067826748,
+        16176.507719528676,
+        22847.254760789874,
+        29518.00180205107,
+        36188.74884331226,
+        42859.49588457346,
+        49530.24292583465,
+        56200.98996709585,
+        62871.73700835704
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3778.127856528759,
+        6914.498297047616,
+        10050.868737566472,
+        13187.239178085329,
+        16323.609618604185,
+        19459.98005912304,
+        22596.3504996419,
+        25732.720940160754,
+        28869.09138067961
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.969467782974243,
+        "median": 2.9202539920806885,
+        "std": 0.0792516789708387,
+        "max": 3.07879900932312,
+        "min": 2.908169984817505,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2876.7816185736656,
+        "median": 2835.013637006283,
+        "std": 61.33705313632552,
+        "max": 2962.785919392109,
+        "min": 2830.9216063976282,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 640.2087613797186,
+        "median": 641.7574160099025,
+        "std": 13.434458938983683,
+        "max": 655.5339418053627,
+        "min": 622.6255375862115,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.47879409790039,
+        110.95758819580078,
+        166.43638229370117,
+        221.91517639160156,
+        277.39397048950195,
+        332.87276458740234,
+        388.35155868530273,
+        443.8303527832031,
+        499.3091468811035
+    ],
+    "Val_Joules": [
+        6670.7470412611965,
+        13341.494082522393,
+        20012.24112378359,
+        26682.988165044786,
+        33353.73520630598,
+        40024.482247567175,
+        46695.22928882837,
+        53365.976330089565,
+        60036.72337135076
+    ],
+    "Val_JoulesNormalized": [
+        3136.3704405188564,
+        6272.740881037713,
+        9409.11132155657,
+        12545.481762075426,
+        15681.852202594282,
+        18818.22264311314,
+        21954.593083631997,
+        25090.96352415085,
+        28227.333964669706
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null\n                  && !rValue.getJSType().isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null &&\n                  !rValue.getJSType().isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             JSType type = rValue.getJSType();\n              if (type != null && !type.isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null && !rValue.getJSType().isEmptyType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null && rValue.getJSType().isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (!rValue.getJSType().isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null && !rValue.getJSType().isAllType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n             if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()\n                  && !rValue.getJSType().isEmptyType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n",
+        "    private JSType getDeclaredType(String sourceName, JSDocInfo info,\n        Node lValue, @Nullable Node rValue) {\n      if (info != null && info.hasType()) {\n        return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n      } else if (rValue != null && rValue.isFunction() &&\n          shouldUseFunctionLiteralType(\n              JSType.toMaybeFunctionType(rValue.getJSType()), info, lValue)) {\n        return rValue.getJSType();\n      } else if (info != null) {\n        if (info.hasEnumParameterType()) {\n          if (rValue != null && rValue.isObjectLit()) {\n            return rValue.getJSType();\n          } else {\n            return createEnumTypeFromNodes(\n                rValue, lValue.getQualifiedName(), info, lValue);\n          }\n        } else if (info.isConstructor() || info.isInterface()) {\n          return createFunctionTypeFromNodes(\n              rValue, lValue.getQualifiedName(), info, lValue);\n        } else {\n          if (info.isConstant()) {\n            JSType knownType = null;\n            if (rValue != null) {\n// buggy code\n//               if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                return rValue.getJSType();\n              } else if (rValue.isOr()) {\n                Node firstClause = rValue.getFirstChild();\n                Node secondClause = firstClause.getNext();\n                boolean namesMatch = firstClause.isName()\n                    && lValue.isName()\n                    && firstClause.getString().equals(lValue.getString());\n                if (namesMatch && secondClause.getJSType() != null\n                    && !secondClause.getJSType().isUnknownType()) {\n                  return secondClause.getJSType();\n                }\n              }\n            }\n          }\n        }\n      }\n      return getDeclaredTypeInAnnotation(sourceName, lValue, info);\n    }\n"
+    ]
+}

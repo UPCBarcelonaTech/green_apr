@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-63",
+    "Time": {
+        "mean": 109.80018758773804,
+        "median": 109.80018758773804,
+        "std": 0,
+        "max": 109.80018758773804,
+        "min": 109.80018758773804,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 14731.337618118523,
+        "median": 14731.337618118523,
+        "std": 0,
+        "max": 14731.337618118523,
+        "min": 14731.337618118523,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5832.471512609722,
+        "median": 5832.471512609722,
+        "std": 0,
+        "max": 5832.471512609722,
+        "min": 5832.471512609722,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.841830730438232,
+        26.711625337600708,
+        38.581419944763184,
+        50.45121455192566,
+        62.321009159088135,
+        74.19080376625061,
+        86.06059837341309,
+        97.93039298057556,
+        109.80018758773804
+    ],
+    "Joules_Per_PatchMedian": [
+        4020.905600839854,
+        5359.709602999688,
+        6698.513605159522,
+        8037.317607319355,
+        9376.121609479189,
+        10714.925611639022,
+        12053.729613798856,
+        13392.53361595869,
+        14731.337618118523
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1058.0907599031927,
+        1654.8883539915087,
+        2251.685948079825,
+        2848.483542168141,
+        3445.281136256457,
+        4042.0787303447732,
+        4638.876324433089,
+        5235.6739185214055,
+        5832.471512609722
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.336016130447388,
+        "median": 2.972036123275757,
+        "std": 0.5332640575229202,
+        "max": 3.921058177947998,
+        "min": 2.9113361835479736,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2985.079521865845,
+        "median": 2682.10159868002,
+        "std": 442.16315477032396,
+        "max": 3470.4712012529376,
+        "min": 2626.7450191378593,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 467.9681674480441,
+        "median": 461.29316581487683,
+        "std": 26.954890123814238,
+        "max": 508.14611233472806,
+        "min": 441.7807689547544,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        11.869794607162476,
+        23.73958921432495,
+        35.60938382148743,
+        47.4791784286499,
+        59.34897303581238,
+        71.21876764297485,
+        83.08856225013733,
+        94.9583568572998,
+        106.82815146446228
+    ],
+    "Val_Joules": [
+        1338.804002159834,
+        2677.6080043196685,
+        4016.412006479502,
+        5355.216008639336,
+        6694.0200107991695,
+        8032.824012959003,
+        9371.628015118837,
+        10710.43201727867,
+        12049.236019438504
+    ],
+    "Val_JoulesNormalized": [
+        596.7975940883159,
+        1193.5951881766318,
+        1790.392782264948,
+        2387.190376353264,
+        2983.9879704415803,
+        3580.7855645298964,
+        4177.583158618212,
+        4774.380752706529,
+        5371.178346794844
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return Double.doubleToLongBits(x) == Double.doubleToLongBits(y);\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return (Double.isNaN(x) && Double.isNaN(y)) || Double.compare(x, y) == 0;\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return x == y || (Double.isNaN(x) && Double.isNaN(y));\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return Double.compare(x, y) == 0;\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return (Double.doubleToLongBits(x) == Double.doubleToLongBits(y));\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return Double.doubleToRawLongBits(x) == Double.doubleToRawLongBits(y);\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return (Double.isNaN(x) && Double.isNaN(y)) || (x != x && y != y) || x == y;\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return (Double.isNaN(x) && Double.isNaN(y)) || (x == y) || (x != x && y != y);\n    }\n",
+        "    public static boolean equals(double x, double y) {\n// buggy code\n//         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n       return (Double.isNaN(x) && Double.isNaN(y)) || (x != x && y != y) || (x == y);\n    }\n"
+    ]
+}

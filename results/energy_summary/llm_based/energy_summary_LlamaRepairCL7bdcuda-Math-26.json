@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-26",
+    "Time": {
+        "mean": 390.4209495782852,
+        "median": 390.4209495782852,
+        "std": 0,
+        "max": 390.4209495782852,
+        "min": 390.4209495782852,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 50701.45969241261,
+        "median": 50701.45969241261,
+        "std": 0,
+        "max": 50701.45969241261,
+        "min": 50701.45969241261,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 19953.140147238966,
+        "median": 19953.140147238966,
+        "std": 0,
+        "max": 19953.140147238966,
+        "min": 19953.140147238966,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        52.27258551120758,
+        94.54113101959229,
+        136.809676527977,
+        179.0782220363617,
+        221.3467675447464,
+        263.6153130531311,
+        305.8838585615158,
+        348.1524040699005,
+        390.4209495782852
+    ],
+    "Joules_Per_PatchMedian": [
+        14311.83478077054,
+        18860.5378947258,
+        23409.24100868106,
+        27957.94412263632,
+        32506.64723659158,
+        37055.35035054684,
+        41604.053464502096,
+        46152.75657845735,
+        50701.45969241261
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4195.334828740358,
+        6165.060493552684,
+        8134.786158365011,
+        10104.511823177338,
+        12074.237487989663,
+        14043.963152801989,
+        16013.688817614315,
+        17983.41448242664,
+        19953.140147238966
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 10.218284606933594,
+        "median": 10.004040002822876,
+        "std": 0.49375510524564076,
+        "max": 11.101135969161987,
+        "min": 9.981029987335205,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 9939.607564957141,
+        "median": 9763.131666815281,
+        "std": 359.76432230241636,
+        "max": 10579.213980722427,
+        "min": 9746.81575422287,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2188.1747086119644,
+        "median": 2225.609163928031,
+        "std": 81.80097049776606,
+        "max": 2251.7889841079696,
+        "min": 2051.168273496627,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        42.268545508384705,
+        84.53709101676941,
+        126.80563652515411,
+        169.07418203353882,
+        211.34272754192352,
+        253.61127305030823,
+        295.87981855869293,
+        338.14836406707764,
+        380.41690957546234
+    ],
+    "Val_Joules": [
+        4548.703113955258,
+        9097.406227910518,
+        13646.109341865778,
+        18194.81245582104,
+        22743.515569776297,
+        27292.21868373156,
+        31840.921797686817,
+        36389.62491164207,
+        40938.32802559733
+    ],
+    "Val_JoulesNormalized": [
+        1969.7256648123266,
+        3939.451329624653,
+        5909.17699443698,
+        7878.902659249306,
+        9848.628324061632,
+        11818.353988873958,
+        13788.079653686284,
+        15757.80531849861,
+        17727.530983310935
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 < -overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 < -overflow) || (q2 < -overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 >= overflow) || (q2 >= overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if (p2 > overflow || q2 > overflow) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 < 0) || (q2 < 0)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 < -overflow) {\n            throw new FractionConversionException(value, a0, -1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 < -overflow) || (q2 < -overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 == overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 == overflow) || (q2 == overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 < overflow) && (q2 < overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 > overflow) || (q2 > overflow)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (a0 >= overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 > overflow) || (q2 > overflow)) {\n                throw new FractionConversionException(value                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n",
+        "    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n// buggy code\n//         if (a0 > overflow) {\n//             throw new FractionConversionException(value, a0, 1l);\n//         }\n//         if (FastMath.abs(a0 - value) < epsilon) {\n//             this.numerator = (int) a0;\n//             this.denominator = 1;\n//             return;\n//         }\n//         long p0 = 1;\n//         long q0 = 0;\n//         long p1 = a0;\n//         long q1 = 1;\n//         long p2 = 0;\n//         long q2 = 1;\n//         int n = 0;\n//         boolean stop = false;\n//         do {\n//             ++n;\n//             double r1 = 1.0 / (r0 - a0);\n//             long a1 = (long)FastMath.floor(r1);\n//             p2 = (a1 * p1) + p0;\n//             q2 = (a1 * q1) + q0;\n//             if ((p2 > overflow) || (q2 > overflow)) {\n       if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n        long p2 = 0;\n        long q2 = 1;\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n            if ((p2 < 0) || (q2 < 0)) {\n                throw new FractionConversionException(value, p2, q2);\n            }\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n    }\n"
+    ]
+}

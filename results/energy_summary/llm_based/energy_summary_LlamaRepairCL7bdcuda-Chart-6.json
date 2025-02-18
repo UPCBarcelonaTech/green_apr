@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-6",
+    "Time": {
+        "mean": 115.83750212192535,
+        "median": 115.83750212192535,
+        "std": 0,
+        "max": 115.83750212192535,
+        "min": 115.83750212192535,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 15300.751988345384,
+        "median": 15300.751988345384,
+        "std": 0,
+        "max": 15300.751988345384,
+        "min": 15300.751988345384,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5670.94677554965,
+        "median": 5670.94677554965,
+        "std": 0,
+        "max": 5670.94677554965,
+        "min": 5670.94677554965,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.99972689151764,
+        28.479448795318604,
+        40.95917069911957,
+        53.43889260292053,
+        65.9186145067215,
+        78.39833641052246,
+        90.87805831432343,
+        103.35778021812439,
+        115.83750212192535
+    ],
+    "Joules_Per_PatchMedian": [
+        4551.883886033296,
+        5895.492398822307,
+        7239.100911611318,
+        8582.70942440033,
+        9926.31793718934,
+        11269.926449978351,
+        12613.534962767362,
+        13957.143475556373,
+        15300.751988345384
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1101.2761861503127,
+        1672.48500982523,
+        2243.6938335001473,
+        2814.9026571750646,
+        3386.111480849982,
+        3957.3203045248993,
+        4528.529128199816,
+        5099.737951874733,
+        5670.94677554965
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.7296024322509767,
+        "median": 3.520004987716675,
+        "std": 0.4648824367854073,
+        "max": 4.558007001876831,
+        "min": 3.4882450103759766,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3378.349572470188,
+        "median": 3208.275373244285,
+        "std": 375.2706482059571,
+        "max": 4047.7640058994293,
+        "min": 3183.9241663694384,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 532.5065538191795,
+        "median": 530.0673624753954,
+        "std": 25.93687942610644,
+        "max": 570.916264867783,
+        "min": 505.9675441741938,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        12.479721903800964,
+        24.95944380760193,
+        37.43916571140289,
+        49.91888761520386,
+        62.39860951900482,
+        74.87833142280579,
+        87.35805332660675,
+        99.83777523040771,
+        112.31749713420868
+    ],
+    "Val_Joules": [
+        1343.608512789011,
+        2687.217025578022,
+        4030.825538367033,
+        5374.434051156044,
+        6718.042563945055,
+        8061.651076734066,
+        9405.259589523077,
+        10748.868102312088,
+        12092.476615101099
+    ],
+    "Val_JoulesNormalized": [
+        571.2088236749173,
+        1142.4176473498346,
+        1713.626471024752,
+        2284.8352946996692,
+        2856.0441183745866,
+        3427.252942049504,
+        3998.4617657244207,
+        4569.670589399338,
+        5140.879413074254
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList other = (ShapeList) obj;\n        return super.equals(other);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       return equals((ShapeList) obj);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList list = (ShapeList) obj;\n        return super.equals(list);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList other = (ShapeList)obj;\n        return super.equals(other);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       return super.equals((ShapeList) obj);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList that = (ShapeList) obj;\n        return super.equals(that);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList list = (ShapeList)obj;\n        return super.equals(list);\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList other = (ShapeList) obj;\n        return super.equals(obj) && other.size() == size();\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList list = (ShapeList) obj;\n        return super.equals(obj) && list.size() == size();\n    }\n",
+        "    public boolean equals(Object obj) {\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n// buggy code\n//         return super.equals(obj);\n       ShapeList other = (ShapeList) obj;\n        return super.equals(obj) && other.size == size;\n    }\n"
+    ]
+}

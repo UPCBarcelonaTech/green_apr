@@ -1,0 +1,135 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-112",
+    "Time": {
+        "mean": 215.31612467765808,
+        "median": 215.31612467765808,
+        "std": 0,
+        "max": 215.31612467765808,
+        "min": 215.31612467765808,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 27347.52629811764,
+        "median": 27347.52629811764,
+        "std": 0,
+        "max": 27347.52629811764,
+        "min": 27347.52629811764,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 12082.396825963258,
+        "median": 12082.396825963258,
+        "std": 0,
+        "max": 12082.396825963258,
+        "min": 12082.396825963258,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        73.77803158760071,
+        144.5470781326294,
+        215.31612467765808
+    ],
+    "Joules_Per_PatchMedian": [
+        11016.915534949303,
+        19182.22091653347,
+        27347.52629811764
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4354.255063289404,
+        8218.325944626331,
+        12082.396825963258
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.016301679611206,
+        "median": 3.0089850425720215,
+        "std": 0.054202629036747225,
+        "max": 3.090130090713501,
+        "min": 2.95114803314209,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2853.0024823904037,
+        "median": 2851.610153365135,
+        "std": 41.61646507813337,
+        "max": 2908.210977935791,
+        "min": 2801.85109719038,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 484.05462223291386,
+        "median": 490.1841819524766,
+        "std": 12.905817707138054,
+        "max": 496.54599751234036,
+        "min": 467.28085416555405,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.76904654502869,
+        141.53809309005737,
+        212.30713963508606
+    ],
+    "Val_Joules": [
+        8165.305381584169,
+        16330.610763168337,
+        24495.916144752504
+    ],
+    "Val_JoulesNormalized": [
+        3864.070881336927,
+        7728.141762673855,
+        11592.212644010782
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   ImmutableMap<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromArguments(fnType, n);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   ImmutableMap<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    if (inferred == null) {\n      return false;\n    }\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   ImmutableMap<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    if (inferred.isEmpty()) {\n      return false;\n    }\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   final Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   Map<TemplateType, JSType> inferred = inferTemplateTypesFromParameters(\n        fnType, n);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(n, fnType);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromCall(fnType, n);\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   final Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    if (inferred == null) {\n      return false;\n    }\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n",
+        "  private boolean inferTemplatedTypesForCall(\n      Node n, FunctionType fnType) {\n    final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n        .getTemplateKeys();\n    if (keys.isEmpty()) {\n      return false;\n    }\n// buggy code\n//     Map<TemplateType, JSType> inferred =\n//         inferTemplateTypesFromParameters(fnType, n);\n   final Map<TemplateType, JSType> inferred =\n        inferTemplateTypesFromParameters(fnType, n);\n    if (inferred.isEmpty()) {\n      return false;\n    }\n    TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n        registry, inferred);\n    Node callTarget = n.getFirstChild();\n    FunctionType replacementFnType = fnType.visit(replacer)\n        .toMaybeFunctionType();\n    Preconditions.checkNotNull(replacementFnType);\n    callTarget.setJSType(replacementFnType);\n    n.setJSType(replacementFnType.getReturnType());\n    return replacer.madeChanges;\n  }\n"
+    ]
+}

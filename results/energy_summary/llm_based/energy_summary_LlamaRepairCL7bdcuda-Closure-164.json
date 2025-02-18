@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-164",
+    "Time": {
+        "mean": 4.3389809131622314,
+        "median": 4.3389809131622314,
+        "std": 0,
+        "max": 4.3389809131622314,
+        "min": 4.3389809131622314,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 4118.766308641434,
+        "median": 4118.766308641434,
+        "std": 0,
+        "max": 4118.766308641434,
+        "min": 4118.766308641434,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 843.5979136586188,
+        "median": 843.5979136586188,
+        "std": 0,
+        "max": 843.5979136586188,
+        "min": 843.5979136586188,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 4.527335786819458,
+        "median": 4.3389809131622314,
+        "std": 0.4315145987569109,
+        "max": 5.298983812332153,
+        "min": 4.319061040878296,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4270.1217888093,
+        "median": 4118.766308641434,
+        "std": 342.8775326316788,
+        "max": 4883.395731163025,
+        "min": 4110.737432014942,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 869.4289890074731,
+        "median": 843.5979136586188,
+        "std": 44.650953202068955,
+        "max": 939.891978025436,
+        "min": 833.1919822573659,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (thisIsVarArgs) {\n        thisParam = null;\n      } else {\n        thisParam = thisParam.getNext();\n      }\n      if (thatIsVarArgs) {\n        thatParam = null;\n      } else {\n        thatParam = thatParam.getNext();\n      }\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     thisParam = thisParam.getNext();\n      thatParam = thatParam.getNext();\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (thisIsVarArgs && !thatIsVarArgs) {\n        return false;\n      }\n      thisParam = thisParam.getNext();\n      thatParam = thatParam.getNext();\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     thisParam = thisParam.getNext();\n      thatParam = thatParam.getNext();\n    }\n    if (thisIsVarArgs != thatIsVarArgs) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     thisParam = thisParam.getNext();\n      thatParam = thatParam.getNext();\n    }\n    if (thisIsVarArgs || thatIsVarArgs) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (!thisIsVarArgs || !thatIsVarArgs) {\n        thisParam = thisParam.getNext();\n        thatParam = thatParam.getNext();\n      } else {\n        thisParam = null;\n        thatParam = null;\n      }\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (!thisIsVarArgs && !thatIsVarArgs) {\n        thisParam = thisParam.getNext();\n        thatParam = thatParam.getNext();\n      } else {\n        thisParam = null;\n        thatParam = null;\n      }\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     thisParam = thisIsVarArgs ? null : thisParam.getNext();\n      thatParam = thatIsVarArgs ? null : thatParam.getNext();\n      if (thisIsVarArgs && thatIsVarArgs) {\n        break;\n      }\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (thisIsVarArgs != thatIsVarArgs) {\n        return false;\n      }\n      if (!thisIsVarArgs) {\n        thisParam = thisParam.getNext();\n        thatParam = thatParam.getNext();\n      }\n    }\n    if (thisParam != null || thatParam != null) {\n      return false;\n    }\n    return true;\n  }\n",
+        "  public boolean isSubtype(JSType other) {\n    if (!(other instanceof ArrowType)) {\n      return false;\n    }\n    ArrowType that = (ArrowType) other;\n    if (!this.returnType.isSubtype(that.returnType)) {\n      return false;\n    }\n    Node thisParam = parameters.getFirstChild();\n    Node thatParam = that.parameters.getFirstChild();\n    while (thisParam != null && thatParam != null) {\n      JSType thisParamType = thisParam.getJSType();\n      JSType thatParamType = thatParam.getJSType();\n      if (thisParamType != null) {\n        if (thatParamType == null ||\n            !thatParamType.isSubtype(thisParamType)) {\n          return false;\n        }\n      }\n      boolean thisIsVarArgs = thisParam.isVarArgs();\n      boolean thatIsVarArgs = thatParam.isVarArgs();\n// buggy code\n//       if (!thisIsVarArgs) {\n//         thisParam = thisParam.getNext();\n//       }\n//       if (!thatIsVarArgs) {\n//         thatParam = thatParam.getNext();\n//       }\n//       if (thisIsVarArgs && thatIsVarArgs) {\n//         thisParam = null;\n//         thatParam = null;\n//       }\n//     }\n     if (thisIsVarArgs) {\n        thisParam = null;\n      } else {\n        thisParam = thisParam.getNext();\n      }\n      if (thatIsVarArgs) {\n        thatParam = null;\n      } else {\n        thatParam = thatParam.getNext();\n      }\n    }\n    if (thisIsVarArgs != thatIsVarArgs) {\n      return false;\n    }\n    return true;\n  }\n"
+    ]
+}

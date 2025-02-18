@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-42",
+    "Time": {
+        "mean": 49.02304768562317,
+        "median": 49.02304768562317,
+        "std": 0,
+        "max": 49.02304768562317,
+        "min": 49.02304768562317,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10254.792443323135,
+        "median": 10254.792443323135,
+        "std": 0,
+        "max": 10254.792443323135,
+        "min": 10254.792443323135,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2463.2523706078528,
+        "median": 2463.2523706078528,
+        "std": 0,
+        "max": 2463.2523706078528,
+        "min": 2463.2523706078528,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.40324592590332,
+        27.943179845809937,
+        38.48311376571655,
+        49.02304768562317
+    ],
+    "Joules_Per_PatchMedian": [
+        7395.713271039724,
+        8348.73966180086,
+        9301.766052561998,
+        10254.792443323135
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1554.5287260591977,
+        1857.436607575416,
+        2160.3444890916344,
+        2463.2523706078528
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 7.217368841171265,
+        "median": 6.863312005996704,
+        "std": 0.8506534211054224,
+        "max": 8.73095703125,
+        "min": 6.720093011856079,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 6698.5684262323375,
+        "median": 6442.686880278587,
+        "std": 671.4825468736109,
+        "max": 7896.292857635021,
+        "min": 6341.869313240051,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1266.0048266148565,
+        "median": 1251.6208445429793,
+        "std": 64.48952912332346,
+        "max": 1372.5217638850208,
+        "min": 1205.6179298877714,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.539933919906616,
+        21.079867839813232,
+        31.61980175971985,
+        42.159735679626465
+    ],
+    "Val_Joules": [
+        953.026390761137,
+        1906.052781522274,
+        2859.079172283411,
+        3812.105563044548
+    ],
+    "Val_JoulesNormalized": [
+        302.90788151621837,
+        605.8157630324367,
+        908.7236445486551,
+        1211.6315260648735
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           char c = str.charAt(i);\n            if (c > 0x7F) {\n                String entityName = this.entityName(c);\n                if (entityName == null) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 127) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c >= 0x7F) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           char c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null && c > 0x7F) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F && c < 0xA0) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F || c < 0) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F || c < 0x20) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F && c <= 0xFFFF) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n",
+        "    public void escape(Writer writer, String str) throws IOException {\n        int len = str.length();\n        for (int i = 0; i < len; i++) {\n// buggy code\n//             char c = str.charAt(i);\n//             String entityName = this.entityName(c);\n//             if (entityName == null) {\n//                 if (c > 0x7F) {\n           int c = str.charAt(i);\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F && c < 0xFF) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n"
+    ]
+}

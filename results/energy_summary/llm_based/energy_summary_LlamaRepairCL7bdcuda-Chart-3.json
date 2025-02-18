@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-3",
+    "Time": {
+        "mean": 25.719154119491577,
+        "median": 25.719154119491577,
+        "std": 0,
+        "max": 25.719154119491577,
+        "min": 25.719154119491577,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 4108.016415977478,
+        "median": 4108.016415977478,
+        "std": 0,
+        "max": 4108.016415977478,
+        "min": 4108.016415977478,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 1465.5910702705382,
+        "median": 1465.5910702705382,
+        "std": 0,
+        "max": 1465.5910702705382,
+        "min": 1465.5910702705382,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.589611172676086,
+        25.719154119491577
+    ],
+    "Joules_Per_PatchMedian": [
+        2755.1331274688246,
+        4108.016415977478
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        882.7562437295912,
+        1465.5910702705382
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.4600332736968995,
+        "median": 1.4600682258605957,
+        "std": 0.010059531244842325,
+        "max": 1.4710991382598877,
+        "min": 1.4499711990356445,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1401.0936687517167,
+        "median": 1402.2498389601708,
+        "std": 7.980081583946939,
+        "max": 1410.3854694724082,
+        "min": 1392.8348792910576,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 300.9693188428879,
+        "median": 299.9214171886442,
+        "std": 3.61643968288434,
+        "max": 307.3021937966346,
+        "min": 298.3651255488396,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        12.12954294681549,
+        24.25908589363098
+    ],
+    "Val_Joules": [
+        1352.8832885086538,
+        2705.766577017307
+    ],
+    "Val_JoulesNormalized": [
+        582.834826540947,
+        1165.669653081894
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.key = this.key;\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.key = null;\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.key = (TimeSeriesKey) this.key.clone();\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.data.clear();\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.seriesKey = (SeriesKey) this.seriesKey.clone();\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.notify = false;\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.key = (String) this.key.clone();\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.name = this.name;\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n",
+        "    public TimeSeries createCopy(int start, int end)\n            throws CloneNotSupportedException {\n        if (start < 0) {\n            throw new IllegalArgumentException(\"Requires start >= 0.\");\n        }\n        if (end < start) {\n            throw new IllegalArgumentException(\"Requires start <= end.\");\n        }\n        TimeSeries copy = (TimeSeries) super.clone();\n// buggy code\n// \n       copy.key = (TimeSeriesKey) this.getKey().clone();\n        copy.data = new java.util.ArrayList();\n        if (this.data.size() > 0) {\n            for (int index = start; index <= end; index++) {\n                TimeSeriesDataItem item\n                        = (TimeSeriesDataItem) this.data.get(index);\n                TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();\n                try {\n                    copy.add(clone);\n                }\n                catch (SeriesException e) {\n                    e.printStackTrace();\n                }\n            }\n        }\n        return copy;\n    }\n"
+    ]
+}

@@ -1,0 +1,123 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-120",
+    "Time": {
+        "mean": 71.30965411663055,
+        "median": 71.30965411663055,
+        "std": 0,
+        "max": 71.30965411663055,
+        "min": 71.30965411663055,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9439.49807136059,
+        "median": 9439.49807136059,
+        "std": 0,
+        "max": 9439.49807136059,
+        "min": 9439.49807136059,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4141.437892621757,
+        "median": 4141.437892621757,
+        "std": 0,
+        "max": 4141.437892621757,
+        "min": 4141.437892621757,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        71.30965411663055
+    ],
+    "Joules_Per_PatchMedian": [
+        9439.49807136059
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4141.437892621757
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.1458642482757568,
+        "median": 1.0911040306091309,
+        "std": 0.11442045011658301,
+        "max": 1.3500001430511475,
+        "min": 1.0890271663665771,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1060.125075378418,
+        "median": 1015.9094667196274,
+        "std": 95.74156247026472,
+        "max": 1231.0250430703163,
+        "min": 1010.8629244565965,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 190.70851711750035,
+        "median": 188.49561452865612,
+        "std": 10.402058855860396,
+        "max": 208.6699347376824,
+        "min": 182.98447258472447,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.21855008602142
+    ],
+    "Val_Joules": [
+        8423.588604640961
+    ],
+    "Val_JoulesNormalized": [
+        3952.942278093101
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isExit) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isExitBlock) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       </s>          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isEntry) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isBasicBlock) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isExitBlock()) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isEntryBlock) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isReturn) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    boolean isAssignedOnceInLifetime() {\n      Reference ref = getOneAndOnlyAssignment();\n      if (ref == null) {\n        return false;\n      }\n      for (BasicBlock block = ref.getBasicBlock();\n           block != null; block = block.getParent()) {\n        if (block.isFunction) {\n// buggy code\n// \n       } else if (block.isCatch) {\n          break;\n        } else if (block.isLoop) {\n          return false;\n        }\n      }\n      return true;\n    }\n"
+    ]
+}

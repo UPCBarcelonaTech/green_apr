@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-42",
+    "Time": {
+        "mean": 261.59383380413055,
+        "median": 261.59383380413055,
+        "std": 0,
+        "max": 261.59383380413055,
+        "min": 261.59383380413055,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 31909.493691325184,
+        "median": 31909.493691325184,
+        "std": 0,
+        "max": 31909.493691325184,
+        "min": 31909.493691325184,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 14575.353258311749,
+        "median": 14575.353258311749,
+        "std": 0,
+        "max": 14575.353258311749,
+        "min": 14575.353258311749,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        53.438745856285095,
+        105.47751784324646,
+        157.51628983020782,
+        209.5550618171692,
+        261.59383380413055
+    ],
+    "Joules_Per_PatchMedian": [
+        7404.337187457084,
+        13530.626313424109,
+        19656.915439391134,
+        25783.20456535816,
+        31909.493691325184
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3090.747927367687,
+        5961.8992601037025,
+        8833.050592839718,
+        11704.201925575733,
+        14575.353258311749
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.467868185043335,
+        "median": 1.3999738693237305,
+        "std": 0.1650422359386431,
+        "max": 1.7598328590393066,
+        "min": 1.3600599765777588,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1332.6541885709762,
+        "median": 1278.048061490059,
+        "std": 140.00004194346297,
+        "max": 1581.0262297987938,
+        "min": 1244.2657809853554,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 222.95515432834623,
+        "median": 219.59659463167168,
+        "std": 10.16223394334796,
+        "max": 240.9135076403618,
+        "min": 215.92097682952885,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        52.038771986961365,
+        104.07754397392273,
+        156.1163159608841,
+        208.15508794784546,
+        260.1938599348068
+    ],
+    "Val_Joules": [
+        6126.289125967025,
+        12252.57825193405,
+        18378.867377901075,
+        24505.1565038681,
+        30631.445629835125
+    ],
+    "Val_JoulesNormalized": [
+        2871.1513327360153,
+        5742.302665472031,
+        8613.453998208046,
+        11484.605330944061,
+        14355.756663680077
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setIsForIn(true);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setType(Token.FOR);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setType(Token.FOR_IN);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     if (loopNode.getBody() == null) {\n        return transform(loopNode.getIterator());\n      }\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setStateMachine(null);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     if (loopNode.getBody() == null) {\n        return newNode(Token.EMPTY);\n      }\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     if (loopNode.getBody() == null) {\n        return null;\n      }\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setTypeOfLoop(Token.FORIN);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n",
+        "    Node processForInLoop(ForInLoop loopNode) {\n// buggy code\n// \n     loopNode.setTypeOfLoop(Token.FOR);\n      return newNode(\n          Token.FOR,\n          transform(loopNode.getIterator()),\n          transform(loopNode.getIteratedObject()),\n          transformBlock(loopNode.getBody()));\n    }\n"
+    ]
+}

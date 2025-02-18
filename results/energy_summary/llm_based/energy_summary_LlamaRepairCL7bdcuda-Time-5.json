@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-5",
+    "Time": {
+        "mean": 112.46379399299622,
+        "median": 112.46379399299622,
+        "std": 0,
+        "max": 112.46379399299622,
+        "min": 112.46379399299622,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 16016.050436460975,
+        "median": 16016.050436460975,
+        "std": 0,
+        "max": 16016.050436460975,
+        "min": 16016.050436460975,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 6228.047156131269,
+        "median": 6228.047156131269,
+        "std": 0,
+        "max": 6228.047156131269,
+        "min": 6228.047156131269,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.086768627166748,
+        25.90643811225891,
+        36.726107597351074,
+        47.54577708244324,
+        58.3654465675354,
+        69.18511605262756,
+        80.00478553771973,
+        90.82445502281189,
+        101.64412450790405,
+        112.46379399299622
+    ],
+    "Joules_Per_PatchMedian": [
+        5250.610143274069,
+        6446.770175850392,
+        7642.930208426715,
+        8839.090241003038,
+        10035.25027357936,
+        11231.410306155683,
+        12427.570338732006,
+        13623.73037130833,
+        14819.890403884652,
+        16016.050436460975
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1372.2122336268424,
+        1911.749447238445,
+        2451.286660850048,
+        2990.823874461651,
+        3530.361088073254,
+        4069.898301684857,
+        4609.43551529646,
+        5148.972728908063,
+        5688.509942519666,
+        6228.047156131269
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.44577054977417,
+        "median": 4.267099142074585,
+        "std": 0.40545941584450723,
+        "max": 5.171038866043091,
+        "min": 4.258907794952393,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4206.498490936756,
+        "median": 4054.4501106977464,
+        "std": 335.9447981452227,
+        "max": 4807.135492455959,
+        "min": 4043.755176091194,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 803.2052496743203,
+        "median": 832.6750200152396,
+        "std": 53.54977005873698,
+        "max": 844.9601539969449,
+        "min": 721.5941506385802,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.819669485092163,
+        21.639338970184326,
+        32.45900845527649,
+        43.27867794036865,
+        54.098347425460815,
+        64.91801691055298,
+        75.73768639564514,
+        86.5573558807373,
+        97.37702536582947,
+        108.19669485092163
+    ],
+    "Val_Joules": [
+        1196.1600325763225,
+        2392.3200651526454,
+        3588.4800977289683,
+        4784.640130305292,
+        5980.800162881615,
+        7176.9601954579375,
+        8373.12022803426,
+        9569.280260610583,
+        10765.440293186906,
+        11961.60032576323
+    ],
+    "Val_JoulesNormalized": [
+        539.5372136116027,
+        1079.0744272232055,
+        1618.6116408348084,
+        2158.1488544464114,
+        2697.6860680580144,
+        3237.2232816696173,
+        3776.7604952812203,
+        4316.297708892824,
+        4855.834922504426,
+        5395.37213611603
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (years != 0) {\n                result = result.withYears(years);\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (months != 0) {\n                years = FieldUtils.safeAdd(years, months / 12);\n                months = months % 12;\n                if (years != 0) {\n                    result = result.withYears(years);\n                }\n                if (months != 0) {\n                    result = result.withMonths(months);\n                }\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (years != 0) {\n                result = result.withYears(FieldUtils.safeAdd(years, months / 12));\n            }\n            if (months != 0) {\n                result = result.withMonths(months % 12);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           result = result.withYears(FieldUtils.safeAdd(years, months / 12));\n            result = result.withMonths(months % 12);\n            if (years != 0) {\n                result = result.withYears(years);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (months != 0) {\n                years = FieldUtils.safeAdd(years, months / 12);\n                months = months % 12;\n                if (years != 0) {\n                    result = result.withYears(years);\n                }\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (months != 0) {\n                years = FieldUtils.safeAdd(years, months / 12);\n                months = months % 12;\n            }\n            if (years != 0) {\n                result = result.withYears(years);\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           result = result.withYears(FieldUtils.safeAdd(years, months / 12));\n            result = result.withMonths(months % 12);\n            if (years != 0) {\n                result = result.withYears(years);\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (years != 0) {\n                result = result.withYears(years);\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n            if (years == 0 && months == 0) {\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (months != 0) {\n                years = FieldUtils.safeAdd(years, months / 12);\n                months = months % 12;\n                if (years != 0) {\n                    result = result.withYears(years);\n                }\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n",
+        "    public Period normalizedStandard(PeriodType type) {\n        type = DateTimeUtils.getPeriodType(type);\n        long millis = getMillis();  \n        millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));\n        millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));\n        millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));\n        millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));\n        millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));\n        Period result = new Period(millis, type, ISOChronology.getInstanceUTC());\n        int years = getYears();\n        int months = getMonths();\n        if (years != 0 || months != 0) {\n// buggy code\n//             years = FieldUtils.safeAdd(years, months / 12);\n//             months = months % 12;\n//             if (years != 0) {\n//                 result = result.withYears(years);\n//             }\n//             if (months != 0) {\n//                 result = result.withMonths(months);\n           if (years != 0) {\n                result = result.withYears(years);\n            }\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        } else {\n            if (months != 0) {\n                result = result.withMonths(months);\n            }\n        }\n        return result;\n    }\n"
+    ]
+}

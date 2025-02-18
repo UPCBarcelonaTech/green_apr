@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-92",
+    "Time": {
+        "mean": 277.75371074676514,
+        "median": 277.75371074676514,
+        "std": 0,
+        "max": 277.75371074676514,
+        "min": 277.75371074676514,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 35750.94220819473,
+        "median": 35750.94220819473,
+        "std": 0,
+        "max": 35750.94220819473,
+        "min": 35750.94220819473,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 16034.779823124407,
+        "median": 16034.779823124407,
+        "std": 0,
+        "max": 16034.779823124407,
+        "min": 16034.779823124407,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        37.23897862434387,
+        71.59822607040405,
+        105.95747351646423,
+        140.3167209625244,
+        174.6759684085846,
+        209.03521585464478,
+        243.39446330070496,
+        277.75371074676514
+    ],
+    "Joules_Per_PatchMedian": [
+        6935.247826534509,
+        11051.775595343111,
+        15168.303364151714,
+        19284.831132960317,
+        23401.35890176892,
+        27517.88667057752,
+        31634.414439386124,
+        35750.94220819473
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2565.7478728115557,
+        4489.89529428482,
+        6414.042715758084,
+        8338.19013723135,
+        10262.337558704614,
+        12186.484980177878,
+        14110.632401651143,
+        16034.779823124407
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9193418979644776,
+        "median": 2.8797311782836914,
+        "std": 0.0567001446708115,
+        "max": 2.9991939067840576,
+        "min": 2.878923177719116,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2846.638080830574,
+        "median": 2818.7200577259064,
+        "std": 45.945814134024175,
+        "max": 2908.633705282211,
+        "min": 2805.7184318184854,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 647.0642045259476,
+        "median": 641.6004513382909,
+        "std": 32.721947701893775,
+        "max": 683.1178122758865,
+        "min": 613.4649035930634,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.35924744606018,
+        68.71849489212036,
+        103.07774233818054,
+        137.43698978424072,
+        171.7962372303009,
+        206.15548467636108,
+        240.51473212242126,
+        274.87397956848145
+    ],
+    "Val_Joules": [
+        4116.527768808603,
+        8233.055537617205,
+        12349.583306425808,
+        16466.11107523441,
+        20582.638844043013,
+        24699.166612851615,
+        28815.694381660218,
+        32932.22215046882
+    ],
+    "Val_JoulesNormalized": [
+        1924.1474214732648,
+        3848.294842946529,
+        5772.442264419793,
+        7696.589685893059,
+        9620.737107366323,
+        11544.884528839588,
+        13469.031950312852,
+        15393.179371786116
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "C",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.lastIndexOf('.');\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.indexOf('.', 1);\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.indexOf(\".\");\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n       int indexOfDot = namespace.indexOf('.');\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n       int indexOfDot = namespace.lastIndexOf('.');\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.indexOf('$');\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.indexOf('.', 0);\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.length() - 1;\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n",
+        "    void replace() {\n      if (firstNode == null) {\n        replacementNode = candidateDefinition;\n        return;\n      }\n      if (candidateDefinition != null && explicitNode != null) {\n        explicitNode.detachFromParent();\n        compiler.reportCodeChange();\n        replacementNode = candidateDefinition;\n        if (NodeUtil.isExpressionNode(candidateDefinition)) {\n          candidateDefinition.putBooleanProp(Node.IS_NAMESPACE, true);\n          Node assignNode = candidateDefinition.getFirstChild();\n          Node nameNode = assignNode.getFirstChild();\n          if (nameNode.getType() == Token.NAME) {\n            Node valueNode = nameNode.getNext();\n            assignNode.removeChild(nameNode);\n            assignNode.removeChild(valueNode);\n            nameNode.addChildToFront(valueNode);\n            Node varNode = new Node(Token.VAR, nameNode);\n            varNode.copyInformationFrom(candidateDefinition);\n            candidateDefinition.getParent().replaceChild(\n                candidateDefinition, varNode);\n            nameNode.setJSDocInfo(assignNode.getJSDocInfo());\n            compiler.reportCodeChange();\n            replacementNode = varNode;\n          }\n        }\n      } else {\n        replacementNode = createDeclarationNode();\n        if (firstModule == minimumModule) {\n          firstNode.getParent().addChildBefore(replacementNode, firstNode);\n        } else {\n// buggy code\n//           int indexOfDot = namespace.indexOf('.');\n         int indexOfDot = namespace.indexOf('.', minimumModule.getLength());\n          if (indexOfDot == -1) {\n            compiler.getNodeForCodeInsertion(minimumModule)\n                .addChildToBack(replacementNode);\n          } else {\n            ProvidedName parentName =\n                providedNames.get(namespace.substring(0, indexOfDot));\n            Preconditions.checkNotNull(parentName);\n            Preconditions.checkNotNull(parentName.replacementNode);\n            parentName.replacementNode.getParent().addChildAfter(\n                replacementNode, parentName.replacementNode);\n          }\n        }\n        if (explicitNode != null) {\n          explicitNode.detachFromParent();\n        }\n        compiler.reportCodeChange();\n      }\n    }\n"
+    ]
+}

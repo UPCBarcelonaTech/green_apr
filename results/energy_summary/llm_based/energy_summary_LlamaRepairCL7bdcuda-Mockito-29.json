@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-29",
+    "Time": {
+        "mean": 74.1771137714386,
+        "median": 74.1771137714386,
+        "std": 0,
+        "max": 74.1771137714386,
+        "min": 74.1771137714386,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10975.86117218733,
+        "median": 10975.86117218733,
+        "std": 0,
+        "max": 10975.86117218733,
+        "min": 10975.86117218733,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5392.456746697426,
+        "median": 5392.456746697426,
+        "std": 0,
+        "max": 5392.456746697426,
+        "min": 5392.456746697426,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.71961522102356,
+        22.1291983127594,
+        32.53878140449524,
+        42.94836449623108,
+        53.35794758796692,
+        63.76753067970276,
+        74.1771137714386
+    ],
+    "Joules_Per_PatchMedian": [
+        2585.8125294804577,
+        3984.1539699316027,
+        5382.495410382748,
+        6780.836850833893,
+        8179.178291285038,
+        9577.519731736184,
+        10975.86117218733
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        936.0300189256669,
+        1678.7678068876266,
+        2421.5055948495865,
+        3164.2433828115463,
+        3906.981170773506,
+        4649.718958735466,
+        5392.456746697426
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3582536697387695,
+        "median": 1.3100321292877197,
+        "std": 0.14985601878164176,
+        "max": 1.6220920085906982,
+        "min": 1.2501230239868164,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1230.5506521201135,
+        "median": 1187.4710890293122,
+        "std": 120.09631491041232,
+        "max": 1443.0330899477005,
+        "min": 1150.1180151700971,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 196.76131300687797,
+        "median": 193.29223096370708,
+        "std": 8.685369883149054,
+        "max": 212.18967382907886,
+        "min": 191.81701971292512,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.40958309173584,
+        20.81916618347168,
+        31.22874927520752,
+        41.63833236694336,
+        52.0479154586792,
+        62.45749855041504,
+        72.86708164215088
+    ],
+    "Val_Joules": [
+        1398.3414404511454,
+        2796.6828809022904,
+        4195.024321353436,
+        5593.36576180458,
+        6991.707202255726,
+        8390.048642706872,
+        9788.390083158018
+    ],
+    "Val_JoulesNormalized": [
+        742.7377879619598,
+        1485.4755759239197,
+        2228.2133638858795,
+        2970.9511518478394,
+        3713.688939809799,
+        4456.426727771759,
+        5199.164515733719
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "I",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "correct",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendValue(wanted);\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendValue(wanted.toString());\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(String.valueOf(wanted));\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendDescriptionOf(wanted);\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(wanted == null ? \"null\" : wanted.toString());\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(wanted);\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(actual.toString());\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(wanted.toString().replace(\"\\n\", \"\\\\n\"));\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n",
+        "    public void describeTo(Description description) {\n        description.appendText(\"same(\");\n        appendQuoting(description);\n// buggy code\n//         description.appendText(wanted.toString());\n       description.appendText(wanted.toString());\n        description.appendText(\", \");\n        appendQuoting(description);\n        description.appendText(\")\");\n    }\n"
+    ]
+}

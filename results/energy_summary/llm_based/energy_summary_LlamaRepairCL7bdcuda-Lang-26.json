@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-26",
+    "Time": {
+        "mean": 80.69512379169464,
+        "median": 80.69512379169464,
+        "std": 0,
+        "max": 80.69512379169464,
+        "min": 80.69512379169464,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 7690.652041476966,
+        "median": 7690.652041476966,
+        "std": 0,
+        "max": 7690.652041476966,
+        "min": 7690.652041476966,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 1930.709680259228,
+        "median": 1930.709680259228,
+        "std": 0,
+        "max": 1930.709680259228,
+        "min": 1930.709680259228,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.819459080696106,
+        18.678917169570923,
+        27.53837525844574,
+        36.39783334732056,
+        45.25729143619537,
+        54.11674952507019,
+        62.97620761394501,
+        71.83566570281982,
+        80.69512379169464
+    ],
+    "Joules_Per_PatchMedian": [
+        1634.2043804109096,
+        2391.2603380441665,
+        3148.316295677423,
+        3905.37225331068,
+        4662.428210943937,
+        5419.484168577194,
+        6176.5401262104515,
+        6933.596083843709,
+        7690.652041476966
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        348.9847509264948,
+        546.7003670930865,
+        744.4159832596781,
+        942.1315994262698,
+        1139.8472155928614,
+        1337.562831759453,
+        1535.2784479260447,
+        1732.9940640926363,
+        1930.709680259228
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 0.962226152420044,
+        "median": 0.9600009918212891,
+        "std": 0.023882692327994115,
+        "max": 0.9908750057220459,
+        "min": 0.9299988746643066,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 882.1762666344642,
+        "median": 877.1484227776527,
+        "std": 15.129921561737415,
+        "max": 899.4788515806199,
+        "min": 862.8007704496384,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 147.26527859449394,
+        "median": 151.26913475990318,
+        "std": 9.289135977166907,
+        "max": 158.49359673261654,
+        "min": 137.21564843654642,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.859458088874817,
+        17.718916177749634,
+        26.57837426662445,
+        35.43783235549927,
+        44.297290444374084,
+        53.1567485332489,
+        62.01620662212372,
+        70.87566471099854,
+        79.73512279987335
+    ],
+    "Val_Joules": [
+        757.0559576332569,
+        1514.1119152665137,
+        2271.1678728997704,
+        3028.2238305330275,
+        3785.2797881662846,
+        4542.335745799542,
+        5299.391703432799,
+        6056.447661066056,
+        6813.503618699313
+    ],
+    "Val_JoulesNormalized": [
+        197.71561616659164,
+        395.4312323331833,
+        593.1468484997749,
+        790.8624646663666,
+        988.5780808329582,
+        1186.2936969995499,
+        1384.0093131661415,
+        1581.7249293327332,
+        1779.4405454993248
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = Calendar.getInstance(mTimeZone);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = new GregorianCalendar(mTimeZone, Locale.US);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = new GregorianCalendar(mTimeZone, mLocale);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       GregorianCalendar c = new GregorianCalendar(mTimeZone);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = new GregorianCalendar(mTimeZone, Locale.getDefault());\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = new GregorianCalendar();\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = Calendar.getInstance();\n        c.setTimeZone(mTimeZone);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = new GregorianCalendar(mLocale);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n       Calendar c = GregorianCalendar.getInstance(mTimeZone);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n",
+        "    public String format(Date date) {\n// buggy code\n//         Calendar c = new GregorianCalendar(mTimeZone);\n        c.setTime(date);\n        return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();\n    }\n"
+    ]
+}

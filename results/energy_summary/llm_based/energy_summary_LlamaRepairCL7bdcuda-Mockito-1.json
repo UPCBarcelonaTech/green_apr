@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-1",
+    "Time": {
+        "mean": 270.49401676654816,
+        "median": 270.49401676654816,
+        "std": 0,
+        "max": 270.49401676654816,
+        "min": 270.49401676654816,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 35254.61908646822,
+        "median": 35254.61908646822,
+        "std": 0,
+        "max": 35254.61908646822,
+        "min": 35254.61908646822,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 15946.837195920943,
+        "median": 15946.837195920943,
+        "std": 0,
+        "max": 15946.837195920943,
+        "min": 15946.837195920943,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        41.659966349601746,
+        79.79897475242615,
+        117.93798315525055,
+        156.07699155807495,
+        194.21599996089935,
+        232.35500836372375,
+        270.49401676654816
+    ],
+    "Joules_Per_PatchMedian": [
+        7864.37037409544,
+        12429.41182615757,
+        16994.4532782197,
+        21559.49473028183,
+        26124.53618234396,
+        30689.57763440609,
+        35254.61908646822
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2758.7286611557,
+        4956.7467502832405,
+        7154.764839410781,
+        9352.782928538321,
+        11550.80101766586,
+        13748.819106793402,
+        15946.837195920943
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.907580757141113,
+        "median": 3.5209579467773438,
+        "std": 0.554341221704965,
+        "max": 4.519852876663208,
+        "min": 3.4709320068359375,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3599.2660145521163,
+        "median": 3299.32892203331,
+        "std": 434.5104030620884,
+        "max": 4078.5693853020666,
+        "min": 3250.6828773260113,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 565.1962472176551,
+        "median": 560.7105720281597,
+        "std": 60.888531318411175,
+        "max": 644.3383482098579,
+        "min": 492.56407896280325,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        38.1390084028244,
+        76.2780168056488,
+        114.4170252084732,
+        152.5560336112976,
+        190.695042014122,
+        228.8340504169464,
+        266.9730588197708
+    ],
+    "Val_Joules": [
+        4565.04145206213,
+        9130.08290412426,
+        13695.124356186388,
+        18260.16580824852,
+        22825.20726031065,
+        27390.24871237278,
+        31955.29016443491
+    ],
+    "Val_JoulesNormalized": [
+        2198.0180891275404,
+        4396.036178255081,
+        6594.054267382621,
+        8792.072356510162,
+        10990.090445637701,
+        13188.108534765242,
+        15386.126623892784
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           matchers.get(indexOfVararg).captureFrom(invocation.getArgumentAt(indexOfVararg, Object.class));\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           matchers.get(indexOfVararg).captureFrom(invocation.getRawArguments()[indexOfVararg]);\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           matchers.get(indexOfVararg).captureFrom(invocation.getArgumentAt(indexOfVararg, Object[].class));\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           Object[] varargs = (Object[]) invocation.getRawArguments()[indexOfVararg];\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(varargs[position]);\n                }\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           Object[] varargs = (Object[]) invocation.getRawArguments()[indexOfVararg];\n            for (int position = 0; position < varargs.length; position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(varargs[position]);\n                }\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           if (indexOfVararg < 0) {\n                throw new UnsupportedOperationException();\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           Object[] varargs = (Object[]) invocation.getRawArguments()[indexOfVararg];\n            for (int i = 0; i < varargs.length; i++) {\n                Matcher m = matchers.get(i);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(varargs[i]);\n                }\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n            return;\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation invocation) {\n        if (invocation.getMethod().isVarArgs()) {\n            int indexOfVararg = invocation.getRawArguments().length - 1;\n// buggy code\n//             throw new UnsupportedOperationException();\n           for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(indexOfVararg, Object.class));\n                }\n            }\n        } else {\n            for (int position = 0; position < matchers.size(); position++) {\n                Matcher m = matchers.get(position);\n                if (m instanceof CapturesArguments) {\n                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));\n                }\n            }\n        }\n    }\n"
+    ]
+}

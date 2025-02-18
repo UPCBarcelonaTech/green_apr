@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-24",
+    "Time": {
+        "mean": 92.30235624313354,
+        "median": 92.30235624313354,
+        "std": 0,
+        "max": 92.30235624313354,
+        "min": 92.30235624313354,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10743.699973082545,
+        "median": 10743.699973082545,
+        "std": 0,
+        "max": 10743.699973082545,
+        "min": 10743.699973082545,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2654.544710969925,
+        "median": 2654.544710969925,
+        "std": 0,
+        "max": 2654.544710969925,
+        "min": 2654.544710969925,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        12.2084139585495,
+        21.107740879058838,
+        30.007067799568176,
+        38.906394720077515,
+        47.80572164058685,
+        56.70504856109619,
+        65.60437548160553,
+        74.50370240211487,
+        83.4030293226242,
+        92.30235624313354
+    ],
+    "Joules_Per_PatchMedian": [
+        4010.4373507082464,
+        4758.577642083168,
+        5506.71793345809,
+        6254.858224833011,
+        7002.998516207933,
+        7751.1388075828545,
+        8499.279098957777,
+        9247.4193903327,
+        9995.559681707622,
+        10743.699973082545
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        955.596303141117,
+        1144.368348455429,
+        1333.140393769741,
+        1521.912439084053,
+        1710.684484398365,
+        1899.456529712677,
+        2088.228575026989,
+        2277.000620341301,
+        2465.772665655613,
+        2654.544710969925
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.308418369293213,
+        "median": 3.309087038040161,
+        "std": 0.017769452606903376,
+        "max": 3.33182692527771,
+        "min": 3.291019916534424,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3267.849425370693,
+        "median": 3262.2970593333243,
+        "std": 9.47109175375672,
+        "max": 3280.7985244750976,
+        "min": 3259.385906112194,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 761.684684870243,
+        "median": 766.824257826805,
+        "std": 12.139436348999373,
+        "max": 774.2860024332999,
+        "min": 743.817939794063,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.899326920509338,
+        17.798653841018677,
+        26.697980761528015,
+        35.59730768203735,
+        44.49663460254669,
+        53.39596152305603,
+        62.29528844356537,
+        71.1946153640747,
+        80.09394228458405,
+        88.99326920509338
+    ],
+    "Val_Joules": [
+        748.1402913749221,
+        1496.2805827498437,
+        2244.4208741247653,
+        2992.561165499687,
+        3740.7014568746085,
+        4488.84174824953,
+        5236.982039624452,
+        5985.122330999375,
+        6733.262622374297,
+        7481.40291374922
+    ],
+    "Val_JoulesNormalized": [
+        188.77204531431198,
+        377.54409062862396,
+        566.316135942936,
+        755.0881812572479,
+        943.8602265715599,
+        1132.632271885872,
+        1321.4043172001839,
+        1510.1763625144958,
+        1698.9484078288078,
+        1887.7204531431198
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return foundDigit && !hasExp && !hasDecPoint;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return !hasExp && foundDigit;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return !hasExp;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return hasDecPoint || !hasExp;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return hasDecPoint || hasExp;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return foundDigit && i == start + 1;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return hasExp ? false : foundDigit;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return !allowSigns && foundDigit && !hasExp;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n",
+        "    public static boolean isNumber(String str) {\n        if (StringUtils.isEmpty(str)) {\n            return false;\n        }\n        char[] chars = str.toCharArray();\n        int sz = chars.length;\n        boolean hasExp = false;\n        boolean hasDecPoint = false;\n        boolean allowSigns = false;\n        boolean foundDigit = false;\n        int start = (chars[0] == '-') ? 1 : 0;\n        if (sz > start + 1) {\n            if (chars[start] == '0' && chars[start + 1] == 'x') {\n                int i = start + 2;\n                if (i == sz) {\n                    return false; \n                }\n                for (; i < chars.length; i++) {\n                    if ((chars[i] < '0' || chars[i] > '9')\n                        && (chars[i] < 'a' || chars[i] > 'f')\n                        && (chars[i] < 'A' || chars[i] > 'F')) {\n                        return false;\n                    }\n                }\n                return true;\n            }\n        }\n        sz--; \n        int i = start;\n        while (i < sz || (i < sz + 1 && allowSigns && !foundDigit)) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                foundDigit = true;\n                allowSigns = false;\n            } else if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                hasDecPoint = true;\n            } else if (chars[i] == 'e' || chars[i] == 'E') {\n                if (hasExp) {\n                    return false;\n                }\n                if (!foundDigit) {\n                    return false;\n                }\n                hasExp = true;\n                allowSigns = true;\n            } else if (chars[i] == '+' || chars[i] == '-') {\n                if (!allowSigns) {\n                    return false;\n                }\n                allowSigns = false;\n                foundDigit = false; \n            } else {\n                return false;\n            }\n            i++;\n        }\n        if (i < chars.length) {\n            if (chars[i] >= '0' && chars[i] <= '9') {\n                return true;\n            }\n            if (chars[i] == 'e' || chars[i] == 'E') {\n                return false;\n            }\n            if (chars[i] == '.') {\n                if (hasDecPoint || hasExp) {\n                    return false;\n                }\n                return foundDigit;\n            }\n            if (!allowSigns\n                && (chars[i] == 'd'\n                    || chars[i] == 'D'\n                    || chars[i] == 'f'\n                    || chars[i] == 'F')) {\n                return foundDigit;\n            }\n            if (chars[i] == 'l'\n                || chars[i] == 'L') {\n// buggy code\n//                 return foundDigit && !hasExp;\n               return foundDigit && !hasExp && !hasDecPoint ;\n            }\n            return false;\n        }\n        return !allowSigns && foundDigit;\n    }\n"
+    ]
+}

@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-9",
+    "Time": {
+        "mean": 514.4174282550812,
+        "median": 514.4174282550812,
+        "std": 0,
+        "max": 514.4174282550812,
+        "min": 514.4174282550812,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 60778.68266442418,
+        "median": 60778.68266442418,
+        "std": 0,
+        "max": 60778.68266442418,
+        "min": 60778.68266442418,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 27250.07130804658,
+        "median": 27250.07130804658,
+        "std": 0,
+        "max": 27250.07130804658,
+        "min": 27250.07130804658,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        74.9291341304779,
+        148.17718315124512,
+        221.42523217201233,
+        294.67328119277954,
+        367.92133021354675,
+        441.16937923431396,
+        514.4174282550812
+    ],
+    "Joules_Per_PatchMedian": [
+        9986.177194923162,
+        18451.594773173332,
+        26917.012351423502,
+        35382.42992967367,
+        43847.84750792384,
+        52313.26508617401,
+        60778.68266442418
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4101.379538983107,
+        7959.494833827019,
+        11817.61012867093,
+        15675.725423514843,
+        19533.840718358755,
+        23391.956013202667,
+        27250.07130804658
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.7805967330932617,
+        "median": 1.6810851097106934,
+        "std": 0.23726454301897212,
+        "max": 2.2009549140930176,
+        "min": 1.6300458908081055,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1603.6394687962531,
+        "median": 1520.7596166729927,
+        "std": 189.9765416867912,
+        "max": 1940.8620097398757,
+        "min": 1485.6200459837914,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 245.59034116029744,
+        "median": 243.26424413919472,
+        "std": 17.278399443468114,
+        "max": 274.07885329723354,
+        "min": 227.16462475061417,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        73.24804902076721,
+        146.49609804153442,
+        219.74414706230164,
+        292.99219608306885,
+        366.24024510383606,
+        439.48829412460327,
+        512.7363431453705
+    ],
+    "Val_Joules": [
+        8465.41757825017,
+        16930.83515650034,
+        25396.25273475051,
+        33861.67031300068,
+        42327.08789125085,
+        50792.50546950102,
+        59257.92304775119
+    ],
+    "Val_JoulesNormalized": [
+        3858.115294843912,
+        7716.230589687824,
+        11574.345884531736,
+        15432.461179375648,
+        19290.57647421956,
+        23148.691769063473,
+        27006.807063907385
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, direction.negate());\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, zero.add(direction));\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, direction);\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, direction.multiply(-1));\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero.add(direction), zero);\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero.subtract(direction), zero);\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(direction, zero);\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, direction.subtract(zero));\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n       final Line reverted = new Line(zero, direction.multiply(2));\n        return reverted;\n    }\n",
+        "    public Line revert() {\n// buggy code\n//         final Line reverted = new Line(zero, zero.subtract(direction));\n        return reverted;\n    }\n"
+    ]
+}

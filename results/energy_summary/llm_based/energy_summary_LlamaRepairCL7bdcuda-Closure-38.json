@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-38",
+    "Time": {
+        "mean": 537.0078525543213,
+        "median": 537.0078525543213,
+        "std": 0,
+        "max": 537.0078525543213,
+        "min": 537.0078525543213,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 67851.18920918702,
+        "median": 67851.18920918702,
+        "std": 0,
+        "max": 67851.18920918702,
+        "min": 67851.18920918702,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 31091.346568739416,
+        "median": 31091.346568739416,
+        "std": 0,
+        "max": 31091.346568739416,
+        "min": 31091.346568739416,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        56.68810498714447,
+        110.0569658279419,
+        163.42582666873932,
+        216.79468750953674,
+        270.16354835033417,
+        323.5324091911316,
+        376.901270031929,
+        430.27013087272644,
+        483.63899171352386,
+        537.0078525543213
+    ],
+    "Joules_Per_PatchMedian": [
+        9633.9471429646,
+        16102.529594767093,
+        22571.112046569586,
+        29039.69449837208,
+        35508.27695017457,
+        41976.85940197706,
+        48445.44185377955,
+        54914.02430558204,
+        61382.60675738453,
+        67851.18920918702
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3679.2353875696663,
+        6725.025518810749,
+        9770.815650051833,
+        12816.605781292916,
+        15862.395912533999,
+        18908.186043775084,
+        21953.976175016167,
+        24999.76630625725,
+        28045.556437498333,
+        31091.346568739416
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.6394068241119384,
+        "median": 3.319244146347046,
+        "std": 0.44703601995430836,
+        "max": 4.129924058914185,
+        "min": 3.309356927871704,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3415.5054386878014,
+        "median": 3165.364691162109,
+        "std": 355.32434183304326,
+        "max": 3808.576888000965,
+        "min": 3147.4691875934604,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 662.5318657112123,
+        "median": 633.4452563285827,
+        "std": 43.95672353451248,
+        "max": 722.1139733791351,
+        "min": 626.6737175583844,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        53.368860840797424,
+        106.73772168159485,
+        160.10658252239227,
+        213.4754433631897,
+        266.8443042039871,
+        320.21316504478455,
+        373.58202588558197,
+        426.9508867263794,
+        480.3197475671768,
+        533.6886084079742
+    ],
+    "Val_Joules": [
+        6468.582451802491,
+        12937.164903604984,
+        19405.747355407475,
+        25874.32980720997,
+        32342.91225901246,
+        38811.49471081495,
+        45280.07716261744,
+        51748.65961441993,
+        58217.24206622242,
+        64685.824518024914
+    ],
+    "Val_JoulesNormalized": [
+        3045.7901312410836,
+        6091.580262482166,
+        9137.37039372325,
+        12183.160524964333,
+        15228.950656205416,
+        18274.740787446503,
+        21320.530918687586,
+        24366.32104992867,
+        27412.111181169752,
+        30457.901312410835
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && prev != '-') {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && !negativeZero && prev == '-') {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (!negativeZero && x < 0 && prev == '-') {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && prev != '-' && !negativeZero) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && (prev == '-' || prev == '(')) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && (prev == '+' || prev == '-')) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && (prev == '-' || prev == 0)) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if (x < 0 && (prev == '-' || prev == '.')) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if ((x < 0 && prev == '-') || (x == 0 && prev == '-')) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n",
+        "  void addNumber(double x) {\n    char prev = getLastChar();\n    boolean negativeZero = isNegativeZero(x);\n// buggy code\n//     if (x < 0 && prev == '-') {\n   if ((x < 0 && prev == '-') || (x > 0 && prev == '-')) {\n      add(\" \");\n    }\n    if ((long) x == x && !negativeZero) {\n      long value = (long) x;\n      long mantissa = value;\n      int exp = 0;\n      if (Math.abs(x) >= 100) {\n        while (mantissa / 10 * Math.pow(10, exp + 1) == value) {\n          mantissa /= 10;\n          exp++;\n        }\n      }\n      if (exp > 2) {\n        add(Long.toString(mantissa) + \"E\" + Integer.toString(exp));\n      } else {\n        add(Long.toString(value));\n      }\n    } else {\n      add(String.valueOf(x));\n    }\n  }\n"
+    ]
+}

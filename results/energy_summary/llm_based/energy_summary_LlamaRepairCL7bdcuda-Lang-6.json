@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-6",
+    "Time": {
+        "mean": 122.41852617263794,
+        "median": 122.41852617263794,
+        "std": 0,
+        "max": 122.41852617263794,
+        "min": 122.41852617263794,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 19141.575359320635,
+        "median": 19141.575359320635,
+        "std": 0,
+        "max": 19141.575359320635,
+        "min": 19141.575359320635,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5701.81619207859,
+        "median": 5701.81619207859,
+        "std": 0,
+        "max": 5701.81619207859,
+        "min": 5701.81619207859,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        22.599848866462708,
+        36.859659910202026,
+        51.119470953941345,
+        65.37928199768066,
+        79.63909304141998,
+        93.8989040851593,
+        108.15871512889862,
+        122.41852617263794
+    ],
+    "Joules_Per_PatchMedian": [
+        9481.544500678778,
+        10861.548909056186,
+        12241.553317433594,
+        13621.557725811002,
+        15001.56213418841,
+        16381.566542565819,
+        17761.570950943227,
+        19141.575359320635
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2267.8552589237684,
+        2758.421106517314,
+        3248.9869541108596,
+        3739.5528017044053,
+        4230.118649297951,
+        4720.6844968914975,
+        5211.250344485044,
+        5701.81619207859
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 8.960853958129883,
+        "median": 8.340037822723389,
+        "std": 1.006787686795716,
+        "max": 10.163166999816895,
+        "min": 8.149075984954834,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 8538.492706685067,
+        "median": 8101.5400923013685,
+        "std": 748.9538311497706,
+        "max": 9455.246127259732,
+        "min": 7834.388067960739,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1750.5579179525373,
+        "median": 1777.2894113302227,
+        "std": 76.71884589530595,
+        "max": 1809.4955932974817,
+        "min": 1620.7176294326782,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        14.259811043739319,
+        28.519622087478638,
+        42.77943313121796,
+        57.039244174957275,
+        71.2990552186966,
+        85.55886626243591,
+        99.81867730617523,
+        114.07848834991455
+    ],
+    "Val_Joules": [
+        1380.0044083774092,
+        2760.0088167548174,
+        4140.013225132226,
+        5520.017633509634,
+        6900.022041887042,
+        8280.02645026445,
+        9660.030858641858,
+        11040.035267019266
+    ],
+    "Val_JoulesNormalized": [
+        490.56584759354564,
+        981.1316951870913,
+        1471.697542780637,
+        1962.2633903741826,
+        2452.8292379677287,
+        2943.3950855612748,
+        3433.960933154821,
+        3924.526780748367
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(input.codePointAt(pos));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointAt(input, pos + pt));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointBefore(input, pos + consumed));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointBefore(input, pos));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(input.charAt(pos));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointAt(input, pos+pt));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointBefore(input, pos + 1));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointBefore(input, pos+1));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.charCount(Character.codePointAt(input, pos, len));\n            }\n        }\n    }\n",
+        "    public final void translate(CharSequence input, Writer out) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (input == null) {\n            return;\n        }\n        int pos = 0;\n        int len = input.length();\n        while (pos < len) {\n            int consumed = translate(input, pos, out);\n            if (consumed == 0) {\n                char[] c = Character.toChars(Character.codePointAt(input, pos));\n                out.write(c);\n                pos+= c.length;\n                continue;\n            }\n            for (int pt = 0; pt < consumed; pt++) {\n// buggy code\n//                 pos += Character.charCount(Character.codePointAt(input, pos));\n               pos += Character.toChars(Character.codePointAt(input, pos)).length;\n            }\n        }\n    }\n"
+    ]
+}

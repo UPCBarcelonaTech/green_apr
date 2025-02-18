@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-106",
+    "Time": {
+        "mean": 56.82001781463623,
+        "median": 56.82001781463623,
+        "std": 0,
+        "max": 56.82001781463623,
+        "min": 56.82001781463623,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9147.386710572244,
+        "median": 9147.386710572244,
+        "std": 0,
+        "max": 9147.386710572244,
+        "min": 9147.386710572244,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2852.7350789546977,
+        "median": 2852.7350789546977,
+        "std": 0,
+        "max": 2852.7350789546977,
+        "min": 2852.7350789546977,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.210877537727356,
+        14.500782012939453,
+        19.79068648815155,
+        25.080590963363647,
+        30.370495438575745,
+        35.66039991378784,
+        40.95030438899994,
+        46.240208864212036,
+        51.53011333942413,
+        56.82001781463623
+    ],
+    "Joules_Per_PatchMedian": [
+        4283.498672491312,
+        4823.930676722527,
+        5364.362680953742,
+        5904.7946851849565,
+        6445.226689416171,
+        6985.658693647386,
+        7526.090697878601,
+        8066.522702109815,
+        8606.95470634103,
+        9147.386710572244
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        932.5645260989668,
+        1145.9168097496035,
+        1359.2690934002403,
+        1572.621377050877,
+        1785.9736607015138,
+        1999.3259443521506,
+        2212.6782280027874,
+        2426.030511653424,
+        2639.382795304061,
+        2852.7350789546977
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.217886209487915,
+        "median": 3.920973062515259,
+        "std": 0.4697003844192128,
+        "max": 4.788006067276001,
+        "min": 3.850098133087158,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3951.6890521097184,
+        "median": 3743.0666682600977,
+        "std": 365.3894624635897,
+        "max": 4398.282570874691,
+        "min": 3658.102895641327,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 718.0248358511926,
+        "median": 719.21224244833,
+        "std": 27.19622131997604,
+        "max": 757.2433570146563,
+        "min": 680.8220093250279,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        5.289904475212097,
+        10.579808950424194,
+        15.869713425636292,
+        21.15961790084839,
+        26.449522376060486,
+        31.739426851272583,
+        37.02933132648468,
+        42.31923580169678,
+        47.609140276908875,
+        52.89904475212097
+    ],
+    "Val_Joules": [
+        540.4320042312147,
+        1080.8640084624294,
+        1621.2960126936441,
+        2161.728016924859,
+        2702.1600211560735,
+        3242.5920253872882,
+        3783.024029618503,
+        4323.456033849718,
+        4863.888038080932,
+        5404.320042312146
+    ],
+    "Val_JoulesNormalized": [
+        213.35228365063676,
+        426.7045673012735,
+        640.0568509519103,
+        853.409134602547,
+        1066.7614182531838,
+        1280.1137019038206,
+        1493.4659855544573,
+        1706.818269205094,
+        1920.1705528557309,
+        2133.5228365063676
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           return new Fraction(whole.intValue(), 1);\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           return new Fraction(num.intValue(), 1);\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setIndex(initialIndex);\n            return new Fraction(whole.intValue(), 1);\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            return new Fraction(whole.intValue(), 1);\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        pos.setIndex(startIndex);\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setIndex(initialIndex);\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           return new Fraction(whole.intValue(), 1);\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n",
+        "    public Fraction parse(String source, ParsePosition pos) {\n        Fraction ret = super.parse(source, pos);\n        if (ret != null) {\n            return ret;\n        }\n        int initialIndex = pos.getIndex();\n        parseAndIgnoreWhitespace(source, pos);\n        Number whole = getWholeFormat().parse(source, pos);\n        if (whole == null) {\n            pos.setIndex(initialIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number num = getNumeratorFormat().parse(source, pos);\n        if (num == null) {\n// buggy code\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n//         int startIndex = pos.getIndex();\n//         char c = parseNextCharacter(source, pos);\n//         switch (c) {\n//         case 0 :\n//             return new Fraction(num.intValue(), 1);\n//         case '/' :\n//             break;\n//         default :\n//             pos.setIndex(initialIndex);\n//             pos.setErrorIndex(startIndex);\n//             return null;\n//         }\n//         parseAndIgnoreWhitespace(source, pos);\n//         Number den = getDenominatorFormat().parse(source, pos);\n//         if (den == null) {\n//             pos.setIndex(initialIndex);\n//             return null;\n//         }\n           pos.setIndex(initialIndex);\n            pos.setErrorIndex(initialIndex);\n            return null;\n        }\n        int startIndex = pos.getIndex();\n        char c = parseNextCharacter(source, pos);\n        switch (c) {\n        case 0 :\n            return new Fraction(num.intValue(), 1);\n        case '/' :\n            break;\n        default :\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        parseAndIgnoreWhitespace(source, pos);\n        Number den = getDenominatorFormat().parse(source, pos);\n        if (den == null) {\n            pos.setIndex(initialIndex);\n            pos.setErrorIndex(startIndex);\n            return null;\n        }\n        int w = whole.intValue();\n        int n = num.intValue();\n        int d = den.intValue();\n        return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);\n    }\n"
+    ]
+}

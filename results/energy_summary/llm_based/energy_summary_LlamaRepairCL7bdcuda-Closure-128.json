@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-128",
+    "Time": {
+        "mean": 630.2266561985016,
+        "median": 630.2266561985016,
+        "std": 0,
+        "max": 630.2266561985016,
+        "min": 630.2266561985016,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 77563.92757395505,
+        "median": 77563.92757395505,
+        "std": 0,
+        "max": 77563.92757395505,
+        "min": 77563.92757395505,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 35593.85017187596,
+        "median": 35593.85017187596,
+        "std": 0,
+        "max": 35593.85017187596,
+        "min": 35593.85017187596,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        65.21961152553558,
+        127.99817204475403,
+        190.77673256397247,
+        253.55529308319092,
+        316.33385360240936,
+        379.1124141216278,
+        441.89097464084625,
+        504.6695351600647,
+        567.4480956792831,
+        630.2266561985016
+    ],
+    "Joules_Per_PatchMedian": [
+        9754.494519847633,
+        17288.875970304012,
+        24823.257420760394,
+        32357.638871216775,
+        39892.02032167316,
+        47426.40177212954,
+        54960.78322258592,
+        62495.164673042294,
+        70029.54612349867,
+        77563.92757395505
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3856.2688743293293,
+        7382.666796278954,
+        10909.06471822858,
+        14435.462640178204,
+        17961.86056212783,
+        21488.258484077454,
+        25014.65640602708,
+        28541.054327976704,
+        32067.45224992633,
+        35593.85017187596
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.7399958610534667,
+        "median": 2.4410510063171387,
+        "std": 0.4381639260230795,
+        "max": 3.2199981212615967,
+        "min": 2.389925956726074,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2452.9835254883765,
+        "median": 2220.1130693912505,
+        "std": 343.8254135973392,
+        "max": 2831.165492975712,
+        "min": 2170.6282881379125,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 327.91307920455927,
+        "median": 329.8709523797038,
+        "std": 33.09624440593645,
+        "max": 377.16957403421384,
+        "min": 295.8730648636815,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        62.778560519218445,
+        125.55712103843689,
+        188.33568155765533,
+        251.11424207687378,
+        313.8928025960922,
+        376.67136311531067,
+        439.4499236345291,
+        502.22848415374756,
+        565.007044672966,
+        627.7856051921844
+    ],
+    "Val_Joules": [
+        7534.381450456382,
+        15068.762900912761,
+        22603.144351369145,
+        30137.525801825526,
+        37671.90725228191,
+        45206.28870273829,
+        52740.67015319467,
+        60275.051603651045,
+        67809.43305410742,
+        75343.8145045638
+    ],
+    "Val_JoulesNormalized": [
+        3526.3979219496255,
+        7052.79584389925,
+        10579.193765848875,
+        14105.5916877985,
+        17631.989609748125,
+        21158.38753169775,
+        24684.785453647375,
+        28211.183375597,
+        31737.581297546625,
+        35263.97921949626
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return s.charAt(0) != '0';\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len > 0 && s.charAt(0) == '0') {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0 || s.charAt(0) == '0') {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) return false;\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return s.charAt(0) != '0';\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return s.charAt(0) != '0' || len == 1;\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return len > 1 || s.charAt(0) != '0';\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return len > 0 && s.charAt(0) != '0';\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len == 0) {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return s.charAt(0) != '0' || len > 1;\n  }\n",
+        "  static boolean isSimpleNumber(String s) {\n    int len = s.length();\n// buggy code\n//     for (int index = 0; index < len; index++) {\n//       char c = s.charAt(index);\n//       if (c < '0' || c > '9') {\n//         return false;\n//       }\n//     }\n//     return len > 0 && s.charAt(0) != '0';\n   if (len > 0 && s.charAt(0) == '0') {\n      return false;\n    }\n    for (int index = 0; index < len; index++) {\n      char c = s.charAt(index);\n      if (c < '0' || c > '9') {\n        return false;\n      }\n    }\n    return len > 0;\n  }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-55",
+    "Time": {
+        "mean": 91.5976173877716,
+        "median": 91.5976173877716,
+        "std": 0,
+        "max": 91.5976173877716,
+        "min": 91.5976173877716,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10005.787268382313,
+        "median": 10005.787268382313,
+        "std": 0,
+        "max": 10005.787268382313,
+        "min": 10005.787268382313,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2619.393416452408,
+        "median": 2619.393416452408,
+        "std": 0,
+        "max": 2619.393416452408,
+        "min": 2619.393416452408,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        12.23888897895813,
+        22.158730030059814,
+        32.0785710811615,
+        41.998412132263184,
+        51.91825318336487,
+        61.83809423446655,
+        71.75793528556824,
+        81.67777633666992,
+        91.5976173877716
+    ],
+    "Joules_Per_PatchMedian": [
+        2998.4741203129292,
+        3874.388263821602,
+        4750.302407330275,
+        5626.216550838948,
+        6502.130694347621,
+        7378.044837856294,
+        8253.958981364967,
+        9129.87312487364,
+        10005.787268382313
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        586.9540762424472,
+        841.0089937686923,
+        1095.0639112949375,
+        1349.1188288211827,
+        1603.1737463474278,
+        1857.228663873673,
+        2111.283581399918,
+        2365.338498926163,
+        2619.393416452408
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.3257856369018555,
+        "median": 2.3190479278564453,
+        "std": 0.054231807081713476,
+        "max": 2.3909170627593994,
+        "min": 2.260104179382324,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2129.1042561364175,
+        "median": 2122.5599768042566,
+        "std": 41.62108141445152,
+        "max": 2181.452497017384,
+        "min": 2086.061970663071,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 330.72388957500465,
+        "median": 332.899158716202,
+        "std": 11.62902130438316,
+        "max": 345.5868303775792,
+        "min": 313.54542816877347,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        9.919841051101685,
+        19.83968210220337,
+        29.759523153305054,
+        39.67936420440674,
+        49.59920525550842,
+        59.51904630661011,
+        69.43888735771179,
+        79.35872840881348,
+        89.27856945991516
+    ],
+    "Val_Joules": [
+        875.9141435086726,
+        1751.8282870173452,
+        2627.7424305260183,
+        3503.6565740346914,
+        4379.5707175433645,
+        5255.484861052038,
+        6131.399004560711,
+        7007.313148069384,
+        7883.227291578057
+    ],
+    "Val_JoulesNormalized": [
+        254.05491752624516,
+        508.1098350524903,
+        762.1647525787355,
+        1016.2196701049807,
+        1270.2745876312258,
+        1524.329505157471,
+        1778.3844226837161,
+        2032.439340209961,
+        2286.4942577362062
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       this.stopTime = System.currentTimeMillis();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.nanoTime();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.currentTimeMillis();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.currentTimeMillis() - startTime;\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.nanoTime() / 1000000;\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = SystemClock.elapsedRealtime();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       long stopTime = System.currentTimeMillis();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.nanoTime() / 1000000L;\n        this.runningState = STATE_STOPPED;\n    }\n",
+        "    public void stop() {\n        if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n            throw new IllegalStateException(\"Stopwatch is not running. \");\n        }\n// buggy code\n//             stopTime = System.currentTimeMillis();\n       stopTime = System.currentTimeMillis() - startTime;\n        startTime = 0;\n        this.runningState = STATE_STOPPED;\n    }\n"
+    ]
+}

@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-118",
+    "Time": {
+        "mean": 308.95511984825134,
+        "median": 308.95511984825134,
+        "std": 0,
+        "max": 308.95511984825134,
+        "min": 308.95511984825134,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 38317.55100445748,
+        "median": 38317.55100445748,
+        "std": 0,
+        "max": 38317.55100445748,
+        "min": 38317.55100445748,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 17097.6784267664,
+        "median": 17097.6784267664,
+        "std": 0,
+        "max": 17097.6784267664,
+        "min": 17097.6784267664,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        79.36952984333038,
+        155.8980598449707,
+        232.42658984661102,
+        308.95511984825134
+    ],
+    "Joules_Per_PatchMedian": [
+        11603.276233631372,
+        20508.034490573405,
+        29412.79274751544,
+        38317.55100445748
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4704.706037551166,
+        8835.696833956245,
+        12966.687630361323,
+        17097.6784267664
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.8457690238952638,
+        "median": 2.8409998416900635,
+        "std": 0.039077169538026965,
+        "max": 2.8910939693450928,
+        "min": 2.798765182495117,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2696.1040172719954,
+        "median": 2698.5179766893384,
+        "std": 29.742749301624936,
+        "max": 2731.627779865265,
+        "min": 2661.9746575713157,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 572.48742872715,
+        "median": 573.7152411460879,
+        "std": 5.261209621269816,
+        "max": 577.9650565743445,
+        "min": 563.7906956434249,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        76.52853000164032,
+        153.05706000328064,
+        229.58559000492096,
+        306.1141200065613
+    ],
+    "Val_Joules": [
+        8904.758256942034,
+        17809.516513884068,
+        26714.2747708261,
+        35619.033027768135
+    ],
+    "Val_JoulesNormalized": [
+        4130.990796405078,
+        8261.981592810156,
+        12392.972389215234,
+        16523.963185620312
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (child.getType() != Token.STRING) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (!child.isString()) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (child.getToken() != Token.STRING) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (!child.isStringKey()) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (!NodeUtil.isNameDeclaration(child)) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (child.getType() != Token.GETPROP) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (!child.isQuotedString()) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (child.getType() != Token.NAME) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n",
+        "    private void handleObjectLit(NodeTraversal t, Node n) {\n      for (Node child = n.getFirstChild();\n          child != null;\n          child = child.getNext()) {\n// buggy code\n// \n       if (child.getType() != Token.GETTER_DEF) {\n          continue;\n        }\n        String name = child.getString();\n        T type = typeSystem.getType(getScope(), n, name);\n        Property prop = getProperty(name);\n        if (!prop.scheduleRenaming(child,\n                                   processProperty(t, prop, type, null))) {\n          if (propertiesToErrorFor.containsKey(name)) {\n            compiler.report(JSError.make(\n                t.getSourceName(), child, propertiesToErrorFor.get(name),\n                Warnings.INVALIDATION, name,\n                (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n          }\n        }\n      }\n    }\n"
+    ]
+}

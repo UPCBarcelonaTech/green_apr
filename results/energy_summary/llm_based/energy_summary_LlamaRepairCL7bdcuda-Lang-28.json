@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-28",
+    "Time": {
+        "mean": 102.01085662841797,
+        "median": 102.01085662841797,
+        "std": 0,
+        "max": 102.01085662841797,
+        "min": 102.01085662841797,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 21146.21976693869,
+        "median": 21146.21976693869,
+        "std": 0,
+        "max": 21146.21976693869,
+        "min": 21146.21976693869,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5052.768415188788,
+        "median": 5052.768415188788,
+        "std": 0,
+        "max": 5052.768415188788,
+        "min": 5052.768415188788,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        22.902795672416687,
+        31.692580223083496,
+        40.482364773750305,
+        49.272149324417114,
+        58.06193387508392,
+        66.85171842575073,
+        75.64150297641754,
+        84.43128752708435,
+        93.22107207775116,
+        102.01085662841797
+    ],
+    "Joules_Per_PatchMedian": [
+        14624.595742082596,
+        15349.220633733274,
+        16073.845525383951,
+        16798.470417034627,
+        17523.095308685304,
+        18247.72020033598,
+        18972.34509198666,
+        19696.969983637337,
+        20421.594875288014,
+        21146.21976693869
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3402.214508092402,
+        3585.609386658667,
+        3769.004265224932,
+        3952.3991437911973,
+        4135.794022357462,
+        4319.1889009237275,
+        4502.583779489993,
+        4685.978658056258,
+        4869.373536622523,
+        5052.768415188788
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 14.11712007522583,
+        "median": 14.113011121749878,
+        "std": 0.012379451903241847,
+        "max": 14.133109092712402,
+        "min": 14.10531210899353,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 13901.00126755476,
+        "median": 13899.970850431919,
+        "std": 23.57396449806467,
+        "max": 13933.8196860075,
+        "min": 13867.804334247114,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 3225.921776692867,
+        "median": 3218.819629526137,
+        "std": 20.46944637536533,
+        "max": 3250.4602081418034,
+        "min": 3207.4871249079715,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.789784550666809,
+        17.579569101333618,
+        26.369353652000427,
+        35.159138202667236,
+        43.948922753334045,
+        52.738707304000854,
+        61.528491854667664,
+        70.31827640533447,
+        79.10806095600128,
+        87.89784550666809
+    ],
+    "Val_Joules": [
+        724.6248916506775,
+        1449.249783301355,
+        2173.8746749520324,
+        2898.499566602708,
+        3623.1244582533855,
+        4347.749349904063,
+        5072.37424155474,
+        5796.999133205418,
+        6521.624024856095,
+        7246.248916506773
+    ],
+    "Val_JoulesNormalized": [
+        183.3948785662651,
+        366.7897571325302,
+        550.1846356987953,
+        733.5795142650604,
+        916.9743928313255,
+        1100.3692713975906,
+        1283.7641499638557,
+        1467.1590285301208,
+        1650.553907096386,
+        1833.948785662651
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(entityValue);\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write((char)entityValue);\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(entityValue);\n            out.flush();\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(entityValue); \n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write((char) entityValue);\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(Character.toChars(entityValue));\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(entityValue);\n            out.write(';');\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(entityValue & 0xFF);\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n",
+        "    public int translate(CharSequence input, int index, Writer out) throws IOException {\n        if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {\n            int start = index + 2;\n            boolean isHex = false;\n            char firstChar = input.charAt(start);\n            if(firstChar == 'x' || firstChar == 'X') {\n                start++;\n                isHex = true;\n            }\n            int end = start;\n            while(input.charAt(end) != ';') {\n                end++;\n            }\n            int entityValue;\n            try {\n                if(isHex) {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);\n                } else {\n                    entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);\n                }\n            } catch(NumberFormatException nfe) {\n                return 0;\n            }\n// buggy code\n//                 out.write(entityValue);\n           out.write(\"&#\" + entityValue + \";\");\n            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n        }\n        return 0;\n    }\n"
+    ]
+}

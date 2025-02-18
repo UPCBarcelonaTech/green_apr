@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-24",
+    "Time": {
+        "mean": 74.84934878349304,
+        "median": 74.84934878349304,
+        "std": 0,
+        "max": 74.84934878349304,
+        "min": 74.84934878349304,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 11182.245268565415,
+        "median": 11182.245268565415,
+        "std": 0,
+        "max": 11182.245268565415,
+        "min": 11182.245268565415,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4335.221763157845,
+        "median": 4335.221763157845,
+        "std": 0,
+        "max": 4335.221763157845,
+        "min": 4335.221763157845,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.470108270645142,
+        23.699981689453125,
+        33.92985510826111,
+        44.15972852706909,
+        54.389601945877075,
+        64.61947536468506,
+        74.84934878349304
+    ],
+    "Joules_Per_PatchMedian": [
+        4307.44154869914,
+        5453.242168676853,
+        6599.042788654566,
+        7744.843408632279,
+        8890.644028609991,
+        10036.444648587703,
+        11182.245268565415
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1179.4795499801637,
+        1705.4365855097772,
+        2231.3936210393904,
+        2757.350656569004,
+        3283.3076920986177,
+        3809.2647276282314,
+        4335.221763157845
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.307670545578003,
+        "median": 3.240234851837158,
+        "std": 0.09551806691279009,
+        "max": 3.440020799636841,
+        "min": 3.2390100955963135,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3206.6394812464714,
+        "median": 3161.640928721428,
+        "std": 73.03250561690339,
+        "max": 3307.961634719372,
+        "min": 3148.573598134518,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 654.7822320103645,
+        "median": 653.5225144505503,
+        "std": 22.141444259666617,
+        "max": 680.129745876789,
+        "min": 621.5844750165938,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.229873418807983,
+        20.459746837615967,
+        30.68962025642395,
+        40.919493675231934,
+        51.14936709403992,
+        61.3792405128479,
+        71.60911393165588
+    ],
+    "Val_Joules": [
+        1145.8006199777124,
+        2291.601239955425,
+        3437.401859933138,
+        4583.202479910851,
+        5729.003099888563,
+        6874.803719866275,
+        8020.604339843987
+    ],
+    "Val_JoulesNormalized": [
+        525.9570355296134,
+        1051.914071059227,
+        1577.8711065888401,
+        2103.828142118454,
+        2629.7851776480675,
+        3155.742213177681,
+        3681.699248707295
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            if (iZone == null) {\n                millis -= iOffset;\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            if (iZone == null) {\n                millis += iOffset;\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            if (resetFields) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].clear(millis, resetFields);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, false);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].clear(millis);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            if (iZone != null) {\n                millis -= iZone.getOffset(millis);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n",
+        "    public long computeMillis(boolean resetFields, String text) {\n        SavedField[] savedFields = iSavedFields;\n        int count = iSavedFieldsCount;\n        if (iSavedFieldsShared) {\n            iSavedFields = savedFields = (SavedField[])iSavedFields.clone();\n            iSavedFieldsShared = false;\n        }\n        sort(savedFields, count);\n        if (count > 0) {\n            DurationField months = DurationFieldType.months().getField(iChrono);\n            DurationField days = DurationFieldType.days().getField(iChrono);\n            DurationField first = savedFields[0].iField.getDurationField();\n            if (compareReverse(first, months) >= 0 && compareReverse(first, days) <= 0) {\n                saveField(DateTimeFieldType.year(), iDefaultYear);\n                return computeMillis(resetFields, text);\n            }\n        }\n        long millis = iMillis;\n        try {\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].set(millis, resetFields);\n// buggy code\n// \n           }\n            for (int i = 0; i < count; i++) {\n                millis = savedFields[i].reset(millis, resetFields);\n            }\n        } catch (IllegalFieldValueException e) {\n            if (text != null) {\n                e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n            }\n            throw e;\n        }\n        if (iZone == null) {\n            millis -= iOffset;\n        } else {\n            int offset = iZone.getOffsetFromLocal(millis);\n            millis -= offset;\n            if (offset != iZone.getOffset(millis)) {\n                String message =\n                    \"Illegal instant due to time zone offset transition (\" + iZone + ')';\n                if (text != null) {\n                    message = \"Cannot parse \\\"\" + text + \"\\\": \" + message;\n                }\n                throw new IllegalArgumentException(message);\n            }\n        }\n        return millis;\n    }\n"
+    ]
+}

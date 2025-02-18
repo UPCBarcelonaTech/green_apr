@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-69",
+    "Time": {
+        "mean": 294.0828413963318,
+        "median": 294.0828413963318,
+        "std": 0,
+        "max": 294.0828413963318,
+        "min": 294.0828413963318,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 42619.45260621309,
+        "median": 42619.45260621309,
+        "std": 0,
+        "max": 42619.45260621309,
+        "min": 42619.45260621309,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 17260.273887705807,
+        "median": 17260.273887705807,
+        "std": 0,
+        "max": 17260.273887705807,
+        "min": 17260.273887705807,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        57.84055185317993,
+        105.0890097618103,
+        152.33746767044067,
+        199.58592557907104,
+        246.83438348770142,
+        294.0828413963318
+    ],
+    "Joules_Per_PatchMedian": [
+        15768.84713922143,
+        21138.968232619765,
+        26509.089326018096,
+        31879.210419416428,
+        37249.33151281476,
+        42619.45260621309
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4872.617855769397,
+        7350.149062156679,
+        9827.680268543962,
+        12305.211474931244,
+        14782.742681318527,
+        17260.273887705807
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 10.995902013778686,
+        "median": 10.59209394454956,
+        "std": 0.5704082010614459,
+        "max": 11.722301006317139,
+        "min": 10.57723593711853,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 10678.70301096201,
+        "median": 10398.726045823098,
+        "std": 455.907164405594,
+        "max": 11224.182097268105,
+        "min": 10280.900591099262,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2400.0383498978613,
+        "median": 2395.086649382114,
+        "std": 26.268654323523688,
+        "max": 2431.435368072989,
+        "min": 2369.1559170961373,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        47.24845790863037,
+        94.49691581726074,
+        141.7453737258911,
+        188.99383163452148,
+        236.24228954315186,
+        283.4907474517822
+    ],
+    "Val_Joules": [
+        5370.121093398333,
+        10740.242186796668,
+        16110.363280194999,
+        21480.484373593332,
+        26850.605466991663,
+        32220.726560389994
+    ],
+    "Val_JoulesNormalized": [
+        2477.5312063872825,
+        4955.062412774565,
+        7432.5936191618475,
+        9910.12482554913,
+        12387.656031936413,
+        14865.187238323693
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     ensureTyped(t, child);\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (isExtern) {\n        return;\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (isExtern) {\n        ensureTyped(t, n);\n        return;\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (functionType.isInterface()) {\n        return;\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     ensureTyped(t, n, functionType.getTypeOfThis());\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (functionType.isInterface()) {\n        report(t, n, CALL_TO_INTERFACE, childType.toString());\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (functionType.isInterface()) {\n        report(t, n, INVALID_INTERFACE_JSDOC);\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (functionType.isInterface()) {\n        report(t, n, INTERFACE_AS_FUNCTION, childType.toString());\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitCall(NodeTraversal t, Node n) {\n    Node child = n.getFirstChild();\n    JSType childType = getJSType(child).restrictByNotNullOrUndefined();\n    if (!childType.canBeCalled()) {\n      report(t, n, NOT_CALLABLE, childType.toString());\n      ensureTyped(t, n);\n      return;\n    }\n    if (childType instanceof FunctionType) {\n      FunctionType functionType = (FunctionType) childType;\n      boolean isExtern = false;\n      JSDocInfo functionJSDocInfo = functionType.getJSDocInfo();\n      if(functionJSDocInfo != null) {\n        String sourceName = functionJSDocInfo.getSourceName();\n        CompilerInput functionSource = compiler.getInput(sourceName);\n        isExtern = functionSource.isExtern();\n      }\n      if (functionType.isConstructor() &&\n          !functionType.isNativeObjectType() &&\n          (functionType.getReturnType().isUnknownType() ||\n           functionType.getReturnType().isVoidType() ||\n           !isExtern)) {\n        report(t, n, CONSTRUCTOR_NOT_CALLABLE, childType.toString());\n      }\n// buggy code\n// \n     if (functionType.isInterface()) {\n        report(t, n, CALL_INTERFACE, childType.toString());\n      }\n      visitParameterList(t, n, functionType);\n      ensureTyped(t, n, functionType.getReturnType());\n    } else {\n      ensureTyped(t, n);\n    }\n  }\n"
+    ]
+}

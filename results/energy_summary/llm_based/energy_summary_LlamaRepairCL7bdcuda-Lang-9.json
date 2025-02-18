@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-9",
+    "Time": {
+        "mean": 127.4568190574646,
+        "median": 127.4568190574646,
+        "std": 0,
+        "max": 127.4568190574646,
+        "min": 127.4568190574646,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13624.487171173098,
+        "median": 13624.487171173098,
+        "std": 0,
+        "max": 13624.487171173098,
+        "min": 13624.487171173098,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4529.59896594286,
+        "median": 4529.59896594286,
+        "std": 0,
+        "max": 4529.59896594286,
+        "min": 4529.59896594286,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.330641269683838,
+        26.900216579437256,
+        39.469791889190674,
+        52.03936719894409,
+        64.60894250869751,
+        77.17851781845093,
+        89.74809312820435,
+        102.31766843795776,
+        114.88724374771118,
+        127.4568190574646
+    ],
+    "Joules_Per_PatchMedian": [
+        2908.244275188446,
+        4098.937930297851,
+        5289.631585407256,
+        6480.325240516662,
+        7671.018895626068,
+        8861.712550735474,
+        10052.40620584488,
+        11243.099860954286,
+        12433.793516063692,
+        13624.487171173098
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        781.7606193780899,
+        1198.187102329731,
+        1614.6135852813723,
+        2031.0400682330132,
+        2447.4665511846542,
+        2863.8930341362952,
+        3280.319517087936,
+        3696.746000039577,
+        4113.172482991218,
+        4529.59896594286
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8020150184631347,
+        "median": 1.76106595993042,
+        "std": 0.08834878873069862,
+        "max": 1.9599111080169678,
+        "min": 1.7599639892578125,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1747.065210928917,
+        "median": 1717.5506200790405,
+        "std": 69.25067540997968,
+        "max": 1870.8753380060195,
+        "min": 1712.1172660589218,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 360.84164020061496,
+        "median": 365.3341364264488,
+        "std": 13.068318831375962,
+        "max": 374.0912248134614,
+        "min": 341.37754609584795,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        12.569575309753418,
+        25.139150619506836,
+        37.708725929260254,
+        50.27830123901367,
+        62.84787654876709,
+        75.41745185852051,
+        87.98702716827393,
+        100.55660247802734,
+        113.12617778778076,
+        125.69575309753418
+    ],
+    "Val_Joules": [
+        1190.6936551094054,
+        2381.387310218811,
+        3572.080965328216,
+        4762.774620437622,
+        5953.468275547028,
+        7144.1619306564335,
+        8334.85558576584,
+        9525.549240875245,
+        10716.242895984651,
+        11906.936551094057
+    ],
+    "Val_JoulesNormalized": [
+        416.4264829516411,
+        832.8529659032822,
+        1249.2794488549234,
+        1665.7059318065644,
+        2082.1324147582054,
+        2498.5588977098464,
+        2914.9853806614874,
+        3331.4118636131284,
+        3747.8383465647694,
+        4164.264829516411
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       regex.append(currentFormatField);\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       regex.append('$');\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       patternMatcher.region(0, 0);\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       patternMatcher.region(0, patternMatcher.regionEnd());\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       if(currentStrategy == null) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       if(currentFormatField==null) {\n            currentFormatField= \"\";\n        }\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       if(currentStrategy==null) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       if(currentFormatField == null) {\n            currentFormatField= \"\";\n        }\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n",
+        "    private void init() {\n        thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n        nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n        StringBuilder regex= new StringBuilder();\n        List<Strategy> collector = new ArrayList<Strategy>();\n        Matcher patternMatcher= formatPattern.matcher(pattern);\n        if(!patternMatcher.lookingAt()) {\n            throw new IllegalArgumentException(\"Invalid pattern\");\n        }\n        currentFormatField= patternMatcher.group();\n        Strategy currentStrategy= getStrategy(currentFormatField);\n        for(;;) {\n            patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n            if(!patternMatcher.lookingAt()) {\n                nextStrategy = null;\n                break;\n            }\n            String nextFormatField= patternMatcher.group();\n            nextStrategy = getStrategy(nextFormatField);\n            if(currentStrategy.addRegex(this, regex)) {\n                collector.add(currentStrategy);\n            }\n            currentFormatField= nextFormatField;\n            currentStrategy= nextStrategy;\n        }\n// buggy code\n// \n       if(currentFormatField == null) {\n            currentFormatField = \"\";\n        }\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= null;\n        strategies= collector.toArray(new Strategy[collector.size()]);\n        parsePattern= Pattern.compile(regex.toString());\n    }\n"
+    ]
+}

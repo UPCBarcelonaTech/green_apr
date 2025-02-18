@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-13",
+    "Time": {
+        "mean": 105.88196611404419,
+        "median": 105.88196611404419,
+        "std": 0,
+        "max": 105.88196611404419,
+        "min": 105.88196611404419,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 15016.709574592116,
+        "median": 15016.709574592116,
+        "std": 0,
+        "max": 15016.709574592116,
+        "min": 15016.709574592116,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5730.539152884482,
+        "median": 5730.539152884482,
+        "std": 0,
+        "max": 5730.539152884482,
+        "min": 5730.539152884482,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.903531193733215,
+        24.12335729598999,
+        34.343183398246765,
+        44.56300950050354,
+        54.782835602760315,
+        65.00266170501709,
+        75.22248780727386,
+        85.44231390953064,
+        95.66214001178741,
+        105.88196611404419
+    ],
+    "Joules_Per_PatchMedian": [
+        4744.889031076431,
+        5886.202424800395,
+        7027.51581852436,
+        8168.829212248324,
+        9310.142605972289,
+        10451.455999696254,
+        11592.76939342022,
+        12734.082787144185,
+        13875.39618086815,
+        15016.709574592116
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1308.9954608142377,
+        1800.2780932664873,
+        2291.5607257187366,
+        2782.843358170986,
+        3274.1259906232353,
+        3765.4086230754847,
+        4256.691255527734,
+        4747.973887979983,
+        5239.256520432233,
+        5730.539152884482
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.6878365993499758,
+        "median": 3.6837050914764404,
+        "std": 0.027225388121866062,
+        "max": 3.729004144668579,
+        "min": 3.6612439155578613,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3606.3483790469168,
+        "median": 3603.5756373524664,
+        "std": 21.752971221790773,
+        "max": 3641.314766705036,
+        "min": 3585.512708544731,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 816.7998535943032,
+        "median": 817.7128283619882,
+        "std": 23.642491741639155,
+        "max": 851.7203950643543,
+        "min": 793.2770230650899,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.219826102256775,
+        20.43965220451355,
+        30.659478306770325,
+        40.8793044090271,
+        51.099130511283875,
+        61.31895661354065,
+        71.53878271579742,
+        81.7586088180542,
+        91.97843492031097,
+        102.19826102256775
+    ],
+    "Val_Joules": [
+        1141.3133937239645,
+        2282.626787447929,
+        3423.9401811718935,
+        4565.253574895858,
+        5706.566968619823,
+        6847.880362343788,
+        7989.193756067753,
+        9130.50714979172,
+        10271.820543515685,
+        11413.13393723965
+    ],
+    "Val_JoulesNormalized": [
+        491.2826324522496,
+        982.5652649044991,
+        1473.8478973567485,
+        1965.1305298089978,
+        2456.413162261247,
+        2947.6957947134965,
+        3438.978427165746,
+        3930.261059617995,
+        4421.543692070245,
+        4912.826324522493
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[2] - w[3]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[3]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[2] - w[0]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[0]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[0] - w[2]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[4]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[2] - w[4]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[1]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n",
+        "    protected Size2D arrangeFF(BlockContainer container, Graphics2D g2,\n                               RectangleConstraint constraint) {\n        double[] w = new double[5];\n        double[] h = new double[5];\n        w[0] = constraint.getWidth();\n        if (this.topBlock != null) {\n            RectangleConstraint c1 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0,\n                    new Range(0.0, constraint.getHeight()),\n                    LengthConstraintType.RANGE);\n            Size2D size = this.topBlock.arrange(g2, c1);\n            h[0] = size.height;\n        }\n        w[1] = w[0];\n        if (this.bottomBlock != null) {\n            RectangleConstraint c2 = new RectangleConstraint(w[0], null,\n                    LengthConstraintType.FIXED, 0.0, new Range(0.0,\n                    constraint.getHeight() - h[0]), LengthConstraintType.RANGE);\n            Size2D size = this.bottomBlock.arrange(g2, c2);\n            h[1] = size.height;\n        }\n        h[2] = constraint.getHeight() - h[1] - h[0];\n        if (this.leftBlock != null) {\n            RectangleConstraint c3 = new RectangleConstraint(0.0,\n                    new Range(0.0, constraint.getWidth()),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.leftBlock.arrange(g2, c3);\n            w[2] = size.width;\n        }\n        h[3] = h[2];\n        if (this.rightBlock != null) {\n            RectangleConstraint c4 = new RectangleConstraint(0.0,\n// buggy code\n//                     new Range(0.0, constraint.getWidth() - w[2]),\n                   new Range(0.0, constraint.getWidth() - w[2] - w[1]),\n                    LengthConstraintType.RANGE, h[2], null,\n                    LengthConstraintType.FIXED);\n            Size2D size = this.rightBlock.arrange(g2, c4);\n            w[3] = size.width;\n        }\n        h[4] = h[2];\n        w[4] = constraint.getWidth() - w[3] - w[2];\n        RectangleConstraint c5 = new RectangleConstraint(w[4], h[4]);\n        if (this.centerBlock != null) {\n            this.centerBlock.arrange(g2, c5);\n        }\n        if (this.topBlock != null) {\n            this.topBlock.setBounds(new Rectangle2D.Double(0.0, 0.0, w[0],\n                    h[0]));\n        }\n        if (this.bottomBlock != null) {\n            this.bottomBlock.setBounds(new Rectangle2D.Double(0.0, h[0] + h[2],\n                    w[1], h[1]));\n        }\n        if (this.leftBlock != null) {\n            this.leftBlock.setBounds(new Rectangle2D.Double(0.0, h[0], w[2],\n                    h[2]));\n        }\n        if (this.rightBlock != null) {\n            this.rightBlock.setBounds(new Rectangle2D.Double(w[2] + w[4], h[0],\n                    w[3], h[3]));\n        }\n        if (this.centerBlock != null) {\n            this.centerBlock.setBounds(new Rectangle2D.Double(w[2], h[0], w[4],\n                    h[4]));\n        }\n        return new Size2D(constraint.getWidth(), constraint.getHeight());\n    }\n"
+    ]
+}

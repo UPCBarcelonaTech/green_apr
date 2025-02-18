@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-97",
+    "Time": {
+        "mean": 53.16673278808594,
+        "median": 53.16673278808594,
+        "std": 0,
+        "max": 53.16673278808594,
+        "min": 53.16673278808594,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9195.141135954857,
+        "median": 9195.141135954857,
+        "std": 0,
+        "max": 9195.141135954857,
+        "min": 9195.141135954857,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3002.7939642786982,
+        "median": 3002.7939642786982,
+        "std": 0,
+        "max": 3002.7939642786982,
+        "min": 3002.7939642786982,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        10.05123746395111,
+        16.210593938827515,
+        22.36995041370392,
+        28.529306888580322,
+        34.688663363456726,
+        40.84801983833313,
+        47.007376313209534,
+        53.16673278808594
+    ],
+    "Joules_Per_PatchMedian": [
+        4334.454527276755,
+        5028.838328516484,
+        5723.222129756213,
+        6417.605930995942,
+        7111.989732235671,
+        7806.3735334754,
+        8500.757334715128,
+        9195.141135954857
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        876.1532085478302,
+        1179.959030795097,
+        1483.764853042364,
+        1787.5706752896308,
+        2091.3764975368977,
+        2395.1823197841645,
+        2698.9881420314314,
+        3002.7939642786982
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.892560434341431,
+        "median": 3.891880989074707,
+        "std": 0.08814880897159005,
+        "max": 4.001976013183594,
+        "min": 3.779067039489746,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3616.9771758437155,
+        "median": 3640.0707260370255,
+        "std": 72.45775774175505,
+        "max": 3686.6851197600363,
+        "min": 3520.0231628537176,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 574.3840764403343,
+        "median": 572.3473863005634,
+        "std": 45.654943946883485,
+        "max": 627.7742859482764,
+        "min": 526.9262300729752,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.159356474876404,
+        12.318712949752808,
+        18.47806942462921,
+        24.637425899505615,
+        30.79678237438202,
+        36.95613884925842,
+        43.11549532413483,
+        49.27485179901123
+    ],
+    "Val_Joules": [
+        694.3838012397291,
+        1388.7676024794582,
+        2083.1514037191873,
+        2777.5352049589164,
+        3471.9190061986455,
+        4166.302807438375,
+        4860.686608678103,
+        5555.070409917831
+    ],
+    "Val_JoulesNormalized": [
+        303.80582224726686,
+        607.6116444945337,
+        911.4174667418006,
+        1215.2232889890674,
+        1519.0291112363343,
+        1822.8349334836012,
+        2126.640755730868,
+        2430.446577978135
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign <= 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMin, max, yMax, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign > 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMin, max, yMax, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign <= 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMax, max, yMin, min, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign <= 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(max, yMax, min, yMin, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign > 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(max, yMax, min, yMin, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign <= 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMin, max, yMax, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign <= 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMin, max, yMax, min, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign > 0) {\n            ret = solve(min, yMin, max, yMax, min, yMin);\n        } else {\n            ret = solve(min, yMin, max, yMax, max, yMax);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n        }\n        return ret;\n    }\n",
+        "    public double solve(double min, double max) throws MaxIterationsExceededException, \n        FunctionEvaluationException {\n        clearResult();\n        verifyInterval(min, max);\n        double ret = Double.NaN;\n        double yMin = f.value(min);\n        double yMax = f.value(max);\n        double sign = yMin * yMax;\n// buggy code\n//         if (sign >= 0) {\n//                 throw new IllegalArgumentException\n//                 (\"Function values at endpoints do not have different signs.\" +\n//                         \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n//                         \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n//         } else {\n//             ret = solve(min, yMin, max, yMax, min, yMin);\n       if (sign > 0) {\n                throw new IllegalArgumentException\n                (\"Function values at endpoints do not have different signs.\" +\n                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n        } else {\n            ret = solve(min, yMin, max, yMax, min, yMin);\n        }\n        }\n        return ret;\n    }\n"
+    ]
+}

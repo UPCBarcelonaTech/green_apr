@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-125",
+    "Time": {
+        "mean": 341.1205048561096,
+        "median": 341.1205048561096,
+        "std": 0,
+        "max": 341.1205048561096,
+        "min": 341.1205048561096,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 42191.57522705793,
+        "median": 42191.57522705793,
+        "std": 0,
+        "max": 42191.57522705793,
+        "min": 42191.57522705793,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 19436.19529452324,
+        "median": 19436.19529452324,
+        "std": 0,
+        "max": 19436.19529452324,
+        "min": 19436.19529452324,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        69.44811868667603,
+        137.36621522903442,
+        205.28431177139282,
+        273.2024083137512,
+        341.1205048561096
+    ],
+    "Joules_Per_PatchMedian": [
+        9605.97207225561,
+        17752.37286095619,
+        25898.77364965677,
+        34045.17443835735,
+        42191.57522705793
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4119.116069173813,
+        7948.3858755111705,
+        11777.655681848528,
+        15606.925488185885,
+        19436.19529452324
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.5977412223815919,
+        "median": 1.530022144317627,
+        "std": 0.15922900288296868,
+        "max": 1.8800039291381836,
+        "min": 1.5001499652862549,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1512.8764084982872,
+        "median": 1459.5712835550307,
+        "std": 127.98383789079492,
+        "max": 1739.8675947070124,
+        "min": 1432.2104614019395,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 290.34674333333976,
+        "median": 289.8462628364564,
+        "std": 3.898242652299898,
+        "max": 296.5885783076287,
+        "min": 286.4190506458283,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        67.9180965423584,
+        135.8361930847168,
+        203.7542896270752,
+        271.6723861694336,
+        339.590482711792
+    ],
+    "Val_Joules": [
+        8146.400788700579,
+        16292.80157740116,
+        24439.20236610174,
+        32585.603154802324,
+        40732.0039435029
+    ],
+    "Val_JoulesNormalized": [
+        3829.269806337357,
+        7658.539612674715,
+        11487.809419012072,
+        15317.07922534943,
+        19146.349031686783
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && fnType.isConstructor()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && fnType.getTypeOfThis() != null) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isAbstract()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && fnType.isFunctionType()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isNativeObjectType()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isTopFunction()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isConstructor()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isLoose()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && !fnType.isInterfaceDefinition()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n",
+        "  private void visitNew(NodeTraversal t, Node n) {\n    Node constructor = n.getFirstChild();\n    JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n    if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n      FunctionType fnType = type.toMaybeFunctionType();\n// buggy code\n//       if (fnType != null) {\n     if (fnType != null && fnType.isStructuralInterface()) {\n        visitParameterList(t, n, fnType);\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n);\n      }\n    } else {\n      report(t, n, NOT_A_CONSTRUCTOR);\n      ensureTyped(t, n);\n    }\n  }\n"
+    ]
+}

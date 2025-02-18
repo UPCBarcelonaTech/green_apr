@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-33",
+    "Time": {
+        "mean": 2.3799889087677,
+        "median": 2.3799889087677,
+        "std": 0,
+        "max": 2.3799889087677,
+        "min": 2.3799889087677,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 2178.3128238201143,
+        "median": 2178.3128238201143,
+        "std": 0,
+        "max": 2178.3128238201143,
+        "min": 2178.3128238201143,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 373.35491042137187,
+        "median": 373.35491042137187,
+        "std": 0,
+        "max": 373.35491042137187,
+        "min": 373.35491042137187,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 2.599809455871582,
+        "median": 2.3799889087677,
+        "std": 0.35285519982381747,
+        "max": 3.019038200378418,
+        "min": 2.311100959777832,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2356.7760719513894,
+        "median": 2178.3128238201143,
+        "std": 281.6422881379343,
+        "max": 2688.209129285812,
+        "min": 2131.5990442275997,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 384.27789398908607,
+        "median": 373.35491042137187,
+        "std": 23.134414931461492,
+        "max": 411.77518485784503,
+        "min": 364.3001402854916,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName());\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName()) && m1.getParameterTypes().length == m2.getParameterTypes().length;\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName()) && m1.getParameterTypes().equals(m2.getParameterTypes());\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1 == m2;\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName())\n                && m1.getParameterTypes().length == m2.getParameterTypes().length;\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.equals(m2) || m2.equals(m1);\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName()) &&\n               m1.getParameterTypes().length == m2.getParameterTypes().length;\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName()) && m1.getReturnType().equals(m2.getReturnType());\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.toString().equals(m2.toString());\n    }\n",
+        "    public boolean hasSameMethod(Invocation candidate) {        \n        Method m1 = invocation.getMethod();\n        Method m2 = candidate.getMethod();\n// buggy code\n//         return m1.equals(m2);\n       return m1.getName().equals(m2.getName()) &&\n                m1.getParameterTypes().length == m2.getParameterTypes().length;\n    }\n"
+    ]
+}

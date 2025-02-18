@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-53",
+    "Time": {
+        "mean": 362.3291256427765,
+        "median": 362.3291256427765,
+        "std": 0,
+        "max": 362.3291256427765,
+        "min": 362.3291256427765,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 46216.652884560826,
+        "median": 46216.652884560826,
+        "std": 0,
+        "max": 46216.652884560826,
+        "min": 46216.652884560826,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 20450.399392974374,
+        "median": 20450.399392974374,
+        "std": 0,
+        "max": 20450.399392974374,
+        "min": 20450.399392974374,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        55.55769658088684,
+        106.68626809120178,
+        157.81483960151672,
+        208.94341111183167,
+        260.0719826221466,
+        311.20055413246155,
+        362.3291256427765
+    ],
+    "Joules_Per_PatchMedian": [
+        10241.897711390257,
+        16237.690240252017,
+        22233.482769113776,
+        28229.27529797554,
+        34225.0678268373,
+        40220.860355699064,
+        46216.652884560826
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3692.217417395115,
+        6485.247746658325,
+        9278.278075921535,
+        12071.308405184745,
+        14864.338734447956,
+        17657.369063711165,
+        20450.399392974374
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.5388250827789305,
+        "median": 4.429125070571899,
+        "std": 0.2477196271239067,
+        "max": 4.9818150997161865,
+        "min": 4.421292066574097,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4366.18052439928,
+        "median": 4246.105182528496,
+        "std": 226.60560849810994,
+        "max": 4758.908846616745,
+        "min": 4229.119874954224,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 932.0685270333291,
+        "median": 899.1870881319046,
+        "std": 67.48715794513207,
+        "max": 1013.9649980068207,
+        "min": 870.8085014462476,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        51.12857151031494,
+        102.25714302062988,
+        153.38571453094482,
+        204.51428604125977,
+        255.6428575515747,
+        306.77142906188965,
+        357.9000005722046
+    ],
+    "Val_Joules": [
+        5995.792528861761,
+        11991.585057723521,
+        17987.37758658528,
+        23983.170115447043,
+        29978.962644308805,
+        35974.75517317057,
+        41970.54770203233
+    ],
+    "Val_JoulesNormalized": [
+        2793.03032926321,
+        5586.06065852642,
+        8379.09098778963,
+        11172.12131705284,
+        13965.151646316051,
+        16758.18197557926,
+        19551.21230484247
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(new Node(Token.FALSE));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(Node.newTrue());\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(new Node(Token.TRUE));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 1; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(Node.newString(Token.TRUE));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(new Node(Token.FALSE));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 1; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n       nodes.add(new Node(Token.FALSE));\n        nodes = Lists.reverse(nodes);\n        replacement = new Node(Token.COMMA);\n        Node cur = replacement;\n        int i;\n        for (i = 0; i < nodes.size() - 2; i++) {\n          cur.addChildToFront(nodes.get(i));\n          Node t = new Node(Token.COMMA);\n          cur.addChildToFront(t);\n          cur = t;\n        }\n        cur.addChildToFront(nodes.get(i));\n        cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(NodeUtil.newUndefinedNode(null));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      cur.addChildToFront(nodes.get(i + 1));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(new Node(Token.FALSE));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      cur.addChildToFront(nodes.get(i + 1));\n      nodes.clear();\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n",
+        "    private void replaceAssignmentExpression(Var v, Reference ref,\n                                             Map<String, String> varmap) {\n      List<Node> nodes = Lists.newArrayList();\n      Node val = ref.getAssignedValue();\n      blacklistVarReferencesInTree(val, v.scope);\n      Preconditions.checkState(val.getType() == Token.OBJECTLIT);\n      Set<String> all = Sets.newLinkedHashSet(varmap.keySet());\n      for (Node key = val.getFirstChild(); key != null;\n           key = key.getNext()) {\n        String var = key.getString();\n        Node value = key.removeFirstChild();\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)), value));\n        all.remove(var);\n      }\n      for (String var : all) {\n        nodes.add(\n          new Node(Token.ASSIGN,\n                   Node.newString(Token.NAME, varmap.get(var)),\n                   NodeUtil.newUndefinedNode(null)));\n      }\n      Node replacement;\n// buggy code\n//         nodes.add(new Node(Token.TRUE));\n//         nodes = Lists.reverse(nodes);\n//         replacement = new Node(Token.COMMA);\n//         Node cur = replacement;\n//         int i;\n//         for (i = 0; i < nodes.size() - 2; i++) {\n//           cur.addChildToFront(nodes.get(i));\n//           Node t = new Node(Token.COMMA);\n//           cur.addChildToFront(t);\n//           cur = t;\n//         }\n//         cur.addChildToFront(nodes.get(i));\n//         cur.addChildToFront(nodes.get(i + 1));\n     nodes.add(NodeUtil.newUndefinedNode(null));\n      nodes = Lists.reverse(nodes);\n      replacement = new Node(Token.COMMA);\n      Node cur = replacement;\n      int i;\n      for (i = 0; i < nodes.size() - 2; i++) {\n        cur.addChildToFront(nodes.get(i));\n        Node t = new Node(Token.COMMA);\n        cur.addChildToFront(t);\n        cur = t;\n      }\n      cur.addChildToFront(nodes.get(i));\n      Node replace = ref.getParent();\n      replacement.copyInformationFromForTree(replace);\n      if (replace.getType() == Token.VAR) {\n        replace.getParent().replaceChild(\n            replace, NodeUtil.newExpr(replacement));\n      } else {\n        replace.getParent().replaceChild(replace, replacement);\n      }\n    }\n"
+    ]
+}

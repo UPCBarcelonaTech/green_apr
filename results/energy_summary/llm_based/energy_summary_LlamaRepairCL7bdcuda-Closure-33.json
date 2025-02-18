@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-33",
+    "Time": {
+        "mean": 487.880370259285,
+        "median": 487.880370259285,
+        "std": 0,
+        "max": 487.880370259285,
+        "min": 487.880370259285,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 60043.16455976962,
+        "median": 60043.16455976962,
+        "std": 0,
+        "max": 60043.16455976962,
+        "min": 60043.16455976962,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 27818.496749246126,
+        "median": 27818.496749246126,
+        "std": 0,
+        "max": 27818.496749246126,
+        "min": 27818.496749246126,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        55.168901562690735,
+        109.25783514976501,
+        163.3467687368393,
+        217.43570232391357,
+        271.52463591098785,
+        325.61356949806213,
+        379.7025030851364,
+        433.7914366722107,
+        487.880370259285
+    ],
+    "Joules_Per_PatchMedian": [
+        7588.665295433998,
+        14145.477703475952,
+        20702.290111517905,
+        27259.10251955986,
+        33815.914927601814,
+        40372.727335643765,
+        46929.53974368572,
+        53486.35215172767,
+        60043.16455976962
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3271.9634101271627,
+        6340.280077517033,
+        9408.596744906903,
+        12476.913412296773,
+        15545.230079686644,
+        18613.546747076514,
+        21681.863414466385,
+        24750.180081856255,
+        27818.496749246126
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.1177474021911622,
+        "median": 1.079967975616455,
+        "std": 0.10297783538193513,
+        "max": 1.3000550270080566,
+        "min": 1.0500209331512451,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1059.1469793796539,
+        "median": 1031.852887392044,
+        "std": 83.52417201687892,
+        "max": 1206.6900321483613,
+        "min": 1002.755816066265,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 197.03531345844266,
+        "median": 203.64674273729304,
+        "std": 19.757900655743605,
+        "max": 214.09801902771005,
+        "min": 162.96465260982518,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        54.08893358707428,
+        108.17786717414856,
+        162.26680076122284,
+        216.35573434829712,
+        270.4446679353714,
+        324.5336015224457,
+        378.62253510951996,
+        432.71146869659424,
+        486.8004022836685
+    ],
+    "Val_Joules": [
+        6556.812408041954,
+        13113.624816083908,
+        19670.43722412586,
+        26227.249632167815,
+        32784.06204020977,
+        39340.87444825172,
+        45897.68685629367,
+        52454.49926433562,
+        59011.311672377575
+    ],
+    "Val_JoulesNormalized": [
+        3068.3166673898695,
+        6136.63333477974,
+        9204.95000216961,
+        12273.26666955948,
+        15341.58333694935,
+        18409.900004339223,
+        21478.216671729093,
+        24546.533339118963,
+        27614.850006508834
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (constraintObj == null) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (!isRecordType()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (!constraintObj.isRecordType()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (!isObject()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (constraintObj.isUnknownType()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (this == constraintObj) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (isStructuralInterface()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (constraintObj == null || constraintObj.isUnknownType()) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n",
+        "  public void matchConstraint(ObjectType constraintObj) {\n// buggy code\n// \n   if (!(constraintObj.isRecordType() || constraintObj.isFunctionType())) {\n      return;\n    }\n    if (constraintObj.isRecordType()) {\n      for (String prop : constraintObj.getOwnPropertyNames()) {\n        JSType propType = constraintObj.getPropertyType(prop);\n        if (!isPropertyTypeDeclared(prop)) {\n          JSType typeToInfer = propType;\n          if (!hasProperty(prop)) {\n            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)\n                .getLeastSupertype(propType);\n          }\n          defineInferredProperty(prop, typeToInfer, null);\n        }\n      }\n    }\n  }\n"
+    ]
+}

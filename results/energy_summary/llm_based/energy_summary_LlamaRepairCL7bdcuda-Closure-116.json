@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-116",
+    "Time": {
+        "mean": 506.46168529987335,
+        "median": 506.46168529987335,
+        "std": 0,
+        "max": 506.46168529987335,
+        "min": 506.46168529987335,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 71998.12597240807,
+        "median": 71998.12597240807,
+        "std": 0,
+        "max": 71998.12597240807,
+        "min": 71998.12597240807,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 30753.501760828498,
+        "median": 30753.501760828498,
+        "std": 0,
+        "max": 30753.501760828498,
+        "min": 30753.501760828498,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        83.47300708293915,
+        153.97112011909485,
+        224.46923315525055,
+        294.96734619140625,
+        365.46545922756195,
+        435.96357226371765,
+        506.46168529987335
+    ],
+    "Joules_Per_PatchMedian": [
+        21267.42146485448,
+        29722.538882780078,
+        38177.656300705676,
+        46632.77371863127,
+        55087.89113655687,
+        63543.00855448247,
+        71998.12597240807
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        6958.292134726047,
+        10924.160405743121,
+        14890.028676760196,
+        18855.89694777727,
+        22821.765218794346,
+        26787.633489811422,
+        30753.501760828498
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 13.477252435684203,
+        "median": 12.974894046783447,
+        "std": 1.0957114064819784,
+        "max": 15.436069011688232,
+        "min": 12.954987049102783,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 13194.751229684352,
+        "median": 12812.304046928883,
+        "std": 937.3116856436103,
+        "max": 14868.964851546287,
+        "min": 12691.578153729439,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2971.5940070796005,
+        "median": 2992.423863708973,
+        "std": 52.287817760587544,
+        "max": 3018.5167156815533,
+        "min": 2896.8306378126126,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.4981130361557,
+        140.9962260723114,
+        211.4943391084671,
+        281.9924521446228,
+        352.4905651807785,
+        422.9886782169342,
+        493.4867912530899
+    ],
+    "Val_Joules": [
+        8455.117417925598,
+        16910.234835851195,
+        25365.352253776793,
+        33820.46967170239,
+        42275.58708962799,
+        50730.704507553586,
+        59185.82192547919
+    ],
+    "Val_JoulesNormalized": [
+        3965.868271017074,
+        7931.736542034148,
+        11897.604813051223,
+        15863.473084068297,
+        19829.341355085373,
+        23795.20962610245,
+        27761.077897119525
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node arg = callNode.getFirstChild().getNext();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (arg == null || !arg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        arg = arg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (arg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (arg != null) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild().getNext();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (fnParam != null || cArg != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (fnParam != null || cArg != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getSecondChild();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null && !cArg.isThis()) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (!cArg.isName()) {\n            return CanInlineResult.NO;\n          }\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = null;\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        cArg = callNode.getFirstChild().getNext();\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          cArg = cArg.getNext();\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = null;\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        cArg = callNode.getFirstChild().getNext();\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild().getNext();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null && cArg.isName()) {\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n",
+        "  private CanInlineResult canInlineReferenceDirectly(\n      Node callNode, Node fnNode) {\n    if (!isDirectCallNodeReplacementPossible(fnNode)) {\n      return CanInlineResult.NO;\n    }\n    Node block = fnNode.getLastChild();\n// buggy code\n//     Node cArg = callNode.getFirstChild().getNext();\n//     if (!callNode.getFirstChild().isName()) {\n//       if (NodeUtil.isFunctionObjectCall(callNode)) {\n//         if (cArg == null || !cArg.isThis()) {\n//           return CanInlineResult.NO;\n//         }\n//         cArg = cArg.getNext();\n//       } else {\n//         Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n//       }\n//     }\n//     Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n//     while (cArg != null || fnParam != null) {\n//       if (fnParam != null) {\n//         if (cArg != null) {\n   Node cArg = callNode.getFirstChild();\n    if (!callNode.getFirstChild().isName()) {\n      if (NodeUtil.isFunctionObjectCall(callNode)) {\n        if (cArg == null || !cArg.isThis()) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      } else {\n        Preconditions.checkState(!NodeUtil.isFunctionObjectApply(callNode));\n      }\n    }\n    Node fnParam = NodeUtil.getFunctionParameters(fnNode).getFirstChild();\n    while (cArg != null || fnParam != null) {\n      if (fnParam != null) {\n        if (cArg != null) {\n          if (cArg.isSpread()) {\n            return CanInlineResult.NO;\n          }\n          if (NodeUtil.mayEffectMutableState(cArg, compiler)\n              && NodeUtil.getNameReferenceCount(\n                  block, fnParam.getString()) > 1) {\n            return CanInlineResult.NO;\n          }\n        }\n        fnParam = fnParam.getNext();\n      }\n      if (cArg != null) {\n        if (NodeUtil.mayHaveSideEffects(cArg, compiler)) {\n          return CanInlineResult.NO;\n        }\n        cArg = cArg.getNext();\n      }\n    }\n    return CanInlineResult.YES;\n  }\n"
+    ]
+}

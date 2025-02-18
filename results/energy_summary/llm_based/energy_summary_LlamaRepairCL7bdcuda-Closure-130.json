@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-130",
+    "Time": {
+        "mean": 497.2073874473572,
+        "median": 497.2073874473572,
+        "std": 0,
+        "max": 497.2073874473572,
+        "min": 497.2073874473572,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 61701.59301166535,
+        "median": 61701.59301166535,
+        "std": 0,
+        "max": 61701.59301166535,
+        "min": 61701.59301166535,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28476.177391695972,
+        "median": 28476.177391695972,
+        "std": 0,
+        "max": 28476.177391695972,
+        "min": 28476.177391695972,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        64.05841994285583,
+        125.93684387207031,
+        187.8152678012848,
+        249.69369173049927,
+        311.57211565971375,
+        373.4505395889282,
+        435.3289635181427,
+        497.2073874473572
+    ],
+    "Joules_Per_PatchMedian": [
+        9513.676227742435,
+        16969.092911159994,
+        24424.509594577554,
+        31879.926277995113,
+        39335.34296141267,
+        46790.759644830236,
+        54246.17632824779,
+        61701.59301166535
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3918.1304372608665,
+        7426.4228593230255,
+        10934.715281385184,
+        14443.007703447343,
+        17951.3001255095,
+        21459.592547571658,
+        24967.884969633815,
+        28476.177391695972
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.080077648162842,
+        "median": 2.1799960136413574,
+        "std": 0.17523304629354008,
+        "max": 2.2410600185394287,
+        "min": 1.8890471458435059,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1976.7948497271539,
+        "median": 2058.2595443248747,
+        "std": 144.12888313002887,
+        "max": 2105.4332142949106,
+        "min": 1819.5782152175902,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 402.7797275376321,
+        "median": 409.8380151987078,
+        "std": 11.306768349774332,
+        "max": 412.0882642865183,
+        "min": 389.27032411098503,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        61.87842392921448,
+        123.75684785842896,
+        185.63527178764343,
+        247.5136957168579,
+        309.3921196460724,
+        371.27054357528687,
+        433.14896750450134,
+        495.0273914337158
+    ],
+    "Val_Joules": [
+        7455.41668341756,
+        14910.833366835119,
+        22366.25005025268,
+        29821.666733670238,
+        37277.0834170878,
+        44732.500100505364,
+        52187.91678392292,
+        59643.333467340475
+    ],
+    "Val_JoulesNormalized": [
+        3508.292422062159,
+        7016.584844124318,
+        10524.877266186477,
+        14033.169688248636,
+        17541.462110310793,
+        21049.75453237295,
+        24558.046954435107,
+        28066.339376497264
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 0 && name.localSets == 1 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 0 && name.localSets == 0 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets > 0 && name.localSets == 0 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.localSets == 0 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 1 && name.localSets == 1 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 1 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 1 && name.localSets == 0 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets + name.localSets == 1 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n     if (name.globalSets == 1 && name.localSets == 0 &&\n          name.refs != null &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n",
+        "  private void inlineAliases(GlobalNamespace namespace) {\n    Deque<Name> workList = new ArrayDeque<Name>(namespace.getNameForest());\n    while (!workList.isEmpty()) {\n      Name name = workList.pop();\n      if (name.type == Name.Type.GET || name.type == Name.Type.SET) {\n        continue;\n      }\n// buggy code\n//       if (name.globalSets == 1 && name.localSets == 0 &&\n          name.aliasingGets > 0) {\n        List<Ref> refs = Lists.newArrayList(name.getRefs());\n        for (Ref ref : refs) {\n          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {\n            if (inlineAliasIfPossible(ref, namespace)) {\n              name.removeRef(ref);\n            }\n          }\n        }\n      }\n      if ((name.type == Name.Type.OBJECTLIT ||\n           name.type == Name.Type.FUNCTION) &&\n          name.aliasingGets == 0 && name.props != null) {\n        workList.addAll(name.props);\n      }\n    }\n  }\n"
+    ]
+}

@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-131",
+    "Time": {
+        "mean": 425.7318241596222,
+        "median": 425.7318241596222,
+        "std": 0,
+        "max": 425.7318241596222,
+        "min": 425.7318241596222,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 53013.54027394055,
+        "median": 53013.54027394055,
+        "std": 0,
+        "max": 53013.54027394055,
+        "min": 53013.54027394055,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 23938.577790367603,
+        "median": 23938.577790367603,
+        "std": 0,
+        "max": 23938.577790367603,
+        "min": 23938.577790367603,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        73.28789901733398,
+        143.77668404579163,
+        214.26546907424927,
+        284.7542541027069,
+        355.24303913116455,
+        425.7318241596222
+    ],
+    "Joules_Per_PatchMedian": [
+        10963.26814559698,
+        19373.322571265693,
+        27783.376996934407,
+        36193.43142260312,
+        44603.485848271834,
+        53013.54027394055
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4363.751910555363,
+        8278.71708651781,
+        12193.682262480259,
+        16108.647438442707,
+        20023.612614405156,
+        23938.577790367603
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9033058166503904,
+        "median": 2.7991139888763428,
+        "std": 0.31763414980969124,
+        "max": 3.4612560272216797,
+        "min": 2.679949998855591,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2638.1760445308687,
+        "median": 2553.2137199282643,
+        "std": 250.9534964088899,
+        "max": 3080.286771166325,
+        "min": 2464.0308367848397,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 445.4882848644259,
+        "median": 448.78673459291485,
+        "std": 22.50937643200691,
+        "max": 474.3071082711226,
+        "min": 416.0130476593972,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.48878502845764,
+        140.97757005691528,
+        211.46635508537292,
+        281.95514011383057,
+        352.4439251422882,
+        422.93271017074585
+    ],
+    "Val_Joules": [
+        8410.054425668715,
+        16820.108851337427,
+        25230.16327700614,
+        33640.217702674854,
+        42050.27212834357,
+        50460.32655401228
+    ],
+    "Val_JoulesNormalized": [
+        3914.965175962448,
+        7829.930351924895,
+        11744.895527887344,
+        15659.860703849792,
+        19574.82587981224,
+        23489.791055774687
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.codePointAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isUnicodeIdentifierStart(s.charAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            !Character.isUnicodeIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.codePointAt(0))) {\n        return false;\n      }\n      for (int i = Character.charCount(s.codePointAt(0)); i < length; i += Character.charCount(s.codePointAt(i))) {\n        if (\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         Character.isDigit(s.charAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (Character.isDigit(s.charAt(i))) {\n          return false;\n        }\n        if (\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isUnicodeIdentifierStart(s.charAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n          !Character.isUnicodeIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.codePointAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            !Character.isJavaIdentifierPart(s.codePointAt(i))) {\n          return false;\n        }\n      }\n      return true;\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.charAt(0)) && s.charAt(0) != '$') {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            s.charAt(i) == '$' ||\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.charAt(0)) &&\n          s.charAt(0) != '$') {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            s.charAt(i) == '$' ||\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isJavaIdentifierStart(s.charAt(0)) && s.charAt(0) != '$') {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (s.charAt(i) == '$') {\n          continue;\n        }\n        if (\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n",
+        "    public static boolean isJSIdentifier(String s) {\n      int length = s.length();\n      if (length == 0 ||\n// buggy code\n//           !Character.isJavaIdentifierStart(s.charAt(0))) {\n//         return false;\n//       }\n//       for (int i = 1; i < length; i++) {\n//         if (\n         !Character.isUnicodeIdentifierStart(s.charAt(0))) {\n        return false;\n      }\n      for (int i = 1; i < length; i++) {\n        if (\n            !Character.isUnicodeIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n            !Character.isJavaIdentifierPart(s.charAt(i))) {\n          return false;\n        }\n      }\n      return true;\n    }\n"
+    ]
+}

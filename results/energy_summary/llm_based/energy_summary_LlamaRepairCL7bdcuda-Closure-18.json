@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-18",
+    "Time": {
+        "mean": 506.71153485774994,
+        "median": 506.71153485774994,
+        "std": 0,
+        "max": 506.71153485774994,
+        "min": 506.71153485774994,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 67694.39029207229,
+        "median": 67694.39029207229,
+        "std": 0,
+        "max": 67694.39029207229,
+        "min": 67694.39029207229,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 29938.556530010712,
+        "median": 29938.556530010712,
+        "std": 0,
+        "max": 29938.556530010712,
+        "min": 29938.556530010712,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        63.20427453517914,
+        118.64268207550049,
+        174.08108961582184,
+        229.5194971561432,
+        284.95790469646454,
+        340.3963122367859,
+        395.83471977710724,
+        451.2731273174286,
+        506.71153485774994
+    ],
+    "Joules_Per_PatchMedian": [
+        14353.222851848603,
+        21020.868781876565,
+        27688.51471190453,
+        34356.16064193249,
+        41023.80657196045,
+        47691.45250198841,
+        54359.09843201637,
+        61026.74436204433,
+        67694.39029207229
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4774.409606277944,
+        7919.927971744539,
+        11065.446337211135,
+        14210.964702677731,
+        17356.483068144327,
+        20502.001433610923,
+        23647.51979907752,
+        26793.038164544116,
+        29938.556530010712
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 7.773509216308594,
+        "median": 7.765866994857788,
+        "std": 0.028027648237447248,
+        "max": 7.8191139698028564,
+        "min": 7.749001979827881,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 7697.937275397778,
+        "median": 7685.576921820641,
+        "std": 88.1766351242702,
+        "max": 7801.854690921306,
+        "min": 7575.018213629723,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1630.181900615692,
+        "median": 1628.8912408113483,
+        "std": 75.14050520399891,
+        "max": 1706.6464705944054,
+        "min": 1525.9089649200441,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.43840754032135,
+        110.8768150806427,
+        166.31522262096405,
+        221.7536301612854,
+        277.19203770160675,
+        332.6304452419281,
+        388.06885278224945,
+        443.5072603225708,
+        498.94566786289215
+    ],
+    "Val_Joules": [
+        6667.645930027962,
+        13335.291860055924,
+        20002.937790083888,
+        26670.58372011185,
+        33338.22965013981,
+        40005.87558016777,
+        46673.52151019573,
+        53341.16744022369,
+        60008.81337025165
+    ],
+    "Val_JoulesNormalized": [
+        3145.5183654665952,
+        6291.0367309331905,
+        9436.555096399787,
+        12582.073461866383,
+        15727.591827332979,
+        18873.110192799577,
+        22018.628558266173,
+        25164.14692373277,
+        28309.665289199365
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement()) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.closurePass && options.dependencyOptions.needsManagement()) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement() && !options.closurePass) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.closurePass) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement() &&\n          !options.closurePass) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement() &&\n          (options.closurePass || options.processCommonJSModules)) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement()\n          && (options.closurePass || options.processCommonJSModules)) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement() &&\n          options.closurePass && inputs.size() > 0) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n",
+        "  Node parseInputs() {\n    boolean devMode = options.devMode != DevMode.OFF;\n    if (externsRoot != null) {\n      externsRoot.detachChildren();\n    }\n    if (jsRoot != null) {\n      jsRoot.detachChildren();\n    }\n    jsRoot = IR.block();\n    jsRoot.setIsSyntheticBlock(true);\n    externsRoot = IR.block();\n    externsRoot.setIsSyntheticBlock(true);\n    externAndJsRoot = IR.block(externsRoot, jsRoot);\n    externAndJsRoot.setIsSyntheticBlock(true);\n    if (options.tracer.isOn()) {\n      tracker = new PerformanceTracker(jsRoot, options.tracer);\n      addChangeHandler(tracker.getCodeChangeHandler());\n    }\n    Tracer tracer = newTracer(\"parseInputs\");\n    try {\n      for (CompilerInput input : externs) {\n        Node n = input.getAstRoot(this);\n        if (hasErrors()) {\n          return null;\n        }\n        externsRoot.addChildToBack(n);\n      }\n      if (options.transformAMDToCJSModules || options.processCommonJSModules) {\n        processAMDAndCommonJSModules();\n      }\n      hoistExterns(externsRoot);\n      boolean staleInputs = false;\n// buggy code\n//       if (options.dependencyOptions.needsManagement() && options.closurePass) {\n     if (options.dependencyOptions.needsManagement() &&\n          options.closurePass && inputs.size() > 1) {\n        for (CompilerInput input : inputs) {\n          for (String provide : input.getProvides()) {\n            getTypeRegistry().forwardDeclareType(provide);\n          }\n        }\n        try {\n          inputs =\n              (moduleGraph == null ? new JSModuleGraph(modules) : moduleGraph)\n              .manageDependencies(options.dependencyOptions, inputs);\n          staleInputs = true;\n        } catch (CircularDependencyException e) {\n          report(JSError.make(\n              JSModule.CIRCULAR_DEPENDENCY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        } catch (MissingProvideException e) {\n          report(JSError.make(\n              MISSING_ENTRY_ERROR, e.getMessage()));\n          if (hasErrors()) {\n            return null;\n          }\n        }\n      }\n      hoistNoCompileFiles();\n      if (staleInputs) {\n        repartitionInputs();\n      }\n      for (CompilerInput input : inputs) {\n        Node n = input.getAstRoot(this);\n        if (n == null) {\n          continue;\n        }\n        if (devMode) {\n          runSanityCheck();\n          if (hasErrors()) {\n            return null;\n          }\n        }\n        if (options.sourceMapOutputPath != null ||\n            options.nameReferenceReportPath != null) {\n          SourceInformationAnnotator sia =\n              new SourceInformationAnnotator(\n                  input.getName(), options.devMode != DevMode.OFF);\n          NodeTraversal.traverse(this, n, sia);\n        }\n        jsRoot.addChildToBack(n);\n      }\n      if (hasErrors()) {\n        return null;\n      }\n      return externAndJsRoot;\n    } finally {\n      stopTracer(tracer, \"parseInputs\");\n    }\n  }\n"
+    ]
+}

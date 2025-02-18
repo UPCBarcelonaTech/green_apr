@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-96",
+    "Time": {
+        "mean": 14.7687828540802,
+        "median": 14.7687828540802,
+        "std": 0,
+        "max": 14.7687828540802,
+        "min": 14.7687828540802,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 2772.898637902737,
+        "median": 2772.898637902737,
+        "std": 0,
+        "max": 2772.898637902737,
+        "min": 2772.898637902737,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 943.5169011116033,
+        "median": 943.5169011116033,
+        "std": 0,
+        "max": 943.5169011116033,
+        "min": 943.5169011116033,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        8.029509425163269,
+        14.7687828540802
+    ],
+    "Joules_Per_PatchMedian": [
+        1995.0330876886846,
+        2772.898637902737
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        592.8910599112514,
+        943.5169011116033
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.4182164192199707,
+        "median": 1.290235996246338,
+        "std": 0.18429276243272588,
+        "max": 1.6200060844421387,
+        "min": 1.2709910869598389,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1314.05152518034,
+        "median": 1217.1675374746324,
+        "std": 142.34159913324612,
+        "max": 1471.4455900907517,
+        "min": 1201.715879237652,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 248.39605054140097,
+        "median": 242.2652187108996,
+        "std": 12.877634673949135,
+        "max": 264.57157291173917,
+        "min": 234.08501361608512,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.739273428916931,
+        13.478546857833862
+    ],
+    "Val_Joules": [
+        777.8655502140523,
+        1555.7311004281046
+    ],
+    "Val_JoulesNormalized": [
+        350.62584120035183,
+        701.2516824007037
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToLongBits(real) == Double.doubleToLongBits(rhs.getReal())) && (Double.doubleToLongBits(imaginary) == Double.doubleToLongBits(rhs.getImaginary()));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.real)) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.imaginary));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToRawLongBits(this.getReal()) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(this.getImaginary()) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToRawLongBits(getReal()) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(getImaginary()) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal()) && Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary());\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (real == rhs.getReal()) && (imaginary == rhs.getImaginary());\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = Double.doubleToLongBits(real) == Double.doubleToLongBits(rhs.getReal()) && Double.doubleToLongBits(imaginary) == Double.doubleToLongBits(rhs.getImaginary());\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n",
+        "    public boolean equals(Object other) {\n        boolean ret;\n        if (this == other) { \n            ret = true;\n        } else if (other == null) {\n            ret = false;\n        } else  {\n            try {\n                Complex rhs = (Complex)other;\n                if (rhs.isNaN()) {\n                    ret = this.isNaN();\n                } else {\n// buggy code\n//                     ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));\n                   ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())) && !this.isNaN();\n                }\n            } catch (ClassCastException ex) {\n                ret = false;\n            }\n        }\n        return ret;\n    }\n"
+    ]
+}

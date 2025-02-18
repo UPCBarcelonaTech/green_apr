@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-27",
+    "Time": {
+        "mean": 76.33637166023254,
+        "median": 76.33637166023254,
+        "std": 0,
+        "max": 76.33637166023254,
+        "min": 76.33637166023254,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13372.657063603403,
+        "median": 13372.657063603403,
+        "std": 0,
+        "max": 13372.657063603403,
+        "min": 13372.657063603403,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4624.522789156437,
+        "median": 4624.522789156437,
+        "std": 0,
+        "max": 4624.522789156437,
+        "min": 4624.522789156437,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.73944640159607,
+        25.83893394470215,
+        35.93842148780823,
+        46.03790903091431,
+        56.137396574020386,
+        66.23688411712646,
+        76.33637166023254
+    ],
+    "Joules_Per_PatchMedian": [
+        6503.881566905975,
+        7648.677483022213,
+        8793.473399138451,
+        9938.269315254689,
+        11083.065231370927,
+        12227.861147487165,
+        13372.657063603403
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1495.2046517014503,
+        2016.7576746106147,
+        2538.310697519779,
+        3059.8637204289435,
+        3581.416743338108,
+        4102.969766247273,
+        4624.522789156437
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 6.168715763092041,
+        "median": 5.63995885848999,
+        "std": 0.7285916935976975,
+        "max": 6.9708311557769775,
+        "min": 5.633085012435913,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5780.244172954559,
+        "median": 5359.085650789738,
+        "std": 581.8733748701045,
+        "max": 6429.745964396,
+        "min": 5350.673336327076,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 967.5020833396911,
+        "median": 973.6516287922859,
+        "std": 103.1305048020417,
+        "max": 1110.3047094225885,
+        "min": 835.1312412142752,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.099487543106079,
+        20.198975086212158,
+        30.298462629318237,
+        40.397950172424316,
+        50.497437715530396,
+        60.596925258636475,
+        70.69641280174255
+    ],
+    "Val_Joules": [
+        1144.795916116237,
+        2289.591832232475,
+        3434.387748348713,
+        4579.183664464951,
+        5723.979580581189,
+        6868.775496697427,
+        8013.571412813665
+    ],
+    "Val_JoulesNormalized": [
+        521.5530229091644,
+        1043.1060458183288,
+        1564.659068727493,
+        2086.2120916366575,
+        2607.765114545822,
+        3129.3181374549868,
+        3650.8711603641514
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return new PeriodFormatter(sep, sep);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return new PeriodFormatter(sep, f);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(1, size), notPrinter, notParser);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return new PeriodFormatter(sep, sep);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return sep;\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           if (size > 2) {\n                PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                sep = sep.finish(f.getPrinter(), f.getParser());\n                return new PeriodFormatter(sep, sep);\n            }\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n            return new PeriodFormatter(sep.finish(f.getPrinter(), f.getParser()), sep);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           if (size >= 3) {\n                PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                sep = sep.finish(f.getPrinter(), f.getParser());\n                return new PeriodFormatter(sep, sep);\n            }\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(1, size), notPrinter, notParser);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return new PeriodFormatter(sep, f);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n           PeriodFormatter f = toFormatter(elementPairs.subList(2, size), false, false);\n            sep = sep.finish(f.getPrinter(), f.getParser());\n            return new PeriodFormatter(sep, sep);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n",
+        "    private static PeriodFormatter toFormatter(List<Object> elementPairs, boolean notPrinter, boolean notParser) {\n        if (notPrinter && notParser) {\n            throw new IllegalStateException(\"Builder has created neither a printer nor a parser\");\n        }\n        int size = elementPairs.size();\n        if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n            Separator sep = (Separator) elementPairs.get(0);\n// buggy code\n//                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n//                 sep = sep.finish(f.getPrinter(), f.getParser());\n//                 return new PeriodFormatter(sep, sep);\n        }\n        Object[] comp = createComposite(elementPairs);\n        if (notPrinter) {\n            return new PeriodFormatter(null, (PeriodParser) comp[1]);\n        } else if (notParser) {\n            return new PeriodFormatter((PeriodPrinter) comp[0], null);\n        } else {\n            return new PeriodFormatter((PeriodPrinter) comp[0], (PeriodParser) comp[1]);\n        }\n    }\n"
+    ]
+}

@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-7",
+    "Time": {
+        "mean": 659.6496341228485,
+        "median": 659.6496341228485,
+        "std": 0,
+        "max": 659.6496341228485,
+        "min": 659.6496341228485,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 79018.3416250348,
+        "median": 79018.3416250348,
+        "std": 0,
+        "max": 79018.3416250348,
+        "min": 79018.3416250348,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 35507.971383214,
+        "median": 35507.971383214,
+        "std": 0,
+        "max": 35507.971383214,
+        "min": 35507.971383214,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        68.63796257972717,
+        134.30592608451843,
+        199.9738895893097,
+        265.64185309410095,
+        331.3098165988922,
+        396.9777801036835,
+        462.64574360847473,
+        528.313707113266,
+        593.9816706180573,
+        659.6496341228485
+    ],
+    "Joules_Per_PatchMedian": [
+        10355.029482972623,
+        17984.2863876462,
+        25613.543292319777,
+        33242.800196993354,
+        40872.05710166693,
+        48501.3140063405,
+        56130.570911014074,
+        63759.82781568765,
+        71389.08472036122,
+        79018.3416250348
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3968.6249811947346,
+        7472.996803641319,
+        10977.368626087904,
+        14481.740448534489,
+        17986.112270981073,
+        21490.484093427658,
+        24994.855915874243,
+        28499.227738320827,
+        32003.599560767412,
+        35507.971383214
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.965342903137207,
+        "median": 2.969999074935913,
+        "std": 0.07173821215841393,
+        "max": 3.048030138015747,
+        "min": 2.8709352016448975,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2724.6087423992158,
+        "median": 2725.7725782990456,
+        "std": 49.56258315001607,
+        "max": 2780.075637686253,
+        "min": 2659.3702139258385,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 463.9906653308869,
+        "median": 464.2531587481499,
+        "std": 6.774712861810728,
+        "max": 474.72266693115216,
+        "min": 456.99028495550147,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        65.66796350479126,
+        131.33592700958252,
+        197.00389051437378,
+        262.67185401916504,
+        328.3398175239563,
+        394.00778102874756,
+        459.6757445335388,
+        525.3437080383301,
+        591.0116715431213,
+        656.6796350479126
+    ],
+    "Val_Joules": [
+        7629.256904673577,
+        15258.513809347154,
+        22887.77071402073,
+        30517.02761869431,
+        38146.28452336788,
+        45775.541428041455,
+        53404.79833271503,
+        61034.0552373886,
+        68663.31214206218,
+        76292.56904673575
+    ],
+    "Val_JoulesNormalized": [
+        3504.3718224465847,
+        7008.743644893169,
+        10513.115467339754,
+        14017.487289786339,
+        17521.859112232924,
+        21026.23093467951,
+        24530.602757126093,
+        28034.974579572678,
+        31539.346402019262,
+        35043.71822446585
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return ctorType.isSubtype(type) ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue && type.isSubtype(ctorType) ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue && ctorType.isSubtype(type) ? type : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue && ctorType != null && ctorType.isSubtype(type) ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return (resultEqualsValue && ctorType.isSubtype(type)) ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       if (resultEqualsValue && ctorType.isSubtype(type)) {\n          return ctorType;\n        }\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue && ctorType != null &&\n            ctorType.isSubtype(type) ? ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       return resultEqualsValue && ctorType != null && ctorType.isSubtype(type) ?\n            ctorType : null;\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n",
+        "    public JSType caseObjectType(ObjectType type) {\n      if (value.equals(\"function\")) {\n        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n// buggy code\n//         return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n       if (resultEqualsValue) {\n          return ctorType.isSubtype(type) ? ctorType : null;\n        }\n      }\n      return matchesExpectation(\"object\") ? type : null;\n    }\n"
+    ]
+}

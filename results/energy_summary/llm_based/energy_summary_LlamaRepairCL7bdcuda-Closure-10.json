@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-10",
+    "Time": {
+        "mean": 266.1947226524353,
+        "median": 266.1947226524353,
+        "std": 0,
+        "max": 266.1947226524353,
+        "min": 266.1947226524353,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 32496.274755513667,
+        "median": 32496.274755513667,
+        "std": 0,
+        "max": 32496.274755513667,
+        "min": 32496.274755513667,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 14317.632844436166,
+        "median": 14317.632844436166,
+        "std": 0,
+        "max": 14317.632844436166,
+        "min": 14317.632844436166,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        67.83868300914764,
+        133.95736289024353,
+        200.07604277133942,
+        266.1947226524353
+    ],
+    "Joules_Per_PatchMedian": [
+        9300.094753539563,
+        17032.154754197596,
+        24764.21475485563,
+        32496.274755513667
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3765.22847495079,
+        7282.696598112582,
+        10800.164721274374,
+        14317.632844436166
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.815492582321167,
+        "median": 1.7200031280517578,
+        "std": 0.23392573132413091,
+        "max": 2.229975938796997,
+        "min": 1.669924020767212,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1644.8818112373351,
+        "median": 1568.0347528815269,
+        "std": 185.42201594444435,
+        "max": 1974.5256891489025,
+        "min": 1536.1513339042667,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 249.32712885379783,
+        "median": 247.76035178899747,
+        "std": 14.44085407670495,
+        "max": 266.3641200304028,
+        "min": 231.90037193298326,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        66.11867988109589,
+        132.23735976219177,
+        198.35603964328766,
+        264.47471952438354
+    ],
+    "Val_Joules": [
+        7732.060000658035,
+        15464.120001316069,
+        23196.180001974106,
+        30928.24000263214
+    ],
+    "Val_JoulesNormalized": [
+        3517.4681231617924,
+        7034.936246323585,
+        10552.404369485375,
+        14069.87249264717
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return allResultsMatch(n, MAY_BE_STRING_PREDICATE, true);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return anyResultsMatch(n, MAY_BE_STRING_PREDICATE);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n   return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return allResultsMatch(n, MAY_BE_STRING_PREDICATE, false);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return allResultsMatch(n, MAY_BE_STRING_PREDICATE, recurse);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return !allResultsMatch(n, MAY_NOT_BE_STRING_PREDICATE);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return !allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return mayBeStringHelper(n);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n",
+        "  static boolean mayBeString(Node n, boolean recurse) {\n    if (recurse) {\n// buggy code\n//       return allResultsMatch(n, MAY_BE_STRING_PREDICATE);\n     return allResultsMatch(n, mayBeStringHelper);\n    } else {\n      return mayBeStringHelper(n);\n    }\n  }\n"
+    ]
+}

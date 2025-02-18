@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-87",
+    "Time": {
+        "mean": 60.798272252082825,
+        "median": 60.798272252082825,
+        "std": 0,
+        "max": 60.798272252082825,
+        "min": 60.798272252082825,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8595.124974769353,
+        "median": 8595.124974769353,
+        "std": 0,
+        "max": 8595.124974769353,
+        "min": 8595.124974769353,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3619.211839282513,
+        "median": 3619.211839282513,
+        "std": 0,
+        "max": 3619.211839282513,
+        "min": 3619.211839282513,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        8.158928036689758,
+        14.738846063613892,
+        21.318764090538025,
+        27.898682117462158,
+        34.47860014438629,
+        41.058518171310425,
+        47.63843619823456,
+        54.21835422515869,
+        60.798272252082825
+    ],
+    "Joules_Per_PatchMedian": [
+        2229.022078603506,
+        3024.784940624237,
+        3820.547802644968,
+        4616.3106646657,
+        5412.07352668643,
+        6207.836388707161,
+        7003.599250727892,
+        7799.362112748622,
+        8595.124974769353
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        584.0074046969413,
+        963.4079590201377,
+        1342.8085133433342,
+        1722.2090676665307,
+        2101.609621989727,
+        2481.0101763129237,
+        2860.41073063612,
+        3239.8112849593167,
+        3619.211839282513
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.671684169769287,
+        "median": 1.579010009765625,
+        "std": 0.20096590172033033,
+        "max": 2.030026912689209,
+        "min": 1.5698678493499756,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1511.9735906529427,
+        "median": 1433.2592165827753,
+        "std": 165.32940661862142,
+        "max": 1806.7370609164236,
+        "min": 1425.9840693354606,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 203.56937557697302,
+        "median": 204.60685037374492,
+        "std": 10.368104114350658,
+        "max": 216.21097482442838,
+        "min": 188.57023057937658,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.579918026924133,
+        13.159836053848267,
+        19.7397540807724,
+        26.319672107696533,
+        32.89959013462067,
+        39.4795081615448,
+        46.05942618846893,
+        52.639344215393066,
+        59.2192622423172
+    ],
+    "Val_Joules": [
+        795.7628620207308,
+        1591.525724041462,
+        2387.2885860621927,
+        3183.0514480829243,
+        3978.814310103655,
+        4774.5771721243855,
+        5570.340034145116,
+        6366.102896165847,
+        7161.865758186577
+    ],
+    "Val_JoulesNormalized": [
+        379.4005543231964,
+        758.8011086463928,
+        1138.2016629695893,
+        1517.6022172927858,
+        1897.0027716159823,
+        2276.403325939179,
+        2655.803880262375,
+        3035.204434585572,
+        3414.604988908768
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                row = i;\n                break;\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            }\n            if (row == null) {\n                row = i;\n            } else {\n                return null;\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            } else {\n                if (row == null) {\n                    row = i;\n                } else {\n                    return null;\n                }\n                break;\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            } else {\n                if (row == null) {\n                    row = i;\n                } else {\n                    return null;\n                }\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            } else {\n                if (row == null) {\n                row = i;\n                } else {\n                return null;\n                }\n                break;\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                if (row == null) {\n                    row = i;\n                } else {\n                    return null;\n                }\n                break;\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                if (row == null) {\n                    row = i;\n                } else {\n                    row = null;\n                }\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           final double entry = getEntry(i, col);\n            if (!MathUtils.equals(entry, 0.0, epsilon)) {\n                if (row == null) {\n                    row = i;\n                } else if (row != i) {\n                    return null;\n                }\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            } else {\n                if (row == null) {\n                row = i;\n                } else {\n                return null;\n                }\n            }\n        }\n        return row;\n    }\n",
+        "    private Integer getBasicRow(final int col) {\n        Integer row = null;\n        for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n// buggy code\n//             if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n//                 if (row == null) {\n//                 row = i;\n//                 } else {\n//                 return null;\n//                 }\n           if (MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n                continue;\n            } else {\n                if (row == null) {\n                row = i;\n                } else {\n                return null;\n                }\n            }\n        }\n        return row;\n            }\n        }\n        return row;\n    }\n"
+    ]
+}

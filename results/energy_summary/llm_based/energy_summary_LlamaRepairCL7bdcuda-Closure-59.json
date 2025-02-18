@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-59",
+    "Time": {
+        "mean": 320.1683030128479,
+        "median": 320.1683030128479,
+        "std": 0,
+        "max": 320.1683030128479,
+        "min": 320.1683030128479,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 53460.52681962252,
+        "median": 53460.52681962252,
+        "std": 0,
+        "max": 53460.52681962252,
+        "min": 53460.52681962252,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 20744.685137712946,
+        "median": 20744.685137712946,
+        "std": 0,
+        "max": 20744.685137712946,
+        "min": 20744.685137712946,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        68.2746753692627,
+        118.65340089797974,
+        169.03212642669678,
+        219.41085195541382,
+        269.78957748413086,
+        320.1683030128479
+    ],
+    "Joules_Per_PatchMedian": [
+        23965.354931956528,
+        29864.389309489725,
+        35763.42368702292,
+        41662.45806455612,
+        47561.49244208932,
+        53460.52681962252
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7016.394278967377,
+        9762.052450716492,
+        12507.710622465605,
+        15253.368794214719,
+        17999.026965963832,
+        20744.685137712946
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 17.969098615646363,
+        "median": 17.895949840545654,
+        "std": 0.18484432829680794,
+        "max": 18.299111127853394,
+        "min": 17.87486696243286,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 18062.220171494482,
+        "median": 18066.32055442333,
+        "std": 102.08592586722213,
+        "max": 18200.49766294956,
+        "min": 17953.06131761074,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 4297.907064948081,
+        "median": 4270.736107218263,
+        "std": 81.207226926076,
+        "max": 4434.452197349072,
+        "min": 4223.288599944113,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        50.37872552871704,
+        100.75745105743408,
+        151.13617658615112,
+        201.51490211486816,
+        251.8936276435852,
+        302.27235317230225
+    ],
+    "Val_Joules": [
+        5899.034377533197,
+        11798.068755066393,
+        17697.10313259959,
+        23596.13751013279,
+        29495.17188766599,
+        35394.20626519919
+    ],
+    "Val_JoulesNormalized": [
+        2745.6581717491144,
+        5491.316343498229,
+        8236.974515247342,
+        10982.632686996456,
+        13728.29085874557,
+        16473.94903049468
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel != CheckLevel.OFF) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (!options.checkGlobalThisLevel.isOff()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.enables(DiagnosticGroups.GLOBAL_THIS)) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel != null) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel > CheckLevel.OFF) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThis) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel.isOn()\n        && options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel.isOn() ||\n        options.checkSymbols) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n// buggy code\n//     if (options.checkGlobalThisLevel.isOn()) {\n   if (options.checkGlobalThisLevel.isOn()\n        && !options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {\n      options.setWarningLevel(\n          DiagnosticGroups.ES5_STRICT,\n          CheckLevel.ERROR);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n    if (!options.checkSymbols &&\n        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = composedGuards;\n  }\n"
+    ]
+}

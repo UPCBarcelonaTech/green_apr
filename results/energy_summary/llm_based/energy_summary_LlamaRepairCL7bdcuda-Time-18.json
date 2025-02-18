@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-18",
+    "Time": {
+        "mean": 85.44179368019104,
+        "median": 85.44179368019104,
+        "std": 0,
+        "max": 85.44179368019104,
+        "min": 85.44179368019104,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13653.662464594838,
+        "median": 13653.662464594838,
+        "std": 0,
+        "max": 13653.662464594838,
+        "min": 13653.662464594838,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5061.890080976488,
+        "median": 5061.890080976488,
+        "std": 0,
+        "max": 5061.890080976488,
+        "min": 5061.890080976488,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.60025405883789,
+        24.720474004745483,
+        34.840693950653076,
+        44.96091389656067,
+        55.08113384246826,
+        65.20135378837585,
+        75.32157373428345,
+        85.44179368019104
+    ],
+    "Joules_Per_PatchMedian": [
+        5426.835167098045,
+        6602.0962095975865,
+        7777.357252097128,
+        8952.61829459667,
+        10127.879337096212,
+        11303.140379595754,
+        12478.401422095296,
+        13653.662464594838
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1329.809444260598,
+        1862.9638209342966,
+        2396.118197607995,
+        2929.272574281694,
+        3462.4269509553924,
+        3995.581327629091,
+        4528.73570430279,
+        5061.890080976488
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.673312616348267,
+        "median": 4.480034112930298,
+        "std": 0.43509617482664004,
+        "max": 5.45133900642395,
+        "min": 4.468208074569702,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4406.211556866169,
+        "median": 4251.574124598503,
+        "std": 346.75726959616003,
+        "max": 5026.472460746765,
+        "min": 4247.091694116592,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 795.6704245448116,
+        "median": 796.6550675868993,
+        "std": 54.85659137623087,
+        "max": 876.9132090568546,
+        "min": 742.689047265053,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.120219945907593,
+        20.240439891815186,
+        30.36065983772278,
+        40.48087978363037,
+        50.601099729537964,
+        60.72131967544556,
+        70.84153962135315,
+        80.96175956726074
+    ],
+    "Val_Joules": [
+        1175.2610424995419,
+        2350.5220849990837,
+        3525.7831274986256,
+        4701.0441699981675,
+        5876.305212497709,
+        7051.566254997251,
+        8226.827297496793,
+        9402.088339996335
+    ],
+    "Val_JoulesNormalized": [
+        533.1543766736986,
+        1066.3087533473972,
+        1599.4631300210958,
+        2132.6175066947944,
+        2665.771883368493,
+        3198.9262600421916,
+        3732.0806367158903,
+        4265.235013389589
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       instant = iJulianChronology.getDateTimeMillis\n            (year, monthOfYear, dayOfMonth,\n             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       try {\n            instant = iGregorianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        } catch (IllegalArgumentException ex) {\n            throw new IllegalArgumentException(\"Specified date does not exist\");\n        }\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n           instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       instant = iGregorianChronology.getDateTimeMillis\n            (year, monthOfYear, dayOfMonth,\n             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       try {\n            instant = iGregorianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        } catch (IllegalArgumentException e) {\n            throw new IllegalArgumentException(\"Specified date does not exist\");\n        }\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       try {\n            instant = iGregorianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        catch (IllegalArgumentException ex) {\n            throw new IllegalArgumentException(\"Specified date does not exist\");\n        }\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       instant = getJulianChronology().getDateTimeMillis\n            (year, monthOfYear, dayOfMonth,\n             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n           try {\n                instant = iGregorianChronology.getDateTimeMillis\n                    (year, monthOfYear, dayOfMonth,\n                     hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            } catch (IllegalArgumentException ex) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n",
+        "    public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,\n                                  int hourOfDay, int minuteOfHour,\n                                  int secondOfMinute, int millisOfSecond)\n        throws IllegalArgumentException\n    {\n        Chronology base;\n        if ((base = getBase()) != null) {\n            return base.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        }\n        long instant;\n// buggy code\n//             instant = iGregorianChronology.getDateTimeMillis\n//                 (year, monthOfYear, dayOfMonth,\n//                  hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n       try {\n            instant = iGregorianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n        } catch (IllegalArgumentException ex) {\n            throw new IllegalArgumentException\n                (\"Specified date does not exist\");\n        }\n        if (instant < iCutoverMillis) {\n            instant = iJulianChronology.getDateTimeMillis\n                (year, monthOfYear, dayOfMonth,\n                 hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n            if (instant >= iCutoverMillis) {\n                throw new IllegalArgumentException(\"Specified date does not exist\");\n            }\n        }\n        return instant;\n    }\n"
+    ]
+}

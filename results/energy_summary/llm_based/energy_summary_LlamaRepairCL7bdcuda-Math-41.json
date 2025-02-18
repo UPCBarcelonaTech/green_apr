@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-41",
+    "Time": {
+        "mean": 204.2937902212143,
+        "median": 204.2937902212143,
+        "std": 0,
+        "max": 204.2937902212143,
+        "min": 204.2937902212143,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 24318.458696144815,
+        "median": 24318.458696144815,
+        "std": 0,
+        "max": 24318.458696144815,
+        "min": 24318.458696144815,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 10276.665279132128,
+        "median": 10276.665279132128,
+        "std": 0,
+        "max": 10276.665279132128,
+        "min": 10276.665279132128,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        24.379270911216736,
+        46.86858582496643,
+        69.35790073871613,
+        91.84721565246582,
+        114.33653056621552,
+        136.8258454799652,
+        159.3151603937149,
+        181.8044753074646,
+        204.2937902212143
+    ],
+    "Joules_Per_PatchMedian": [
+        4321.734416598081,
+        6821.324951541424,
+        9320.915486484766,
+        11820.506021428107,
+        14320.096556371449,
+        16819.68709131479,
+        19319.277626258132,
+        21818.868161201473,
+        24318.458696144815
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1502.4523364841937,
+        2599.2289543151855,
+        3696.005572146177,
+        4792.782189977169,
+        5889.55880780816,
+        6986.335425639152,
+        8083.112043470144,
+        9179.888661301136,
+        10276.665279132128
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.9453201770782471,
+        "median": 1.889955997467041,
+        "std": 0.12501779111536387,
+        "max": 2.1689510345458984,
+        "min": 1.8879618644714355,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1867.6259037160874,
+        "median": 1822.1438816547393,
+        "std": 105.3986812306533,
+        "max": 2056.083217608929,
+        "min": 1817.1491737842562,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 405.64201099872594,
+        "median": 405.675718653202,
+        "std": 5.247254030538503,
+        "max": 413.53659914732,
+        "min": 400.678065752983,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        22.489314913749695,
+        44.97862982749939,
+        67.46794474124908,
+        89.95725965499878,
+        112.44657456874847,
+        134.93588948249817,
+        157.42520439624786,
+        179.91451930999756,
+        202.40383422374725
+    ],
+    "Val_Joules": [
+        2499.590534943342,
+        4999.181069886685,
+        7498.771604830026,
+        9998.362139773368,
+        12497.95267471671,
+        14997.54320966005,
+        17497.133744603394,
+        19996.724279546735,
+        22496.314814490077
+    ],
+    "Val_JoulesNormalized": [
+        1096.7766178309917,
+        2193.5532356619833,
+        3290.3298534929754,
+        4387.106471323967,
+        5483.883089154958,
+        6580.65970698595,
+        7677.436324816942,
+        8774.212942647935,
+        9870.989560478927
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "C",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct"
+    ],
+    "patches": [
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = begin; i < begin + length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < begin + length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < weights.length && i < length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < weights.length - 1; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = begin; i < begin+length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < weights.length && i < values.length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = 0; i < values.length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n               for (int i = begin; i < (begin + length); i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n",
+        "    public double evaluate(final double[] values, final double[] weights,\n                           final double mean, final int begin, final int length) {\n        double var = Double.NaN;\n        if (test(values, weights, begin, length)) {\n            if (length == 1) {\n                var = 0.0;\n            } else if (length > 1) {\n                double accum = 0.0;\n                double dev = 0.0;\n                double accum2 = 0.0;\n                for (int i = begin; i < begin + length; i++) {\n                    dev = values[i] - mean;\n                    accum += weights[i] * (dev * dev);\n                    accum2 += weights[i] * dev;\n                }\n                double sumWts = 0;\n// buggy code\n//                 for (int i = 0; i < weights.length; i++) {\n                    sumWts += weights[i];\n                }\n                if (isBiasCorrected) {\n                    var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);\n                } else {\n                    var = (accum - (accum2 * accum2 / sumWts)) / sumWts;\n                }\n            }\n        }\n        return var;\n    }\n"
+    ]
+}

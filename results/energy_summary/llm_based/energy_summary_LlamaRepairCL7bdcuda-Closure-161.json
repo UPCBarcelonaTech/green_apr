@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-161",
+    "Time": {
+        "mean": 3.1590189933776855,
+        "median": 3.1590189933776855,
+        "std": 0,
+        "max": 3.1590189933776855,
+        "min": 3.1590189933776855,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 3022.7146235466003,
+        "median": 3022.7146235466003,
+        "std": 0,
+        "max": 3022.7146235466003,
+        "min": 3022.7146235466003,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 623.7083827376364,
+        "median": 623.7083827376364,
+        "std": 0,
+        "max": 623.7083827376364,
+        "min": 623.7083827376364,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 3.257796049118042,
+        "median": 3.1590189933776855,
+        "std": 0.2305183224765305,
+        "max": 3.670070171356201,
+        "min": 3.149770975112915,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3106.6139772248266,
+        "median": 3022.7146235466003,
+        "std": 187.7932110489763,
+        "max": 3442.4013257980346,
+        "min": 3017.6129759192463,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 637.1319517350197,
+        "median": 623.7083827376364,
+        "std": 25.941879146100785,
+        "max": 670.7643323898319,
+        "min": 610.0506652355193,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent == null) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (left.getType() != Token.ARRAYLIT) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent == null || parent.getType() != Token.GETELEM) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent.getType() != Token.GETELEM) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent.getType() != Token.ASSIGN) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (n.getType() != Token.GETELEM) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent == null || parent.getType() != Token.ASSIGN) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (right == null) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n",
+        "  private Node tryFoldArrayAccess(Node n, Node left, Node right) {\n    Node parent = n.getParent();\n// buggy code\n// \n   if (parent == null || parent.getType() != Token.GETPROP) {\n      return n;\n    }\n    if (right.getType() != Token.NUMBER) {\n      return n;\n    }\n    double index = right.getDouble();\n    int intIndex = (int) index;\n    if (intIndex != index) {\n      error(INVALID_GETELEM_INDEX_ERROR, right);\n      return n;\n    }\n    if (intIndex < 0) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    Node elem = left.getFirstChild();\n    for (int i = 0; elem != null && i < intIndex; i++) {\n      elem = elem.getNext();\n    }\n    if (elem == null) {\n      error(INDEX_OUT_OF_BOUNDS_ERROR, right);\n      return n;\n    }\n    if (elem.getType() == Token.EMPTY) {\n      elem = NodeUtil.newUndefinedNode(elem);\n    } else {\n      left.removeChild(elem);\n    }\n    n.getParent().replaceChild(n, elem);\n    reportCodeChange();\n    return elem;\n  }\n"
+    ]
+}

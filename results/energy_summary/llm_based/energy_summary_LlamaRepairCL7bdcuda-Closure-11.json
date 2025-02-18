@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-11",
+    "Time": {
+        "mean": 664.5579347610474,
+        "median": 664.5579347610474,
+        "std": 0,
+        "max": 664.5579347610474,
+        "min": 664.5579347610474,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 80601.58448324204,
+        "median": 80601.58448324204,
+        "std": 0,
+        "max": 80601.58448324204,
+        "min": 80601.58448324204,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 36800.581299567224,
+        "median": 36800.581299567224,
+        "std": 0,
+        "max": 36800.581299567224,
+        "min": 36800.581299567224,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        68.58795630931854,
+        134.80684280395508,
+        201.0257292985916,
+        267.24461579322815,
+        333.4635022878647,
+        399.6823887825012,
+        465.90127527713776,
+        532.1201617717743,
+        598.3390482664108,
+        664.5579347610474
+    ],
+    "Joules_Per_PatchMedian": [
+        10065.170896929503,
+        17902.550184297565,
+        25739.929471665622,
+        33577.30875903368,
+        41414.68804640174,
+        49252.067333769795,
+        57089.44662113785,
+        64926.82590850591,
+        72764.20519587398,
+        80601.58448324204
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4098.314998084306,
+        7731.900142693519,
+        11365.485287302732,
+        14999.070431911945,
+        18632.65557652116,
+        22266.240721130373,
+        25899.825865739585,
+        29533.4110103488,
+        33166.99615495801,
+        36800.581299567224
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.4480753898620606,
+        "median": 2.369069814682007,
+        "std": 0.2300330821314703,
+        "max": 2.852962017059326,
+        "min": 2.2902419567108154,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2297.945083079338,
+        "median": 2227.7916095614432,
+        "std": 184.1024658020534,
+        "max": 2621.319964170456,
+        "min": 2164.7654611349108,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 462.3988197183609,
+        "median": 464.7298534750937,
+        "std": 25.10584408216218,
+        "max": 497.86033487319946,
+        "min": 430.136203122139,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        66.21888649463654,
+        132.43777298927307,
+        198.6566594839096,
+        264.87554597854614,
+        331.0944324731827,
+        397.3133189678192,
+        463.53220546245575,
+        529.7510919570923,
+        595.9699784517288,
+        662.1888649463654
+    ],
+    "Val_Joules": [
+        7837.3792873680595,
+        15674.75857473612,
+        23512.13786210418,
+        31349.517149472238,
+        39186.896436840296,
+        47024.27572420835,
+        54861.65501157641,
+        62699.03429894447,
+        70536.41358631253,
+        78373.79287368059
+    ],
+    "Val_JoulesNormalized": [
+        3633.585144609213,
+        7267.170289218426,
+        10900.755433827639,
+        14534.340578436852,
+        18167.925723046064,
+        21801.510867655277,
+        25435.09601226449,
+        29068.681156873703,
+        32702.266301482916,
+        36335.85144609213
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (parent.isAssign()) {\n      return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (parent.isAssign()) {\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (parent != null && parent.isAssign()) {\n      return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (parent.isAssign() && n.getJSType() != null) {\n      return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (n.getJSType() == null && parent.isAssign()) {\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (n.getJSType() == null && parent.isAssign()) {\n      return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (n.getJSType() != null && !parent.isAssign()) {\n      return;\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (n.getJSType() != null && !parent.isAssign()) {\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n",
+        "  private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n    Node property = n.getLastChild();\n    Node objNode = n.getFirstChild();\n    JSType childType = getJSType(objNode);\n    if (childType.isDict()) {\n      report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n// buggy code\n//     } else if (n.getJSType() != null && parent.isAssign()) {\n//       return;\n   } else if (n.getJSType() != null && parent != null && parent.isAssign()) {\n    } else if (validator.expectNotNullOrUndefined(t, n, childType,\n        \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n      checkPropertyAccess(childType, property.getString(), t, n);\n    }\n    ensureTyped(t, n);\n  }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-10",
+    "Time": {
+        "mean": 115.24194002151489,
+        "median": 115.24194002151489,
+        "std": 0,
+        "max": 115.24194002151489,
+        "min": 115.24194002151489,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13213.638903409243,
+        "median": 13213.638903409243,
+        "std": 0,
+        "max": 13213.638903409243,
+        "min": 13213.638903409243,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4385.336278975012,
+        "median": 4385.336278975012,
+        "std": 0,
+        "max": 4385.336278975012,
+        "min": 4385.336278975012,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.760271549224854,
+        27.32048010826111,
+        39.88068866729736,
+        52.44089722633362,
+        65.00110578536987,
+        77.56131434440613,
+        90.12152290344238,
+        102.68173146247864,
+        115.24194002151489
+    ],
+    "Joules_Per_PatchMedian": [
+        3309.32365706563,
+        4547.3630628585815,
+        5785.402468651533,
+        7023.441874444485,
+        8261.481280237436,
+        9499.520686030388,
+        10737.56009182334,
+        11975.599497616291,
+        13213.638903409243
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        861.5463590264324,
+        1302.0200990200046,
+        1742.493839013577,
+        2182.967579007149,
+        2623.4413190007217,
+        3063.915058994294,
+        3504.3887989878667,
+        3944.8625389814392,
+        4385.336278975012
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.3337899684906005,
+        "median": 2.2000629901885986,
+        "std": 0.25978522232944695,
+        "max": 2.6426658630371094,
+        "min": 2.100113868713379,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2192.526039893627,
+        "median": 2071.2842512726784,
+        "std": 209.39354473452536,
+        "max": 2445.598952376842,
+        "min": 2009.3887379407884,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 426.22008107900615,
+        "median": 421.0726190328601,
+        "std": 18.06815403233887,
+        "max": 448.53635967969853,
+        "min": 406.68433911800366,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        12.560208559036255,
+        25.12041711807251,
+        37.680625677108765,
+        50.24083423614502,
+        62.801042795181274,
+        75.36125135421753,
+        87.92145991325378,
+        100.48166847229004,
+        113.0418770313263
+    ],
+    "Val_Joules": [
+        1238.0394057929516,
+        2476.078811585903,
+        3714.1182173788548,
+        4952.157623171806,
+        6190.197028964758,
+        7428.2364347577095,
+        8666.275840550661,
+        9904.315246343613,
+        11142.354652136564
+    ],
+    "Val_JoulesNormalized": [
+        440.4737399935723,
+        880.9474799871446,
+        1321.4212199807168,
+        1761.8949599742891,
+        2202.3686999678616,
+        2642.842439961434,
+        3083.3161799550066,
+        3523.789919948579,
+        3964.2636599421517
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean white= false;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!white) {\n                    white= true;\n                    regex.append(\"\\\\s*+\");\n                }\n                continue;\n            }\n            white= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean wasWhite= true;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!wasWhite) {\n                    wasWhite= true;\n                    regex.append(\"\\\\s*+\");\n                }\n                continue;\n            }\n            wasWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean whitespace= false;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!whitespace) {\n                    whitespace= true;\n                    regex.append(\"\\\\s*+\");\n                }\n                continue;\n            }\n            whitespace= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean isWhite= false;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!isWhite) {\n                    isWhite= true;\n                    regex.append(\"\\\\s*+\");\n                }\n                continue;\n            }\n            isWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                regex.append(\"\\\\s*+\");\n                continue;\n            }\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean wasWhite= true;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(wasWhite) {\n                    regex.append(\"\\\\s*+\");\n                }\n                wasWhite= true;\n                continue;\n            }\n            wasWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean lastWhite= false;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!lastWhite) {\n                    lastWhite= true;\n                    regex.append(\"\\\\s*+\");\n                }\n                continue;\n            }\n            lastWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n",
+        "    private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n// buggy code\n//         boolean wasWhite= false;\n//         for(int i= 0; i<value.length(); ++i) {\n//             char c= value.charAt(i);\n//             if(Character.isWhitespace(c)) {\n//                 if(!wasWhite) {\n//                     wasWhite= true;\n//                     regex.append(\"\\\\s*+\");\n//                 }\n//                 continue;\n//             }\n//             wasWhite= false;\n       boolean wasWhite= true;\n        for(int i= 0; i<value.length(); ++i) {\n            char c= value.charAt(i);\n            if(Character.isWhitespace(c)) {\n                if(!wasWhite) {\n                    regex.append(\"\\\\s*+\");\n                }\n                wasWhite= true;\n                continue;\n            }\n            wasWhite= false;\n            switch(c) {\n            case '\\'':\n                if(unquote) {\n                    if(++i==value.length()) {\n                        return regex;\n                    }\n                    c= value.charAt(i);\n                }\n                break;\n            case '?':\n            case '[':\n            case ']':\n            case '(':\n            case ')':\n            case '{':\n            case '}':\n            case '\\\\':\n            case '|':\n            case '*':\n            case '+':\n            case '^':\n            case '$':\n            case '.':\n                regex.append('\\\\');\n            }\n            regex.append(c);\n        }\n        return regex;\n    }\n"
+    ]
+}

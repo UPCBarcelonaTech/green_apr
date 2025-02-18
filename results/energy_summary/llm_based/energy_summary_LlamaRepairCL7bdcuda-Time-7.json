@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-7",
+    "Time": {
+        "mean": 77.67092204093933,
+        "median": 77.67092204093933,
+        "std": 0,
+        "max": 77.67092204093933,
+        "min": 77.67092204093933,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 12884.919761717318,
+        "median": 12884.919761717318,
+        "std": 0,
+        "max": 12884.919761717318,
+        "min": 12884.919761717318,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4588.10474103689,
+        "median": 4588.10474103689,
+        "std": 0,
+        "max": 4588.10474103689,
+        "min": 4588.10474103689,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.389271974563599,
+        25.76954698562622,
+        36.14982199668884,
+        46.530097007751465,
+        56.91037201881409,
+        67.29064702987671,
+        77.67092204093933
+    ],
+    "Joules_Per_PatchMedian": [
+        5836.627073442936,
+        7011.3425214886665,
+        8186.057969534397,
+        9360.773417580127,
+        10535.488865625857,
+        11710.204313671587,
+        12884.919761717318
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1446.8030792832371,
+        1970.3533562421794,
+        2493.903633201122,
+        3017.453910160064,
+        3541.004187119006,
+        4064.554464077948,
+        4588.10474103689
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.8697733879089355,
+        "median": 5.008996963500977,
+        "std": 0.3235989644106598,
+        "max": 5.089738845825195,
+        "min": 4.299970865249634,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4542.08425803423,
+        "median": 4661.911625397205,
+        "std": 257.87477008916744,
+        "max": 4704.182726871968,
+        "min": 4086.5935953021044,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 913.9222932600975,
+        "median": 923.2528023242949,
+        "std": 24.52240755968715,
+        "max": 929.9816382408139,
+        "min": 870.6453851819033,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.380275011062622,
+        20.760550022125244,
+        31.140825033187866,
+        41.52110004425049,
+        51.90137505531311,
+        62.28165006637573,
+        72.66192507743835
+    ],
+    "Val_Joules": [
+        1174.7154480457311,
+        2349.4308960914614,
+        3524.1463441371916,
+        4698.861792182922,
+        5873.577240228652,
+        7048.292688274382,
+        8223.008136320113
+    ],
+    "Val_JoulesNormalized": [
+        523.5502769589423,
+        1047.1005539178846,
+        1570.650830876827,
+        2094.201107835769,
+        2617.751384794711,
+        3141.301661753653,
+        3664.8519387125953
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = chrono.getZone().convertUTCToLocal(instantMillis);\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       int defaultYear = chrono.year().get(instantMillis);\n        long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n        chrono = selectChronology(chrono);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = chrono.getZone().getMillisKeepLocal(instantMillis);\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = chrono.getZone().getMillisKeepLocal(instantMillis, instantMillis);\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis - chrono.getZone().getOffset(instantMillis);\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        if (iPivotYear != null) {\n            defaultYear = iPivotYear;\n        }\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis - chrono.getZone().getOffset(instantMillis);\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        if (defaultYear == 0) {\n            defaultYear = iPivotYear;\n        }\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis;\n        if (chrono.getZone() != null) {\n            instantLocal += chrono.getZone().getOffset(instantMillis);\n        }\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis;\n        if (chrono.getZone() != null) {\n            instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n        }\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis;\n        if (chrono.getZone() != null) {\n            instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n        }\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.getYear(instantLocal);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n",
+        "    public int parseInto(ReadWritableInstant instant, String text, int position) {\n        DateTimeParser parser = requireParser();\n        if (instant == null) {\n            throw new IllegalArgumentException(\"Instant must not be null\");\n        }\n        long instantMillis = instant.getMillis();\n        Chronology chrono = instant.getChronology();\n// buggy code\n//         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n//         chrono = selectChronology(chrono);\n//         int defaultYear = chrono.year().get(instantLocal);\n       long instantLocal = instantMillis;\n        if (chrono.getZone() != null) {\n            instantLocal += chrono.getZone().getOffset(instantMillis);\n        }\n        chrono = selectChronology(chrono);\n        int defaultYear = chrono.year().get(instantMillis);\n        DateTimeParserBucket bucket = new DateTimeParserBucket(\n            instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n        int newPos = parser.parseInto(bucket, text, position);\n        instant.setMillis(bucket.computeMillis(false, text));\n        if (iOffsetParsed && bucket.getOffsetInteger() != null) {\n            int parsedOffset = bucket.getOffsetInteger();\n            DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);\n            chrono = chrono.withZone(parsedZone);\n        } else if (bucket.getZone() != null) {\n            chrono = chrono.withZone(bucket.getZone());\n        }\n        instant.setChronology(chrono);\n        if (iZone != null) {\n            instant.setZone(iZone);\n        }\n        return newPos;\n    }\n"
+    ]
+}

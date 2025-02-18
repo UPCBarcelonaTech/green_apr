@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-25",
+    "Time": {
+        "mean": 440.1192948818207,
+        "median": 440.1192948818207,
+        "std": 0,
+        "max": 440.1192948818207,
+        "min": 440.1192948818207,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 55913.17956495285,
+        "median": 55913.17956495285,
+        "std": 0,
+        "max": 55913.17956495285,
+        "min": 55913.17956495285,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 25157.39393839836,
+        "median": 25157.39393839836,
+        "std": 0,
+        "max": 25157.39393839836,
+        "min": 25157.39393839836,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        57.92796814441681,
+        112.52672910690308,
+        167.12549006938934,
+        221.7242510318756,
+        276.3230119943619,
+        330.92177295684814,
+        385.5205339193344,
+        440.1192948818207
+    ],
+    "Joules_Per_PatchMedian": [
+        9610.057239979506,
+        16224.789000689983,
+        22839.52076140046,
+        29454.25252211094,
+        36068.98428282142,
+        42683.716043531895,
+        49298.44780424237,
+        55913.17956495285
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3569.7222096383575,
+        6653.6753137469295,
+        9737.628417855502,
+        12821.581521964074,
+        15905.534626072646,
+        18989.487730181216,
+        22073.440834289788,
+        25157.39393839836
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.6336758136749268,
+        "median": 3.329207181930542,
+        "std": 0.5012616971099796,
+        "max": 4.239256143569946,
+        "min": 3.221007823944092,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3245.1521576547625,
+        "median": 2995.3254792690277,
+        "std": 402.16275378052853,
+        "max": 3728.9479376316067,
+        "min": 2920.570526826382,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 501.11112032413484,
+        "median": 485.7691055297855,
+        "std": 32.47777824519509,
+        "max": 542.1293689489366,
+        "min": 470.51092554330853,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        54.59876096248627,
+        109.19752192497253,
+        163.7962828874588,
+        218.39504384994507,
+        272.99380481243134,
+        327.5925657749176,
+        382.19132673740387,
+        436.79008769989014
+    ],
+    "Val_Joules": [
+        6614.731760710478,
+        13229.463521420956,
+        19844.195282131433,
+        26458.92704284191,
+        33073.65880355239,
+        39688.39056426287,
+        46303.122324973345,
+        52917.85408568382
+    ],
+    "Val_JoulesNormalized": [
+        3083.953104108572,
+        6167.906208217144,
+        9251.859312325716,
+        12335.812416434288,
+        15419.76552054286,
+        18503.718624651432,
+        21587.671728760004,
+        24671.624832868576
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   if (n.isNew()) {\n      Node constructor = n.getFirstChild();\n      scope = traverse(constructor, scope);\n      JSType constructorType = constructor.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n      for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n        scope = traverse(arg, scope);\n      }\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   for (Node arg = n.getFirstChild(); arg != null; arg = arg.getNext()) {\n      scope = traverse(arg, scope);\n    }\n    Node constructor = n.getFirstChild();\n    if (constructor != null) {\n      scope = traverse(constructor, scope);\n      JSType constructorType = constructor.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   Node constructor = n.getFirstChild();\n    if (constructor != null) {\n      scope = traverse(constructor, scope);\n      JSType constructorType = constructor.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n      for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n        scope = traverse(arg, scope);\n      }\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   for (Node arg = n.getFirstChild(); arg != null; arg = arg.getNext()) {\n      scope = traverse(arg, scope);\n    }\n    Node constructor = n.getFirstChild();\n    scope = traverse(constructor, scope);\n    JSType constructorType = constructor.getJSType();\n    JSType type = null;\n    if (constructorType != null) {\n      constructorType = constructorType.restrictByNotNullOrUndefined();\n      if (constructorType.isUnknownType()) {\n        type = getNativeType(UNKNOWN_TYPE);\n      } else {\n        FunctionType ct = constructorType.toMaybeFunctionType();\n        if (ct == null && constructorType instanceof FunctionType) {\n          ct = (FunctionType) constructorType;\n        }\n        if (ct != null && ct.isConstructor()) {\n          type = ct.getInstanceType();\n        }\n      }\n    }\n    n.setJSType(type);\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   Node firstChild = n.getFirstChild();\n    if (firstChild != null) {\n      scope = traverse(firstChild, scope);\n      JSType constructorType = firstChild.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n      for (Node arg = firstChild.getNext(); arg != null; arg = arg.getNext()) {\n        scope = traverse(arg, scope);\n      }\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   scope = traverse(n.getFirstChild(), scope);\n    JSType constructorType = n.getFirstChild().getJSType();\n    JSType type = null;\n    if (constructorType != null) {\n      constructorType = constructorType.restrictByNotNullOrUndefined();\n      if (constructorType.isUnknownType()) {\n        type = getNativeType(UNKNOWN_TYPE);\n      } else {\n        FunctionType ct = constructorType.toMaybeFunctionType();\n        if (ct == null && constructorType instanceof FunctionType) {\n          ct = (FunctionType) constructorType;\n        }\n        if (ct != null && ct.isConstructor()) {\n          type = ct.getInstanceType();\n        }\n      }\n    }\n    n.setJSType(type);\n    for (Node arg = n.getFirstChild().getNext(); arg != null; arg = arg.getNext()) {\n      scope = traverse(arg, scope);\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   Node constructor = n.getFirstChild();\n    JSType constructorType = constructor.getJSType();\n    JSType type = null;\n    if (constructorType != null) {\n      constructorType = constructorType.restrictByNotNullOrUndefined();\n      if (constructorType.isUnknownType()) {\n        type = getNativeType(UNKNOWN_TYPE);\n      } else {\n        FunctionType ct = constructorType.toMaybeFunctionType();\n        if (ct == null && constructorType instanceof FunctionType) {\n          ct = (FunctionType) constructorType;\n        }\n        if (ct != null && ct.isConstructor()) {\n          type = ct.getInstanceType();\n        }\n      }\n    }\n    n.setJSType(type);\n    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n      scope = traverse(arg, scope);\n    }\n    scope = traverse(constructor, scope);\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   scope = traverse(n.getFirstChild(), scope);\n    JSType constructorType = n.getFirstChild().getJSType();\n    JSType type = null;\n    if (constructorType != null) {\n      constructorType = constructorType.restrictByNotNullOrUndefined();\n      if (constructorType.isUnknownType()) {\n        type = getNativeType(UNKNOWN_TYPE);\n      } else {\n        FunctionType ct = constructorType.toMaybeFunctionType();\n        if (ct == null && constructorType instanceof FunctionType) {\n          ct = (FunctionType) constructorType;\n        }\n        if (ct != null && ct.isConstructor()) {\n          type = ct.getInstanceType();\n        }\n      }\n    }\n    n.setJSType(type);\n    for (Node arg = n.getFirstChild().getNext(); arg != null;\n         arg = arg.getNext()) {\n      scope = traverse(arg, scope);\n    }\n    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   Node constructor = n.getFirstChild();\n    if (constructor != null) {\n      scope = traverse(constructor, scope);\n      JSType constructorType = constructor.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n      for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n        scope = traverse(arg, scope);\n      }\n    } else {\n      n.setJSType(getNativeType    return scope;\n  }\n",
+        "  private FlowScope traverseNew(Node n, FlowScope scope) {\n// buggy code\n//     Node constructor = n.getFirstChild();\n//     scope = traverse(constructor, scope);\n//     JSType constructorType = constructor.getJSType();\n//     JSType type = null;\n//     if (constructorType != null) {\n//       constructorType = constructorType.restrictByNotNullOrUndefined();\n//       if (constructorType.isUnknownType()) {\n//         type = getNativeType(UNKNOWN_TYPE);\n//       } else {\n//         FunctionType ct = constructorType.toMaybeFunctionType();\n//         if (ct == null && constructorType instanceof FunctionType) {\n//           ct = (FunctionType) constructorType;\n//         }\n//         if (ct != null && ct.isConstructor()) {\n//           type = ct.getInstanceType();\n//         }\n//       }\n//     }\n//     n.setJSType(type);\n//     for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n//       scope = traverse(arg, scope);\n//     }\n   if (n.isNew()) {\n      Node constructor = n.getFirstChild();\n      scope = traverse(constructor, scope);\n      JSType constructorType = constructor.getJSType();\n      JSType type = null;\n      if (constructorType != null) {\n        constructorType = constructorType.restrictByNotNullOrUndefined();\n        if (constructorType.isUnknownType()) {\n          type = getNativeType(UNKNOWN_TYPE);\n        } else {\n          FunctionType ct = constructorType.toMaybeFunctionType();\n          if (ct == null && constructorType instanceof FunctionType) {\n            ct = (FunctionType) constructorType;\n          }\n          if (ct != null && ct.isConstructor()) {\n            type = ct.getInstanceType();\n          }\n        }\n      }\n      n.setJSType(type);\n      for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n        scope = traverse(arg, scope);\n      }\n    } else {\n      scope = traverseChildren(n, scope);    return scope;\n  }\n"
+    ]
+}

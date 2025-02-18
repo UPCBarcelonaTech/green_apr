@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-32",
+    "Time": {
+        "mean": 349.95016622543335,
+        "median": 349.95016622543335,
+        "std": 0,
+        "max": 349.95016622543335,
+        "min": 349.95016622543335,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 39987.28077292442,
+        "median": 39987.28077292442,
+        "std": 0,
+        "max": 39987.28077292442,
+        "min": 39987.28077292442,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 16778.454100012776,
+        "median": 16778.454100012776,
+        "std": 0,
+        "max": 16778.454100012776,
+        "min": 16778.454100012776,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        36.66900408267975,
+        71.47802209854126,
+        106.28704011440277,
+        141.09605813026428,
+        175.9050761461258,
+        210.7140941619873,
+        245.52311217784882,
+        280.3321301937103,
+        315.14114820957184,
+        349.95016622543335
+    ],
+    "Joules_Per_PatchMedian": [
+        5644.061079132557,
+        9459.974378442765,
+        13275.887677752973,
+        17091.80097706318,
+        20907.714276373386,
+        24723.627575683593,
+        28539.5408749938,
+        32355.454174304006,
+        36171.36747361421,
+        39987.28077292442
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2066.579235398769,
+        3701.2319981336586,
+        5335.884760868548,
+        6970.537523603438,
+        8605.190286338327,
+        10239.843049073217,
+        11874.495811808107,
+        13509.148574542996,
+        15143.801337277886,
+        16778.454100012776
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8758682250976562,
+        "median": 1.8599860668182373,
+        "std": 0.04168892605627703,
+        "max": 1.950066089630127,
+        "min": 1.8500871658325195,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1841.2085941791534,
+        "median": 1828.1477798223495,
+        "std": 32.29572420351815,
+        "max": 1898.869230544567,
+        "min": 1823.6950364112854,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 433.2234889864921,
+        "median": 431.9264726638794,
+        "std": 11.165352892298934,
+        "max": 448.41007307767836,
+        "min": 418.54349054098134,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.80901801586151,
+        69.61803603172302,
+        104.42705404758453,
+        139.23607206344604,
+        174.04509007930756,
+        208.85410809516907,
+        243.66312611103058,
+        278.4721441268921,
+        313.2811621427536,
+        348.0901801586151
+    ],
+    "Val_Joules": [
+        3815.9132993102075,
+        7631.826598620415,
+        11447.739897930624,
+        15263.65319724083,
+        19079.566496551037,
+        22895.479795861243,
+        26711.39309517145,
+        30527.306394481657,
+        34343.21969379186,
+        38159.132993102074
+    ],
+    "Val_JoulesNormalized": [
+        1634.6527627348896,
+        3269.3055254697792,
+        4903.958288204669,
+        6538.6110509395585,
+        8173.263813674448,
+        9807.916576409338,
+        11442.569339144227,
+        13077.222101879117,
+        14711.874864614007,
+        16346.527627348896
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree != null && (Boolean) tree.getAttribute()) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree == null || (Boolean) tree.getAttribute()) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (Boolean.TRUE.equals(tree.getAttribute())) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree.getAttribute() != null && (Boolean) tree.getAttribute()) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree != null && ((Boolean) tree.getAttribute())) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree != null && Boolean.TRUE.equals(tree.getAttribute())) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree.getAttribute() == null || (Boolean) tree.getAttribute()) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree.getAttribute() == Boolean.TRUE) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree.getAttribute() != null && ((Boolean) tree.getAttribute())) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n",
+        "    protected void computeGeometricalProperties() {\n        final Vector2D[][] v = getVertices();\n        if (v.length == 0) {\n            final BSPTree<Euclidean2D> tree = getTree(false);\n// buggy code\n//             if ((Boolean) tree.getAttribute()) {\n           if (tree.getAttribute() == null) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(0);\n                setBarycenter(new Vector2D(0, 0));\n            }\n        } else if (v[0][0] == null) {\n            setSize(Double.POSITIVE_INFINITY);\n            setBarycenter(Vector2D.NaN);\n        } else {\n            double sum  = 0;\n            double sumX = 0;\n            double sumY = 0;\n            for (Vector2D[] loop : v) {\n                double x1 = loop[loop.length - 1].getX();\n                double y1 = loop[loop.length - 1].getY();\n                for (final Vector2D point : loop) {\n                    final double x0 = x1;\n                    final double y0 = y1;\n                    x1 = point.getX();\n                    y1 = point.getY();\n                    final double factor = x0 * y1 - y0 * x1;\n                    sum  += factor;\n                    sumX += factor * (x0 + x1);\n                    sumY += factor * (y0 + y1);\n                }\n            }\n            if (sum < 0) {\n                setSize(Double.POSITIVE_INFINITY);\n                setBarycenter(Vector2D.NaN);\n            } else {\n                setSize(sum / 2);\n                setBarycenter(new Vector2D(sumX / (3 * sum), sumY / (3 * sum)));\n            }\n        }\n    }\n"
+    ]
+}

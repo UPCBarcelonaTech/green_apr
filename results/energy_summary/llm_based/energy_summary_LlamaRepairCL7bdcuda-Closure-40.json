@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-40",
+    "Time": {
+        "mean": 270.55466079711914,
+        "median": 270.55466079711914,
+        "std": 0,
+        "max": 270.55466079711914,
+        "min": 270.55466079711914,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 35776.908190834525,
+        "median": 35776.908190834525,
+        "std": 0,
+        "max": 35776.908190834525,
+        "min": 35776.908190834525,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 15910.8450552404,
+        "median": 15910.8450552404,
+        "std": 0,
+        "max": 15910.8450552404,
+        "min": 15910.8450552404,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        56.958998680114746,
+        110.35791420936584,
+        163.75682973861694,
+        217.15574526786804,
+        270.55466079711914
+    ],
+    "Joules_Per_PatchMedian": [
+        9896.272293198108,
+        16366.431267607211,
+        22836.590242016315,
+        29306.749216425418,
+        35776.908190834525
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3786.2964922606957,
+        6817.433633005621,
+        9848.570773750547,
+        12879.707914495473,
+        15910.8450552404
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.6260518074035644,
+        "median": 3.5600831508636475,
+        "std": 0.1475787448664828,
+        "max": 3.889894962310791,
+        "min": 3.5530271530151367,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3481.3486885857583,
+        "median": 3426.1133187890055,
+        "std": 120.85056094205338,
+        "max": 3697.340695464611,
+        "min": 3423.368050861359,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 758.566201040745,
+        "median": 755.1593515157706,
+        "std": 15.659961986672817,
+        "max": 785.7543161749841,
+        "min": 746.064937269688,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        53.3989155292511,
+        106.7978310585022,
+        160.1967465877533,
+        213.5956621170044,
+        266.9945776462555
+    ],
+    "Val_Joules": [
+        6470.1589744091025,
+        12940.317948818207,
+        19410.47692322731,
+        25880.635897636414,
+        32350.79487204552
+    ],
+    "Val_JoulesNormalized": [
+        3031.137140744925,
+        6062.27428148985,
+        9093.411422234776,
+        12124.548562979702,
+        15155.685703724628
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n       JsName name = getName(ns.name, false);\n        if (name != null) {\n          refNodes.add(new ClassDefiningFunctionNode(\n              name, n, parent, parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n       refNodes.add(new ClassDefiningFunctionNode(\n            getName(ns.name, false), n, parent, parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n       JsName name = getName(ns.name, false);\n        if (name != null) {\n          refNodes.add(new ClassDefiningFunctionNode(name, n, parent,\n              parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n   JsName name = getName(ns.name, false);\n    if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n    }\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n       JsName name = getName(ns.name, false);\n        if (name != null) {\n          refNodes.add(new ClassDefiningFunctionNode(name, n, parent, parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n   }\n    JsName name = getName(ns.name, false);\n    if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n       } else {\n          JsName name = getName(ns.name, false);\n          if (name != null) {\n            refNodes.add(new ClassDefiningFunctionNode(name, n, parent, parent.getParent()));\n          }\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n   } else {\n      JsName name = getName(ns.name, false);\n      if (name != null) {\n        refNodes.add(new ClassDefiningFunctionNode(\n            name, n, parent, parent.getParent()));\n        }\n      }\n    }\n",
+        "    public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        if (NodeUtil.isVarDeclaration(n)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          Preconditions.checkNotNull(ns);\n          recordSet(ns.name, n);\n        } else if (NodeUtil.isFunctionDeclaration(n)) {\n          Node nameNode = n.getFirstChild();\n          NameInformation ns = createNameInformation(t, nameNode, n);\n          if (ns != null) {\n            JsName nameInfo = getName(nameNode.getString(), true);\n            recordSet(nameInfo.name, nameNode);\n          }\n        } else if (NodeUtil.isObjectLitKey(n, parent)) {\n          NameInformation ns = createNameInformation(t, n, parent);\n          if (ns != null) {\n            recordSet(ns.name, n);\n          }\n        }\n      }\n      if (n.isAssign()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null) {\n          if (ns.isPrototype) {\n            recordPrototypeSet(ns.prototypeClass, ns.prototypeProperty, n);\n          } else {\n            recordSet(ns.name, nameNode);\n          }\n        }\n      } else if (n.isCall()) {\n        Node nameNode = n.getFirstChild();\n        NameInformation ns = createNameInformation(t, nameNode, n);\n        if (ns != null && ns.onlyAffectsClassDef) {\n// buggy code\n//           JsName name = getName(ns.name, false);\n//           if (name != null) {\n//           refNodes.add(new ClassDefiningFunctionNode(\n//               name, n, parent, parent.getParent()));\n//           }\n   }\n    JsName name = getName(ns.name, false);\n    if (name != null) {\n      refNodes.add(new ClassDefiningFunctionNode(\n          name, n, parent, parent.getParent()));\n    }\n        }\n      }\n    }\n"
+    ]
+}

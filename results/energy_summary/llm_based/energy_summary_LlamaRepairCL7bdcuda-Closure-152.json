@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-152",
+    "Time": {
+        "mean": 255.086354970932,
+        "median": 255.086354970932,
+        "std": 0,
+        "max": 255.086354970932,
+        "min": 255.086354970932,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 30669.700649058814,
+        "median": 30669.700649058814,
+        "std": 0,
+        "max": 30669.700649058814,
+        "min": 30669.700649058814,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 12996.688076615334,
+        "median": 12996.688076615334,
+        "std": 0,
+        "max": 12996.688076615334,
+        "min": 12996.688076615334,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        44.638625741004944,
+        86.72817158699036,
+        128.81771743297577,
+        170.90726327896118,
+        212.9968091249466,
+        255.086354970932
+    ],
+    "Joules_Per_PatchMedian": [
+        7147.236751502752,
+        11851.729531013963,
+        16556.222310525176,
+        21260.71509003639,
+        25965.2078695476,
+        30669.700649058814
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2576.120506078005,
+        4660.23402018547,
+        6744.347534292936,
+        8828.4610484004,
+        10912.574562507867,
+        12996.688076615334
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.643713140487671,
+        "median": 2.5490798950195312,
+        "std": 0.2159704765076787,
+        "max": 3.0299649238586426,
+        "min": 2.539306163787842,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2521.575065982342,
+        "median": 2442.743971991539,
+        "std": 175.80918794728825,
+        "max": 2835.9803999185565,
+        "min": 2438.2753552913664,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 490.3997899794579,
+        "median": 492.0069919705393,
+        "std": 8.21449545628555,
+        "max": 502.17711184024824,
+        "min": 480.48566811084766,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        42.08954584598541,
+        84.17909169197083,
+        126.26863753795624,
+        168.35818338394165,
+        210.44772922992706,
+        252.53727507591248
+    ],
+    "Val_Joules": [
+        4704.492779511213,
+        9408.985559022425,
+        14113.478338533638,
+        18817.97111804485,
+        23522.463897556063,
+        28226.956677067275
+    ],
+    "Val_JoulesNormalized": [
+        2084.1135141074656,
+        4168.227028214931,
+        6252.340542322397,
+        8336.454056429862,
+        10420.567570537329,
+        12504.681084644795
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   if (typeOfThis != null) {\n      typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n    }\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = safeResolve(typeOfThis, t, scope);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = (typeOfThis == null) ? null :\n        (ObjectType) safeResolve(typeOfThis, t, scope);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = ObjectType.cast(safeResolve(typeOfThis, t, scope));\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope, false);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope, true);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = (typeOfThis == null) ? null : (ObjectType) safeResolve(typeOfThis, t, scope);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = (typeOfThis == null) ? null : (ObjectType) safeResolve(\n        typeOfThis, t, scope);\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n",
+        "  JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {\n    setResolvedTypeInternal(this);\n    call = (ArrowType) safeResolve(call, t, scope);\n    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);\n// buggy code\n//     typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n   typeOfThis = safeResolve(typeOfThis, t, scope);\n    if (typeOfThis != null) {\n      typeOfThis = (ObjectType) typeOfThis;\n    }\n    boolean changed = false;\n    ImmutableList.Builder<ObjectType> resolvedInterfaces =\n        ImmutableList.builder();\n    for (ObjectType iface : implementedInterfaces) {\n      ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);\n      resolvedInterfaces.add(resolvedIface);\n      changed |= (resolvedIface != iface);\n    }\n    if (changed) {\n      implementedInterfaces = resolvedInterfaces.build();\n    }\n    if (subTypes != null) {\n      for (int i = 0; i < subTypes.size(); i++) {\n        subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));\n      }\n    }\n    return super.resolveInternal(t, scope);\n  }\n"
+    ]
+}

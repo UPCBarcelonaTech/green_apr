@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-15",
+    "Time": {
+        "mean": 502.2665106058121,
+        "median": 502.2665106058121,
+        "std": 0,
+        "max": 502.2665106058121,
+        "min": 502.2665106058121,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 62809.50381418467,
+        "median": 62809.50381418467,
+        "std": 0,
+        "max": 62809.50381418467,
+        "min": 62809.50381418467,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28747.000773191456,
+        "median": 28747.000773191456,
+        "std": 0,
+        "max": 28747.000773191456,
+        "min": 28747.000773191456,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        58.43855440616608,
+        113.91704893112183,
+        169.39554345607758,
+        224.87403798103333,
+        280.3525325059891,
+        335.8310270309448,
+        391.3095215559006,
+        446.7880160808563,
+        502.2665106058121
+    ],
+    "Joules_Per_PatchMedian": [
+        9453.803174936771,
+        16123.265754842758,
+        22792.728334748746,
+        29462.190914654733,
+        36131.65349456072,
+        42801.11607446671,
+        49470.57865437269,
+        56140.04123427868,
+        62809.50381418467
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3677.8154431819917,
+        6811.4636094331745,
+        9945.111775684358,
+        13078.759941935541,
+        16212.408108186724,
+        19346.056274437906,
+        22479.70444068909,
+        25613.352606940272,
+        28747.000773191456
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9616941452026366,
+        "median": 2.960059881210327,
+        "std": 0.060153286302998106,
+        "max": 3.030125856399536,
+        "min": 2.880228042602539,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2786.354930784702,
+        "median": 2784.3405950307842,
+        "std": 48.979732329189154,
+        "max": 2851.4830777049065,
+        "min": 2725.5809126138683,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 537.4735711216924,
+        "median": 544.1672769308088,
+        "std": 13.044151209335698,
+        "max": 549.1934520125392,
+        "min": 521.8171122550957,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.47849452495575,
+        110.9569890499115,
+        166.43548357486725,
+        221.913978099823,
+        277.39247262477875,
+        332.8709671497345,
+        388.34946167469025,
+        443.827956199646,
+        499.30645072460175
+    ],
+    "Val_Joules": [
+        6669.462579905987,
+        13338.925159811974,
+        20008.38773971796,
+        26677.850319623947,
+        33347.312899529934,
+        40016.77547943592,
+        46686.23805934191,
+        53355.700639247894,
+        60025.16321915388
+    ],
+    "Val_JoulesNormalized": [
+        3133.648166251183,
+        6267.296332502366,
+        9400.94449875355,
+        12534.592665004733,
+        15668.240831255916,
+        18801.888997507096,
+        21935.53716375828,
+        25069.185330009463,
+        28202.833496260646
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isScript()) {\n          return false;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isFunction()) {\n          return true;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isFunction()) {\n          return false;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isScript()) {\n          return true;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (NodeUtil.isControlStructure(n)) {\n          return true;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isObjectLit()) {\n          return false;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (NodeUtil.isStatementBlock(n)) {\n          return false;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isFunction() && NodeUtil.functionHasSideEffects(n)) {\n          return true;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n",
+        "      public boolean apply(Node n) {\n        if (n == null) {\n          return false;\n        }\n        if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n          return true;\n        }\n        if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n          return true;\n        }\n// buggy code\n// \n       if (n.isObjectLit()) {\n          return true;\n        }\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n            return true;\n          }\n        }\n        return false;\n      }\n"
+    ]
+}

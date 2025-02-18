@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-49",
+    "Time": {
+        "mean": 102.10570120811462,
+        "median": 102.10570120811462,
+        "std": 0,
+        "max": 102.10570120811462,
+        "min": 102.10570120811462,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10059.295510292051,
+        "median": 10059.295510292051,
+        "std": 0,
+        "max": 10059.295510292051,
+        "min": 10059.295510292051,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2797.4696801543223,
+        "median": 2797.4696801543223,
+        "std": 0,
+        "max": 2797.4696801543223,
+        "min": 2797.4696801543223,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.478729486465454,
+        21.54839301109314,
+        31.618056535720825,
+        41.68772006034851,
+        51.757383584976196,
+        61.82704710960388,
+        71.89671063423157,
+        81.96637415885925,
+        92.03603768348694,
+        102.10570120811462
+    ],
+    "Joules_Per_PatchMedian": [
+        2172.3574446082116,
+        3048.683896350861,
+        3925.01034809351,
+        4801.336799836159,
+        5677.663251578808,
+        6553.989703321457,
+        7430.316155064105,
+        8306.642606806754,
+        9182.969058549403,
+        10059.295510292051
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        479.19824079275133,
+        736.7839562773704,
+        994.3696717619895,
+        1251.9553872466086,
+        1509.5411027312275,
+        1767.1268182158465,
+        2024.7125337004654,
+        2282.2982491850844,
+        2539.8839646697033,
+        2797.4696801543223
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.4859721660614014,
+        "median": 1.4090659618377686,
+        "std": 0.17185508252914264,
+        "max": 1.7900030612945557,
+        "min": 1.3798060417175293,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1355.8670943069458,
+        "median": 1296.0309928655624,
+        "std": 141.96658637259952,
+        "max": 1607.3159479975702,
+        "min": 1267.8504564404489,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 215.78568952322007,
+        "median": 221.61252530813226,
+        "std": 14.352316601482965,
+        "max": 228.44230231046686,
+        "min": 194.0709574103355,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.069663524627686,
+        20.13932704925537,
+        30.208990573883057,
+        40.27865409851074,
+        50.34831762313843,
+        60.41798114776611,
+        70.4876446723938,
+        80.55730819702148,
+        90.62697172164917,
+        100.69663524627686
+    ],
+    "Val_Joules": [
+        876.3264517426492,
+        1752.6529034852983,
+        2628.9793552279475,
+        3505.3058069705967,
+        4381.632258713245,
+        5257.958710455894,
+        6134.285162198543,
+        7010.6116139411915,
+        7886.93806568384,
+        8763.264517426489
+    ],
+    "Val_JoulesNormalized": [
+        257.5857154846191,
+        515.1714309692381,
+        772.7571464538572,
+        1030.3428619384763,
+        1287.9285774230952,
+        1545.5142929077142,
+        1803.1000083923332,
+        2060.685723876952,
+        2318.271439361571,
+        2575.85715484619
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public Fraction reduce() {\n// buggy code\n// \n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 1) {\n            return this;\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            return Fraction.getFraction(0, 1);\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            throw new ArithmeticException();\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (numerator == 0) {\n            return Fraction.ZERO;\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (numerator == 0) {\n            return Fraction.getFraction(0, 1);\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            return Fraction.getFraction(0, 0);\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            throw new ArithmeticException(\"Division by zero\");\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            return Fraction.getFraction(1, 0);\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n",
+        "    public Fraction reduce() {\n// buggy code\n// \n       if (denominator == 0) {\n            throw new ArithmeticException(\"Denominator is zero\");\n        }\n        int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n        if (gcd == 1) {\n            return this;\n        }\n        return Fraction.getFraction(numerator / gcd, denominator / gcd);\n    }\n"
+    ]
+}

@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-101",
+    "Time": {
+        "mean": 138.42806363105774,
+        "median": 138.42806363105774,
+        "std": 0,
+        "max": 138.42806363105774,
+        "min": 138.42806363105774,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 18087.438667303322,
+        "median": 18087.438667303322,
+        "std": 0,
+        "max": 18087.438667303322,
+        "min": 18087.438667303322,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7474.851888382434,
+        "median": 7474.851888382434,
+        "std": 0,
+        "max": 7474.851888382434,
+        "min": 7474.851888382434,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        30.189861536026,
+        57.249412059783936,
+        84.30896258354187,
+        111.3685131072998,
+        138.42806363105774
+    ],
+    "Joules_Per_PatchMedian": [
+        5970.846457511187,
+        8999.99450995922,
+        12029.142562407254,
+        15058.290614855288,
+        18087.438667303322
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1947.1641615986819,
+        3329.08609329462,
+        4711.008024990558,
+        6092.929956686496,
+        7474.851888382434
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.1339821815490723,
+        "median": 3.1303110122680664,
+        "std": 0.064316875224633,
+        "max": 3.2119531631469727,
+        "min": 3.048830986022949,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2938.529466791153,
+        "median": 2941.6984050631527,
+        "std": 41.64518008429291,
+        "max": 2988.812934052944,
+        "min": 2877.9992450714108,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 561.4610929679868,
+        "median": 565.2422299027439,
+        "std": 10.938091852505124,
+        "max": 570.1747821688655,
+        "min": 543.5093590736383,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        27.059550523757935,
+        54.11910104751587,
+        81.1786515712738,
+        108.23820209503174,
+        135.29775261878967
+    ],
+    "Val_Joules": [
+        3029.148052448034,
+        6058.296104896068,
+        9087.444157344102,
+        12116.592209792136,
+        15145.74026224017
+    ],
+    "Val_JoulesNormalized": [
+        1381.921931695938,
+        2763.843863391876,
+        4145.765795087814,
+        5527.687726783752,
+        6909.60965847969
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   options.closurePass = flags.process_closure_primitives;\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   options.setProcessClosurePrimitives(flags.process_closure_primitives);\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   if (flags.process_closure_primitives) {\n      options.setProcessClosurePrimitives(true);\n    }\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   if (flags.process_closure_primitives) {\n      options.setClosurePass(true);\n    }\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   options.setClosurePass(flags.process_closure_primitives);\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   if (!flags.process_closure_primitives) {\n      options.closurePass = false;\n    }\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   if (!flags.process_closure_primitives) {\n      options.setProcessClosurePrimitives(false);\n    }\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   flags.process_closure_primitives = true;\n    initOptionsFromFlags(options);\n    return options;\n  }\n",
+        "  protected CompilerOptions createOptions() {\n    CompilerOptions options = new CompilerOptions();\n    options.setCodingConvention(new ClosureCodingConvention());\n    CompilationLevel level = flags.compilation_level;\n    level.setOptionsForCompilationLevel(options);\n    if (flags.debug) {\n      level.setDebugOptionsForCompilationLevel(options);\n    }\n    WarningLevel wLevel = flags.warning_level;\n    wLevel.setOptionsForWarningLevel(options);\n    for (FormattingOption formattingOption : flags.formatting) {\n      formattingOption.applyToOptions(options);\n    }\n// buggy code\n//     if (flags.process_closure_primitives) {\n//       options.closurePass = true;\n//     }\n   if (!flags.process_closure_primitives) {\n      options.closurePass = true;\n    }\n    initOptionsFromFlags(options);\n    return options;\n  }\n"
+    ]
+}

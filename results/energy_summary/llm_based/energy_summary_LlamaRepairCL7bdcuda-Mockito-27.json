@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-27",
+    "Time": {
+        "mean": 43.40441632270813,
+        "median": 43.40441632270813,
+        "std": 0,
+        "max": 43.40441632270813,
+        "min": 43.40441632270813,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 16075.392783153056,
+        "median": 16075.392783153056,
+        "std": 0,
+        "max": 16075.392783153056,
+        "min": 16075.392783153056,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3831.9119246840455,
+        "median": 3831.9119246840455,
+        "std": 0,
+        "max": 3831.9119246840455,
+        "min": 3831.9119246840455,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        28.585233688354492,
+        43.40441632270813
+    ],
+    "Joules_Per_PatchMedian": [
+        14281.82723327279,
+        16075.392783153056
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2962.0259260475614,
+        3831.9119246840455
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 12.869658470153809,
+        "median": 13.766051054000854,
+        "std": 1.5841912286709245,
+        "max": 14.267102003097534,
+        "min": 11.019036054611206,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 11875.257712426186,
+        "median": 12488.261683392524,
+        "std": 1219.6415551071739,
+        "max": 12956.149688637257,
+        "min": 10408.620843112469,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2135.8557526445384,
+        "median": 2092.139927411077,
+        "std": 114.80941344798198,
+        "max": 2315.692999041081,
+        "min": 2027.154148304464,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        14.819182634353638,
+        29.638365268707275
+    ],
+    "Val_Joules": [
+        1793.5655498802662,
+        3587.1310997605324
+    ],
+    "Val_JoulesNormalized": [
+        869.8859986364841,
+        1739.7719972729683
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockSettingsImpl mockSettings = (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS);\n        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, mockSettings);\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockSettingsImpl settings = (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS);\n        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, settings);\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler);\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MethodInterceptorFilter newFilter = new MethodInterceptorFilter(oldMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        MockHandler<T> newMockHandler = new MockHandler<T>(newFilter);\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MethodInterceptorFilter newFilter = new MethodInterceptorFilter(oldMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockHandler<T> newMockHandler = new MockHandler<T>(mock, oldMockHandler);\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MockHandler<T> newMockHandler = new MockHandler<T>(mock);\n        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n       MethodInterceptorFilter newFilter = new MethodInterceptorFilter(oldMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n",
+        "    public <T> void resetMock(T mock) {\n        MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n// buggy code\n//         MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n//         MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n        ((Factory) mock).setCallback(0, newFilter);\n    }\n"
+    ]
+}

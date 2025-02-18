@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-57",
+    "Time": {
+        "mean": 307.62426829338074,
+        "median": 307.62426829338074,
+        "std": 0,
+        "max": 307.62426829338074,
+        "min": 307.62426829338074,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 37019.569159615035,
+        "median": 37019.569159615035,
+        "std": 0,
+        "max": 37019.569159615035,
+        "min": 37019.569159615035,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 16837.30124857426,
+        "median": 16837.30124857426,
+        "std": 0,
+        "max": 16837.30124857426,
+        "min": 16837.30124857426,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        52.22825562953949,
+        103.30745816230774,
+        154.386660695076,
+        205.46586322784424,
+        256.5450657606125,
+        307.62426829338074
+    ],
+    "Joules_Per_PatchMedian": [
+        7074.576852101087,
+        13063.575313603877,
+        19052.573775106666,
+        25041.572236609456,
+        31030.570698112246,
+        37019.569159615035
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2967.5733224689957,
+        5741.518907690048,
+        8515.4644929111,
+        11289.410078132152,
+        14063.355663353204,
+        16837.30124857426
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.188173532485962,
+        "median": 1.1490530967712402,
+        "std": 0.11356533659116276,
+        "max": 1.3900458812713623,
+        "min": 1.120816946029663,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1117.4511793565748,
+        "median": 1085.578390598297,
+        "std": 94.85156757234294,
+        "max": 1285.2625927567483,
+        "min": 1052.2855996012686,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 194.31436650753008,
+        "median": 193.62773724794363,
+        "std": 10.46598284021146,
+        "max": 209.78409441709528,
+        "min": 180.41139008998834,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        51.07920253276825,
+        102.1584050655365,
+        153.23760759830475,
+        204.316810131073,
+        255.39601266384125,
+        306.4752151966095
+    ],
+    "Val_Joules": [
+        5988.99846150279,
+        11977.99692300558,
+        17966.99538450837,
+        23955.99384601116,
+        29944.99230751395,
+        35933.99076901674
+    ],
+    "Val_JoulesNormalized": [
+        2773.945585221052,
+        5547.891170442104,
+        8321.836755663157,
+        11095.782340884209,
+        13869.72792610526,
+        16643.673511326313
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n       if (target != null) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && target.getType() == Token.STRING) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && target.isQualifiedName()) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && target.isString()) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && target.isGetProp()) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && target.getType() == Token.NAME) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target.getType() == Token.STRING) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && NodeUtil.isExprResult(target)) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n         if (target != null && NodeUtil.isExprCall(target)) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n",
+        "  private static String extractClassNameIfGoog(Node node, Node parent,\n      String functionName){\n    String className = null;\n    if (NodeUtil.isExprCall(parent)) {\n      Node callee = node.getFirstChild();\n      if (callee != null && callee.getType() == Token.GETPROP) {\n        String qualifiedName = callee.getQualifiedName();\n        if (functionName.equals(qualifiedName)) {\n          Node target = callee.getNext();\n// buggy code\n//           if (target != null) {\n            className = target.getString();\n          }\n        }\n      }\n    }\n    return className;\n  }\n"
+    ]
+}

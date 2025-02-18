@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-58",
+    "Time": {
+        "mean": 369.54129445552826,
+        "median": 369.54129445552826,
+        "std": 0,
+        "max": 369.54129445552826,
+        "min": 369.54129445552826,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 54431.11426542401,
+        "median": 54431.11426542401,
+        "std": 0,
+        "max": 54431.11426542401,
+        "min": 54431.11426542401,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 22679.182329231502,
+        "median": 22679.182329231502,
+        "std": 0,
+        "max": 22679.182329231502,
+        "min": 22679.182329231502,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        63.42776548862457,
+        114.44668698310852,
+        165.46560847759247,
+        216.48452997207642,
+        267.50345146656036,
+        318.5223729610443,
+        369.54129445552826
+    ],
+    "Joules_Per_PatchMedian": [
+        18480.07521955371,
+        24471.915060532094,
+        30463.754901510478,
+        36455.59474248886,
+        42447.43458346724,
+        48439.274424445626,
+        54431.11426542401
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5950.272099536657,
+        8738.423804485798,
+        11526.575509434937,
+        14314.727214384078,
+        17102.87891933322,
+        19891.03062428236,
+        22679.182329231502
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 12.423269414901734,
+        "median": 12.408843994140625,
+        "std": 0.04924512230280884,
+        "max": 12.509241819381714,
+        "min": 12.38381314277649,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 12464.619483237266,
+        "median": 12488.235378575326,
+        "std": 65.83889599597065,
+        "max": 12535.974051403999,
+        "min": 12390.727819228172,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 3137.603710603714,
+        "median": 3162.120394587517,
+        "std": 51.29314964455874,
+        "max": 3185.9101018190377,
+        "min": 3076.1346738576885,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        51.01892149448395,
+        102.0378429889679,
+        153.05676448345184,
+        204.0756859779358,
+        255.09460747241974,
+        306.1135289669037,
+        357.13245046138763
+    ],
+    "Val_Joules": [
+        5991.839840978384,
+        11983.679681956768,
+        17975.519522935152,
+        23967.359363913532,
+        29959.199204891916,
+        35951.039045870304,
+        41942.87888684869
+    ],
+    "Val_JoulesNormalized": [
+        2788.1517049491404,
+        5576.303409898281,
+        8364.45511484742,
+        11152.606819796561,
+        13940.758524745703,
+        16728.910229694844,
+        19517.061934643985
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (lhs != null) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (lhs.isName()) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n        }\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n         if (lhs != null) {\n            addToSetIfLocal(lhs, kill);\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (lhs != null) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n        }\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (!conditional) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n        }\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (lhs.getType() == Token.NAME) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n        }\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n         addToSetIfLocal(lhs, gen);\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n         if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          addToSetIfLocal(lhs, gen);\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n",
+        "  private void computeGenKill(Node n, BitSet gen, BitSet kill,\n      boolean conditional) {\n    switch (n.getType()) {\n      case Token.SCRIPT:\n      case Token.BLOCK:\n      case Token.FUNCTION:\n        return;\n      case Token.WHILE:\n      case Token.DO:\n      case Token.IF:\n        computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n            conditional);\n        return;\n      case Token.FOR:\n        if (!NodeUtil.isForIn(n)) {\n          computeGenKill(NodeUtil.getConditionExpression(n), gen, kill,\n              conditional);\n        } else {\n          Node lhs = n.getFirstChild();\n          Node rhs = lhs.getNext();\n          if (NodeUtil.isVar(lhs)) {\n            lhs = lhs.getLastChild();\n          }\n// buggy code\n//             addToSetIfLocal(lhs, kill);\n//             addToSetIfLocal(lhs, gen);\n       if (lhs.isName()) {\n          addToSetIfLocal(lhs, kill);\n          addToSetIfLocal(lhs, gen);\n        } else {\n          computeGenKill(rhs, gen, kill, conditional);\n        }\n        return;\n      case Token.VAR:\n        for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n          if (c.hasChildren()) {\n            computeGenKill(c.getFirstChild(), gen, kill, conditional);\n            if (!conditional) {\n              addToSetIfLocal(c, kill);\n            }\n          }\n        }\n        return;\n      case Token.AND:\n      case Token.OR:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.HOOK:\n        computeGenKill(n.getFirstChild(), gen, kill, conditional);\n        computeGenKill(n.getFirstChild().getNext(), gen, kill, true);\n        computeGenKill(n.getLastChild(), gen, kill, true);\n        return;\n      case Token.NAME:\n        if (isArgumentsName(n)) {\n          markAllParametersEscaped();\n        } else {\n          addToSetIfLocal(n, gen);\n        }\n        return;\n      default:\n        if (NodeUtil.isAssignmentOp(n) && NodeUtil.isName(n.getFirstChild())) {\n          Node lhs = n.getFirstChild();\n          if (!conditional) {\n            addToSetIfLocal(lhs, kill);\n          }\n          if (!NodeUtil.isAssign(n)) {\n            addToSetIfLocal(lhs, gen);\n          }\n          computeGenKill(lhs.getNext(), gen, kill, conditional);\n        } else {\n          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n            computeGenKill(c, gen, kill, conditional);\n          }\n        }\n        return;\n    }\n  }\n"
+    ]
+}

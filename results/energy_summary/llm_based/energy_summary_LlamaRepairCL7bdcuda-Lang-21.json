@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-21",
+    "Time": {
+        "mean": 84.64328861236572,
+        "median": 84.64328861236572,
+        "std": 0,
+        "max": 84.64328861236572,
+        "min": 84.64328861236572,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 11268.795466816424,
+        "median": 11268.795466816424,
+        "std": 0,
+        "max": 11268.795466816424,
+        "min": 11268.795466816424,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2675.5852949023238,
+        "median": 2675.5852949023238,
+        "std": 0,
+        "max": 2675.5852949023238,
+        "min": 2675.5852949023238,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.44849681854248,
+        22.347845792770386,
+        31.24719476699829,
+        40.146543741226196,
+        49.0458927154541,
+        57.94524168968201,
+        66.84459066390991,
+        75.74393963813782,
+        84.64328861236572
+    ],
+    "Joules_Per_PatchMedian": [
+        5140.223346149921,
+        5906.294861233234,
+        6672.366376316547,
+        7438.43789139986,
+        8204.509406483172,
+        8970.580921566485,
+        9736.652436649798,
+        10502.72395173311,
+        11268.795466816424
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1129.3362718462938,
+        1322.6173997282976,
+        1515.8985276103015,
+        1709.1796554923053,
+        1902.4607833743091,
+        2095.741911256313,
+        2289.0230391383166,
+        2482.30416702032,
+        2675.5852949023238
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.717234706878662,
+        "median": 4.549147844314575,
+        "std": 0.39722212728211453,
+        "max": 5.426728963851929,
+        "min": 4.517837047576904,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4496.597532269954,
+        "median": 4374.151831066608,
+        "std": 289.85723153200803,
+        "max": 5013.923366713524,
+        "min": 4343.753739917278,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 920.9036120653151,
+        "median": 936.05514396429,
+        "std": 38.92179814630997,
+        "max": 959.3538941740999,
+        "min": 858.3311300396913,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.899348974227905,
+        17.79869794845581,
+        26.698046922683716,
+        35.59739589691162,
+        44.496744871139526,
+        53.39609384536743,
+        62.29544281959534,
+        71.19479179382324,
+        80.09414076805115
+    ],
+    "Val_Joules": [
+        766.071515083313,
+        1532.143030166626,
+        2298.214545249939,
+        3064.286060333252,
+        3830.357575416564,
+        4596.429090499877,
+        5362.50060558319,
+        6128.572120666503,
+        6894.643635749816
+    ],
+    "Val_JoulesNormalized": [
+        193.28112788200383,
+        386.56225576400766,
+        579.8433836460115,
+        773.1245115280153,
+        966.4056394100191,
+        1159.686767292023,
+        1352.9678951740266,
+        1546.2490230560302,
+        1739.5301509380338
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY)) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) ||\n                        cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR)) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY));\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               Math.abs(cal1.get(Calendar.HOUR) - cal2.get(Calendar.HOUR)) <= 1 &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR_OF_DAY) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) ||\n                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR)) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) || cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR)) &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n",
+        "    public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n        if (cal1 == null || cal2 == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n// buggy code\n//                 cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n               Math.abs(cal1.get(Calendar.HOUR_OF_DAY) - cal2.get(Calendar.HOUR_OF_DAY)) <= 1 &&\n                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n                cal1.getClass() == cal2.getClass());\n    }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-105",
+    "Time": {
+        "mean": 51.932828187942505,
+        "median": 51.932828187942505,
+        "std": 0,
+        "max": 51.932828187942505,
+        "min": 51.932828187942505,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9342.87833916545,
+        "median": 9342.87833916545,
+        "std": 0,
+        "max": 9342.87833916545,
+        "min": 9342.87833916545,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2601.6530374109743,
+        "median": 2601.6530374109743,
+        "std": 0,
+        "max": 2601.6530374109743,
+        "min": 2601.6530374109743,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        10.33027958869934,
+        15.530598163604736,
+        20.730916738510132,
+        25.931235313415527,
+        31.131553888320923,
+        36.33187246322632,
+        41.532191038131714,
+        46.73250961303711,
+        51.932828187942505
+    ],
+    "Joules_Per_PatchMedian": [
+        5018.22567512393,
+        5558.80725812912,
+        6099.38884113431,
+        6639.970424139499,
+        7180.552007144689,
+        7721.133590149879,
+        8261.71517315507,
+        8802.29675616026,
+        9342.87833916545
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        876.1304279386999,
+        1091.8207541227341,
+        1307.5110803067685,
+        1523.2014064908028,
+        1738.8917326748372,
+        1954.5820588588715,
+        2170.2723850429056,
+        2385.96271122694,
+        2601.6530374109743
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.072168970108033,
+        "median": 5.129961013793945,
+        "std": 0.6082812459603628,
+        "max": 5.900987863540649,
+        "min": 4.190845012664795,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4420.262804706096,
+        "median": 4477.64409211874,
+        "std": 468.1416070514956,
+        "max": 5038.215424835682,
+        "min": 3726.882326328754,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 652.1341480350493,
+        "median": 660.4401017546656,
+        "std": 22.39680727060163,
+        "max": 667.0475513577462,
+        "min": 612.6653974175447,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        5.2003185749053955,
+        10.400637149810791,
+        15.600955724716187,
+        20.801274299621582,
+        26.001592874526978,
+        31.201911449432373,
+        36.40223002433777,
+        41.602548599243164,
+        46.80286717414856
+    ],
+    "Val_Joules": [
+        540.5815830051897,
+        1081.1631660103794,
+        1621.7447490155691,
+        2162.326332020759,
+        2702.9079150259486,
+        3243.4894980311383,
+        3784.071081036329,
+        4324.6526640415195,
+        4865.23424704671
+    ],
+    "Val_JoulesNormalized": [
+        215.69032618403423,
+        431.38065236806847,
+        647.0709785521028,
+        862.7613047361372,
+        1078.4516309201715,
+        1294.1419571042059,
+        1509.83228328824,
+        1725.5226094722743,
+        1941.2129356563087
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - (sumXY * sumXY) / sumXX;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - (sumXY * sumXY / sumXX);\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumXX * sumYY - sumXY * sumXY;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - sumXY * sumXY / sumXX;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return (sumYY - sumXY * sumXY / sumXX);\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - 2 * sumXY * sumXY / sumXX;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - sumXY * sumXY / sumXX - 1;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - sumXY * sumXY / (sumXX - 1);\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n       return sumYY - 2.0 * sumXY * sumXY / sumXX;\n    }\n",
+        "    public double getSumSquaredErrors() {\n// buggy code\n//         return sumYY - sumXY * sumXY / sumXX;\n    }\n"
+    ]
+}

@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-96",
+    "Time": {
+        "mean": 278.0084192752838,
+        "median": 278.0084192752838,
+        "std": 0,
+        "max": 278.0084192752838,
+        "min": 278.0084192752838,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 33333.8301296711,
+        "median": 33333.8301296711,
+        "std": 0,
+        "max": 33333.8301296711,
+        "min": 33333.8301296711,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 14866.430556082727,
+        "median": 14866.430556082727,
+        "std": 0,
+        "max": 14866.430556082727,
+        "min": 14866.430556082727,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        36.72683298587799,
+        71.19563102722168,
+        105.66442906856537,
+        140.13322710990906,
+        174.60202515125275,
+        209.07082319259644,
+        243.53962123394012,
+        278.0084192752838
+    ],
+    "Joules_Per_PatchMedian": [
+        6062.8929924070835,
+        9958.74115487337,
+        13854.589317339658,
+        17750.437479805947,
+        21646.285642272236,
+        25542.133804738525,
+        29437.981967204814,
+        33333.8301296711
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2262.226867330074,
+        4062.827394294739,
+        5863.427921259404,
+        7664.028448224069,
+        9464.628975188733,
+        11265.229502153397,
+        13065.830029118062,
+        14866.430556082727
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.324027442932129,
+        "median": 2.2580349445343018,
+        "std": 0.154361194501497,
+        "max": 2.600062131881714,
+        "min": 2.2509169578552246,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2222.8003226614,
+        "median": 2167.0448299407963,
+        "std": 126.4101941623646,
+        "max": 2448.5123138904573,
+        "min": 2159.6686186552047,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 470.1220678853991,
+        "median": 461.62634036540976,
+        "std": 23.847371439802618,
+        "max": 507.04592001438186,
+        "min": 447.273916721344,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.46879804134369,
+        68.93759608268738,
+        103.40639412403107,
+        137.87519216537476,
+        172.34399020671844,
+        206.81278824806213,
+        241.28158628940582,
+        275.7503843307495
+    ],
+    "Val_Joules": [
+        3895.8481624662872,
+        7791.6963249325745,
+        11687.544487398862,
+        15583.39264986515,
+        19479.240812331438,
+        23375.088974797727,
+        27270.937137264016,
+        31166.785299730305
+    ],
+    "Val_JoulesNormalized": [
+        1800.6005269646644,
+        3601.201053929329,
+        5401.8015808939945,
+        7202.402107858659,
+        9003.002634823322,
+        10803.603161787987,
+        12604.203688752652,
+        14404.804215717317
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext() && arguments.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n          parameters.hasNext() && arguments.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       arguments.hasNext() && parameters.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext() &&\n        arguments.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n          arguments.hasNext() && parameters.hasNext()) {\n      parameter = parameters.next();\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext()) {\n      parameter = parameters.next();\n      if (!parameter.isVarArgs()) {\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext()) {\n      parameter = parameters.next();\n      if (parameter == null) {\n        continue;\n      }\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n",
+        "  private void visitParameterList(NodeTraversal t, Node call,\n      FunctionType functionType) {\n    Iterator<Node> arguments = call.children().iterator();\n    arguments.next(); \n    Iterator<Node> parameters = functionType.getParameters().iterator();\n    int ordinal = 0;\n    Node parameter = null;\n    Node argument = null;\n    while (arguments.hasNext() &&\n// buggy code\n//            parameters.hasNext()) {\n//         parameter = parameters.next();\n       parameters.hasNext()) {\n      parameter = parameters.next();\n      if (parameter == null) {\n        break;\n      }\n      argument = arguments.next();\n      ordinal++;\n      validator.expectArgumentMatchesParameter(t, argument,\n          getJSType(argument), getJSType(parameter), call, ordinal);\n    }\n    int numArgs = call.getChildCount() - 1;\n    int minArgs = functionType.getMinArguments();\n    int maxArgs = functionType.getMaxArguments();\n    if (minArgs > numArgs || maxArgs < numArgs) {\n      report(t, call, WRONG_ARGUMENT_COUNT,\n              validator.getReadableJSTypeName(call.getFirstChild(), false),\n              String.valueOf(numArgs), String.valueOf(minArgs),\n              maxArgs != Integer.MAX_VALUE ?\n              \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n    }\n  }\n"
+    ]
+}

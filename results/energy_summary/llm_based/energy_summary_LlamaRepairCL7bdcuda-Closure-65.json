@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-65",
+    "Time": {
+        "mean": 555.3197648525238,
+        "median": 555.3197648525238,
+        "std": 0,
+        "max": 555.3197648525238,
+        "min": 555.3197648525238,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 65075.885246562946,
+        "median": 65075.885246562946,
+        "std": 0,
+        "max": 65075.885246562946,
+        "min": 65075.885246562946,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28073.48497709035,
+        "median": 28073.48497709035,
+        "std": 0,
+        "max": 28073.48497709035,
+        "min": 28073.48497709035,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        58.52814471721649,
+        113.72721362113953,
+        168.92628252506256,
+        224.1253514289856,
+        279.32442033290863,
+        334.52348923683167,
+        389.7225581407547,
+        444.92162704467773,
+        500.12069594860077,
+        555.3197648525238
+    ],
+    "Joules_Per_PatchMedian": [
+        9436.789018779993,
+        15618.91082186699,
+        21801.032624953987,
+        27983.154428040983,
+        34165.27623112798,
+        40347.39803421497,
+        46529.51983730197,
+        52711.64164038896,
+        58893.76344347595,
+        65075.885246562946
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3447.1768457889557,
+        6183.433304822444,
+        8919.689763855933,
+        11655.946222889423,
+        14392.20268192291,
+        17128.4591409564,
+        19864.715599989886,
+        22600.972059023374,
+        25337.22851805686,
+        28073.48497709035
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.333619785308838,
+        "median": 3.329075813293457,
+        "std": 0.012065588973640974,
+        "max": 3.3500890731811523,
+        "min": 3.319000005722046,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3259.3669337010383,
+        "median": 3254.667215692997,
+        "std": 14.821193961991199,
+        "max": 3283.3250582695005,
+        "min": 3245.5394864559175,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 717.184266023636,
+        "median": 710.920386755467,
+        "std": 39.558165247373694,
+        "max": 768.9157043933869,
+        "min": 666.3752808690074,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        55.199068903923035,
+        110.39813780784607,
+        165.5972067117691,
+        220.79627561569214,
+        275.9953445196152,
+        331.1944134235382,
+        386.39348232746124,
+        441.5925512313843,
+        496.7916201353073,
+        551.9906890392303
+    ],
+    "Val_Joules": [
+        6182.121803086996,
+        12364.243606173994,
+        18546.36540926099,
+        24728.487212347987,
+        30910.609015434984,
+        37092.73081852197,
+        43274.85262160897,
+        49456.97442469596,
+        55639.09622778295,
+        61821.218030869946
+    ],
+    "Val_JoulesNormalized": [
+        2736.2564590334887,
+        5472.512918066977,
+        8208.769377100467,
+        10945.025836133955,
+        13681.282295167442,
+        16417.53875420093,
+        19153.795213234418,
+        21890.051672267906,
+        24626.308131301394,
+        27362.56459033488
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\000\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\u0000\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\x00\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\u0000': sb.append(\"\\\\0\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\0\"); break;\n        case '\\f': sb.append(\"\\\\f\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\0\"); continue;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\0\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\0\"); break;\n        case '\\b': sb.append(\"\\\\b\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n",
+        "  static String strEscape(String s, char quote,\n                          String doublequoteEscape,\n                          String singlequoteEscape,\n                          String backslashEscape,\n                          CharsetEncoder outputCharsetEncoder) {\n    StringBuilder sb = new StringBuilder(s.length() + 2);\n    sb.append(quote);\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      switch (c) {\n// buggy code\n//         case '\\0': sb.append(\"\\\\0\"); break;\n       case '\\0': sb.append(\"\\\\00\"); break;\n        case '\\n': sb.append(\"\\\\n\"); break;\n        case '\\r': sb.append(\"\\\\r\"); break;\n        case '\\t': sb.append(\"\\\\t\"); break;\n        case '\\\\': sb.append(backslashEscape); break;\n        case '\\\"': sb.append(doublequoteEscape); break;\n        case '\\'': sb.append(singlequoteEscape); break;\n        case '>':                       \n          if (i >= 2 &&\n              ((s.charAt(i - 1) == '-' && s.charAt(i - 2) == '-') ||\n               (s.charAt(i - 1) == ']' && s.charAt(i - 2) == ']'))) {\n            sb.append(\"\\\\>\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        case '<':\n          final String END_SCRIPT = \"/script\";\n          final String START_COMMENT = \"!--\";\n          if (s.regionMatches(true, i + 1, END_SCRIPT, 0,\n                              END_SCRIPT.length())) {\n            sb.append(\"<\\\\\");\n          } else if (s.regionMatches(false, i + 1, START_COMMENT, 0,\n                                     START_COMMENT.length())) {\n            sb.append(\"<\\\\\");\n          } else {\n            sb.append(c);\n          }\n          break;\n        default:\n          if (outputCharsetEncoder != null) {\n            if (outputCharsetEncoder.canEncode(c)) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          } else {\n            if (c > 0x1f && c < 0x7f) {\n              sb.append(c);\n            } else {\n              appendHexJavaScriptRepresentation(sb, c);\n            }\n          }\n      }\n    }\n    sb.append(quote);\n    return sb.toString();\n  }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-104",
+    "Time": {
+        "mean": 269.8664139509201,
+        "median": 269.8664139509201,
+        "std": 0,
+        "max": 269.8664139509201,
+        "min": 269.8664139509201,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 31907.706111919877,
+        "median": 31907.706111919877,
+        "std": 0,
+        "max": 31907.706111919877,
+        "min": 31907.706111919877,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 13788.476454186439,
+        "median": 13788.476454186439,
+        "std": 0,
+        "max": 13788.476454186439,
+        "min": 13788.476454186439,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        31.629510760307312,
+        61.40912365913391,
+        91.18873655796051,
+        120.96834945678711,
+        150.7479623556137,
+        180.5275752544403,
+        210.3071881532669,
+        240.0868010520935,
+        269.8664139509201
+    ],
+    "Joules_Per_PatchMedian": [
+        5127.904538738728,
+        8475.379735386372,
+        11822.854932034017,
+        15170.33012868166,
+        18517.805325329304,
+        21865.280521976947,
+        25212.75571862459,
+        28560.230915272234,
+        31907.706111919877
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1867.7735513925556,
+        3357.861414241791,
+        4847.9492770910265,
+        6338.037139940262,
+        7828.125002789498,
+        9318.212865638732,
+        10808.300728487968,
+        12298.388591337203,
+        13788.476454186439
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8533479213714599,
+        "median": 1.849897861480713,
+        "std": 0.005889306063248883,
+        "max": 1.859766960144043,
+        "min": 1.848193883895874,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1779.59076192379,
+        "median": 1780.4293420910835,
+        "std": 3.364977234459042,
+        "max": 1782.7372853040697,
+        "min": 1774.9284446358681,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 376.47927373170853,
+        "median": 377.6856885433201,
+        "std": 3.884652902023207,
+        "max": 380.0005513668059,
+        "min": 370.85596777200703,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        29.7796128988266,
+        59.5592257976532,
+        89.3388386964798,
+        119.1184515953064,
+        148.898064494133,
+        178.6776773929596,
+        208.4572902917862,
+        238.2369031906128,
+        268.0165160894394
+    ],
+    "Val_Joules": [
+        3347.475196647644,
+        6694.950393295288,
+        10042.425589942934,
+        13389.900786590577,
+        16737.37598323822,
+        20084.851179885864,
+        23432.326376533507,
+        26779.80157318115,
+        30127.276769828793
+    ],
+    "Val_JoulesNormalized": [
+        1490.0878628492355,
+        2980.175725698471,
+        4470.263588547707,
+        5960.351451396942,
+        7450.439314246178,
+        8940.527177095411,
+        10430.615039944647,
+        11920.702902793882,
+        13410.790765643118
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.isNoType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (!result.isNoType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.isNoObjectType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.isUnknownType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (!result.isUnknownType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.isObject()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.equals(this)) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (result != null && !result.isEmptyType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n",
+        "  JSType meet(JSType that) {\n    UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n    for (JSType alternate : alternates) {\n      if (alternate.isSubtype(that)) {\n        builder.addAlternate(alternate);\n      }\n    }\n    if (that instanceof UnionType) {\n      for (JSType otherAlternate : ((UnionType) that).alternates) {\n        if (otherAlternate.isSubtype(this)) {\n          builder.addAlternate(otherAlternate);\n        }\n      }\n    } else if (that.isSubtype(this)) {\n      builder.addAlternate(that);\n    }\n    JSType result = builder.build();\n// buggy code\n//     if (result != null) {\n   if (!result.isNoType() && !result.isUnknownType()) {\n      return result;\n    } else if (this.isObject() && that.isObject()) {\n      return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n    } else {\n      return getNativeType(JSTypeNative.NO_TYPE);\n    }\n  }\n"
+    ]
+}

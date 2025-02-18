@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-86",
+    "Time": {
+        "mean": 394.8659327030182,
+        "median": 394.8659327030182,
+        "std": 0,
+        "max": 394.8659327030182,
+        "min": 394.8659327030182,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 54671.82908725739,
+        "median": 54671.82908725739,
+        "std": 0,
+        "max": 54671.82908725739,
+        "min": 54671.82908725739,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 23553.892424631114,
+        "median": 23553.892424631114,
+        "std": 0,
+        "max": 23553.892424631114,
+        "min": 23553.892424631114,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        47.2041220664978,
+        85.83321213722229,
+        124.46230220794678,
+        163.09139227867126,
+        201.72048234939575,
+        240.34957242012024,
+        278.9786624908447,
+        317.6077525615692,
+        356.2368426322937,
+        394.8659327030182
+    ],
+    "Joules_Per_PatchMedian": [
+        13007.558366554975,
+        17636.921779966353,
+        22266.28519337773,
+        26895.64860678911,
+        31525.012020200487,
+        36154.375433611865,
+        40783.73884702325,
+        45413.10226043463,
+        50042.46567384601,
+        54671.82908725739
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4071.0326535642143,
+        6235.794850349426,
+        8400.557047134638,
+        10565.31924391985,
+        12730.081440705062,
+        14894.843637490274,
+        17059.605834275484,
+        19224.368031060694,
+        21389.130227845904,
+        23553.892424631114
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 8.667006015777588,
+        "median": 8.575031995773315,
+        "std": 0.12725582170002725,
+        "max": 8.808043003082275,
+        "min": 8.573089122772217,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 8418.507895264625,
+        "median": 8378.194953143597,
+        "std": 103.18584293581843,
+        "max": 8545.40013270378,
+        "min": 8317.989224898814,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1906.5434992122648,
+        "median": 1906.2704567790024,
+        "std": 47.63603402520318,
+        "max": 1974.9546873450272,
+        "min": 1840.7659581899643,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        38.62909007072449,
+        77.25818014144897,
+        115.88727021217346,
+        154.51636028289795,
+        193.14545035362244,
+        231.77454042434692,
+        270.4036304950714,
+        309.0327205657959,
+        347.6618106365204,
+        386.2909007072449
+    ],
+    "Val_Joules": [
+        4629.363413411378,
+        9258.726826822756,
+        13888.090240234134,
+        18517.453653645513,
+        23146.81706705689,
+        27776.18048046827,
+        32405.54389387965,
+        37034.90730729103,
+        41664.270720702414,
+        46293.634134113796
+    ],
+    "Val_JoulesNormalized": [
+        2164.762196785212,
+        4329.524393570424,
+        6494.286590355636,
+        8659.048787140848,
+        10823.81098392606,
+        12988.573180711272,
+        15153.335377496482,
+        17318.09757428169,
+        19482.859771066902,
+        21647.621967852112
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "C",
+        "W",
+        "W",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return locals.apply(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return false;\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return callHasLocalResult(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return callHasLocalResult(value) || locals.apply(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return evaluatesToLocalValue(value.getFirstChild(), locals);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return isImmutableValue(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return isImmutableValue(value) || locals.apply(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return NodeUtil.isImmutableValue(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return NodeUtil.isImmutableValue(value.getFirstChild());\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n",
+        "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n// buggy code\n//         return true;\n       return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        return true;\n      case Token.IN:\n        return true;\n      default:\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n"
+    ]
+}

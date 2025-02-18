@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-69",
+    "Time": {
+        "mean": 80.50700616836548,
+        "median": 80.50700616836548,
+        "std": 0,
+        "max": 80.50700616836548,
+        "min": 80.50700616836548,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 10565.905710983276,
+        "median": 10565.905710983276,
+        "std": 0,
+        "max": 10565.905710983276,
+        "min": 10565.905710983276,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4448.879378044606,
+        "median": 4448.879378044606,
+        "std": 0,
+        "max": 4448.879378044606,
+        "min": 4448.879378044606,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.49976897239685,
+        17.389461994171143,
+        25.279155015945435,
+        33.16884803771973,
+        41.05854105949402,
+        48.94823408126831,
+        56.8379271030426,
+        64.7276201248169,
+        72.61731314659119,
+        80.50700616836548
+    ],
+    "Joules_Per_PatchMedian": [
+        2440.0481831610205,
+        3342.921241807938,
+        4245.794300454855,
+        5148.6673591017725,
+        6051.54041774869,
+        6954.413476395607,
+        7857.2865350425245,
+        8760.159593689441,
+        9663.032652336358,
+        10565.905710983276
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        733.2845935702322,
+        1146.1284585118292,
+        1558.9723234534263,
+        1971.8161883950233,
+        2384.6600533366204,
+        2797.5039182782175,
+        3210.3477832198146,
+        3623.1916481614116,
+        4036.0355131030087,
+        4448.879378044606
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.6703134059906006,
+        "median": 1.6100759506225586,
+        "std": 0.15250185590084653,
+        "max": 1.9408209323883057,
+        "min": 1.5797080993652344,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1586.1238013076781,
+        "median": 1537.175124514103,
+        "std": 123.41569743894911,
+        "max": 1805.0272572159765,
+        "min": 1512.9807435750963,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 325.37158547878255,
+        "median": 320.44072862863527,
+        "std": 12.395454148517647,
+        "max": 347.0825728058812,
+        "min": 316.6478309392926,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.889693021774292,
+        15.779386043548584,
+        23.669079065322876,
+        31.558772087097168,
+        39.44846510887146,
+        47.33815813064575,
+        55.227851152420044,
+        63.117544174194336,
+        71.00723719596863,
+        78.89693021774292
+    ],
+    "Val_Joules": [
+        902.8730586469176,
+        1805.746117293835,
+        2708.619175940752,
+        3611.4922345876694,
+        4514.365293234587,
+        5417.238351881504,
+        6320.111410528421,
+        7222.984469175338,
+        8125.857527822255,
+        9028.730586469173
+    ],
+    "Val_JoulesNormalized": [
+        412.84386494159696,
+        825.6877298831939,
+        1238.531594824791,
+        1651.375459766388,
+        2064.219324707985,
+        2477.0631896495825,
+        2889.907054591179,
+        3302.7509195327766,
+        3715.5947844743732,
+        4128.438649415971
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = tDistribution.cumulativeProbability(t);\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 2 * tDistribution.cumulativeProbability(t);\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 1 - tDistribution.cumulativeProbability(t);\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = tDistribution.cumulativeProbability(t) * 2;\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(Math.abs(t)));\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[j][i] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 2 * (tDistribution.cumulativeProbability(t) - 0.5);\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = (1 - tDistribution.cumulativeProbability(t));\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n",
+        "    public RealMatrix getCorrelationPValues() throws MathException {\n        TDistribution tDistribution = new TDistributionImpl(nObs - 2);\n        int nVars = correlationMatrix.getColumnDimension();\n        double[][] out = new double[nVars][nVars];\n        for (int i = 0; i < nVars; i++) {\n            for (int j = 0; j < nVars; j++) {\n                if (i == j) {\n                    out[i][j] = 0d;\n                } else {\n                    double r = correlationMatrix.getEntry(i, j);\n                    double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n// buggy code\n//                     out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                   out[i][j] = 2 * (tDistribution.cumulativeProbability(t));\n                }\n            }\n        }\n        return new BlockRealMatrix(out);\n    }\n"
+    ]
+}

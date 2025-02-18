@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-13",
+    "Time": {
+        "mean": 290.8605717420578,
+        "median": 290.8605717420578,
+        "std": 0,
+        "max": 290.8605717420578,
+        "min": 290.8605717420578,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 36672.185170835255,
+        "median": 36672.185170835255,
+        "std": 0,
+        "max": 36672.185170835255,
+        "min": 36672.185170835255,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 16563.872224140167,
+        "median": 16563.872224140167,
+        "std": 0,
+        "max": 16563.872224140167,
+        "min": 16563.872224140167,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        60.06834161281586,
+        117.76639914512634,
+        175.46445667743683,
+        233.16251420974731,
+        290.8605717420578
+    ],
+    "Joules_Per_PatchMedian": [
+        9097.666151589156,
+        15991.29590640068,
+        22884.925661212204,
+        29778.55541602373,
+        36672.185170835255
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3652.695377588272,
+        6880.489589226246,
+        10108.28380086422,
+        13336.078012502192,
+        16563.872224140167
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.483902597427368,
+        "median": 2.370284080505371,
+        "std": 0.28001458845794003,
+        "max": 2.9789798259735107,
+        "min": 2.300018072128296,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2294.814964437485,
+        "median": 2204.03639677763,
+        "std": 235.61351398687478,
+        "max": 2711.4363837242126,
+        "min": 2136.8900718331333,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 426.1719713377953,
+        "median": 424.9011659502987,
+        "std": 22.3718444449325,
+        "max": 458.7318393230439,
+        "min": 403.36645087003694,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        57.698057532310486,
+        115.39611506462097,
+        173.09417259693146,
+        230.79223012924194,
+        288.49028766155243
+    ],
+    "Val_Joules": [
+        6893.629754811525,
+        13787.25950962305,
+        20680.889264434576,
+        27574.5190192461,
+        34468.14877405763
+    ],
+    "Val_JoulesNormalized": [
+        3227.7942116379736,
+        6455.588423275947,
+        9683.38263491392,
+        12911.176846551893,
+        16138.971058189867
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "correct",
+        "uncompilable",
+        "uncompilable",
+        "correct",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       Node next = c.getNext();\n        traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       Node next = c.getNextSibling();\n        traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       visit(c);\n        Node next = c.getNext();\n        traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       Node next = c.getNext(); \n        traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       traverse(c);\n        Node next = c.getNextSibling();\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       visit(c);\n        Node next = c.getNextSibling();\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n     Node next = c.getNext();\n      traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       visit(c);\n        Node next = c.getNext();\n        traverse(next);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       visit(c);\n        Node next = c.getNextSibling();\n        traverse(c);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n",
+        "  private void traverse(Node node) {\n    if (!shouldVisit(node)) {\n      return;\n    }\n    int visits = 0;\n    do {\n      Node c = node.getFirstChild();\n      while(c != null) {\n// buggy code\n//         traverse(c);\n//         Node next = c.getNext();\n       visit(c);\n        Node next = c.getNextSibling();\n        traverse(next);\n        c = next;\n      }\n      visit(node);\n      visits++;\n      Preconditions.checkState(visits < 10000, \"too many interations\");\n    } while (shouldRetraverse(node));\n    exitNode(node);\n  }\n"
+    ]
+}

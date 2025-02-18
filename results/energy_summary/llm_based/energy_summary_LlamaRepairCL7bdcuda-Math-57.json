@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-57",
+    "Time": {
+        "mean": 175.50527012348175,
+        "median": 175.50527012348175,
+        "std": 0,
+        "max": 175.50527012348175,
+        "min": 175.50527012348175,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 21062.33314019442,
+        "median": 21062.33314019442,
+        "std": 0,
+        "max": 21062.33314019442,
+        "min": 21062.33314019442,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 8766.670009571315,
+        "median": 8766.670009571315,
+        "std": 0,
+        "max": 8766.670009571315,
+        "min": 8766.670009571315,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        21.270106434822083,
+        40.54950189590454,
+        59.828897356987,
+        79.10829281806946,
+        98.38768827915192,
+        117.66708374023438,
+        136.94647920131683,
+        156.2258746623993,
+        175.50527012348175
+    ],
+    "Joules_Per_PatchMedian": [
+        4055.159584629536,
+        6181.056279075146,
+        8306.952973520756,
+        10432.849667966366,
+        12558.746362411975,
+        14684.643056857585,
+        16810.539751303197,
+        18936.43644574881,
+        21062.33314019442
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1344.3031662046908,
+        2272.0990216255186,
+        3199.8948770463467,
+        4127.690732467175,
+        5055.486587888003,
+        5983.282443308831,
+        6911.078298729659,
+        7838.874154150487,
+        8766.670009571315
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.066340970993042,
+        "median": 1.990710973739624,
+        "std": 0.1142226353741413,
+        "max": 2.203011989593506,
+        "min": 1.9789700508117676,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1993.4367883944512,
+        "median": 1929.2628901839257,
+        "std": 95.24236732105238,
+        "max": 2107.591228234768,
+        "min": 1918.1478754639625,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 413.18663346052176,
+        "median": 416.507310783863,
+        "std": 13.849780846431933,
+        "max": 425.8118753790857,
+        "min": 393.55795780420294,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        19.27939546108246,
+        38.55879092216492,
+        57.838186383247375,
+        77.11758184432983,
+        96.39697730541229,
+        115.67637276649475,
+        134.9557682275772,
+        154.23516368865967,
+        173.51455914974213
+    ],
+    "Val_Joules": [
+        2125.89669444561,
+        4251.793388891221,
+        6377.690083336831,
+        8503.58677778244,
+        10629.48347222805,
+        12755.38016667366,
+        14881.276861119271,
+        17007.17355556488,
+        19133.070250010493
+    ],
+    "Val_JoulesNormalized": [
+        927.7958554208278,
+        1855.5917108416556,
+        2783.3875662624837,
+        3711.1834216833117,
+        4638.979277104139,
+        5566.775132524968,
+        6494.570987945795,
+        7422.366843366624,
+        8350.162698787452
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "W",
+        "I",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           double sum = 0;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           double sum = 0.0;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           long sum = 0;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           int sum = 1;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           double sum = 0.;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           double sum = 0d;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           int sum = 1; \n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           int sum = dx2.length;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n",
+        "    private static <T extends Clusterable<T>> List<Cluster<T>>\n        chooseInitialCenters(final Collection<T> points, final int k, final Random random) {\n        final List<T> pointSet = new ArrayList<T>(points);\n        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();\n        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));\n        resultSet.add(new Cluster<T>(firstPoint));\n        final double[] dx2 = new double[pointSet.size()];\n        while (resultSet.size() < k) {\n// buggy code\n//             int sum = 0;\n           int sum = 0;\n            dx2[0] = sum;\n            for (int i = 0; i < pointSet.size(); i++) {\n                final T p = pointSet.get(i);\n                final Cluster<T> nearest = getNearestCluster(resultSet, p);\n                final double d = p.distanceFrom(nearest.getCenter());\n                sum += d * d;\n                dx2[i] = sum;\n            }\n            final double r = random.nextDouble() * sum;\n            for (int i = 0 ; i < dx2.length; i++) {\n                if (dx2[i] >= r) {\n                    final T p = pointSet.remove(i);\n                    resultSet.add(new Cluster<T>(p));\n                    break;\n                }\n            }\n        }\n        return resultSet;\n    }\n"
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-60",
+    "Time": {
+        "mean": 149.56716573238373,
+        "median": 149.56716573238373,
+        "std": 0,
+        "max": 149.56716573238373,
+        "min": 149.56716573238373,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 17626.09592418671,
+        "median": 17626.09592418671,
+        "std": 0,
+        "max": 17626.09592418671,
+        "min": 17626.09592418671,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7251.101208388805,
+        "median": 7251.101208388805,
+        "std": 0,
+        "max": 7251.101208388805,
+        "min": 7251.101208388805,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.888678908348083,
+        34.34848976135254,
+        50.808300614356995,
+        67.26811146736145,
+        83.7279223203659,
+        100.18773317337036,
+        116.64754402637482,
+        133.10735487937927,
+        149.56716573238373
+    ],
+    "Joules_Per_PatchMedian": [
+        3110.87966632843,
+        4925.281698560715,
+        6739.683730793,
+        8554.085763025285,
+        10368.48779525757,
+        12182.889827489855,
+        13997.29185972214,
+        15811.693891954425,
+        17626.09592418671
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        968.6232902407648,
+        1753.93303000927,
+        2539.242769777775,
+        3324.55250954628,
+        4109.862249314785,
+        4895.17198908329,
+        5680.481728851795,
+        6465.7914686203,
+        7251.101208388805
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.5998075485229493,
+        "median": 1.428868055343628,
+        "std": 0.25160025450570506,
+        "max": 1.8802769184112549,
+        "min": 1.4000539779663086,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1434.7362273120882,
+        "median": 1296.4776340961457,
+        "std": 202.0264891535201,
+        "max": 1656.6255705118178,
+        "min": 1277.8561704039575,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 195.9482371234895,
+        "median": 183.31355047225975,
+        "std": 23.8875306710915,
+        "max": 222.78001443147673,
+        "min": 170.8334900259972,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        16.459810853004456,
+        32.91962170600891,
+        49.37943255901337,
+        65.83924341201782,
+        82.29905426502228,
+        98.75886511802673,
+        115.21867597103119,
+        131.67848682403564,
+        148.1382976770401
+    ],
+    "Val_Joules": [
+        1814.4020322322845,
+        3628.8040644645694,
+        5443.206096696855,
+        7257.60812892914,
+        9072.010161161425,
+        10886.41219339371,
+        12700.814225625994,
+        14515.21625785828,
+        16329.618290090564
+    ],
+    "Val_JoulesNormalized": [
+        785.3097397685051,
+        1570.6194795370102,
+        2355.9292193055153,
+        3141.2389590740204,
+        3926.5486988425255,
+        4711.858438611031,
+        5497.168178379536,
+        6282.477918148041,
+        7067.787657916546
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       return 0.5 * (1.0 + Erf.erf((dev) /\n                (standardDeviation * FastMath.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       return 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double ret;\n        try {\n            ret = 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                ret = 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                ret = 1;\n            } else {\n                throw ex;\n            }\n        }\n        return ret;\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double result;\n        try {\n            result = 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                result = 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                result = 1;\n            } else {\n                throw ex;\n            }\n        }\n        return result;\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double ret;\n        try {\n            ret = 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                return 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                return 1;\n            } else {\n                throw ex;\n            }\n        }\n        return ret;\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       if (x < (mean - 20 * standardDeviation)) { \n            return 0;\n        } else if (x > (mean + 20 * standardDeviation)) {\n            return 1;\n        } else {\n            return 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n        }\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double result;\n        try {\n            result = 0.5 * (1.0 + Erf.erf((dev) /\n                    (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                return 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                return 1;\n            } else {\n                throw ex;\n            }\n        }\n        return result;\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double ret;\n        try {\n            ret = 0.5 * (1.0 + Erf.erf((dev) /\n                        (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                ret = 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                ret = 1;\n            } else {\n                throw ex;\n            }\n        }\n        return ret;\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n        final double dev = x - mean;\n// buggy code\n//         try {\n//         return 0.5 * (1.0 + Erf.erf((dev) /\n//                     (standardDeviation * FastMath.sqrt(2.0))));\n//         } catch (MaxIterationsExceededException ex) {\n//             if (x < (mean - 20 * standardDeviation)) { \n//                 return 0;\n//             } else if (x > (mean + 20 * standardDeviation)) {\n//                 return 1;\n//             } else {\n//                 throw ex;\n//             }\n//         }\n       double ret;\n        try {\n            ret = 0.5 * (1.0 + Erf.erf((dev) /\n                        (standardDeviation * FastMath.sqrt(2.0))));\n        } catch (MaxIterationsExceededException ex) {\n            if (x < (mean - 20 * standardDeviation)) { \n                return 0;\n            } else if (x > (mean + 20 * standardDeviation)) {\n                return 1;\n            } else {\n                throw ex;\n            }\n        }\n        return ret;\n    }\n"
+    ]
+}

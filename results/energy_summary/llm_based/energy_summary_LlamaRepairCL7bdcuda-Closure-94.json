@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-94",
+    "Time": {
+        "mean": 348.0236918926239,
+        "median": 348.0236918926239,
+        "std": 0,
+        "max": 348.0236918926239,
+        "min": 348.0236918926239,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 40981.67111876011,
+        "median": 40981.67111876011,
+        "std": 0,
+        "max": 40981.67111876011,
+        "min": 40981.67111876011,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 18462.649258673187,
+        "median": 18462.649258673187,
+        "std": 0,
+        "max": 18462.649258673187,
+        "min": 18462.649258673187,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        36.53932976722717,
+        71.1487033367157,
+        105.75807690620422,
+        140.36745047569275,
+        174.97682404518127,
+        209.5861976146698,
+        244.19557118415833,
+        278.80494475364685,
+        313.4143183231354,
+        348.0236918926239
+    ],
+    "Joules_Per_PatchMedian": [
+        5719.058701348305,
+        9637.126747727394,
+        13555.194794106483,
+        17473.26284048557,
+        21391.33088686466,
+        25309.39893324375,
+        29227.466979622837,
+        33145.535026001926,
+        37063.60307238102,
+        40981.67111876011
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2149.6634096086027,
+        3962.2173928380016,
+        5774.7713760674005,
+        7587.325359296799,
+        9399.879342526197,
+        11212.433325755595,
+        13024.987308984993,
+        14837.541292214391,
+        16650.09527544379,
+        18462.649258673187
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.9375845909118652,
+        "median": 1.9299561977386475,
+        "std": 0.03742860695400849,
+        "max": 1.9800729751586914,
+        "min": 1.8889269828796387,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1802.9771361112594,
+        "median": 1800.9906549692153,
+        "std": 29.111881186777826,
+        "max": 1839.5887999296187,
+        "min": 1766.50106613636,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 335.037507250309,
+        "median": 337.1094263792038,
+        "std": 7.705681878124037,
+        "max": 343.4877344369886,
+        "min": 326.267442727089,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.609373569488525,
+        69.21874713897705,
+        103.82812070846558,
+        138.4374942779541,
+        173.04686784744263,
+        207.65624141693115,
+        242.26561498641968,
+        276.8749885559082,
+        311.48436212539673,
+        346.09373569488525
+    ],
+    "Val_Joules": [
+        3918.0680463790895,
+        7836.136092758179,
+        11754.204139137268,
+        15672.272185516356,
+        19590.340231895443,
+        23508.40827827453,
+        27426.47632465362,
+        31344.54437103271,
+        35262.6124174118,
+        39180.68046379089
+    ],
+    "Val_JoulesNormalized": [
+        1812.553983229399,
+        3625.107966458798,
+        5437.661949688197,
+        7250.215932917596,
+        9062.769916146994,
+        10875.323899376392,
+        12687.87788260579,
+        14500.431865835188,
+        16312.985849064586,
+        18125.539832293984
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.NOT:\n      case Token.NEG:\n      case Token.BITAND:\n      case Token.BITNOT:\n      case Token.BITOR:\n      case Token.BITXOR:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.NEG:\n      case Token.NOT:\n      case Token.BITAND:\n      case Token.BITNOT:\n      case Token.BITOR:\n      case Token.BITXOR:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.AND:\n      case Token.OR:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.NOT:\n      case Token.NEG:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.OR:\n      case Token.AND:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.BITNOT:\n      case Token.NOT:\n      case Token.NEG:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.NEG:\n      case Token.NOT:\n      case Token.BITNOT:\n      case Token.BITAND:\n      case Token.BITOR:\n      case Token.BITXOR:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.NOT:\n      case Token.NEG:\n      case Token.BITNOT:\n      case Token.BITAND:\n      case Token.BITOR:\n      case Token.BITXOR:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.AND:\n      case Token.NOT:\n      case Token.NEG:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n",
+        "  static boolean isValidDefineValue(Node val, Set<String> defines) {\n    switch (val.getType()) {\n      case Token.STRING:\n      case Token.NUMBER:\n      case Token.TRUE:\n      case Token.FALSE:\n        return true;\n// buggy code\n//       case Token.BITAND:\n//       case Token.BITNOT:\n//       case Token.BITOR:\n//       case Token.BITXOR:\n//       case Token.NOT:\n//       case Token.NEG:\n     case Token.AND:\n      case Token.OR:\n      case Token.HOOK:\n        return isValidDefineValue(val.getFirstChild(), defines);\n      case Token.NAME:\n      case Token.GETPROP:\n        if (val.isQualifiedName()) {\n          return defines.contains(val.getQualifiedName());\n        }\n    }\n    return false;\n  }\n"
+    ]
+}

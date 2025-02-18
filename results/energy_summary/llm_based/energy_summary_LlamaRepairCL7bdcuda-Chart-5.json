@@ -1,0 +1,141 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-5",
+    "Time": {
+        "mean": 47.970911741256714,
+        "median": 47.970911741256714,
+        "std": 0,
+        "max": 47.970911741256714,
+        "min": 47.970911741256714,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8429.69644793272,
+        "median": 8429.69644793272,
+        "std": 0,
+        "max": 8429.69644793272,
+        "min": 8429.69644793272,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2837.817785966396,
+        "median": 2837.817785966396,
+        "std": 0,
+        "max": 2837.817785966396,
+        "min": 2837.817785966396,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.731590032577515,
+        25.81136393547058,
+        36.89113783836365,
+        47.970911741256714
+    ],
+    "Joules_Per_PatchMedian": [
+        4718.815058720113,
+        5955.775521790982,
+        7192.735984861851,
+        8429.69644793272
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1234.3798815906048,
+        1768.8591830492019,
+        2303.338484507799,
+        2837.817785966396
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.808244514465332,
+        "median": 3.6518161296844482,
+        "std": 0.3521595067208054,
+        "max": 4.437914133071899,
+        "min": 3.6411800384521484,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3606.0898327612877,
+        "median": 3481.8545956492426,
+        "std": 284.5545992183606,
+        "max": 4115.07537381649,
+        "min": 3474.9345955371855,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 720.951608865261,
+        "median": 699.9005801320077,
+        "std": 43.761485313214486,
+        "max": 795.9593936920169,
+        "min": 689.1112351059915,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        11.079773902893066,
+        22.159547805786133,
+        33.2393217086792,
+        44.319095611572266
+    ],
+    "Val_Joules": [
+        1236.96046307087,
+        2473.920926141739,
+        3710.881389212608,
+        4947.841852283477
+    ],
+    "Val_JoulesNormalized": [
+        534.4793014585971,
+        1068.9586029171942,
+        1603.4379043757913,
+        2137.9172058343884
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        XYDataItem overwritten = null;\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem overwritten = null;\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem overwritten = (XYDataItem) this.data.get(index);\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem overwritten = (XYDataItem) this.data.get(index);\n            overwritten.setY(y);\n            return overwritten;\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem overwritten = (XYDataItem) this.data.get(index);\n            overwritten.setY(y);\n            return overwritten;\n        }\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       XYDataItem overwritten = null;\n        int index = indexOf(x);\n        if (index >= 0 && index < this.data.size() && !this.allowDuplicateXValues) {\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem overwritten = (XYDataItem) this.data.get(index);\n            overwritten.setY(y);\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       XYDataItem overwritten = null;\n        int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues && this.data.get(index) != null) {\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n       if (y == null) {\n            throw new IllegalArgumentException(\"Null 'y' argument.\");\n        }\n        XYDataItem overwritten = null;\n        int index = indexOf(x);\n        if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n",
+        "    public XYDataItem addOrUpdate(Number x, Number y) {\n        if (x == null) {\n            throw new IllegalArgumentException(\"Null 'x' argument.\");\n        }\n// buggy code\n//         XYDataItem overwritten = null;\n//         int index = indexOf(x);\n//         if (index >= 0 && !this.allowDuplicateXValues) {\n            XYDataItem existing = (XYDataItem) this.data.get(index);\n            try {\n                overwritten = (XYDataItem) existing.clone();\n            }\n            catch (CloneNotSupportedException e) {\n                throw new SeriesException(\"Couldn't clone XYDataItem!\");\n            }\n            existing.setY(y);\n        }\n        else {\n            if (this.autoSort) {\n                this.data.add(-index - 1, new XYDataItem(x, y));\n            }\n            else {\n                this.data.add(new XYDataItem(x, y));\n            }\n            if (getItemCount() > this.maximumItemCount) {\n                this.data.remove(0);\n            }\n        }\n        fireSeriesChanged();\n        return overwritten;\n    }\n"
+    ]
+}

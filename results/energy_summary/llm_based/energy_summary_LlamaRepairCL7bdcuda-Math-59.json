@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-59",
+    "Time": {
+        "mean": 151.7596435546875,
+        "median": 151.7596435546875,
+        "std": 0,
+        "max": 151.7596435546875,
+        "min": 151.7596435546875,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 17541.56058911085,
+        "median": 17541.56058911085,
+        "std": 0,
+        "max": 17541.56058911085,
+        "min": 17541.56058911085,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7326.040764105321,
+        "median": 7326.040764105321,
+        "std": 0,
+        "max": 7326.040764105321,
+        "min": 7326.040764105321,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.839088439941406,
+        34.57915782928467,
+        51.31922721862793,
+        68.05929660797119,
+        84.79936599731445,
+        101.53943538665771,
+        118.27950477600098,
+        135.01957416534424,
+        151.7596435546875
+    ],
+    "Joules_Per_PatchMedian": [
+        2823.6089575648307,
+        4663.352911508084,
+        6503.096865451336,
+        8342.840819394589,
+        10182.584773337841,
+        12022.328727281094,
+        13862.072681224347,
+        15701.816635167599,
+        17541.56058911085
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        951.0343388199805,
+        1747.910141980648,
+        2544.785945141315,
+        3341.6617483019827,
+        4138.53755146265,
+        4935.413354623318,
+        5732.2891577839855,
+        6529.164960944653,
+        7326.040764105321
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.1059298038482666,
+        "median": 1.0990190505981445,
+        "std": 0.024253733341856418,
+        "max": 1.1402909755706787,
+        "min": 1.0792829990386963,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 986.7499136829376,
+        "median": 983.8650036215782,
+        "std": 19.929387971792504,
+        "max": 1012.3745801687239,
+        "min": 962.8454914569855,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 149.87038135528564,
+        "median": 154.1585356593131,
+        "std": 11.09848746640583,
+        "max": 155.69919804334643,
+        "min": 130.07072939872762,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        16.74006938934326,
+        33.48013877868652,
+        50.220208168029785,
+        66.96027755737305,
+        83.70034694671631,
+        100.44041633605957,
+        117.18048572540283,
+        133.9205551147461,
+        150.66062450408936
+    ],
+    "Val_Joules": [
+        1839.7439539432526,
+        3679.4879078865056,
+        5519.231861829758,
+        7358.97581577301,
+        9198.719769716263,
+        11038.463723659515,
+        12878.207677602768,
+        14717.95163154602,
+        16557.695585489273
+    ],
+    "Val_JoulesNormalized": [
+        796.8758031606674,
+        1593.7516063213347,
+        2390.627409482002,
+        3187.5032126426695,
+        3984.379015803337,
+        4781.254818964005,
+        5578.130622124672,
+        6375.00642528534,
+        7171.8822284460075
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? a : (Float.isNaN(a + b) ? Float.NaN : b);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a >= b) ? a : (Float.isNaN(a + b) ? Float.NaN : b);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : a);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? (Float.isNaN(a + b) ? Float.NaN : a) : b;\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? b : Float.isNaN(a + b) ? Float.NaN : b;\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? b : (Float.isNaN(a) ? Float.NaN : b);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (a <= b) ? (Float.isNaN(a + b) ? Float.NaN : b) : a;\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (b >= a) ? b : (Float.isNaN(a + b) ? Float.NaN : a);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n       return (b <= a) ? a : (Float.isNaN(a + b) ? Float.NaN : b);\n    }\n",
+        "    public static float max(final float a, final float b) {\n// buggy code\n//         return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n    }\n"
+    ]
+}

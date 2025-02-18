@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-88",
+    "Time": {
+        "mean": 69.46133017539978,
+        "median": 69.46133017539978,
+        "std": 0,
+        "max": 69.46133017539978,
+        "min": 69.46133017539978,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 12081.663394773008,
+        "median": 12081.663394773008,
+        "std": 0,
+        "max": 12081.663394773008,
+        "min": 12081.663394773008,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4527.333981728553,
+        "median": 4527.333981728553,
+        "std": 0,
+        "max": 4527.333981728553,
+        "min": 4527.333981728553,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.05013382434845,
+        17.540266752243042,
+        24.030399680137634,
+        30.520532608032227,
+        37.01066553592682,
+        43.50079846382141,
+        49.990931391716,
+        56.481064319610596,
+        62.97119724750519,
+        69.46133017539978
+    ],
+    "Joules_Per_PatchMedian": [
+        5010.9501365780825,
+        5796.584943044185,
+        6582.219749510287,
+        7367.85455597639,
+        8153.489362442492,
+        8939.124168908595,
+        9724.758975374698,
+        10510.393781840801,
+        11296.028588306905,
+        12081.663394773008
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1177.1508041918273,
+        1549.3933794736859,
+        1921.6359547555444,
+        2293.878530037403,
+        2666.1211053192615,
+        3038.36368060112,
+        3410.6062558829785,
+        3782.848831164837,
+        4155.091406446695,
+        4527.333981728553
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.901462554931641,
+        "median": 4.560000896453857,
+        "std": 0.6535712339193546,
+        "max": 5.6722118854522705,
+        "min": 4.31003999710083,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4486.68585962534,
+        "median": 4225.31533011198,
+        "std": 513.6447157425096,
+        "max": 5095.5731377124785,
+        "min": 4022.1077139258387,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 801.7702842378617,
+        "median": 804.9082289099688,
+        "std": 28.320815825183118,
+        "max": 828.5706623435017,
+        "min": 755.5284001231198,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.490132927894592,
+        12.980265855789185,
+        19.470398783683777,
+        25.96053171157837,
+        32.45066463947296,
+        38.940797567367554,
+        45.430930495262146,
+        51.92106342315674,
+        58.41119635105133,
+        64.90132927894592
+    ],
+    "Val_Joules": [
+        785.6348064661024,
+        1571.2696129322048,
+        2356.9044193983073,
+        3142.5392258644097,
+        3928.174032330512,
+        4713.8088387966145,
+        5499.443645262718,
+        6285.078451728821,
+        7070.7132581949245,
+        7856.348064661028
+    ],
+    "Val_JoulesNormalized": [
+        372.24257528185854,
+        744.4851505637171,
+        1116.7277258455756,
+        1488.9703011274341,
+        1861.2128764092927,
+        2233.455451691151,
+        2605.6980269730097,
+        2977.9406022548683,
+        3350.1831775367264,
+        3722.4257528185844
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                         coefficients[i] = 0;\n                    }\n                }\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < getOriginalNumDecisionVariables(); i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                         coefficients[i] = 0;\n                    }\n                }\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                        coefficients[i] = 0;\n                    }\n                }\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < getOriginalNumDecisionVariables(); i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                        coefficients[i] = 0;\n                    }\n                }\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            if (basicRow == null) {\n                coefficients[i] = 0;\n            } else {\n                coefficients[i] = getEntry(basicRow, getRhsOffset()) -\n                    (restrictToNonNegative ? 0 : mostNegative);\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                        coefficients[i] = 0;\n                    }\n                }\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            if (basicRow != null) {\n                coefficients[i] =\n                    (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                    (restrictToNonNegative ? 0 : mostNegative);\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                         coefficients[i] = 0;\n                    }\n                }\n            } else {\n                coefficients[i] = 0;\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            if (basicRow != null) {\n                coefficients[i] =\n                    (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                    (restrictToNonNegative ? 0 : mostNegative);\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                         coefficients[i] = 0;\n                    }\n                }\n            } else {\n                coefficients[i] = mostNegative;\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                        coefficients[i] = 0;\n                    }\n                }\n            } else {\n                coefficients[i] = 0;\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                         coefficients[i] = 0;\n                    }\n                }\n            } else {\n                coefficients[i] = 0;\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n",
+        "    protected RealPointValuePair getSolution() {\n        double[] coefficients = new double[getOriginalNumDecisionVariables()];\n        Integer basicRow =\n            getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n        double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n// buggy code\n//         for (int i = 0; i < coefficients.length; i++) {\n//             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n//                 coefficients[i] =\n//                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n//                     (restrictToNonNegative ? 0 : mostNegative);\n//             if (basicRow != null) {\n//                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n//                     if (tableau.getEntry(basicRow, j) == 1) {\n//                          coefficients[i] = 0;\n//                     }\n//                 }\n       for (int i = 0; i < coefficients.length; i++) {\n            basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n            coefficients[i] =\n                (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                (restrictToNonNegative ? 0 : mostNegative);\n            if (basicRow != null) {\n                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n                    if (tableau.getEntry(basicRow, j) == 1) {\n                        coefficients[i] = 0;\n                    }\n                }\n            } else {\n                coefficients[i] = Double.NaN;\n            }\n        }\n        return new RealPointValuePair(coefficients, f.getValue(coefficients));\n    }\n"
+    ]
+}

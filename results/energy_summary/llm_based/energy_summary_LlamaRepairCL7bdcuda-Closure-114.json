@@ -1,0 +1,135 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-114",
+    "Time": {
+        "mean": 213.6250228881836,
+        "median": 213.6250228881836,
+        "std": 0,
+        "max": 213.6250228881836,
+        "min": 213.6250228881836,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 27310.089576411247,
+        "median": 27310.089576411247,
+        "std": 0,
+        "max": 27310.089576411247,
+        "min": 27310.089576411247,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 12336.005197048189,
+        "median": 12336.005197048189,
+        "std": 0,
+        "max": 12336.005197048189,
+        "min": 12336.005197048189,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        72.48850774765015,
+        143.05676531791687,
+        213.6250228881836
+    ],
+    "Joules_Per_PatchMedian": [
+        10312.616409134864,
+        18811.352992773056,
+        27310.089576411247
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4354.379760479927,
+        8345.192478764058,
+        12336.005197048189
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.0098703861236573,
+        "median": 1.9202501773834229,
+        "std": 0.2147826450133758,
+        "max": 2.3898918628692627,
+        "min": 1.8701369762420654,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1882.094972860813,
+        "median": 1813.8798254966737,
+        "std": 170.03428549625937,
+        "max": 2183.1653754949566,
+        "min": 1771.0804003238677,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 364.8084137940406,
+        "median": 363.56704219579706,
+        "std": 12.911495593664585,
+        "max": 384.2937703132625,
+        "min": 351.2252653837204,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        70.56825757026672,
+        141.13651514053345,
+        211.70477271080017
+    ],
+    "Val_Joules": [
+        8498.73658363819,
+        16997.47316727638,
+        25496.20975091457
+    ],
+    "Val_JoulesNormalized": [
+        3990.8127182841304,
+        7981.625436568262,
+        11972.438154852392
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n       } else {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (!parent.isFor() || NodeUtil.isForIn(parent)) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (!parent.isFor()) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n       } else if (parent.isVar()) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (!NodeUtil.isForIn(parent)) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (parent.isFor()) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n     } else {\n        if (NodeUtil.isForIn(parent)) {\n          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n",
+        "    private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n      Node nameNode = n.getFirstChild();\n      Node parent = n.getParent();\n      NameInformation ns = createNameInformation(t, nameNode);\n      if (ns != null) {\n        if (parent.isFor() && !NodeUtil.isForIn(parent)) {\n          if (parent.getFirstChild().getNext() != n) {\n            recordDepScope(recordNode, ns);\n          } else {\n            recordDepScope(nameNode, ns);\n          }\n// buggy code\n//         } else {\n}          recordDepScope(recordNode, ns);\n        }\n      }\n    }\n"
+    ]
+}

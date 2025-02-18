@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-14",
+    "Time": {
+        "mean": 103.5580153465271,
+        "median": 103.5580153465271,
+        "std": 0,
+        "max": 103.5580153465271,
+        "min": 103.5580153465271,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13654.777489972117,
+        "median": 13654.777489972117,
+        "std": 0,
+        "max": 13654.777489972117,
+        "min": 13654.777489972117,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5723.572939944268,
+        "median": 5723.572939944268,
+        "std": 0,
+        "max": 5723.572939944268,
+        "min": 5723.572939944268,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        12.118878245353699,
+        22.2787823677063,
+        32.4386864900589,
+        42.5985906124115,
+        52.7584947347641,
+        62.9183988571167,
+        73.0783029794693,
+        83.2382071018219,
+        93.3981112241745,
+        103.5580153465271
+    ],
+    "Joules_Per_PatchMedian": [
+        3033.5014686763284,
+        4213.6432488203045,
+        5393.785028964281,
+        6573.926809108258,
+        7754.068589252234,
+        8934.21036939621,
+        10114.352149540187,
+        11294.493929684164,
+        12474.63570982814,
+        13654.777489972117
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        903.2780983626842,
+        1438.8664140939711,
+        1974.454729825258,
+        2510.0430455565447,
+        3045.6313612878316,
+        3581.2196770191185,
+        4116.807992750406,
+        4652.396308481693,
+        5187.984624212981,
+        5723.572939944268
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.0416664123535155,
+        "median": 1.9589741230010986,
+        "std": 0.2069707972722942,
+        "max": 2.4099109172821045,
+        "min": 1.920245885848999,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1922.561415412426,
+        "median": 1853.3596885323523,
+        "std": 168.24400188483745,
+        "max": 2221.3297325015064,
+        "min": 1816.1312543272973,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 367.658825829029,
+        "median": 367.6897826313973,
+        "std": 11.099937134278083,
+        "max": 377.7478807806965,
+        "min": 349.8962729930879,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.1599041223526,
+        20.3198082447052,
+        30.4797123670578,
+        40.6396164894104,
+        50.799520611763,
+        60.9594247341156,
+        71.1193288564682,
+        81.2792329788208,
+        91.4391371011734,
+        101.599041223526
+    ],
+    "Val_Joules": [
+        1180.1417801439761,
+        2360.2835602879522,
+        3540.425340431929,
+        4720.567120575905,
+        5900.708900719882,
+        7080.8506808638585,
+        8260.992461007834,
+        9441.134241151813,
+        10621.276021295787,
+        11801.417801439766
+    ],
+    "Val_JoulesNormalized": [
+        535.5883157312869,
+        1071.1766314625738,
+        1606.7649471938607,
+        2142.3532629251476,
+        2677.941578656434,
+        3213.5298943877215,
+        3749.118210119009,
+        4284.706525850296,
+        4820.294841581584,
+        5355.883157312871
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       }\n        if (partial == null) {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       } else if (valueToAdd < 0) {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       } else if (partial.size() == 0) {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       } else if (valueToAdd == 1) {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       }\n        if (values == null) {\n            return null;\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       } else if (values == null) {\n            return null;\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       }\n        if (values == null) {\n            values = new int[partial.size()];\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       }\n        if (valueToAdd == 1) {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n",
+        "    public int[] add(ReadablePartial partial, int fieldIndex, int[] values, int valueToAdd) {\n        if (valueToAdd == 0) {\n            return values;\n// buggy code\n// \n       }\n        if (partial == null) {\n            return super.add(null, fieldIndex, values, valueToAdd);\n        }\n        if (DateTimeUtils.isContiguous(partial)) {\n            long instant = 0L;\n            for (int i = 0, isize = partial.size(); i < isize; i++) {\n                instant = partial.getFieldType(i).getField(iChronology).set(instant, values[i]);\n            }\n            instant = add(instant, valueToAdd);\n            return iChronology.get(partial, instant);\n        } else {\n            return super.add(partial, fieldIndex, values, valueToAdd);\n        }\n    }\n"
+    ]
+}

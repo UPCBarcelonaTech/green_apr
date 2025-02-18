@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-15",
+    "Time": {
+        "mean": 139.71329259872437,
+        "median": 139.71329259872437,
+        "std": 0,
+        "max": 139.71329259872437,
+        "min": 139.71329259872437,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 21207.11732076407,
+        "median": 21207.11732076407,
+        "std": 0,
+        "max": 21207.11732076407,
+        "min": 21207.11732076407,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7341.029496145248,
+        "median": 7341.029496145248,
+        "std": 0,
+        "max": 7341.029496145248,
+        "min": 7341.029496145248,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        20.645966053009033,
+        33.87566900253296,
+        47.105371952056885,
+        60.33507490158081,
+        73.56477785110474,
+        86.79448080062866,
+        100.02418375015259,
+        113.25388669967651,
+        126.48358964920044,
+        139.71329259872437
+    ],
+    "Joules_Per_PatchMedian": [
+        8161.573976695538,
+        9611.078792703152,
+        11060.583608710767,
+        12510.088424718382,
+        13959.593240725997,
+        15409.098056733612,
+        16858.602872741227,
+        18308.10768874884,
+        19757.612504756456,
+        21207.11732076407
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1731.2999349832523,
+        2354.6032195568073,
+        2977.906504130362,
+        3601.209788703917,
+        4224.513073277472,
+        4847.8163578510275,
+        5471.119642424583,
+        6094.422926998138,
+        6717.726211571693,
+        7341.029496145248
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 6.941489267349243,
+        "median": 7.416263103485107,
+        "std": 0.8284529011652024,
+        "max": 7.673017978668213,
+        "min": 5.972986936569214,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 6340.780816717148,
+        "median": 6712.069160687924,
+        "std": 660.5095204796619,
+        "max": 6920.420663535595,
+        "min": 5557.088445973397,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1082.5011236310006,
+        "median": 1107.9966504096974,
+        "std": 51.96331252089762,
+        "max": 1127.2920896410942,
+        "min": 997.0115692496302,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        13.229702949523926,
+        26.45940589904785,
+        39.68910884857178,
+        52.9188117980957,
+        66.14851474761963,
+        79.37821769714355,
+        92.60792064666748,
+        105.8376235961914,
+        119.06732654571533,
+        132.29702949523926
+    ],
+    "Val_Joules": [
+        1449.504816007614,
+        2899.009632015229,
+        4348.514448022844,
+        5798.0192640304585,
+        7247.524080038073,
+        8697.02889604569,
+        10146.533712053304,
+        11596.038528060919,
+        13045.543344068534,
+        14495.048160076149
+    ],
+    "Val_JoulesNormalized": [
+        623.303284573555,
+        1246.60656914711,
+        1869.9098537206646,
+        2493.21313829422,
+        3116.516422867775,
+        3739.81970744133,
+        4363.122992014885,
+        4986.4262765884405,
+        5609.729561161996,
+        6233.032845735551
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "C",
+        "C",
+        "C",
+        "C",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "correct"
+    ],
+    "patches": [
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               return -val1;\n            case -2:\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                    return Long.MIN_VALUE;\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                  return Long.MIN_VALUE;\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                    throw new ArithmeticException(\"Integer overflow\");\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                  throw new ArithmeticException(\"Integer overflow\");\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                    throw new ArithmeticException(\"Long.MIN_VALUE * -1 overflow\");\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                  throw new ArithmeticException(\"Long.MIN_VALUE * -1 overflow\");\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 == Long.MIN_VALUE) {\n                    throw new ArithmeticException(\"Long.MIN_VALUE * -1\");\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n",
+        "    public static long safeMultiply(long val1, int val2) {\n        switch (val2) {\n            case -1:\n// buggy code\n// \n               if (val1 != Long.MIN_VALUE) {\n                    return -val1;\n                }\n                return -val1;\n            case 0:\n                return 0L;\n            case 1:\n                return val1;\n        }\n        long total = val1 * val2;\n        if (total / val2 != val1) {\n          throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n        }\n        return total;\n    }\n"
+    ]
+}

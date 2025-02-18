@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-168",
+    "Time": {
+        "mean": 612.4276603460312,
+        "median": 612.4276603460312,
+        "std": 0,
+        "max": 612.4276603460312,
+        "min": 612.4276603460312,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 72165.77723739743,
+        "median": 72165.77723739743,
+        "std": 0,
+        "max": 72165.77723739743,
+        "min": 72165.77723739743,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 31752.769425928596,
+        "median": 31752.769425928596,
+        "std": 0,
+        "max": 31752.769425928596,
+        "min": 31752.769425928596,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        70.59965646266937,
+        138.3281569480896,
+        206.05665743350983,
+        273.78515791893005,
+        341.5136584043503,
+        409.2421588897705,
+        476.97065937519073,
+        544.699159860611,
+        612.4276603460312
+    ],
+    "Joules_Per_PatchMedian": [
+        10491.975142222644,
+        18201.200404119492,
+        25910.42566601634,
+        33619.650927913186,
+        41328.876189810035,
+        49038.10145170688,
+        56747.32671360373,
+        64456.55197550058,
+        72165.77723739743
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4031.116229021549,
+        7496.322878634929,
+        10961.52952824831,
+        14426.73617786169,
+        17891.94282747507,
+        21357.149477088453,
+        24822.356126701834,
+        28287.562776315215,
+        31752.769425928596
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.8682956218719484,
+        "median": 2.8711559772491455,
+        "std": 0.00527658066161834,
+        "max": 2.873051166534424,
+        "min": 2.860106945037842,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2785.0001925992965,
+        "median": 2782.749880325794,
+        "std": 5.886576044846284,
+        "max": 2792.778155362606,
+        "min": 2779.3588348984717,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 568.9467824935912,
+        "median": 565.9095794081686,
+        "std": 8.242860472964335,
+        "max": 578.7514684796329,
+        "min": 560.1362092971804,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        67.72850048542023,
+        135.45700097084045,
+        203.18550145626068,
+        270.9140019416809,
+        338.64250242710114,
+        406.37100291252136,
+        474.0995033979416,
+        541.8280038833618,
+        609.556504368782
+    ],
+    "Val_Joules": [
+        7709.22526189685,
+        15418.450523793697,
+        23127.675785690546,
+        30836.90104758739,
+        38546.12630948424,
+        46255.35157138109,
+        53964.57683327794,
+        61673.80209517479,
+        69383.02735707164
+    ],
+    "Val_JoulesNormalized": [
+        3465.2066496133803,
+        6930.4132992267605,
+        10395.61994884014,
+        13860.826598453521,
+        17326.033248066902,
+        20791.239897680283,
+        24256.446547293664,
+        27721.653196907046,
+        31186.859846520427
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() <= 1) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() < 2) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() <= 3) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() > 2) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() >= 2) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() < 3) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.inGlobalScope() || t.getScopeDepth() <= 2) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() > 1) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n",
+        "    @Override public void visit(NodeTraversal t, Node n, Node parent) {\n      if (t.inGlobalScope()) {\n        return;\n      }\n      if (n.isReturn() && n.getFirstChild() != null) {\n        data.get(t.getScopeRoot()).recordNonEmptyReturn();\n      }\n// buggy code\n//       if (t.getScopeDepth() <= 2) {\n     if (t.getScopeDepth() <= 2 || t.inGlobalScope()) {\n        return;\n      }\n      if (n.isName() && NodeUtil.isLValue(n) &&\n          !NodeUtil.isBleedingFunctionName(n)) {\n        String name = n.getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordAssignedName(name);\n          }\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode()).recordEscapedVarName(name);\n          }\n        }\n      } else if (n.isGetProp() && n.isUnscopedQualifiedName() &&\n          NodeUtil.isLValue(n)) {\n        String name = NodeUtil.getRootOfQualifiedName(n).getString();\n        Scope scope = t.getScope();\n        Var var = scope.getVar(name);\n        if (var != null) {\n          Scope ownerScope = var.getScope();\n          if (scope != ownerScope && ownerScope.isLocal()) {\n            data.get(ownerScope.getRootNode())\n                .recordEscapedQualifiedName(n.getQualifiedName());\n          }\n        }\n      }\n    }\n"
+    ]
+}

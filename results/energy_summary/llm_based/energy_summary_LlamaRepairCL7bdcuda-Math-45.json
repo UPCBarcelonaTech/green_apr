@@ -1,0 +1,153 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-45",
+    "Time": {
+        "mean": 147.92857480049133,
+        "median": 147.92857480049133,
+        "std": 0,
+        "max": 147.92857480049133,
+        "min": 147.92857480049133,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 17380.46117414236,
+        "median": 17380.46117414236,
+        "std": 0,
+        "max": 17380.46117414236,
+        "min": 17380.46117414236,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 7796.43708717823,
+        "median": 7796.43708717823,
+        "std": 0,
+        "max": 7796.43708717823,
+        "min": 7796.43708717823,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        25.380602598190308,
+        49.89019703865051,
+        74.39979147911072,
+        98.90938591957092,
+        123.41898036003113,
+        147.92857480049133
+    ],
+    "Joules_Per_PatchMedian": [
+        3572.4544116973875,
+        6334.055764186382,
+        9095.657116675377,
+        11857.258469164371,
+        14618.859821653366,
+        17380.46117414236
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1427.0922374129293,
+        2700.961207365989,
+        3974.830177319049,
+        5248.699147272109,
+        6522.56811722517,
+        7796.43708717823
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 0.914313793182373,
+        "median": 0.8710081577301025,
+        "std": 0.09965311493648844,
+        "max": 1.0907888412475586,
+        "min": 0.8499939441680908,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 843.9450894498825,
+        "median": 810.8530592083931,
+        "std": 81.39642328644989,
+        "max": 987.4207201957703,
+        "min": 786.2138693809509,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 151.99356544017786,
+        "median": 153.22326745986925,
+        "std": 7.622382628449798,
+        "max": 163.11159286499026,
+        "min": 143.4484488010405,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        24.509594440460205,
+        49.01918888092041,
+        73.52878332138062,
+        98.03837776184082,
+        122.54797220230103,
+        147.05756664276123
+    ],
+    "Val_Joules": [
+        2761.6013524889945,
+        5523.202704977988,
+        8284.804057466983,
+        11046.405409955978,
+        13808.006762444973,
+        16569.60811493397
+    ],
+    "Val_JoulesNormalized": [
+        1273.86896995306,
+        2547.73793990612,
+        3821.6069098591797,
+        5095.47587981224,
+        6369.344849765301,
+        7643.213819718361
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       this.data = new double[rowDimension][columnDimension];\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       this.data = new double[rowDimension * columnDimension];\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       this.data = null;\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       this.data = new OpenIntToDoubleHashMap[rowDimension][columnDimension];\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       if (rowDimension <= 0 || columnDimension <= 0) {\n            throw new IllegalArgumentException(\"Row and column dimensions must be positive\");\n        }\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       if (rowDimension <= 0 || columnDimension <= 0) {\n            throw new IllegalArgumentException(\"Row and column dimensions must be greater than 0\");\n        }\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       if (rowDimension <= 0 || columnDimension <= 0) {\n            throw new IllegalArgumentException(\"Row and column dimensions must be > 0\");\n        }\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       if (rowDimension <= 0 || columnDimension <= 0) {\n            throw new IllegalArgumentException(\"Row and column dimensions must be positive.\");\n        }\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n",
+        "    public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n        super(rowDimension, columnDimension);\n// buggy code\n// \n       if (rowDimension <= 0 || columnDimension <= 0) {\n            throw new IllegalArgumentException(\"Row and column dimensions must be greater than 0.\");\n        }\n        this.rows = rowDimension;\n        this.columns = columnDimension;\n        this.entries = new OpenIntToDoubleHashMap(0.0);\n    }\n"
+    ]
+}

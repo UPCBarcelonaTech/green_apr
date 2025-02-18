@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-34",
+    "Time": {
+        "mean": 246.20591914653778,
+        "median": 246.20591914653778,
+        "std": 0,
+        "max": 246.20591914653778,
+        "min": 246.20591914653778,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 28842.815736627574,
+        "median": 28842.815736627574,
+        "std": 0,
+        "max": 28842.815736627574,
+        "min": 28842.815736627574,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 11067.504313093425,
+        "median": 11067.504313093425,
+        "std": 0,
+        "max": 11067.504313093425,
+        "min": 11067.504313093425,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        38.12885916233063,
+        72.80836915969849,
+        107.48787915706635,
+        142.1673891544342,
+        176.84689915180206,
+        211.52640914916992,
+        246.20591914653778
+    ],
+    "Joules_Per_PatchMedian": [
+        6791.328226566315,
+        10466.576144909859,
+        14141.824063253403,
+        17817.071981596946,
+        21492.31989994049,
+        25167.56781828403,
+        28842.815736627574
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2008.7074785649772,
+        3518.506950986385,
+        5028.306423407793,
+        6538.105895829201,
+        8047.905368250608,
+        9557.704840672017,
+        11067.504313093425
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.6430801868438722,
+        "median": 3.4493491649627686,
+        "std": 0.48580057844342334,
+        "max": 4.502917051315308,
+        "min": 3.330091953277588,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3271.0748761630057,
+        "median": 3116.080308222771,
+        "std": 392.7963307171125,
+        "max": 3967.482801175117,
+        "min": 3026.293611478806,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 493.2336717605588,
+        "median": 498.9080061435693,
+        "std": 35.99793151262582,
+        "max": 544.1401129126543,
+        "min": 446.7886946320532,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.67950999736786,
+        69.35901999473572,
+        104.03852999210358,
+        138.71803998947144,
+        173.3975499868393,
+        208.07705998420715,
+        242.756569981575
+    ],
+    "Val_Joules": [
+        3675.247918343544,
+        7350.495836687089,
+        11025.743755030633,
+        14700.991673374176,
+        18376.239591717716,
+        22051.48751006126,
+        25726.7354284048
+    ],
+    "Val_JoulesNormalized": [
+        1509.799472421408,
+        3019.598944842816,
+        4529.398417264223,
+        6039.197889685631,
+        7548.9973621070385,
+        9058.796834528448,
+        10568.596306949856
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "I",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return Collections.unmodifiableCollection(chromosomes).iterator();\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return Collections.unmodifiableList(chromosomes).iterator();\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return new Iterator<Chromosome>() {\n            int i = 0;\n            @Override\n            public boolean hasNext() {\n                return i < chromosomes.size();\n            }\n\n            @Override\n            public Chromosome next() {\n                return chromosomes.get(i++);\n            }\n        };\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return new Iterator<Chromosome>() {\n            int index = 0;\n            @Override\n            public boolean hasNext() {\n                return index < chromosomes.size();\n            }\n\n            @Override\n            public Chromosome next() {\n                return chromosomes.get(index++);\n            }\n        };\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       synchronized (chromosomes) {\n            return chromosomes.iterator();\n        }\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return new ChromosomeIterator(chromosomes.iterator());\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return chromosomes.listIterator();\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return new ChromosomeIterator();\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return new ArrayList<Chromosome>(chromosomes).iterator();\n    }\n",
+        "    public Iterator<Chromosome> iterator() {\n// buggy code\n//         return chromosomes.iterator();\n       return chromosomes.values().iterator();\n    }\n"
+    ]
+}

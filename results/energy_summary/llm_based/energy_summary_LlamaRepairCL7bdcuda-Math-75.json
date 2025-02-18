@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-75",
+    "Time": {
+        "mean": 68.49201798439026,
+        "median": 68.49201798439026,
+        "std": 0,
+        "max": 68.49201798439026,
+        "min": 68.49201798439026,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 16471.73357626199,
+        "median": 16471.73357626199,
+        "std": 0,
+        "max": 16471.73357626199,
+        "min": 16471.73357626199,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5178.451393485069,
+        "median": 5178.451393485069,
+        "std": 0,
+        "max": 5178.451393485069,
+        "min": 5178.451393485069,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.248353481292725,
+        24.56887698173523,
+        31.889400482177734,
+        39.20992398262024,
+        46.530447483062744,
+        53.85097098350525,
+        61.171494483947754,
+        68.49201798439026
+    ],
+    "Joules_Per_PatchMedian": [
+        10249.941972035169,
+        11138.769344067572,
+        12027.596716099975,
+        12916.424088132379,
+        13805.251460164782,
+        14694.078832197185,
+        15582.906204229588,
+        16471.73357626199
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2216.079880285263,
+        2639.275810742378,
+        3062.471741199493,
+        3485.667671656608,
+        3908.863602113723,
+        4332.059532570838,
+        4755.255463027954,
+        5178.451393485069
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 10.466424751281739,
+        "median": 9.92782998085022,
+        "std": 1.3447604605506134,
+        "max": 12.852068901062012,
+        "min": 9.637063980102539,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 9776.110952305793,
+        "median": 9361.114600002766,
+        "std": 1091.7815544345428,
+        "max": 11715.491815471649,
+        "min": 9088.241630661487,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1784.5072604155541,
+        "median": 1792.8839498281477,
+        "std": 117.67099778528522,
+        "max": 1965.9123471260082,
+        "min": 1649.3919444203375,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.320523500442505,
+        14.64104700088501,
+        21.961570501327515,
+        29.28209400177002,
+        36.602617502212524,
+        43.92314100265503,
+        51.243664503097534,
+        58.56418800354004
+    ],
+    "Val_Joules": [
+        888.8273720324032,
+        1777.6547440648064,
+        2666.4821160972097,
+        3555.309488129613,
+        4444.136860162016,
+        5332.964232194419,
+        6221.7916042268225,
+        7110.618976259226
+    ],
+    "Val_JoulesNormalized": [
+        423.1959304571151,
+        846.3918609142302,
+        1269.5877913713452,
+        1692.7837218284603,
+        2115.9796522855754,
+        2539.1755827426905,
+        2962.371513199806,
+        3385.5674436569216
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<Object>) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getPct((Comparable<?>) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct(v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<? super T>) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<? super Object>) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<?>) v) / 100;\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<?>) v) / 100.0;\n    }\n",
+        "    public double getPct(Object v) {\n// buggy code\n//         return getCumPct((Comparable<?>) v);\n       return getCumPct((Comparable<?>) v);\n    }\n"
+    ]
+}

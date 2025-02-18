@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-78",
+    "Time": {
+        "mean": 347.84657549858093,
+        "median": 347.84657549858093,
+        "std": 0,
+        "max": 347.84657549858093,
+        "min": 347.84657549858093,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 46542.17725754975,
+        "median": 46542.17725754975,
+        "std": 0,
+        "max": 46542.17725754975,
+        "min": 46542.17725754975,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 20251.698482286934,
+        "median": 20251.698482286934,
+        "std": 0,
+        "max": 20251.698482286934,
+        "min": 20251.698482286934,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        48.60659909248352,
+        91.35516715049744,
+        134.10373520851135,
+        176.85230326652527,
+        219.60087132453918,
+        262.3494393825531,
+        305.098007440567,
+        347.84657549858093
+    ],
+    "Joules_Per_PatchMedian": [
+        10841.341891884804,
+        15941.46122983694,
+        21041.580567789075,
+        26141.69990574121,
+        31241.819243693346,
+        36341.93858164548,
+        41442.05791959762,
+        46542.17725754975
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3679.9838327467432,
+        6047.371639823913,
+        8414.759446901084,
+        10782.147253978254,
+        13149.535061055423,
+        15516.922868132593,
+        17884.310675209763,
+        20251.698482286934
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.861645841598511,
+        "median": 5.8580310344696045,
+        "std": 0.0285261967440742,
+        "max": 5.909296035766602,
+        "min": 5.833059072494507,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5719.699654431342,
+        "median": 5741.222553932666,
+        "std": 40.482927113888316,
+        "max": 5752.849001729488,
+        "min": 5659.241713023185,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1309.5919202852244,
+        "median": 1312.5960256695735,
+        "std": 45.64322772745924,
+        "max": 1353.2534296870235,
+        "min": 1246.5325246810908,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        42.748568058013916,
+        85.49713611602783,
+        128.24570417404175,
+        170.99427223205566,
+        213.74284029006958,
+        256.4914083480835,
+        299.2399764060974,
+        341.9885444641113
+    ],
+    "Val_Joules": [
+        5100.119337952137,
+        10200.238675904273,
+        15300.358013856408,
+        20400.477351808542,
+        25500.596689760678,
+        30600.716027712813,
+        35700.83536566495,
+        40800.954703617084
+    ],
+    "Val_JoulesNormalized": [
+        2367.38780707717,
+        4734.77561415434,
+        7102.16342123151,
+        9469.55122830868,
+        11836.93903538585,
+        14204.326842463019,
+        16571.71464954019,
+        18939.102456617362
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MODULO_BY_0_ERROR\", \"Modulo by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n       }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n       error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n        return null;\n      }\n      result = lval % rval;\n      break;\n    case Token.DIV:\n      if (rval == 0) {\n        error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n       error(DiagnosticType.error(\"JSC_MODULO_BY_0_ERROR\", \"Modulo by 0\"), right);\n        return null;\n      }\n      result = lval % rval;\n      break;\n    case Token.DIV:\n      if (rval == 0) {\n        error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MOD_BY_0_ERROR\", \"Mod by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIV_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         warning(DiagnosticType.warning(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          warning(DiagnosticType.warning(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MOD_BY_0_ERROR\", \"Modulus by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIV_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MOD_BY_0_ERROR\", \"Modulus by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MOD_BY_0_ERROR\", \"Mod by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n",
+        "  private Node performArithmeticOp(int opType, Node left, Node right) {\n    if (opType == Token.ADD\n        && (NodeUtil.mayBeString(left, false)\n            || NodeUtil.mayBeString(right, false))) {\n      return null;\n    }\n    double result;\n    Double lValObj = NodeUtil.getNumberValue(left);\n    if (lValObj == null) {\n      return null;\n    }\n    Double rValObj = NodeUtil.getNumberValue(right);\n    if (rValObj == null) {\n      return null;\n    }\n    double lval = lValObj;\n    double rval = rValObj;\n    switch (opType) {\n      case Token.BITAND:\n        result = ScriptRuntime.toInt32(lval) & ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITOR:\n        result = ScriptRuntime.toInt32(lval) | ScriptRuntime.toInt32(rval);\n        break;\n      case Token.BITXOR:\n        result = ScriptRuntime.toInt32(lval) ^ ScriptRuntime.toInt32(rval);\n        break;\n      case Token.ADD:\n        result = lval + rval;\n        break;\n      case Token.SUB:\n        result = lval - rval;\n        break;\n      case Token.MUL:\n        result = lval * rval;\n        break;\n      case Token.MOD:\n        if (rval == 0) {\n// buggy code\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n//           return null;\n//         }\n//         result = lval % rval;\n//         break;\n//       case Token.DIV:\n//         if (rval == 0) {\n//           error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n         error(DiagnosticType.error(\"JSC_MODULO_BY_0_ERROR\", \"Modulo by 0\"), right);\n          return null;\n        }\n        result = lval % rval;\n        break;\n      case Token.DIV:\n        if (rval == 0) {\n          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n          return null;\n          return null;\n        }\n        result = lval / rval;\n        break;\n      default:\n        throw new Error(\"Unexpected arithmetic operator\");\n    }\n    if (String.valueOf(result).length() <=\n        String.valueOf(lval).length() + String.valueOf(rval).length() + 1 &&\n        Math.abs(result) <= MAX_FOLD_NUMBER) {\n      Node newNumber = Node.newNumber(result);\n      return newNumber;\n    } else if (Double.isNaN(result)) {\n      return Node.newString(Token.NAME, \"NaN\");\n    } else if (result == Double.POSITIVE_INFINITY) {\n      return Node.newString(Token.NAME, \"Infinity\");\n    } else if (result == Double.NEGATIVE_INFINITY) {\n      return new Node(Token.NEG, Node.newString(Token.NAME, \"Infinity\"));\n    }\n    return null;\n  }\n"
+    ]
+}

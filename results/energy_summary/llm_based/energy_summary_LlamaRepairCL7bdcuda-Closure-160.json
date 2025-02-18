@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-160",
+    "Time": {
+        "mean": 3.0889370441436768,
+        "median": 3.0889370441436768,
+        "std": 0,
+        "max": 3.0889370441436768,
+        "min": 3.0889370441436768,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 2980.8630454421045,
+        "median": 2980.8630454421045,
+        "std": 0,
+        "max": 2980.8630454421045,
+        "min": 2980.8630454421045,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 645.873939788341,
+        "median": 645.873939788341,
+        "std": 0,
+        "max": 645.873939788341,
+        "min": 645.873939788341,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 3.173435354232788,
+        "median": 3.0889370441436768,
+        "std": 0.1888610728286484,
+        "max": 3.5112709999084473,
+        "min": 3.087056875228882,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3048.0635636496545,
+        "median": 2980.8630454421045,
+        "std": 156.32363433150826,
+        "max": 3327.6187594532967,
+        "min": 2972.960239601135,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 652.5130494332311,
+        "median": 645.873939788341,
+        "std": 20.539037691213142,
+        "max": 684.1583871722223,
+        "min": 630.166506171226,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   guards.add(new DiagnosticGroupWarningsGuard(\n        DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   if (!options.checkSymbols) {\n      guards.add(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   if (!options.checkSymbols) {\n      guards.add(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   guards.add(\n        new DiagnosticGroupWarningsGuard(\n            DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   if (warningsGuard == null || !warningsGuard.disables(\n        DiagnosticGroups.CHECK_VARIABLES)) {\n      guards.add(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   if (warningsGuard == null || !warningsGuard.disables(\n        DiagnosticGroups.CHECK_VARIABLES)) {\n      guards.add(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    this.warningsGuard = new ComposeWarningsGuard(guards);\n  }\n",
+        "  public void initOptions(CompilerOptions options) {\n    this.options = options;\n    if (errorManager == null) {\n      if (outStream == null) {\n        setErrorManager(\n            new LoggerErrorManager(createMessageFormatter(), logger));\n      } else {\n        PrintStreamErrorManager printer =\n            new PrintStreamErrorManager(createMessageFormatter(), outStream);\n        printer.setSummaryDetailLevel(options.summaryDetailLevel);\n        setErrorManager(printer);\n      }\n    }\n    if (options.enables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = true;\n    } else if (options.disables(DiagnosticGroups.CHECK_TYPES)) {\n      options.checkTypes = false;\n    } else if (!options.checkTypes) {\n      options.setWarningLevel(\n          DiagnosticGroup.forType(\n              RhinoErrorReporter.TYPE_PARSE_ERROR),\n          CheckLevel.OFF);\n    }\n    if (options.checkGlobalThisLevel.isOn()) {\n      options.setWarningLevel(\n          DiagnosticGroups.GLOBAL_THIS,\n          options.checkGlobalThisLevel);\n    }\n    List<WarningsGuard> guards = Lists.newArrayList();\n    guards.add(\n        new SuppressDocWarningsGuard(\n            getDiagnosticGroups().getRegisteredGroups()));\n    guards.add(options.getWarningsGuard());\n// buggy code\n//     if (!options.checkSymbols &&\n//         (warningsGuard == null || !warningsGuard.disables(\n//             DiagnosticGroups.CHECK_VARIABLES))) {\n//       guards.add(new DiagnosticGroupWarningsGuard(\n//           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n//     }\n//     this.warningsGuard = new ComposeWarningsGuard(guards);\n   if (!options.checkSymbols ||\n        (warningsGuard == null || !warningsGuard.disables(\n            DiagnosticGroups.CHECK_VARIABLES))) {\n      guards.add(new DiagnosticGroupWarningsGuard(\n          DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n    }\n    warningsGuard = new ComposeWarningsGuard(guards);\n  }\n"
+    ]
+}

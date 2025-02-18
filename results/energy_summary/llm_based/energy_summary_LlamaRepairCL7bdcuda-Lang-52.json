@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-52",
+    "Time": {
+        "mean": 103.72947216033936,
+        "median": 103.72947216033936,
+        "std": 0,
+        "max": 103.72947216033936,
+        "min": 103.72947216033936,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 11956.892551386358,
+        "median": 11956.892551386358,
+        "std": 0,
+        "max": 11956.892551386358,
+        "min": 11956.892551386358,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3317.7442770838743,
+        "median": 3317.7442770838743,
+        "std": 0,
+        "max": 3317.7442770838743,
+        "min": 3317.7442770838743,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.279396414756775,
+        23.329404830932617,
+        33.37941324710846,
+        43.4294216632843,
+        53.479430079460144,
+        63.529438495635986,
+        73.57944691181183,
+        83.62945532798767,
+        93.67946374416351,
+        103.72947216033936
+    ],
+    "Joules_Per_PatchMedian": [
+        4058.5352333247656,
+        4936.130490887164,
+        5813.725748449563,
+        6691.321006011962,
+        7568.9162635743605,
+        8446.51152113676,
+        9324.106778699159,
+        10201.702036261559,
+        11079.297293823958,
+        11956.892551386358
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        965.8267314255238,
+        1227.1509031653404,
+        1488.475074905157,
+        1749.7992466449737,
+        2011.1234183847903,
+        2272.447590124607,
+        2533.7717618644238,
+        2795.0959336042406,
+        3056.4201053440574,
+        3317.7442770838743
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.2453282356262205,
+        "median": 3.2293879985809326,
+        "std": 0.031229131082997994,
+        "max": 3.2797021865844727,
+        "min": 3.2189950942993164,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3177.9198723626137,
+        "median": 3180.939975762367,
+        "std": 18.37712563330764,
+        "max": 3199.8180661439897,
+        "min": 3153.2833841919896,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 714.7411646056174,
+        "median": 704.5025596857072,
+        "std": 19.49803423449769,
+        "max": 743.7954809188841,
+        "min": 699.7653233170504,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.050008416175842,
+        20.100016832351685,
+        30.150025248527527,
+        40.20003366470337,
+        50.25004208087921,
+        60.300050497055054,
+        70.3500589132309,
+        80.40006732940674,
+        90.45007574558258,
+        100.50008416175842
+    ],
+    "Val_Joules": [
+        877.5952575623987,
+        1755.1905151247975,
+        2632.785772687196,
+        3510.381030249595,
+        4387.976287811994,
+        5265.571545374392,
+        6143.166802936792,
+        7020.762060499192,
+        7898.357318061591,
+        8775.952575623991
+    ],
+    "Val_JoulesNormalized": [
+        261.3241717398166,
+        522.6483434796332,
+        783.9725152194499,
+        1045.2966869592665,
+        1306.620858699083,
+        1567.9450304388997,
+        1829.2692021787166,
+        2090.5933739185334,
+        2351.9175456583503,
+        2613.241717398167
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '/':\n                        out.write('\\\\');\n                        out.write('/');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '/' :\n                        out.write('\\\\');\n                        out.write('/');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '>':\n                        out.write('\\\\');\n                        out.write('>');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '/':\n                        out.write('/');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '/' :\n                        out.write('/');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '$':\n                        out.write('\\\\');\n                        out.write('$');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n",
+        "    private static void escapeJavaStyleString(Writer out, String str, boolean escapeSingleQuote) throws IOException {\n        if (out == null) {\n            throw new IllegalArgumentException(\"The Writer must not be null\");\n        }\n        if (str == null) {\n            return;\n        }\n        int sz;\n        sz = str.length();\n        for (int i = 0; i < sz; i++) {\n            char ch = str.charAt(i);\n            if (ch > 0xfff) {\n                out.write(\"\\\\u\" + hex(ch));\n            } else if (ch > 0xff) {\n                out.write(\"\\\\u0\" + hex(ch));\n            } else if (ch > 0x7f) {\n                out.write(\"\\\\u00\" + hex(ch));\n            } else if (ch < 32) {\n                switch (ch) {\n                    case '\\b':\n                        out.write('\\\\');\n                        out.write('b');\n                        break;\n                    case '\\n':\n                        out.write('\\\\');\n                        out.write('n');\n                        break;\n                    case '\\t':\n                        out.write('\\\\');\n                        out.write('t');\n                        break;\n                    case '\\f':\n                        out.write('\\\\');\n                        out.write('f');\n                        break;\n                    case '\\r':\n                        out.write('\\\\');\n                        out.write('r');\n                        break;\n                    default :\n                        if (ch > 0xf) {\n                            out.write(\"\\\\u00\" + hex(ch));\n                        } else {\n                            out.write(\"\\\\u000\" + hex(ch));\n                        }\n                        break;\n                }\n            } else {\n                switch (ch) {\n                    case '\\'':\n                        if (escapeSingleQuote) {\n                          out.write('\\\\');\n                        }\n                        out.write('\\'');\n                        break;\n                    case '\"':\n                        out.write('\\\\');\n                        out.write('\"');\n                        break;\n                    case '\\\\':\n                        out.write('\\\\');\n                        out.write('\\\\');\n                        break;\n// buggy code\n// \n                   case '<':\n                        out.write('\\\\');\n                        out.write('<');\n                        break;\n                    default :\n                        out.write(ch);\n                        break;\n                }\n            }\n        }\n    }\n"
+    ]
+}

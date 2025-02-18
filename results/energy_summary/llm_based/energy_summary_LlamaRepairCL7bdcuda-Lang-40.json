@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-40",
+    "Time": {
+        "mean": 73.1575733423233,
+        "median": 73.1575733423233,
+        "std": 0,
+        "max": 73.1575733423233,
+        "min": 73.1575733423233,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9139.472724187373,
+        "median": 9139.472724187373,
+        "std": 0,
+        "max": 9139.472724187373,
+        "min": 9139.472724187373,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2248.241859847307,
+        "median": 2248.241859847307,
+        "std": 0,
+        "max": 2248.241859847307,
+        "min": 2248.241859847307,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.08043348789215,
+        18.840075969696045,
+        26.59971845149994,
+        34.35936093330383,
+        42.11900341510773,
+        49.87864589691162,
+        57.638288378715515,
+        65.39793086051941,
+        73.1575733423233
+    ],
+    "Joules_Per_PatchMedian": [
+        3683.9919229865072,
+        4365.927023136615,
+        5047.8621232867235,
+        5729.797223436832,
+        6411.73232358694,
+        7093.667423737048,
+        7775.602523887156,
+        8457.537624037264,
+        9139.472724187373
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        714.1719208538527,
+        905.9306632280345,
+        1097.6894056022163,
+        1289.448147976398,
+        1481.20689035058,
+        1672.9656327247617,
+        1864.7243750989435,
+        2056.4831174731253,
+        2248.241859847307
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.612783336639404,
+        "median": 3.320791006088257,
+        "std": 0.48669659434032125,
+        "max": 4.188060998916626,
+        "min": 3.2179789543151855,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3240.9908325362203,
+        "median": 3002.056822836399,
+        "std": 390.7081650219581,
+        "max": 3705.0863829016685,
+        "min": 2927.630012512207,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 542.8087457036971,
+        "median": 522.4131784796709,
+        "std": 38.59431745139047,
+        "max": 588.7501936078074,
+        "min": 503.3655672788623,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.759642481803894,
+        15.519284963607788,
+        23.278927445411682,
+        31.038569927215576,
+        38.79821240901947,
+        46.557854890823364,
+        54.31749737262726,
+        62.07713985443115,
+        69.83678233623505
+    ],
+    "Val_Joules": [
+        681.9351001501082,
+        1363.8702003002163,
+        2045.8053004503245,
+        2727.7404006004326,
+        3409.675500750541,
+        4091.610600900649,
+        4773.545701050757,
+        5455.480801200865,
+        6137.415901350974
+    ],
+    "Val_JoulesNormalized": [
+        191.7587423741818,
+        383.5174847483636,
+        575.2762271225454,
+        767.0349694967272,
+        958.793711870909,
+        1150.5524542450908,
+        1342.3111966192726,
+        1534.0699389934543,
+        1725.828681367636
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return contains(str.toLowerCase(), searchStr.toLowerCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return containsIgnoreCase(str.toUpperCase(), searchStr.toUpperCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return contains(str.toUpperCase(), searchStr.toLowerCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return contains(str.toUpperCase().trim(), searchStr.toUpperCase().trim());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return str.toUpperCase().contains(searchStr.toUpperCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return str.toLowerCase().contains(searchStr.toLowerCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return containsIgnoreCase(str, searchStr.toUpperCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return contains(str.toUpperCase().trim(), searchStr.toUpperCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n    }\n",
+        "    public static boolean containsIgnoreCase(String str, String searchStr) {\n        if (str == null || searchStr == null) {\n            return false;\n        }\n// buggy code\n//         return contains(str.toUpperCase(), searchStr.toUpperCase());\n       return contains(str.toUpperCase(Locale.ENGLISH), searchStr.toUpperCase());\n    }\n"
+    ]
+}

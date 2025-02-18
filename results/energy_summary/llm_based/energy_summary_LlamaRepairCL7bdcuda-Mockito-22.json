@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-22",
+    "Time": {
+        "mean": 245.50229024887085,
+        "median": 245.50229024887085,
+        "std": 0,
+        "max": 245.50229024887085,
+        "min": 245.50229024887085,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 30898.245828449722,
+        "median": 30898.245828449722,
+        "std": 0,
+        "max": 30898.245828449722,
+        "min": 30898.245828449722,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 14835.6161152482,
+        "median": 14835.6161152482,
+        "std": 0,
+        "max": 14835.6161152482,
+        "min": 14835.6161152482,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        25.81116509437561,
+        50.22129011154175,
+        74.63141512870789,
+        99.04154014587402,
+        123.45166516304016,
+        147.8617901802063,
+        172.27191519737244,
+        196.68204021453857,
+        221.0921652317047,
+        245.50229024887085
+    ],
+    "Joules_Per_PatchMedian": [
+        4248.466770219803,
+        7209.55333224535,
+        10170.639894270898,
+        13131.726456296445,
+        16092.813018321991,
+        19053.899580347537,
+        22014.986142373084,
+        24976.07270439863,
+        27937.159266424176,
+        30898.245828449722
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1691.8362833261488,
+        3152.2562646508213,
+        4612.676245975494,
+        6073.096227300166,
+        7533.516208624838,
+        8993.93618994951,
+        10454.356171274183,
+        11914.776152598855,
+        13375.196133923528,
+        14835.6161152482
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.5440430164337158,
+        "median": 1.4010400772094727,
+        "std": 0.20608867635556544,
+        "max": 1.7699720859527588,
+        "min": 1.3807868957519531,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1404.5574051523208,
+        "median": 1287.3802081942558,
+        "std": 172.7343182460013,
+        "max": 1595.5641431093215,
+        "min": 1267.4416041851046,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 229.52967980384832,
+        "median": 231.4163020014762,
+        "std": 12.474826423294038,
+        "max": 247.78232917785658,
+        "min": 216.38661913871783,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        24.410125017166138,
+        48.820250034332275,
+        73.23037505149841,
+        97.64050006866455,
+        122.05062508583069,
+        146.46075010299683,
+        170.87087512016296,
+        195.2810001373291,
+        219.69112515449524,
+        244.10125017166138
+    ],
+    "Val_Joules": [
+        2961.086562025547,
+        5922.173124051094,
+        8883.259686076643,
+        11844.346248102189,
+        14805.432810127735,
+        17766.51937215328,
+        20727.605934178828,
+        23688.692496204374,
+        26649.77905822992,
+        29610.865620255467
+    ],
+    "Val_JoulesNormalized": [
+        1460.4199813246726,
+        2920.839962649345,
+        4381.259943974017,
+        5841.679925298689,
+        7302.099906623362,
+        8762.519887948034,
+        10222.939869272706,
+        11683.359850597379,
+        13143.779831922051,
+        14604.199813246723
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == o2) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null || o1.getClass() != o2.getClass()) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null && o2 == null) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null ^ o2 == null) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null || o1.equals(o2)) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if ((o1 == null) || (o2 == null)) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null || isArray(o1) || isArray(o2)) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null || isArray(o1)) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n",
+        "    public static boolean areEqual(Object o1, Object o2) {\n// buggy code\n//         if (o1 == null || o2 == null) {\n       if (o1 == null || o2 == null || !o1.getClass().isInstance(o2)) {\n            return o1 == null && o2 == null;\n        } else if (isArray(o1)) {\n            return isArray(o2) && areArraysEqual(o1, o2);\n        } else {\n            return o1.equals(o2);\n        }\n    }\n"
+    ]
+}

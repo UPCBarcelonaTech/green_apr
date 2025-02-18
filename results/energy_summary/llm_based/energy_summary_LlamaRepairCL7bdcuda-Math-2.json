@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-2",
+    "Time": {
+        "mean": 503.5315155982971,
+        "median": 503.5315155982971,
+        "std": 0,
+        "max": 503.5315155982971,
+        "min": 503.5315155982971,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 64049.80630347728,
+        "median": 64049.80630347728,
+        "std": 0,
+        "max": 64049.80630347728,
+        "min": 64049.80630347728,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 28781.8788638115,
+        "median": 28781.8788638115,
+        "std": 0,
+        "max": 28781.8788638115,
+        "min": 28781.8788638115,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        55.15916049480438,
+        104.97831106185913,
+        154.79746162891388,
+        204.61661219596863,
+        254.43576276302338,
+        304.2549133300781,
+        354.0740638971329,
+        403.8932144641876,
+        453.71236503124237,
+        503.5315155982971
+    ],
+    "Joules_Per_PatchMedian": [
+        10791.270513159037,
+        16708.88560097218,
+        22626.500688785316,
+        28544.115776598454,
+        34461.73086441159,
+        40379.34595222473,
+        46296.961040037866,
+        52214.576127851,
+        58132.19121566414,
+        64049.80630347728
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3570.95396181345,
+        6372.167839813233,
+        9173.381717813016,
+        11974.595595812798,
+        14775.80947381258,
+        17577.023351812364,
+        20378.237229812148,
+        23179.451107811932,
+        25980.664985811716,
+        28781.8788638115
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.63020806312561,
+        "median": 5.340009927749634,
+        "std": 0.7461868529119609,
+        "max": 6.9510111808776855,
+        "min": 5.150938034057617,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5101.226012587547,
+        "median": 4873.655425345898,
+        "std": 587.3133740102588,
+        "max": 6143.998413491249,
+        "min": 4727.098331797122,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 771.3468953847885,
+        "median": 769.7400838136673,
+        "std": 32.154726487245995,
+        "max": 809.0973321676256,
+        "min": 737.9543713212001,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        49.81915056705475,
+        99.6383011341095,
+        149.45745170116425,
+        199.276602268219,
+        249.09575283527374,
+        298.9149034023285,
+        348.73405396938324,
+        398.553204536438,
+        448.37235510349274,
+        498.1915056705475
+    ],
+    "Val_Joules": [
+        5917.615087813139,
+        11835.23017562628,
+        17752.84526343942,
+        23670.460351252557,
+        29588.075439065695,
+        35505.69052687883,
+        41423.30561469197,
+        47340.92070250511,
+        53258.535790318245,
+        59176.15087813138
+    ],
+    "Val_JoulesNormalized": [
+        2801.2138779997827,
+        5602.427755999565,
+        8403.641633999348,
+        11204.85551199913,
+        14006.069389998913,
+        16807.283267998697,
+        19608.49714599848,
+        22409.711023998265,
+        25210.92490199805,
+        28012.138779997833
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getSampleSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) getNumberOfSuccesses() / (double) getSampleSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) getSampleSize() * getNumberOfSuccesses() / (double) getPopulationSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getNumberOfSuccesses()) / (double) getSampleSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getNumberOfSuccesses()) / (double) getPopulationSize();\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) (getSampleSize());\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) (getPopulationSize() - getSampleSize());\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) (getSampleSize() * getPopulationSize());\n    }\n",
+        "    public double getNumericalMean() {\n// buggy code\n//         return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n       return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) (getPopulationSize());\n    }\n"
+    ]
+}

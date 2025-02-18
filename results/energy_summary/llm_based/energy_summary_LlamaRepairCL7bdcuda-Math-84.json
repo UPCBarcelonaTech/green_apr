@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-84",
+    "Time": {
+        "mean": 68.51362991333008,
+        "median": 68.51362991333008,
+        "std": 0,
+        "max": 68.51362991333008,
+        "min": 68.51362991333008,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 17451.21852368117,
+        "median": 17451.21852368117,
+        "std": 0,
+        "max": 17451.21852368117,
+        "min": 17451.21852368117,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5464.6464693546295,
+        "median": 5464.6464693546295,
+        "std": 0,
+        "max": 5464.6464693546295,
+        "min": 5464.6464693546295,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        18.110400199890137,
+        25.310861587524414,
+        32.51132297515869,
+        39.71178436279297,
+        46.912245750427246,
+        54.11270713806152,
+        61.3131685256958,
+        68.51362991333008
+    ],
+    "Joules_Per_PatchMedian": [
+        11310.599180585148,
+        12187.830515313151,
+        13065.061850041155,
+        13942.293184769158,
+        14819.524519497161,
+        15696.755854225165,
+        16573.987188953168,
+        17451.21852368117
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2533.79133937359,
+        2952.484929370881,
+        3371.1785193681726,
+        3789.872109365464,
+        4208.565699362755,
+        4627.259289360047,
+        5045.952879357338,
+        5464.6464693546295
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 11.48487696647644,
+        "median": 10.90993881225586,
+        "std": 1.4103651869536067,
+        "max": 13.99343991279602,
+        "min": 10.657083988189697,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 10868.46244465828,
+        "median": 10433.367845857145,
+        "std": 1032.4417856725117,
+        "max": 12711.014832985402,
+        "min": 10326.63854380846,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2140.6100427484516,
+        "median": 2115.0977493762985,
+        "std": 91.99996481872353,
+        "max": 2244.0293524861336,
+        "min": 2022.5412295699134,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.200461387634277,
+        14.400922775268555,
+        21.601384162902832,
+        28.80184555053711,
+        36.00230693817139,
+        43.202768325805664,
+        50.40322971343994,
+        57.60369110107422
+    ],
+    "Val_Joules": [
+        877.2313347280033,
+        1754.4626694560066,
+        2631.69400418401,
+        3508.925338912013,
+        4386.156673640016,
+        5263.38800836802,
+        6140.619343096023,
+        7017.850677824026
+    ],
+    "Val_JoulesNormalized": [
+        418.6935899972914,
+        837.3871799945828,
+        1256.0807699918741,
+        1674.7743599891655,
+        2093.467949986457,
+        2512.1615399837483,
+        2930.8551299810397,
+        3349.548719978331
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       while (true) {\n            final RealPointValuePair[] original = simplex;\n            final RealPointValuePair best = original[0];\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                return;\n            }\n            incrementIterationsCounter();\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       incrementIterationsCounter();\n        final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n        if (comparator.compare(reflected, best) < 0) {\n            final RealPointValuePair[] reflectedSimplex = simplex;\n            final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n            if (comparator.compare(reflected, expanded) <= 0) {\n                simplex = reflectedSimplex;\n            }\n            return;\n        }\n        final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n        if (comparator.compare(contracted, best) < 0) {\n            return;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n        if (comparator.compare(reflected, best) < 0) {\n            final RealPointValuePair[] reflectedSimplex = simplex;\n            final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n            if (comparator.compare(reflected, expanded) <= 0) {\n                simplex = reflectedSimplex;\n            }\n            return;\n        }\n        final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n        if (comparator.compare(contracted, best) < 0) {\n            return;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair[] original = simplex;\n            final RealPointValuePair best = original[0];\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) <= 0) {\n                return;\n            }\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                return;\n            }\n            original = simplex;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair best = original[0];\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                return;\n            }\n            simplex = original;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                return;\n            }\n            original[0] = contracted;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       incrementIterationsCounter();\n        final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n        if (comparator.compare(reflected, best) < 0) {\n            final RealPointValuePair[] reflectedSimplex = simplex;\n            final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n            if (comparator.compare(reflected, expanded) <= 0) {\n                simplex = reflectedSimplex;\n            }\n            return;\n        }\n        final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n        if (comparator.compare(contracted, best) < 0) {\n            simplex = original;\n            return;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair best = original[0];\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                return;\n            }\n            original = simplex;\n        }\n    }\n",
+        "    protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n// buggy code\n//         while (true) {\n//             incrementIterationsCounter();\n//             final RealPointValuePair[] original = simplex;\n//             final RealPointValuePair best = original[0];\n//             final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n//             if (comparator.compare(reflected, best) < 0) {\n//                 final RealPointValuePair[] reflectedSimplex = simplex;\n//                 final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n//                 if (comparator.compare(reflected, expanded) <= 0) {\n//                     simplex = reflectedSimplex;\n//                 }\n//                 return;\n//             }\n//             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n//             if (comparator.compare(contracted, best) < 0) {\n//                 return;\n//             }\n       final RealPointValuePair[] original = simplex;\n        final RealPointValuePair best = original[0];\n        while (true) {\n            incrementIterationsCounter();\n            final RealPointValuePair reflected = evaluateNewSimplex(original, 1.0, comparator);\n            if (comparator.compare(reflected, best) < 0) {\n                final RealPointValuePair[] reflectedSimplex = simplex;\n                final RealPointValuePair expanded = evaluateNewSimplex(original, khi, comparator);\n                if (comparator.compare(reflected, expanded) <= 0) {\n                    simplex = reflectedSimplex;\n                }\n                return;\n            }\n            final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n            if (comparator.compare(contracted, best) < 0) {\n                simplex = original;\n                return;\n            }\n        }\n    }\n"
+    ]
+}

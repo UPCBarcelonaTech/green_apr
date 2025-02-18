@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-57",
+    "Time": {
+        "mean": 77.207284450531,
+        "median": 77.207284450531,
+        "std": 0,
+        "max": 77.207284450531,
+        "min": 77.207284450531,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8873.703378033637,
+        "median": 8873.703378033637,
+        "std": 0,
+        "max": 8873.703378033637,
+        "min": 8873.703378033637,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2329.5890624761582,
+        "median": 2329.5890624761582,
+        "std": 0,
+        "max": 2329.5890624761582,
+        "min": 2329.5890624761582,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.760672211647034,
+        21.110188245773315,
+        30.459704279899597,
+        39.80922031402588,
+        49.15873634815216,
+        58.50825238227844,
+        67.85776841640472,
+        77.207284450531
+    ],
+    "Joules_Per_PatchMedian": [
+        3030.8018348157407,
+        3865.5020552754404,
+        4700.20227573514,
+        5534.902496194839,
+        6369.602716654538,
+        7204.3029371142375,
+        8039.003157573937,
+        8873.703378033637
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        587.585877764225,
+        836.4434755802154,
+        1085.3010733962058,
+        1334.1586712121962,
+        1583.0162690281866,
+        1831.873866844177,
+        2080.7314646601676,
+        2329.5890624761582
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.716365671157837,
+        "median": 2.411156177520752,
+        "std": 0.44115671920551947,
+        "max": 3.2000300884246826,
+        "min": 2.362100124359131,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2431.11117399931,
+        "median": 2196.101614356041,
+        "std": 345.5106673009179,
+        "max": 2810.868277657032,
+        "min": 2152.0786286950115,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 348.76763510942476,
+        "median": 338.72827994823456,
+        "std": 34.14451586788705,
+        "max": 388.6040276050567,
+        "min": 316.68581930398955,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        9.349516034126282,
+        18.699032068252563,
+        28.048548102378845,
+        37.39806413650513,
+        46.74758017063141,
+        56.09709620475769,
+        65.44661223888397,
+        74.79612827301025
+    ],
+    "Val_Joules": [
+        834.7002204596997,
+        1669.4004409193994,
+        2504.1006613790987,
+        3338.800881838798,
+        4173.501102298497,
+        5008.2013227581965,
+        5842.901543217896,
+        6677.601763677596
+    ],
+    "Val_JoulesNormalized": [
+        248.8575978159904,
+        497.7151956319808,
+        746.5727934479712,
+        995.4303912639616,
+        1244.287989079952,
+        1493.1455868959424,
+        1742.003184711933,
+        1990.8607825279237
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(locale.toString());\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return locale != null && cAvailableLocaleSet.contains(locale);\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(locale.getLanguage());\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(new Locale(locale.getLanguage()));\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.containsKey(locale);\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return true;\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(new Locale(locale.getLanguage(), locale.getCountry()));\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(locale) && locale.getLanguage().length() > 0;\n    }\n",
+        "    public static boolean isAvailableLocale(Locale locale) {\n// buggy code\n//         return cAvailableLocaleSet.contains(locale);\n       return cAvailableLocaleSet.contains(locale) || locale.getLanguage().equals(\"\");\n    }\n"
+    ]
+}

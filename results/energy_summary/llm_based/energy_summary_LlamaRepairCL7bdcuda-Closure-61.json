@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-61",
+    "Time": {
+        "mean": 448.7352703809738,
+        "median": 448.7352703809738,
+        "std": 0,
+        "max": 448.7352703809738,
+        "min": 448.7352703809738,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 56671.70354073048,
+        "median": 56671.70354073048,
+        "std": 0,
+        "max": 56671.70354073048,
+        "min": 56671.70354073048,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 25160.81338452101,
+        "median": 25160.81338452101,
+        "std": 0,
+        "max": 25160.81338452101,
+        "min": 25160.81338452101,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        54.09958636760712,
+        103.42904686927795,
+        152.7585073709488,
+        202.08796787261963,
+        251.41742837429047,
+        300.7468888759613,
+        350.07634937763214,
+        399.405809879303,
+        448.7352703809738
+    ],
+    "Joules_Per_PatchMedian": [
+        10405.364326405524,
+        16188.656728196143,
+        21971.949129986762,
+        27755.24153177738,
+        33538.533933568004,
+        39321.82633535862,
+        45105.11873714924,
+        50888.41113893986,
+        56671.70354073048
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3645.970470321178,
+        6335.325834596157,
+        9024.681198871134,
+        11714.036563146114,
+        14403.391927421093,
+        17092.747291696072,
+        19782.10265597105,
+        22471.45802024603,
+        25160.81338452101
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.8671962261199955,
+        "median": 4.770125865936279,
+        "std": 0.13704554479070066,
+        "max": 5.056971073150635,
+        "min": 4.768946170806885,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4688.683846132755,
+        "median": 4622.071924614906,
+        "std": 106.00789024405017,
+        "max": 4834.518056869507,
+        "min": 4601.945292794704,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 957.9021207451817,
+        "median": 956.6151060461993,
+        "std": 7.575525144576255,
+        "max": 969.5360523939125,
+        "min": 948.3858585357661,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        49.32946050167084,
+        98.65892100334167,
+        147.9883815050125,
+        197.31784200668335,
+        246.6473025083542,
+        295.976763010025,
+        345.30622351169586,
+        394.6356840133667,
+        443.96514451503754
+    ],
+    "Val_Joules": [
+        5783.292401790619,
+        11566.584803581238,
+        17349.877205371857,
+        23133.169607162476,
+        28916.462008953098,
+        34699.75441074371,
+        40483.04681253433,
+        46266.33921432495,
+        52049.63161611557
+    ],
+    "Val_JoulesNormalized": [
+        2689.3553642749785,
+        5378.710728549957,
+        8068.0660928249345,
+        10757.421457099914,
+        13446.776821374893,
+        16136.132185649873,
+        18825.487549924852,
+        21514.84291419983,
+        24204.19827847481
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (callNode.isOnlyModifiesThisCall()) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (callNode.isOnlyModifiesArgumentsCall()) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (nameNode.getType() != Token.GETPROP) {\n        return true;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (!callNode.isOnlyModifiesThisCall()) {\n        return true;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n   } else if (nameNode.getType() == Token.GETELEM) {\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (nameNode.getFirstChild().getType() == Token.THIS) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (!callNode.isOnlyModifiesThisCall()) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n     if (callNode.isOnlyModifiesThisCall()\n          && nameNode.getFirstChild().getType() == Token.THIS) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n",
+        "  static boolean functionCallHasSideEffects(\n      Node callNode, @Nullable AbstractCompiler compiler) {\n    if (callNode.getType() != Token.CALL) {\n      throw new IllegalStateException(\n          \"Expected CALL node, got \" + Token.name(callNode.getType()));\n    }\n    if (callNode.isNoSideEffectsCall()) {\n      return false;\n    }\n    Node nameNode = callNode.getFirstChild();\n    if (nameNode.getType() == Token.NAME) {\n      String name = nameNode.getString();\n      if (BUILTIN_FUNCTIONS_WITHOUT_SIDEEFFECTS.contains(name)) {\n        return false;\n      }\n    } else if (nameNode.getType() == Token.GETPROP) {\n      if (callNode.hasOneChild()\n          && OBJECT_METHODS_WITHOUT_SIDEEFFECTS.contains(\n                nameNode.getLastChild().getString())) {\n        return false;\n      }\n      if (callNode.isOnlyModifiesThisCall()\n          && evaluatesToLocalValue(nameNode.getFirstChild())) {\n        return false;\n      }\n// buggy code\n// \n   } else if (nameNode.getType() == Token.GETELEM) {\n      if (callNode.isOnlyModifiesThisCall()) {\n        return false;\n      }\n      if (compiler != null && !compiler.hasRegExpGlobalReferences()) {\n        if (nameNode.getFirstChild().getType() == Token.REGEXP\n            && REGEXP_METHODS.contains(nameNode.getLastChild().getString())) {\n          return false;\n        } else if (nameNode.getFirstChild().getType() == Token.STRING\n            && STRING_REGEXP_METHODS.contains(\n                nameNode.getLastChild().getString())) {\n          Node param = nameNode.getNext();\n          if (param != null &&\n              (param.getType() == Token.STRING\n                  || param.getType() == Token.REGEXP))\n          return false;\n        }\n      }\n    }\n    return true;\n  }\n"
+    ]
+}

@@ -1,0 +1,159 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-38",
+    "Time": {
+        "mean": 62.664756655693054,
+        "median": 62.664756655693054,
+        "std": 0,
+        "max": 62.664756655693054,
+        "min": 62.664756655693054,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9368.717020404338,
+        "median": 9368.717020404338,
+        "std": 0,
+        "max": 9368.717020404338,
+        "min": 9368.717020404338,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4361.858392816782,
+        "median": 4361.858392816782,
+        "std": 0,
+        "max": 4361.858392816782,
+        "min": 4361.858392816782,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        10.229028820991516,
+        18.968316793441772,
+        27.70760476589203,
+        36.446892738342285,
+        45.18618071079254,
+        53.9254686832428,
+        62.664756655693054
+    ],
+    "Joules_Per_PatchMedian": [
+        2499.536672079563,
+        3644.4000634670256,
+        4789.263454854488,
+        5934.126846241951,
+        7078.990237629414,
+        8223.853629016876,
+        9368.717020404338
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        809.3529706180096,
+        1401.4372076511384,
+        1993.521444684267,
+        2585.605681717396,
+        3177.6899187505246,
+        3769.7741557836534,
+        4361.858392816782
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.4877351760864257,
+        "median": 1.4897408485412598,
+        "std": 0.03458251558072274,
+        "max": 1.5210459232330322,
+        "min": 1.438952922821045,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1349.910878174305,
+        "median": 1354.6732806921004,
+        "std": 26.26147496168405,
+        "max": 1373.7199490189553,
+        "min": 1310.947515285015,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 217.12621653318402,
+        "median": 217.26873358488092,
+        "std": 2.004228247593592,
+        "max": 220.23562452793112,
+        "min": 215.23906737566017,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        8.739287972450256,
+        17.478575944900513,
+        26.21786391735077,
+        34.957151889801025,
+        43.69643986225128,
+        52.43572783470154,
+        61.175015807151794
+    ],
+    "Val_Joules": [
+        1144.8633913874623,
+        2289.726782774925,
+        3434.590174162388,
+        4579.453565549851,
+        5724.316956937313,
+        6869.180348324775,
+        8014.043739712237
+    ],
+    "Val_JoulesNormalized": [
+        592.0842370331287,
+        1184.1684740662574,
+        1776.252711099386,
+        2368.336948132515,
+        2960.4211851656437,
+        3552.5054221987725,
+        4144.5896592319
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(arg).equals(arg.toString());\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(m).equals(StringDescription.toString(arg));\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return arg.toString().equals(StringDescription.toString(m));\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return m.toString().equals(arg.toString());\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(m).equals(String.valueOf(arg));\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(arg).equals(m.toString());\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(m).equals(arg.toString());\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(m).equals(arg);\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       try {\n            return StringDescription.toString(m).equals(arg.toString());\n        } catch (Exception e) {\n            return false;\n        }\n    }\n",
+        "    private boolean toStringEquals(Matcher m, Object arg) {\n// buggy code\n//         return StringDescription.toString(m).equals(arg.toString());\n       return StringDescription.toString(m).equals(arg.toString()) || arg.toString().equals(StringDescription.toString(m));\n    }\n"
+    ]
+}

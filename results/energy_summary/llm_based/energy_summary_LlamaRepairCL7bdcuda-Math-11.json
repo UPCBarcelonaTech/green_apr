@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-11",
+    "Time": {
+        "mean": 574.1272485256195,
+        "median": 574.1272485256195,
+        "std": 0,
+        "max": 574.1272485256195,
+        "min": 574.1272485256195,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 68348.21660583616,
+        "median": 68348.21660583616,
+        "std": 0,
+        "max": 68348.21660583616,
+        "min": 68348.21660583616,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 29158.695149201158,
+        "median": 29158.695149201158,
+        "std": 0,
+        "max": 29158.695149201158,
+        "min": 29158.695149201158,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        68.0584409236908,
+        131.31704187393188,
+        194.57564282417297,
+        257.83424377441406,
+        321.09284472465515,
+        384.35144567489624,
+        447.61004662513733,
+        510.8686475753784,
+        574.1272485256195
+    ],
+    "Joules_Per_PatchMedian": [
+        11555.549542456865,
+        18654.632925379276,
+        25753.716308301686,
+        32852.79969122409,
+        39951.883074146506,
+        47050.96645706892,
+        54150.049839991334,
+        61249.13322291375,
+        68348.21660583616
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3901.6416086375702,
+        7058.773301208018,
+        10215.904993778466,
+        13373.036686348914,
+        16530.168378919363,
+        19687.30007148981,
+        22844.43176406026,
+        26001.56345663071,
+        29158.695149201158
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.051557779312134,
+        "median": 4.799839973449707,
+        "std": 0.6139783474344386,
+        "max": 6.140014886856079,
+        "min": 4.668745040893555,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 4657.821400871277,
+        "median": 4456.466159534454,
+        "std": 483.1573755565007,
+        "max": 5518.983696091174,
+        "min": 4404.958129358292,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 740.1802297496791,
+        "median": 744.5099160671225,
+        "std": 53.23354329824349,
+        "max": 812.5922576427465,
+        "min": 672.1026004433634,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        63.25860095024109,
+        126.51720190048218,
+        189.77580285072327,
+        253.03440380096436,
+        316.29300475120544,
+        379.55160570144653,
+        442.8102066516876,
+        506.0688076019287,
+        569.3274085521698
+    ],
+    "Val_Joules": [
+        7099.083382922411,
+        14198.16676584482,
+        21297.25014876723,
+        28396.333531689637,
+        35495.416914612055,
+        42594.50029753447,
+        49693.58368045688,
+        56792.6670633793,
+        63891.75044630171
+    ],
+    "Val_JoulesNormalized": [
+        3157.1316925704477,
+        6314.2633851408955,
+        9471.395077711342,
+        12628.526770281791,
+        15785.65846285224,
+        18942.79015542269,
+        22099.921847993137,
+        25257.053540563586,
+        28414.185233134034
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "W",
+        "W",
+        "I",
+        "I",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, -dim / 2.0) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(FastMath.PI, -dim / 2) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, dim / 2) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.exp(FastMath.pow(2 * FastMath.PI, -dim / 2)) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, -dim / 2d) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, -dim / 2D) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.exp(FastMath.pow(2 * FastMath.PI, -dim / 2) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2 * FastMath.PI, -dim) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n",
+        "    public double density(final double[] vals) throws DimensionMismatchException {\n        final int dim = getDimension();\n        if (vals.length != dim) {\n            throw new DimensionMismatchException(vals.length, dim);\n        }\n// buggy code\n//         return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n       return FastMath.pow(2.0 * FastMath.PI, -dim / 2.0) *\n            FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n            getExponentTerm(vals);\n    }\n"
+    ]
+}

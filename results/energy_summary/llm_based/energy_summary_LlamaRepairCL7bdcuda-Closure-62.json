@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-62",
+    "Time": {
+        "mean": 496.22892689704895,
+        "median": 496.22892689704895,
+        "std": 0,
+        "max": 496.22892689704895,
+        "min": 496.22892689704895,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 60025.20807754994,
+        "median": 60025.20807754994,
+        "std": 0,
+        "max": 60025.20807754994,
+        "min": 60025.20807754994,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 27464.209254920486,
+        "median": 27464.209254920486,
+        "std": 0,
+        "max": 27464.209254920486,
+        "min": 27464.209254920486,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        51.54800808429718,
+        100.95699906349182,
+        150.36599004268646,
+        199.7749810218811,
+        249.18397200107574,
+        298.5929629802704,
+        348.001953959465,
+        397.41094493865967,
+        446.8199359178543,
+        496.22892689704895
+    ],
+    "Joules_Per_PatchMedian": [
+        7863.288636022806,
+        13659.057462859153,
+        19454.8262896955,
+        25250.595116531847,
+        31046.363943368196,
+        36842.132770204546,
+        42637.901597040895,
+        48433.67042387724,
+        54229.43925071359,
+        60025.20807754994
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3157.3932248353967,
+        5858.150561511518,
+        8558.907898187641,
+        11259.665234863762,
+        13960.422571539882,
+        16661.179908216003,
+        19361.937244892124,
+        22062.694581568245,
+        24763.451918244366,
+        27464.209254920486
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.184259843826294,
+        "median": 2.139017105102539,
+        "std": 0.10970291573326896,
+        "max": 2.3803539276123047,
+        "min": 2.130958080291748,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2109.61904088974,
+        "median": 2067.5198091864586,
+        "std": 95.00806816031053,
+        "max": 2279.287127161026,
+        "min": 2059.6616456270217,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 452.9867815780639,
+        "median": 456.6358881592748,
+        "std": 7.467262938251296,
+        "max": 460.9347618579866,
+        "min": 443.50506603717804,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        49.40899097919464,
+        98.81798195838928,
+        148.22697293758392,
+        197.63596391677856,
+        247.0449548959732,
+        296.45394587516785,
+        345.8629368543625,
+        395.27192783355713,
+        444.68091881275177,
+        494.0899097919464
+    ],
+    "Val_Joules": [
+        5795.768826836347,
+        11591.537653672694,
+        17387.30648050904,
+        23183.07530734539,
+        28978.844134181738,
+        34774.61296101809,
+        40570.381787854436,
+        46366.150614690785,
+        52161.919441527134,
+        57957.68826836348
+    ],
+    "Val_JoulesNormalized": [
+        2700.7573366761217,
+        5401.514673352243,
+        8102.272010028366,
+        10803.029346704487,
+        13503.786683380607,
+        16204.544020056728,
+        18905.30135673285,
+        21606.05869340897,
+        24306.81603008509,
+        27007.57336676121
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno <= sourceExcerpt.length()) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length() - 1) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length()) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno\n          && charno < sourceExcerpt.length()) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && charno >= 0 && charno < sourceExcerpt.length()) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length() + 1) {\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length()) {\n        b.append(' ');\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length()) {\n        b.append(\"     \");\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length()) {\n        b.append(\"    \");\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n",
+        "  private String format(JSError error, boolean warning) {\n    SourceExcerptProvider source = getSource();\n    String sourceExcerpt = source == null ? null :\n        excerpt.get(\n            source, error.sourceName, error.lineNumber, excerptFormatter);\n    StringBuilder b = new StringBuilder();\n    if (error.sourceName != null) {\n      b.append(error.sourceName);\n      if (error.lineNumber > 0) {\n        b.append(':');\n        b.append(error.lineNumber);\n      }\n      b.append(\": \");\n    }\n    b.append(getLevelName(warning ? CheckLevel.WARNING : CheckLevel.ERROR));\n    b.append(\" - \");\n    b.append(error.description);\n    b.append('\\n');\n    if (sourceExcerpt != null) {\n      b.append(sourceExcerpt);\n      b.append('\\n');\n      int charno = error.getCharno();\n      if (excerpt.equals(LINE)\n// buggy code\n//           && 0 <= charno && charno < sourceExcerpt.length()) {\n         && 0 <= charno && charno < sourceExcerpt.length()) {\n        b.append(\"  \");\n        for (int i = 0; i < charno; i++) {\n          char c = sourceExcerpt.charAt(i);\n          if (Character.isWhitespace(c)) {\n            b.append(c);\n          } else {\n            b.append(' ');\n          }\n        }\n        b.append(\"^\\n\");\n      }\n    }\n    return b.toString();\n  }\n"
+    ]
+}

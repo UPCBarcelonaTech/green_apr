@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-28",
+    "Time": {
+        "mean": 31.940500736236572,
+        "median": 31.940500736236572,
+        "std": 0,
+        "max": 31.940500736236572,
+        "min": 31.940500736236572,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 6905.225365054607,
+        "median": 6905.225365054607,
+        "std": 0,
+        "max": 6905.225365054607,
+        "min": 6905.225365054607,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2207.377226066589,
+        "median": 2207.377226066589,
+        "std": 0,
+        "max": 2207.377226066589,
+        "min": 2207.377226066589,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.870798349380493,
+        31.940500736236572
+    ],
+    "Joules_Per_PatchMedian": [
+        5186.456705355644,
+        6905.225365054607
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1365.5570765733717,
+        2207.377226066589
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 4.005467796325684,
+        "median": 3.801095962524414,
+        "std": 0.5111122117011913,
+        "max": 4.911029100418091,
+        "min": 3.681072950363159,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3653.1785192894936,
+        "median": 3467.688045656681,
+        "std": 402.2798391873537,
+        "max": 4370.3920360326765,
+        "min": 3448.0142458438872,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 553.2856463527678,
+        "median": 523.7369270801541,
+        "std": 59.82052430823069,
+        "max": 650.778595376014,
+        "min": 503.7840138435363,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        14.069702386856079,
+        28.139404773712158
+    ],
+    "Val_Joules": [
+        1718.768659698963,
+        3437.5373193979262
+    ],
+    "Val_JoulesNormalized": [
+        841.8201494932175,
+        1683.640298986435
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           mockCandidateFilter.filterCandidate(mocks, field, fieldInstance);\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).inject();\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           if(mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject()) {\n                break;\n            }\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject(fieldInstance);\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           if (mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject()) {\n                break;\n            }\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           mockCandidateFilter.filterCandidate(mocks, field, awaitingInjectionClazz).thenInject();\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject(field);\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           if(mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject()) {\n                return;\n            }\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           if(mockCandidateFilter.filterCandidate(mocks, field, fieldInstance)) {\n                mocks.add(fieldInstance);\n            }\n        }\n    }\n",
+        "    private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n        for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n// buggy code\n//             mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n           Object candidate = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance);\n            if(candidate != null) {\n                field.set(fieldInstance, candidate);\n            }\n        }\n    }\n"
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-64",
+    "Time": {
+        "mean": 16.388949155807495,
+        "median": 16.388949155807495,
+        "std": 0,
+        "max": 16.388949155807495,
+        "min": 16.388949155807495,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 16314.819538855554,
+        "median": 16314.819538855554,
+        "std": 0,
+        "max": 16314.819538855554,
+        "min": 16314.819538855554,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4050.8537168145212,
+        "median": 4050.8537168145212,
+        "std": 0,
+        "max": 4050.8537168145212,
+        "min": 4050.8537168145212,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 16.55633149147034,
+        "median": 16.388949155807495,
+        "std": 0.39601949194524355,
+        "max": 17.264355182647705,
+        "min": 16.35711693763733,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 16441.211105940343,
+        "median": 16314.819538855554,
+        "std": 294.9816374379876,
+        "max": 16954.232780325416,
+        "min": 16241.2380387187,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 4093.0512439298636,
+        "median": 4050.8537168145212,
+        "std": 86.69143046327216,
+        "max": 4235.96066542864,
+        "min": 4017.5760460734364,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = FastMath.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < solvedCols; ++i) {\n                           }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = Math.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            diag                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = FastMath.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < cols; ++i) {\n            diag[                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = Math.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < cols; ++i) {\n            diag[i                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = Math.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = FastMath.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                lmDir[i] += jac[j][i] / jacNorm[i];\n            }\n        }\n        for (i = 0; i < solvedCols;                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        for (int i = 0; i < solvedCols; ++i) {\n            oldX[i] = x[i];\n            oldRes[i] = res[i];\n        }\n        for (int iter = 0; iter < maxIterations; ++iter) {\n            for (int i = 0; i < solvedCols; ++i) {\n                diag[i] = 0;\n            }\n            for (int i = 0; i < rows; ++i) {\n                for (int j = 0; j < cols; ++j) {\n                    diag[j] += jac[i][j] * jac[i][j];\n                }\n            }\n            for (int i = 0; i < solvedCols; ++i) {\n                diag[i] = Math.sqrt(diag[i]);\n            }\n            for (int i = 0                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = FastMath.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            diag[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                diag[i] += jac[j][i] * jac[j][i];\n            }\n            diag[i] = FastMath.                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n",
+        "    protected VectorialPointValuePair doOptimize()\n        throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n        solvedCols  = Math.min(rows, cols);\n        diagR       = new double[cols];\n        jacNorm     = new double[cols];\n        beta        = new double[cols];\n        permutation = new int[cols];\n        lmDir       = new double[cols];\n        double   delta   = 0;\n        double   xNorm   = 0;\n        double[] diag    = new double[cols];\n        double[] oldX    = new double[cols];\n        double[] oldRes  = new double[rows];\n       double   actRed  = 0;\n        double   preRed  = 0;\n        double   ratio   = 0;\n        double   maxCosine = 0;\n        int      i       = 0;\n        int      j       = 0;\n        int      k       = 0;\n        for (i = 0; i < solvedCols; ++i) {\n            jacNorm[i] = 0;\n            for (j = 0; j < rows; ++j) {\n                jacNorm[i] += jac[j][i] * jac[j][i];\n            }\n            jacNorm[i] = FastMath.sqrt(jacNorm[i]);\n        }\n        for (i = 0; i < solvedCols; ++i) {\n            for (j = 0; j < rows; ++j) {\n                jac[j][i] /= jacNorm[i];\n            }\n        }\n        for (i = 0; i < cols; ++i) {\n            for (                }\n                if ((Math.abs(actRed) <= 2.2204e-16) && (preRed <= 2.2204e-16) && (ratio <= 2.0)) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_COST_RELATIVE_TOLERANCE,\n                            costRelativeTolerance);\n                } else if (delta <= 2.2204e-16 * xNorm) {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE,\n                            parRelativeTolerance);\n                } else if (maxCosine <= 2.2204e-16)  {\n                    throw new OptimizationException(LocalizedFormats.TOO_SMALL_ORTHOGONALITY_TOLERANCE,\n                            orthoTolerance);\n                }\n            }\n        }\n    }\n"
+    ]
+}

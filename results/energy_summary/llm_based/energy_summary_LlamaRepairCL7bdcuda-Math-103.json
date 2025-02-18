@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-103",
+    "Time": {
+        "mean": 60.73791265487671,
+        "median": 60.73791265487671,
+        "std": 0,
+        "max": 60.73791265487671,
+        "min": 60.73791265487671,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8232.29417513013,
+        "median": 8232.29417513013,
+        "std": 0,
+        "max": 8232.29417513013,
+        "min": 8232.29417513013,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2967.2683658599854,
+        "median": 2967.2683658599854,
+        "std": 0,
+        "max": 2967.2683658599854,
+        "min": 2967.2683658599854,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        8.739816188812256,
+        15.239578247070312,
+        21.73934030532837,
+        28.239102363586426,
+        34.73886442184448,
+        41.23862648010254,
+        47.738388538360596,
+        54.23815059661865,
+        60.73791265487671
+    ],
+    "Joules_Per_PatchMedian": [
+        2695.304748278856,
+        3387.428426635265,
+        4079.5521049916742,
+        4771.675783348083,
+        5463.799461704492,
+        6155.9231400609015,
+        6848.0468184173105,
+        7540.17049677372,
+        8232.29417513013
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        625.8926767349244,
+        918.5646378755571,
+        1211.2365990161898,
+        1503.9085601568224,
+        1796.580521297455,
+        2089.252482438088,
+        2381.9244435787205,
+        2674.596404719353,
+        2967.2683658599854
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.4193115711212156,
+        "median": 2.240054130554199,
+        "std": 0.35089680713356974,
+        "max": 2.829838991165161,
+        "min": 2.099198818206787,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2158.4719458413124,
+        "median": 2003.1810699224473,
+        "std": 277.9821229278723,
+        "max": 2483.9643034696574,
+        "min": 1905.000280356407,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 347.6079652523994,
+        "median": 333.22071559429173,
+        "std": 30.813541610307563,
+        "max": 380.8279652357096,
+        "min": 316.5365346193314,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.499762058258057,
+        12.999524116516113,
+        19.49928617477417,
+        25.999048233032227,
+        32.49881029129028,
+        38.99857234954834,
+        45.4983344078064,
+        51.99809646606445,
+        58.49785852432251
+    ],
+    "Val_Joules": [
+        692.1236783564088,
+        1384.247356712818,
+        2076.371035069227,
+        2768.4947134256363,
+        3460.6183917820454,
+        4152.742070138454,
+        4844.8657484948635,
+        5536.989426851273,
+        6229.113105207683
+    ],
+    "Val_JoulesNormalized": [
+        292.6719611406327,
+        585.3439222812653,
+        878.015883421898,
+        1170.6878445625307,
+        1463.3598057031634,
+        1756.0317668437963,
+        2048.703727984429,
+        2341.3756891250614,
+        2634.047650265694
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           return 0.5 * (1.0 + Erf.erf((x - getMean()) /\n                    (getStandardDeviation() * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n       return 0.5 * (1.0 + Erf.erf((x - mean) /\n                (standardDeviation * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           double z = (x - mean) / (standardDeviation * Math.sqrt(2.0));\n            return 0.5 * (1.0 + Erf.erf(z));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           return 0.5 + 0.5 * Erf.erf((x - mean) /\n                    (standardDeviation * Math.sqrt(2.0)));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           return 0.5 * (1.0 + Erf.erf((x - mean) /\n                    (standardDeviation * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n       return 0.5 * (1.0 + Erf.erf((x - getMean()) /\n                (getStandardDeviation() * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n       return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));\n    }\n",
+        "    public double cumulativeProbability(double x) throws MathException {\n// buggy code\n//             return 0.5 * (1.0 + Erf.erf((x - mean) /\n//                     (standardDeviation * Math.sqrt(2.0))));\n           return 0.5 * (1.0 + Erf.erf((x - mean) /\n                    (Math.sqrt(2.0) * standardDeviation)));\n    }\n"
+    ]
+}

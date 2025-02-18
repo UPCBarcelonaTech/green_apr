@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-81",
+    "Time": {
+        "mean": 335.5477178096771,
+        "median": 335.5477178096771,
+        "std": 0,
+        "max": 335.5477178096771,
+        "min": 335.5477178096771,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 39911.98320543766,
+        "median": 39911.98320543766,
+        "std": 0,
+        "max": 39911.98320543766,
+        "min": 39911.98320543766,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 17922.808354389665,
+        "median": 17922.808354389665,
+        "std": 0,
+        "max": 17922.808354389665,
+        "min": 17922.808354389665,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        43.796926498413086,
+        85.4756109714508,
+        127.15429544448853,
+        168.83297991752625,
+        210.51166439056396,
+        252.19034886360168,
+        293.8690333366394,
+        335.5477178096771
+    ],
+    "Joules_Per_PatchMedian": [
+        6787.816502565146,
+        11519.84031726122,
+        16251.864131957293,
+        20983.887946653365,
+        25715.911761349438,
+        30447.93557604551,
+        35179.959390741584,
+        39911.98320543766
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2648.585640138388,
+        4830.61745646,
+        7012.649272781611,
+        9194.681089103222,
+        11376.712905424833,
+        13558.744721746443,
+        15740.776538068054,
+        17922.808354389665
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.144095230102539,
+        "median": 2.118242025375366,
+        "std": 0.06675551900687471,
+        "max": 2.263123035430908,
+        "min": 2.109025001525879,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2079.8911650872233,
+        "median": 2055.7926878690723,
+        "std": 52.68201822156961,
+        "max": 2173.514373290539,
+        "min": 2050.216001677513,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 463.2812057828904,
+        "median": 466.55382381677646,
+        "std": 5.940172808845425,
+        "max": 467.99513738155383,
+        "min": 453.777296710015,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        41.67868447303772,
+        83.35736894607544,
+        125.03605341911316,
+        166.71473789215088,
+        208.3934223651886,
+        250.07210683822632,
+        291.75079131126404,
+        333.42947578430176
+    ],
+    "Val_Joules": [
+        4732.023814696074,
+        9464.047629392147,
+        14196.07144408822,
+        18928.09525878429,
+        23660.119073480368,
+        28392.142888176437,
+        33124.16670287251,
+        37856.19051756859
+    ],
+    "Val_JoulesNormalized": [
+        2182.0318163216116,
+        4364.063632643223,
+        6546.095448964835,
+        8728.127265286446,
+        10910.159081608057,
+        13092.190897929668,
+        15274.222714251278,
+        17456.25453057289
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(name = new Name());\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(name);\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(new Name());\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       isUnnamedFunction = true;\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(null);\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(\"\");\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(new Name(\"\"));\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(new Name());\n        functionNode.getFunctionName().setIdentifier(\"\");\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n",
+        "    Node processFunctionNode(FunctionNode functionNode) {\n      Name name = functionNode.getFunctionName();\n      Boolean isUnnamedFunction = false;\n      if (name == null) {\n// buggy code\n// \n       functionNode.setFunctionName(name = new Name());\n        name.setIdentifier(\"\");\n        name = new Name();\n        name.setIdentifier(\"\");\n        isUnnamedFunction = true;\n      }\n      Node node = newNode(Token.FUNCTION);\n      Node newName = transform(name);\n      if (isUnnamedFunction) {\n        newName.setLineno(functionNode.getLineno());\n        int lpColumn = functionNode.getAbsolutePosition() +\n            functionNode.getLp();\n        newName.setCharno(position2charno(lpColumn));\n      }\n      node.addChildToBack(newName);\n      Node lp = newNode(Token.LP);\n      Name fnName = functionNode.getFunctionName();\n      if (fnName != null) {\n        lp.setLineno(fnName.getLineno());\n      } else {\n        lp.setLineno(functionNode.getLineno());\n      }\n      int lparenCharno = functionNode.getLp() +\n          functionNode.getAbsolutePosition();\n      lp.setCharno(position2charno(lparenCharno));\n      for (AstNode param : functionNode.getParams()) {\n        lp.addChildToBack(transform(param));\n      }\n      node.addChildToBack(lp);\n      Node bodyNode = transform(functionNode.getBody());\n      parseDirectives(bodyNode);\n      node.addChildToBack(bodyNode);\n     return node;\n    }\n"
+    ]
+}

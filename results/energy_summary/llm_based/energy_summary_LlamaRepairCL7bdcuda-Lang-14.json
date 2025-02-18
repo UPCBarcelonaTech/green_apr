@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-14",
+    "Time": {
+        "mean": 114.29912042617798,
+        "median": 114.29912042617798,
+        "std": 0,
+        "max": 114.29912042617798,
+        "min": 114.29912042617798,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 12090.973222553728,
+        "median": 12090.973222553728,
+        "std": 0,
+        "max": 12090.973222553728,
+        "min": 12090.973222553728,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3684.7439864993094,
+        "median": 3684.7439864993094,
+        "std": 0,
+        "max": 3684.7439864993094,
+        "min": 3684.7439864993094,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.409794926643372,
+        24.619719982147217,
+        35.82964503765106,
+        47.03957009315491,
+        58.24949514865875,
+        69.4594202041626,
+        80.66934525966644,
+        91.87927031517029,
+        103.08919537067413,
+        114.29912042617798
+    ],
+    "Joules_Per_PatchMedian": [
+        3041.742585325241,
+        4047.2126561284067,
+        5052.682726931572,
+        6058.152797734737,
+        7063.622868537902,
+        8069.092939341067,
+        9074.563010144233,
+        10080.033080947398,
+        11085.503151750563,
+        12090.973222553728
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        702.2356326997281,
+        1033.6254497885704,
+        1365.0152668774128,
+        1696.4050839662552,
+        2027.7949010550976,
+        2359.18471814394,
+        2690.574535232782,
+        3021.9643523216246,
+        3353.354169410467,
+        3684.7439864993094
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.455912971496582,
+        "median": 2.1998698711395264,
+        "std": 0.3644905708407423,
+        "max": 2.859886884689331,
+        "min": 2.170037031173706,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2231.0221561789513,
+        "median": 2036.2725145220757,
+        "std": 294.27378247184055,
+        "max": 2556.6330709815024,
+        "min": 1983.6173371791838,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 377.948946416378,
+        "median": 370.84581561088567,
+        "std": 13.114848090989117,
+        "max": 394.51730127334577,
+        "min": 367.23360646963124,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        11.209925055503845,
+        22.41985011100769,
+        33.629775166511536,
+        44.83970022201538,
+        56.049625277519226,
+        67.25955033302307,
+        78.46947538852692,
+        89.67940044403076,
+        100.8893254995346,
+        112.09925055503845
+    ],
+    "Val_Joules": [
+        1005.4700708031655,
+        2010.940141606331,
+        3016.410212409496,
+        4021.880283212661,
+        5027.350354015826,
+        6032.820424818991,
+        7038.290495622157,
+        8043.760566425322,
+        9049.230637228487,
+        10054.700708031653
+    ],
+    "Val_JoulesNormalized": [
+        331.3898170888424,
+        662.7796341776848,
+        994.1694512665272,
+        1325.5592683553696,
+        1656.949085444212,
+        1988.3389025330541,
+        2319.7287196218967,
+        2651.118536710739,
+        2982.5083537995815,
+        3313.898170888424
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       return cs1.toString().equals(cs2.toString());\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int cs1Length = cs1.length();\n        if (cs1Length != cs2.length()) {\n            return false;\n        }\n        for (int i = 0; i < cs1Length; i++) {\n            if (cs1.charAt(i) != cs2.charAt(i)) {\n                return false;\n            }\n        }\n        return true;\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int length = cs1.length();\n        if (length != cs2.length()) {\n            return false;\n        }\n        for (int i = 0; i < length; i++) {\n            if (cs1.charAt(i) != cs2.charAt(i)) {\n                return false;\n            }\n        }\n        return true;\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       return cs1.equals(cs2);\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int length = cs1.length();\n        if (length == cs2.length()) {\n            for (int i = 0; i < length; i++) {\n                if (cs1.charAt(i) != cs2.charAt(i)) {\n                    return false;\n                }\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       if (cs1.length() != cs2.length()) {\n            return false;\n        }\n        return cs1.equals(cs2);\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int cs1Length = cs1.length();\n        int cs2Length = cs2.length();\n        if (cs1Length != cs2Length) {\n            return false;\n        }\n        if (cs1Length == 0) {\n            return true;\n        }\n        return cs1.equals(cs2);\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int cs1Length = cs1.length();\n        int cs2Length = cs2.length();\n        if (cs1Length != cs2Length) {\n            return false;\n        }\n        return cs1.equals(cs2);\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       return cs1.length() == cs2.length() && cs1.equals(cs2);\n    }\n",
+        "    public static boolean equals(CharSequence cs1, CharSequence cs2) {\n        if (cs1 == cs2) {\n            return true;\n        }\n        if (cs1 == null || cs2 == null) {\n            return false;\n        }\n// buggy code\n//             return cs1.equals(cs2);\n       int length = cs1.length();\n        if (length == cs2.length()) {\n            for (int i = 0; i < length; i++) {\n                if (cs1.charAt(i) != cs2.charAt(i)) {\n                    return false;\n                }\n            }\n            return true;\n        } else {\n            return false;\n        }\n    }\n"
+    ]
+}

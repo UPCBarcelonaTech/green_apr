@@ -1,0 +1,129 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-19",
+    "Time": {
+        "mean": 91.90671586990356,
+        "median": 91.90671586990356,
+        "std": 0,
+        "max": 91.90671586990356,
+        "min": 91.90671586990356,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 15409.669915616512,
+        "median": 15409.669915616512,
+        "std": 0,
+        "max": 15409.669915616512,
+        "min": 15409.669915616512,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 5400.165404963492,
+        "median": 5400.165404963492,
+        "std": 0,
+        "max": 5400.165404963492,
+        "min": 5400.165404963492,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        49.06789994239807,
+        91.90671586990356
+    ],
+    "Joules_Per_PatchMedian": [
+        10747.690736413002,
+        15409.669915616512
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3372.7878600716576,
+        5400.165404963492
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 6.358772325515747,
+        "median": 6.229084014892578,
+        "std": 0.1963748906529475,
+        "max": 6.6298508644104,
+        "min": 6.210065841674805,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 6122.340096569061,
+        "median": 6085.711557209492,
+        "std": 129.46145053701366,
+        "max": 6276.587778615951,
+        "min": 5980.900099158287,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1363.3761010742182,
+        "median": 1345.4103151798236,
+        "std": 55.79131119027262,
+        "max": 1445.3331495404245,
+        "min": 1301.612187170982,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        42.83881592750549,
+        85.67763185501099
+    ],
+    "Val_Joules": [
+        4661.97917920351,
+        9323.95835840702
+    ],
+    "Val_JoulesNormalized": [
+        2027.377544891834,
+        4054.755089783668
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               return;\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               break;\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               inputSigma = null;\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               initPoint = init;\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               if (init.length != lB.length) {\n                    throw new DimensionMismatchException(init.length, lB.length);\n                }\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               lowerBound = lB;\n                upperBound = uB;\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               if (lB.length != uB.length) {\n                    throw new DimensionMismatchException(lB.length, uB.length);\n                }\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               if (boundaries[0].length != boundaries[1].length) {\n                    throw new DimensionMismatchException(boundaries[0].length, boundaries[1].length);\n                }\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n",
+        "    private void checkParameters() {\n        final double[] init = getStartPoint();\n        final double[] lB = getLowerBound();\n        final double[] uB = getUpperBound();\n        boolean hasFiniteBounds = false;\n        for (int i = 0; i < lB.length; i++) {\n            if (!Double.isInfinite(lB[i]) ||\n                !Double.isInfinite(uB[i])) {\n                hasFiniteBounds = true;\n                break;\n            }\n        }\n        boolean hasInfiniteBounds = false;\n        if (hasFiniteBounds) {\n            for (int i = 0; i < lB.length; i++) {\n                if (Double.isInfinite(lB[i]) ||\n                    Double.isInfinite(uB[i])) {\n                    hasInfiniteBounds = true;\n                    break;\n                }\n            }\n            if (hasInfiniteBounds) {\n                throw new MathUnsupportedOperationException();\n            } else {\n                boundaries = new double[2][];\n                boundaries[0] = lB;\n                boundaries[1] = uB;\n// buggy code\n// \n               for (int i = 0; i < lB.length; i++) {\n                    if (lB[i] > uB[i]) {\n                        throw new NumberIsTooSmallException(lB[i], uB[i], false);\n                    }\n                }\n            }\n        } else {\n            boundaries = null;\n        }\n        if (inputSigma != null) {\n            if (inputSigma.length != init.length) {\n                throw new DimensionMismatchException(inputSigma.length, init.length);\n            }\n            for (int i = 0; i < init.length; i++) {\n                if (inputSigma[i] < 0) {\n                    throw new NotPositiveException(inputSigma[i]);\n                }\n                if (boundaries != null) {\n                    if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {\n                        throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);\n                    }\n                }\n            }\n        }\n    }\n"
+    ]
+}

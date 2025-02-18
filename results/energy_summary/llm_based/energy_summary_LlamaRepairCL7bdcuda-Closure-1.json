@@ -1,0 +1,165 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-1",
+    "Time": {
+        "mean": 548.4239625930786,
+        "median": 548.4239625930786,
+        "std": 0,
+        "max": 548.4239625930786,
+        "min": 548.4239625930786,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 65652.43144102098,
+        "median": 65652.43144102098,
+        "std": 0,
+        "max": 65652.43144102098,
+        "min": 65652.43144102098,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 29815.99125746489,
+        "median": 29815.99125746489,
+        "std": 0,
+        "max": 29815.99125746489,
+        "min": 29815.99125746489,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        69.70781230926514,
+        138.09583377838135,
+        206.48385524749756,
+        274.87187671661377,
+        343.25989818573,
+        411.6479196548462,
+        480.0359411239624,
+        548.4239625930786
+    ],
+    "Joules_Per_PatchMedian": [
+        9319.005942827464,
+        17366.638156855108,
+        25414.27037088275,
+        33461.90258491039,
+        41509.53479893804,
+        49557.167012965685,
+        57604.79922699333,
+        65652.43144102098
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3949.449522870779,
+        7644.669770669938,
+        11339.890018469096,
+        15035.110266268253,
+        18730.330514067413,
+        22425.550761866572,
+        26120.771009665732,
+        29815.99125746489
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.3605234146118164,
+        "median": 1.3197908401489258,
+        "std": 0.10658948683232039,
+        "max": 1.5506861209869385,
+        "min": 1.3010261058807373,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1308.9291776680946,
+        "median": 1271.3737287998201,
+        "std": 87.52844221863455,
+        "max": 1465.3746958374977,
+        "min": 1263.7250175476074,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 252.5777544856071,
+        "median": 254.22927507162092,
+        "std": 9.724655611887055,
+        "max": 262.6625404000281,
+        "min": 236.71246150732009,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        68.38802146911621,
+        136.77604293823242,
+        205.16406440734863,
+        273.55208587646484,
+        341.94010734558105,
+        410.32812881469727,
+        478.7161502838135,
+        547.1041717529297
+    ],
+    "Val_Joules": [
+        8047.632214027643,
+        16095.264428055289,
+        24142.89664208293,
+        32190.528856110574,
+        40238.161070138216,
+        48285.79328416586,
+        56333.42549819351,
+        64381.057712221154
+    ],
+    "Val_JoulesNormalized": [
+        3695.220247799158,
+        7390.440495598317,
+        11085.660743397475,
+        14780.880991196633,
+        18476.10123899579,
+        22171.32148679495,
+        25866.54173459411,
+        29561.76198239327
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (fnScope.isGlobal()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (fnScope == null) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (referenced.isEmpty()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (fnScope.getRootNode() == null) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (fnScope.isModuleScope()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (!fnScope.isGlobal()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (!fnScope.isFunctionScope()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   if (fnScope.isLocal()) {\n      return;\n    }\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n",
+        "  private void removeUnreferencedFunctionArgs(Scope fnScope) {\n// buggy code\n// \n   Preconditions.checkNotNull(fnScope);\n    Node function = fnScope.getRootNode();\n    Preconditions.checkState(function.isFunction());\n    if (NodeUtil.isGetOrSetKey(function.getParent())) {\n      return;\n    }\n    Node argList = getFunctionArgList(function);\n    boolean modifyCallers = modifyCallSites\n        && callSiteOptimizer.canModifyCallers(function);\n    if (!modifyCallers) {\n      Node lastArg;\n      while ((lastArg = argList.getLastChild()) != null) {\n        Var var = fnScope.getVar(lastArg.getString());\n        if (!referenced.contains(var)) {\n          argList.removeChild(lastArg);\n          compiler.reportCodeChange();\n        } else {\n          break;\n        }\n      }\n    } else {\n      callSiteOptimizer.optimize(fnScope, referenced);\n    }\n  }\n"
+    ]
+}

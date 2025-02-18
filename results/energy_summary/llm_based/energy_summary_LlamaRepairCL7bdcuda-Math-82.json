@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-82",
+    "Time": {
+        "mean": 73.1867024898529,
+        "median": 73.1867024898529,
+        "std": 0,
+        "max": 73.1867024898529,
+        "min": 73.1867024898529,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9896.753476929665,
+        "median": 9896.753476929665,
+        "std": 0,
+        "max": 9896.753476929665,
+        "min": 9896.753476929665,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4428.542539417744,
+        "median": 4428.542539417744,
+        "std": 0,
+        "max": 4428.542539417744,
+        "min": 4428.542539417744,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        8.388903617858887,
+        15.588659048080444,
+        22.788414478302002,
+        29.98816990852356,
+        37.18792533874512,
+        44.387680768966675,
+        51.58743619918823,
+        58.78719162940979,
+        65.98694705963135,
+        73.1867024898529
+    ],
+    "Joules_Per_PatchMedian": [
+        2006.9957911610604,
+        2883.635534024239,
+        3760.275276887417,
+        4636.915019750595,
+        5513.554762613773,
+        6390.194505476951,
+        7266.834248340129,
+        8143.473991203307,
+        9020.113734066486,
+        9896.753476929665
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        656.372844749689,
+        1075.5028108239173,
+        1494.6327768981457,
+        1913.762742972374,
+        2332.8927090466022,
+        2752.0226751208306,
+        3171.152641195059,
+        3590.2826072692874,
+        4009.4125733435158,
+        4428.542539417744
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.2554866313934325,
+        "median": 1.189148187637329,
+        "std": 0.12904375890237307,
+        "max": 1.4099969863891602,
+        "min": 1.139096975326538,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1184.0305027103425,
+        "median": 1130.3560482978821,
+        "std": 102.34533485668838,
+        "max": 1307.232751274109,
+        "min": 1093.3804014325142,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 245.3931768226624,
+        "median": 237.2428786754607,
+        "std": 12.10954142372952,
+        "max": 259.4639906883242,
+        "min": 235.98210810422893,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.199755430221558,
+        14.399510860443115,
+        21.599266290664673,
+        28.79902172088623,
+        35.99877715110779,
+        43.198532581329346,
+        50.3982880115509,
+        57.59804344177246,
+        64.79779887199402,
+        71.99755430221558
+    ],
+    "Val_Joules": [
+        876.6397428631783,
+        1753.2794857263568,
+        2629.919228589535,
+        3506.558971452713,
+        4383.198714315891,
+        5259.838457179069,
+        6136.478200042247,
+        7013.1179429054255,
+        7889.7576857686045,
+        8766.397428631783
+    ],
+    "Val_JoulesNormalized": [
+        419.12996607422826,
+        838.2599321484566,
+        1257.3898982226851,
+        1676.5198642969135,
+        2095.6498303711414,
+        2514.77979644537,
+        2933.909762519598,
+        3353.0397285938266,
+        3772.169694668055,
+        4191.299660742283
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) <= 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) != 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (entry != 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) < 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (entry > 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) != 1) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0.0, epsilon) >= 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) != -1) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n",
+        "    private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n        double minRatio = Double.MAX_VALUE;\n        Integer minRatioPos = null;\n        for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n            final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n            final double entry = tableau.getEntry(i, col);\n// buggy code\n//             if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n           if (MathUtils.compareTo(entry, 0, epsilon) == 0) {\n                final double ratio = rhs / entry;\n                if (ratio < minRatio) {\n                    minRatio = ratio;\n                    minRatioPos = i; \n                }\n            }\n        }\n        return minRatioPos;\n    }\n"
+    ]
+}

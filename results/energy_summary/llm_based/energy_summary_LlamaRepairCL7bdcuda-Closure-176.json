@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-176",
+    "Time": {
+        "mean": 13.464231014251709,
+        "median": 13.464231014251709,
+        "std": 0,
+        "max": 13.464231014251709,
+        "min": 13.464231014251709,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 13465.300738942622,
+        "median": 13465.300738942622,
+        "std": 0,
+        "max": 13465.300738942622,
+        "min": 13465.300738942622,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2714.9350882887848,
+        "median": 2714.9350882887848,
+        "std": 0,
+        "max": 2714.9350882887848,
+        "min": 2714.9350882887848,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 13.877503776550293,
+        "median": 13.464231014251709,
+        "std": 0.9363858458319007,
+        "max": 15.552239894866943,
+        "min": 13.438036918640137,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 13751.370147943497,
+        "median": 13465.300738942622,
+        "std": 766.0178683712252,
+        "max": 15105.404612529277,
+        "min": 13212.994783473016,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2732.227446260453,
+        "median": 2714.9350882887848,
+        "std": 192.7804644028701,
+        "max": 2965.093702375889,
+        "min": 2510.0548588156707,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       left.setJSType(resultType);\n        boolean isVarDeclaration = left.hasChildren();\n        boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       left.setJSType(leftType == null ? unknownType : leftType);\n        boolean isVarDeclaration = left.hasChildren();\n        boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       left.setJSType(leftType == null ? resultType : leftType);\n        boolean isVarDeclaration = left.hasChildren();\n        boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       boolean isVarTypeBetter = var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(isVarTypeBetter || leftType == null ?\n            resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       boolean isVarTypeBetter = var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(leftType == null ?\n            resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       if (var == null || var.isTypeInferred()) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(leftType == null ?\n            resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       if (var == null || var.isTypeInferred()) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(leftType == null ? resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       boolean isVarTypeBetter = var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(leftType == null ? resultType : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n",
+        "  private void updateScopeForTypeChange(\n      FlowScope scope, Node left, JSType leftType, JSType resultType) {\n    Preconditions.checkNotNull(resultType);\n    switch (left.getType()) {\n      case Token.NAME:\n        String varName = left.getString();\n        Var var = syntacticScope.getVar(varName);\n// buggy code\n//         boolean isVarDeclaration = left.hasChildren();\n//         boolean isVarTypeBetter = !isVarDeclaration || var == null || var.isTypeInferred();\n//         if (isVarTypeBetter) {\n//           redeclareSimpleVar(scope, left, resultType);\n//         }\n//         left.setJSType(isVarDeclaration || leftType == null ?\n//             resultType : null);\n       boolean isVarTypeBetter = var == null || var.isTypeInferred();\n        if (isVarTypeBetter) {\n          redeclareSimpleVar(scope, left, resultType);\n        }\n        left.setJSType(leftType == null ?\n            (isVarTypeBetter ? resultType : leftType) : null);\n        if (var != null && var.isTypeInferred()) {\n          JSType oldType = var.getType();\n          var.setType(oldType == null ?\n              resultType : oldType.getLeastSupertype(resultType));\n        }\n        break;\n      case Token.GETPROP:\n        String qualifiedName = left.getQualifiedName();\n        if (qualifiedName != null) {\n          scope.inferQualifiedSlot(left, qualifiedName,\n              leftType == null ? unknownType : leftType,\n              resultType);\n        }\n        left.setJSType(resultType);\n        ensurePropertyDefined(left, resultType);\n        break;\n    }\n  }\n"
+    ]
+}

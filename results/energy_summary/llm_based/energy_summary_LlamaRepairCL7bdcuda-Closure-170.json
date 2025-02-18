@@ -1,0 +1,111 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-170",
+    "Time": {
+        "mean": 2.6009647846221924,
+        "median": 2.6009647846221924,
+        "std": 0,
+        "max": 2.6009647846221924,
+        "min": 2.6009647846221924,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 2402.4142381787296,
+        "median": 2402.4142381787296,
+        "std": 0,
+        "max": 2402.4142381787296,
+        "min": 2402.4142381787296,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 443.4245051741598,
+        "median": 443.4245051741598,
+        "std": 0,
+        "max": 443.4245051741598,
+        "min": 443.4245051741598,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [],
+    "Joules_Per_PatchMedian": [],
+    "JoulesNormalized_Per_PatchMedian": [],
+    "Inf_ExecutionTime": {
+        "mean": 2.6005889892578127,
+        "median": 2.6009647846221924,
+        "std": 0.05795922186223093,
+        "max": 2.6610121726989746,
+        "min": 2.520020008087158,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2401.9775392675397,
+        "median": 2402.4142381787296,
+        "std": 43.68215430471204,
+        "max": 2450.596727633476,
+        "min": 2341.2422983646393,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 442.12230055808993,
+        "median": 443.4245051741598,
+        "std": 4.245152162287079,
+        "max": 445.8235534191126,
+        "min": 436.1071722507479,
+        "count": 5
+    },
+    "Val_ExecutionTime": [],
+    "Val_Joules": [],
+    "Val_JoulesNormalized": [],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            if (!(parent.isAssign() &&\n                (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n            }\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            if (!(parent.isAssign() &&\n                 (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n            }\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            if (!(parent.isAssign() && (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n            }\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            if (!(parent.isAssign() &&\n                  (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n            }\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            numUsesWithinCfgNode++;\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)\n              && !(parent.isAssign() && (parent.getFirstChild() == n))) {\n            numUsesWithinCfgNode++;\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName)) {\n            if (!(parent.isAssign() &&\n                (parent.getFirstChild() == n))) {\n                numUsesWithinCfgNode++;\n            }\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName) &&\n              !(parent.isAssign() &&\n               (parent.getFirstChild() == n))) {\n            numUsesWithinCfgNode++;\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName) &&\n              !(parent.isAssign() &&\n               (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n          }\n          if (n.isGetProp() && n.getFirstChild().getString().equals(varName)) {\n              numUsesWithinCfgNode++;\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n",
+        "    private void getNumUseInUseCfgNode(final Node cfgNode) {\n      numUsesWithinCfgNode = 0;\n      AbstractCfgNodeTraversalCallback gatherCb =\n          new AbstractCfgNodeTraversalCallback() {\n        @Override\n        public void visit(NodeTraversal t, Node n, Node parent) {\n// buggy code\n//           if (n.isName() && n.getString().equals(varName) &&\n//               !(parent.isAssign() &&\n//                (parent.getFirstChild() == n))) {\n//               numUsesWithinCfgNode++;\n//           }\n         if (n.isName() && n.getString().equals(varName) &&\n              !(parent.isAssign() &&\n               (parent.getFirstChild() == n))) {\n              numUsesWithinCfgNode++;\n          }\n          if (parent.isAssign() &&\n           (parent.getFirstChild() == n)) {\n              numUsesWithinCfgNode--;\n          }\n        }\n      };\n      NodeTraversal.traverse(compiler, cfgNode, gatherCb);\n    }\n"
+    ]
+}

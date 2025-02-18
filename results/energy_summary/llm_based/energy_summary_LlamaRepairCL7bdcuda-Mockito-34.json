@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-34",
+    "Time": {
+        "mean": 107.49635708332062,
+        "median": 107.49635708332062,
+        "std": 0,
+        "max": 107.49635708332062,
+        "min": 107.49635708332062,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 14321.891117423775,
+        "median": 14321.891117423775,
+        "std": 0,
+        "max": 14321.891117423775,
+        "min": 14321.891117423775,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 6875.224207848311,
+        "median": 6875.224207848311,
+        "std": 0,
+        "max": 6875.224207848311,
+        "min": 6875.224207848311,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        12.858780980110168,
+        24.688477993011475,
+        36.51817500591278,
+        48.34787201881409,
+        60.17756903171539,
+        72.0072660446167,
+        83.836963057518,
+        95.66666007041931,
+        107.49635708332062
+    ],
+    "Joules_Per_PatchMedian": [
+        2440.4664993226525,
+        3925.6445765852923,
+        5410.822653847932,
+        6896.000731110572,
+        8381.178808373212,
+        9866.356885635852,
+        11351.534962898493,
+        12836.713040161134,
+        14321.891117423775
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        915.934717005491,
+        1660.8459033608433,
+        2405.757089716196,
+        3150.6682760715485,
+        3895.579462426901,
+        4640.490648782254,
+        5385.401835137606,
+        6130.313021492959,
+        6875.224207848311
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.1359125614166259,
+        "median": 1.0290839672088623,
+        "std": 0.16341036366277523,
+        "max": 1.3189818859100342,
+        "min": 1.000581979751587,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1032.7455284118653,
+        "median": 955.2884220600126,
+        "std": 127.12635948337888,
+        "max": 1172.7593400478363,
+        "min": 924.1499779820442,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 176.72030566692342,
+        "median": 171.0235306501387,
+        "std": 13.312413456948365,
+        "max": 192.8876970052719,
+        "min": 163.40749877691258,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        11.829697012901306,
+        23.659394025802612,
+        35.48909103870392,
+        47.318788051605225,
+        59.14848506450653,
+        70.97818207740784,
+        82.80787909030914,
+        94.63757610321045,
+        106.46727311611176
+    ],
+    "Val_Joules": [
+        1485.1780772626398,
+        2970.3561545252796,
+        4455.534231787919,
+        5940.712309050559,
+        7425.890386313199,
+        8911.06846357584,
+        10396.246540838481,
+        11881.424618101122,
+        13366.602695363763
+    ],
+    "Val_JoulesNormalized": [
+        744.9111863553524,
+        1489.8223727107047,
+        2234.7335590660573,
+        2979.64474542141,
+        3724.5559317767625,
+        4469.467118132115,
+        5214.378304487467,
+        5959.28949084282,
+        6704.200677198172
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "I",
+        "W",
+        "C",
+        "C",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct"
+    ],
+    "patches": [
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments && i.getArguments().length > k) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m != null && m instanceof CapturesArguments) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments && i.getArguments()[k] != null) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments && k < i.getArguments().length) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments && i.getArguments().length >= k) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments &&\n                    i.getArguments().length > k) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments\n                    && i.getArguments().length > k) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (k < i.getArguments().length && m instanceof CapturesArguments) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n           if (m instanceof CapturesArguments && i.getArguments()[k] instanceof Object[]) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n",
+        "    public void captureArgumentsFrom(Invocation i) {\n        int k = 0;\n        for (Matcher m : matchers) {\n// buggy code\n//             if (m instanceof CapturesArguments) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n            k++;\n        }\n    }\n"
+    ]
+}

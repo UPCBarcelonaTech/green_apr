@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-8",
+    "Time": {
+        "mean": 623.6611150503159,
+        "median": 623.6611150503159,
+        "std": 0,
+        "max": 623.6611150503159,
+        "min": 623.6611150503159,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 82599.04409345388,
+        "median": 82599.04409345388,
+        "std": 0,
+        "max": 82599.04409345388,
+        "min": 82599.04409345388,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 35460.059841930866,
+        "median": 35460.059841930866,
+        "std": 0,
+        "max": 35460.059841930866,
+        "min": 35460.059841930866,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        78.951691031456,
+        147.04036903381348,
+        215.12904703617096,
+        283.21772503852844,
+        351.3064030408859,
+        419.3950810432434,
+        487.4837590456009,
+        555.5724370479584,
+        623.6611150503159
+    ],
+    "Joules_Per_PatchMedian": [
+        18308.124608170983,
+        26344.489543831347,
+        34380.85447949171,
+        42417.219415152074,
+        50453.58435081244,
+        58489.9492864728,
+        66526.31422213317,
+        74562.67915779352,
+        82599.04409345388
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5726.552498066426,
+        9443.24091604948,
+        13159.929334032535,
+        16876.61775201559,
+        20593.306169998647,
+        24309.994587981702,
+        28026.68300596476,
+        31743.371423947814,
+        35460.059841930866
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 11.439203023910522,
+        "median": 10.86301302909851,
+        "std": 1.4153515406028438,
+        "max": 13.95306396484375,
+        "min": 10.578090190887451,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 10771.11408326149,
+        "median": 10271.759672510623,
+        "std": 1157.8952250221096,
+        "max": 12823.97481327057,
+        "min": 10058.866932463647,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 2043.6116581082342,
+        "median": 2009.864080083371,
+        "std": 88.43372894112322,
+        "max": 2172.2057825088505,
+        "min": 1942.2983289957056,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        68.08867800235748,
+        136.17735600471497,
+        204.26603400707245,
+        272.35471200942993,
+        340.4433900117874,
+        408.5320680141449,
+        476.6207460165024,
+        544.7094240188599,
+        612.7981020212173
+    ],
+    "Val_Joules": [
+        8036.36493566036,
+        16072.729871320724,
+        24109.094806981087,
+        32145.45974264145,
+        40181.82467830181,
+        48218.18961396218,
+        56254.55454962254,
+        64290.919485282895,
+        72327.28442094325
+    ],
+    "Val_JoulesNormalized": [
+        3716.688417983055,
+        7433.37683596611,
+        11150.065253949164,
+        14866.75367193222,
+        18583.442089915276,
+        22300.13050789833,
+        26016.818925881387,
+        29733.507343864443,
+        33450.1957618475
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(final int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES, sampleSize);\n        }\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(int sampleSize) {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(int sampleSize) {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public final T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final Object[] out = new Object[sampleSize];\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(int sampleSize) {\n        final T[] out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n   public T[] sample(final int sampleSize) throws NotStrictlyPositiveException {\n        if (sampleSize <= 0) {\n            throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                    sampleSize);\n        }\n        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n",
+        "// buggy code\n//     public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n//         if (sampleSize <= 0) {\n//             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n//                     sampleSize);\n//         }\n//         final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n        for (int i = 0; i < sampleSize; i++) {\n            out[i] = sample();\n        }\n        return out;\n    }\n"
+    ]
+}

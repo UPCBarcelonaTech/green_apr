@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-80",
+    "Time": {
+        "mean": 66.11928963661194,
+        "median": 66.11928963661194,
+        "std": 0,
+        "max": 66.11928963661194,
+        "min": 66.11928963661194,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 8840.511319708825,
+        "median": 8840.511319708825,
+        "std": 0,
+        "max": 8840.511319708825,
+        "min": 8840.511319708825,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 3968.875192260743,
+        "median": 3968.875192260743,
+        "std": 0,
+        "max": 3968.875192260743,
+        "min": 3968.875192260743,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        8.19900918006897,
+        15.43904423713684,
+        22.679079294204712,
+        29.919114351272583,
+        37.159149408340454,
+        44.399184465408325,
+        51.639219522476196,
+        58.87925457954407,
+        66.11928963661194
+    ],
+    "Joules_Per_PatchMedian": [
+        1788.3693105459213,
+        2669.887061691284,
+        3551.4048128366467,
+        4432.92256398201,
+        5314.440315127373,
+        6195.958066272736,
+        7077.475817418099,
+        7958.993568563462,
+        8840.511319708825
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        598.1032814025882,
+        1019.4497702598576,
+        1440.796259117127,
+        1862.1427479743963,
+        2283.4892368316655,
+        2704.835725688935,
+        3126.1822145462042,
+        3547.5287034034736,
+        3968.875192260743
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 0.9877493381500244,
+        "median": 0.9589741230010986,
+        "std": 0.0799483556619338,
+        "max": 1.1300327777862549,
+        "min": 0.9399359226226807,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 933.8977204418183,
+        "median": 906.8515594005585,
+        "std": 65.67433000295267,
+        "max": 1050.9501494407655,
+        "min": 895.5553537249565,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 172.2155972862244,
+        "median": 176.75679254531883,
+        "std": 7.955710091452348,
+        "max": 178.00138281583781,
+        "min": 159.02156475782397,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.240035057067871,
+        14.480070114135742,
+        21.720105171203613,
+        28.960140228271484,
+        36.200175285339355,
+        43.44021034240723,
+        50.6802453994751,
+        57.92028045654297,
+        65.16031551361084
+    ],
+    "Val_Joules": [
+        881.5177511453628,
+        1763.0355022907256,
+        2644.553253436088,
+        3526.0710045814512,
+        4407.588755726814,
+        5289.106506872177,
+        6170.62425801754,
+        7052.142009162903,
+        7933.659760308266
+    ],
+    "Val_JoulesNormalized": [
+        421.3464888572694,
+        842.6929777145388,
+        1264.0394665718081,
+        1685.3859554290775,
+        2106.7324442863464,
+        2528.0789331436163,
+        2949.425422000885,
+        3370.771910858155,
+        3792.118399715424
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * (n - 1);\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n + 1;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n + pingPong;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n - 1 + pingPong;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = n * 4 - 1;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n + 3;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n - 4;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n           int j = 4 * n - 2;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n",
+        "    private boolean flipIfWarranted(final int n, final int step) {\n        if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n// buggy code\n//             int j = 4 * n - 1;\n            for (int i = 0; i < j; i += 4) {\n                for (int k = 0; k < 4; k += step) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n                j -= 4;\n            }\n            return true;\n        }\n        return false;\n    }\n"
+    ]
+}

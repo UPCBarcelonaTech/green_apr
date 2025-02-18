@@ -1,0 +1,147 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-12",
+    "Time": {
+        "mean": 52.35069501399994,
+        "median": 52.35069501399994,
+        "std": 0,
+        "max": 52.35069501399994,
+        "min": 52.35069501399994,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 6989.943459272384,
+        "median": 6989.943459272384,
+        "std": 0,
+        "max": 6989.943459272384,
+        "min": 6989.943459272384,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 2737.7913169741632,
+        "median": 2737.7913169741632,
+        "std": 0,
+        "max": 2737.7913169741632,
+        "min": 2737.7913169741632,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.55018699169159,
+        21.750313997268677,
+        31.950441002845764,
+        42.15056800842285,
+        52.35069501399994
+    ],
+    "Joules_Per_PatchMedian": [
+        2424.0982565402983,
+        3565.5595572233196,
+        4707.020857906341,
+        5848.482158589362,
+        6989.943459272384
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        770.084833276272,
+        1262.0114542007448,
+        1753.9380751252174,
+        2245.8646960496903,
+        2737.7913169741632
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.451781988143921,
+        "median": 1.350059986114502,
+        "std": 0.144484664867822,
+        "max": 1.6100549697875977,
+        "min": 1.339003086090088,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1366.1969100165368,
+        "median": 1282.636955857277,
+        "std": 119.98137958783316,
+        "max": 1497.6138464689257,
+        "min": 1271.5396843433382,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 276.7970212149621,
+        "median": 278.1582123517992,
+        "std": 4.443857844724766,
+        "max": 281.99299843311314,
+        "min": 270.1213989377021,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.200127005577087,
+        20.400254011154175,
+        30.600381016731262,
+        40.80050802230835,
+        51.00063502788544
+    ],
+    "Val_Joules": [
+        1141.4613006830214,
+        2282.9226013660427,
+        3424.383902049064,
+        4565.845202732085,
+        5707.306503415107
+    ],
+    "Val_JoulesNormalized": [
+        491.9266209244728,
+        983.8532418489456,
+        1475.7798627734182,
+        1967.7064836978911,
+        2459.633104622364
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       setDataset(dataset);\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.setDataset(dataset);\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       super.dataset = dataset;\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       if (dataset != null)\n            this.dataset = dataset;\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.dataset = new DefaultCategoryDataset(dataset);\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.dataset = new DefaultCategoryDataset();\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.dataset = dataset != null ? dataset : new DefaultCategoryDataset();\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.dataset = (CategoryDataset) dataset.clone();\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n",
+        "    public MultiplePiePlot(CategoryDataset dataset) {\n        super();\n// buggy code\n//         this.dataset = dataset;\n       this.dataset = (CategoryDataset) dataset;\n        PiePlot piePlot = new PiePlot(null);\n        this.pieChart = new JFreeChart(piePlot);\n        this.pieChart.removeLegend();\n        this.dataExtractOrder = TableOrder.BY_COLUMN;\n        this.pieChart.setBackgroundPaint(null);\n        TextTitle seriesTitle = new TextTitle(\"Series Title\",\n                new Font(\"SansSerif\", Font.BOLD, 12));\n        seriesTitle.setPosition(RectangleEdge.BOTTOM);\n        this.pieChart.setTitle(seriesTitle);\n        this.aggregatedItemsKey = \"Other\";\n        this.aggregatedItemsPaint = Color.lightGray;\n        this.sectionPaints = new HashMap();\n    }\n"
+    ]
+}

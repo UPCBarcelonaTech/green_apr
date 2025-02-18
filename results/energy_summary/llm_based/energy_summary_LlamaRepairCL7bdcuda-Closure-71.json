@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-71",
+    "Time": {
+        "mean": 494.7822976112366,
+        "median": 494.7822976112366,
+        "std": 0,
+        "max": 494.7822976112366,
+        "min": 494.7822976112366,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 58159.57098495365,
+        "median": 58159.57098495365,
+        "std": 0,
+        "max": 58159.57098495365,
+        "min": 58159.57098495365,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 25177.400955092904,
+        "median": 25177.400955092904,
+        "std": 0,
+        "max": 25177.400955092904,
+        "min": 25177.400955092904,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        57.67737436294556,
+        112.31548976898193,
+        166.9536051750183,
+        221.5917205810547,
+        276.22983598709106,
+        330.86795139312744,
+        385.5060667991638,
+        440.1441822052002,
+        494.7822976112366
+    ],
+    "Joules_Per_PatchMedian": [
+        9137.539211720228,
+        15265.293183374404,
+        21393.04715502858,
+        27520.801126682756,
+        33648.55509833693,
+        39776.30906999111,
+        45904.06304164529,
+        52031.81701329947,
+        58159.57098495365
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        3425.6121920466417,
+        6144.585787427424,
+        8863.559382808207,
+        11582.53297818899,
+        14301.506573569774,
+        17020.480168950555,
+        19739.453764331338,
+        22458.42735971212,
+        25177.400955092904
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 3.040694570541382,
+        "median": 3.0392589569091797,
+        "std": 0.002580614971551488,
+        "max": 3.045063018798828,
+        "min": 3.038874864578247,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 3010.822199172974,
+        "median": 3009.7852400660513,
+        "std": 4.636129695675428,
+        "max": 3015.617288303375,
+        "min": 3004.164766776562,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 704.9436313867569,
+        "median": 706.638596665859,
+        "std": 10.088169798536416,
+        "max": 718.3808358073238,
+        "min": 694.0240336298943,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        54.63811540603638,
+        109.27623081207275,
+        163.91434621810913,
+        218.5524616241455,
+        273.1905770301819,
+        327.82869243621826,
+        382.46680784225464,
+        437.104923248291,
+        491.7430386543274
+    ],
+    "Val_Joules": [
+        6127.753971654177,
+        12255.507943308352,
+        18383.261914962528,
+        24511.015886616704,
+        30638.76985827088,
+        36766.52382992506,
+        42894.27780157924,
+        49022.03177323342,
+        55149.7857448876
+    ],
+    "Val_JoulesNormalized": [
+        2718.9735953807826,
+        5437.947190761565,
+        8156.920786142348,
+        10875.894381523132,
+        13594.867976903915,
+        16313.841572284695,
+        19032.815167665478,
+        21751.78876304626,
+        24470.762358427044
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = t.inGlobalScope() ||\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = !t.inGlobalScope() &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride =\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride =\n          t.inGlobalScope() &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = t.inGlobalScope() &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = t.inGlobalScope() &&\n          parent != null &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = t.inGlobalScope() && parent != null &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride =\n          t.inGlobalScope() ||\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n     boolean isOverride = parent != null &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n",
+        "  private void checkPropertyVisibility(NodeTraversal t,\n      Node getprop, Node parent) {\n    ObjectType objectType =\n        ObjectType.cast(dereference(getprop.getFirstChild().getJSType()));\n    String propertyName = getprop.getLastChild().getString();\n    if (objectType != null) {\n// buggy code\n//       boolean isOverride = t.inGlobalScope() &&\n          parent.getType() == Token.ASSIGN &&\n          parent.getFirstChild() == getprop;\n      if (isOverride) {\n        objectType = objectType.getImplicitPrototype();\n      }\n      JSDocInfo docInfo = null;\n      for (; objectType != null;\n           objectType = objectType.getImplicitPrototype()) {\n        docInfo = objectType.getOwnPropertyJSDocInfo(propertyName);\n        if (docInfo != null &&\n            docInfo.getVisibility() != Visibility.INHERITED) {\n          break;\n        }\n      }\n      if (objectType == null) {\n        return;\n      }\n      boolean sameInput =\n          t.getInput().getName().equals(docInfo.getSourceName());\n      Visibility visibility = docInfo.getVisibility();\n      JSType ownerType = normalizeClassType(objectType);\n      if (isOverride) {\n        JSDocInfo overridingInfo = parent.getJSDocInfo();\n        Visibility overridingVisibility = overridingInfo == null ?\n            Visibility.INHERITED : overridingInfo.getVisibility();\n        if (visibility == Visibility.PRIVATE && !sameInput) {\n          compiler.report(\n              t.makeError(getprop, PRIVATE_OVERRIDE,\n                  objectType.toString()));\n        } else if (overridingVisibility != Visibility.INHERITED &&\n            overridingVisibility != visibility) {\n          compiler.report(\n              t.makeError(getprop, VISIBILITY_MISMATCH,\n                  visibility.name(), objectType.toString(),\n                  overridingVisibility.name()));\n        }\n      } else {\n        if (sameInput) {\n          return;\n        } else if (visibility == Visibility.PRIVATE &&\n            (currentClass == null || ownerType.differsFrom(currentClass))) {\n          if (docInfo.isConstructor() &&\n              isValidPrivateConstructorAccess(parent)) {\n            return;\n          }\n          compiler.report(\n              t.makeError(getprop,\n                  BAD_PRIVATE_PROPERTY_ACCESS,\n                  propertyName,\n                  validator.getReadableJSTypeName(\n                      getprop.getFirstChild(), true)));\n        } else if (visibility == Visibility.PROTECTED) {\n          if (currentClass == null || !currentClass.isSubtype(ownerType)) {\n            compiler.report(\n                t.makeError(getprop,  BAD_PROTECTED_PROPERTY_ACCESS,\n                    propertyName,\n                    validator.getReadableJSTypeName(\n                        getprop.getFirstChild(), true)));\n          }\n        }\n      }\n    }\n  }\n"
+    ]
+}

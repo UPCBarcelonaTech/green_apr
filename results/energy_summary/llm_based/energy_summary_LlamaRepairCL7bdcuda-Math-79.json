@@ -1,0 +1,171 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-79",
+    "Time": {
+        "mean": 67.48068308830261,
+        "median": 67.48068308830261,
+        "std": 0,
+        "max": 67.48068308830261,
+        "min": 67.48068308830261,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 9734.602369511127,
+        "median": 9734.602369511127,
+        "std": 0,
+        "max": 9734.602369511127,
+        "min": 9734.602369511127,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4105.253458106518,
+        "median": 4105.253458106518,
+        "std": 0,
+        "max": 4105.253458106518,
+        "min": 4105.253458106518,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.239174604415894,
+        16.519363164901733,
+        23.799551725387573,
+        31.079740285873413,
+        38.35992884635925,
+        45.64011740684509,
+        52.92030596733093,
+        60.20049452781677,
+        67.48068308830261
+    ],
+    "Joules_Per_PatchMedian": [
+        2674.7410504460336,
+        3557.2237153291703,
+        4439.706380212307,
+        5322.189045095443,
+        6204.67170997858,
+        7087.154374861717,
+        7969.637039744854,
+        8852.11970462799,
+        9734.602369511127
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        735.3531228899956,
+        1156.5906647920608,
+        1577.828206694126,
+        1999.0657485961913,
+        2420.3032904982565,
+        2841.540832400322,
+        3262.7783743023874,
+        3684.015916204453,
+        4105.253458106518
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.0635713577270507,
+        "median": 1.9589860439300537,
+        "std": 0.26932956707975064,
+        "max": 2.540026903152466,
+        "min": 1.8897578716278076,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1874.060736002922,
+        "median": 1792.2583855628968,
+        "std": 208.16249794534954,
+        "max": 2243.5252170920376,
+        "min": 1743.1504835128785,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 318.65966367483145,
+        "median": 314.11558098793034,
+        "std": 15.713536489303294,
+        "max": 345.6171150565149,
+        "min": 305.11518528461465,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.28018856048584,
+        14.56037712097168,
+        21.84056568145752,
+        29.12075424194336,
+        36.4009428024292,
+        43.68113136291504,
+        50.96131992340088,
+        58.24150848388672,
+        65.52169704437256
+    ],
+    "Val_Joules": [
+        882.4826648831367,
+        1764.9653297662735,
+        2647.44799464941,
+        3529.9306595325465,
+        4412.413324415684,
+        5294.8959892988205,
+        6177.378654181957,
+        7059.861319065094,
+        7942.343983948231
+    ],
+    "Val_JoulesNormalized": [
+        421.23754190206523,
+        842.4750838041305,
+        1263.7126257061957,
+        1684.950167608261,
+        2106.1877095103264,
+        2527.425251412392,
+        2948.6627933144573,
+        3369.9003352165228,
+        3791.137877118588
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "I",
+        "I",
+        "W",
+        "W",
+        "W",
+        "I",
+        "C",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     double sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final double dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     double sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final int dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     long sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final long dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     double sum = 0.0;\n      for (int i = 0; i < p1.length; i++) {\n          final double dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     int sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final int dp = Math.abs(p1[i] - p2[i]);\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     int sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final int dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     long sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final int dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     double sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final double dp = (double) (p1[i] - p2[i]);\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n     double sum = 0;\n      for (int i = 0; i < p1.length; i++) {\n          final double dp = (p1[i] - p2[i]);\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n",
+        "    public static double distance(int[] p1, int[] p2) {\n// buggy code\n//       int sum = 0;\n//       for (int i = 0; i < p1.length; i++) {\n//           final int dp = p1[i] - p2[i];\n          sum += dp * dp;\n      }\n      return Math.sqrt(sum);\n    }\n"
+    ]
+}

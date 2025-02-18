@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-97",
+    "Time": {
+        "mean": 368.0604965686798,
+        "median": 368.0604965686798,
+        "std": 0,
+        "max": 368.0604965686798,
+        "min": 368.0604965686798,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 44187.68983237743,
+        "median": 44187.68983237743,
+        "std": 0,
+        "max": 44187.68983237743,
+        "min": 44187.68983237743,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 19046.45882482529,
+        "median": 19046.45882482529,
+        "std": 0,
+        "max": 19046.45882482529,
+        "min": 19046.45882482529,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        39.38998210430145,
+        75.90892815589905,
+        112.42787420749664,
+        148.94682025909424,
+        185.46576631069183,
+        221.98471236228943,
+        258.503658413887,
+        295.0226044654846,
+        331.5415505170822,
+        368.0604965686798
+    ],
+    "Joules_Per_PatchMedian": [
+        6924.990457707644,
+        11065.29038822651,
+        15205.590318745375,
+        19345.89024926424,
+        23486.19017978311,
+        27626.490110301973,
+        31766.790040820837,
+        35907.0899713397,
+        40047.389901858565,
+        44187.68983237743
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2453.739565509558,
+        4297.3750387668615,
+        6141.010512024165,
+        7984.645985281469,
+        9828.281458538771,
+        11671.916931796075,
+        13515.552405053379,
+        15359.187878310682,
+        17202.823351567986,
+        19046.45882482529
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9440450191497805,
+        "median": 2.8710360527038574,
+        "std": 0.111513697140859,
+        "max": 3.0892081260681152,
+        "min": 2.8591010570526123,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2845.0620288276673,
+        "median": 2784.690527188778,
+        "std": 90.44748480473497,
+        "max": 2966.505738890171,
+        "min": 2776.3637953162192,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 613.1839198732378,
+        "median": 610.1040922522543,
+        "std": 15.34823959208002,
+        "max": 632.3000788331033,
+        "min": 592.16276447773,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        36.518946051597595,
+        73.03789210319519,
+        109.55683815479279,
+        146.07578420639038,
+        182.59473025798798,
+        219.11367630958557,
+        255.63262236118317,
+        292.15156841278076,
+        328.67051446437836,
+        365.18946051597595
+    ],
+    "Val_Joules": [
+        4140.299930518866,
+        8280.599861037732,
+        12420.899791556596,
+        16561.199722075464,
+        20701.49965259433,
+        24841.799583113196,
+        28982.09951363206,
+        33122.39944415092,
+        37262.699374669784,
+        41402.99930518865
+    ],
+    "Val_JoulesNormalized": [
+        1843.6354732573036,
+        3687.270946514607,
+        5530.906419771911,
+        7374.541893029214,
+        9218.177366286516,
+        11061.812839543822,
+        12905.448312801123,
+        14749.083786058429,
+        16592.71925931573,
+        18436.354732573036
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = lvalInt >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = lvalInt >> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = ((long) lvalInt) >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = ((int) lvalInt) >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = ((long)lvalInt) >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = (long) lvalInt >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = (int) (lvalInt >>> rvalInt);\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = (lvalInt >> rvalInt) |\n              (lvalInt << (32 - rvalInt));\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         if (rvalInt == 0) {\n            result = lvalInt;\n            break;\n          }\n          result = lvalInt >>> rvalInt;\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n",
+        "  private Node tryFoldShift(Node n, Node left, Node right) {\n    if (left.getType() == Token.NUMBER &&\n        right.getType() == Token.NUMBER) {\n      double result;\n      double lval = left.getDouble();\n      double rval = right.getDouble();\n      if (!(lval >= Integer.MIN_VALUE && lval <= Integer.MAX_VALUE)) {\n        error(BITWISE_OPERAND_OUT_OF_RANGE, left);\n        return n;\n      }\n      if (!(rval >= 0 && rval < 32)) {\n        error(SHIFT_AMOUNT_OUT_OF_BOUNDS, right);\n        return n;\n      }\n      int lvalInt = (int) lval;\n      if (lvalInt != lval) {\n        error(FRACTIONAL_BITWISE_OPERAND, left);\n        return n;\n      }\n      int rvalInt = (int) rval;\n      if (rvalInt != rval) {\n        error(FRACTIONAL_BITWISE_OPERAND, right);\n        return n;\n      }\n      switch (n.getType()) {\n        case Token.LSH:\n          result = lvalInt << rvalInt;\n          break;\n        case Token.RSH:\n          result = lvalInt >> rvalInt;\n          break;\n        case Token.URSH:\n// buggy code\n//           result = lvalInt >>> rvalInt;\n         result = lvalInt >>> rvalInt;\n          if (result < 0) {\n            result = 0;\n          }\n          break;\n        default:\n          throw new AssertionError(\"Unknown shift operator: \" +\n              Node.tokenToName(n.getType()));\n      }\n      Node newNumber = Node.newNumber(result);\n      n.getParent().replaceChild(n, newNumber);\n      reportCodeChange();\n      return newNumber;\n    }\n    return n;\n  }\n"
+    ]
+}

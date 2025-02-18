@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-85",
+    "Time": {
+        "mean": 73.9392831325531,
+        "median": 73.9392831325531,
+        "std": 0,
+        "max": 73.9392831325531,
+        "min": 73.9392831325531,
+        "count": 1
+    },
+    "Joules": {
+        "mean": 11050.625925314427,
+        "median": 11050.625925314427,
+        "std": 0,
+        "max": 11050.625925314427,
+        "min": 11050.625925314427,
+        "count": 1
+    },
+    "JoulesNormalized": {
+        "mean": 4657.840999531745,
+        "median": 4657.840999531745,
+        "std": 0,
+        "max": 4657.840999531745,
+        "min": 4657.840999531745,
+        "count": 1
+    },
+    "NrExecutions": 1,
+    "ExecutionsIds": [
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.590795040130615,
+        16.74062705039978,
+        23.890459060668945,
+        31.04029107093811,
+        38.190123081207275,
+        45.33995509147644,
+        52.489787101745605,
+        59.63961911201477,
+        66.78945112228394,
+        73.9392831325531
+    ],
+    "Joules_Per_PatchMedian": [
+        3254.38767247796,
+        4120.636367237567,
+        4986.8850619971745,
+        5853.133756756782,
+        6719.382451516389,
+        7585.631146275996,
+        8451.879841035603,
+        9318.128535795211,
+        10184.37723055482,
+        11050.625925314427
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        942.6348869919774,
+        1355.4355661630627,
+        1768.236245334148,
+        2181.0369245052334,
+        2593.837603676319,
+        3006.6382828474043,
+        3419.4389620184897,
+        3832.239641189575,
+        4245.04032036066,
+        4657.840999531745
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.4838507652282713,
+        "median": 2.44096302986145,
+        "std": 0.06626645268368737,
+        "max": 2.5720229148864746,
+        "min": 2.4282360076904297,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2422.5958957362172,
+        "median": 2388.138977718353,
+        "std": 51.58780830860517,
+        "max": 2491.7457467198374,
+        "min": 2383.4101290583612,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 534.9193892121314,
+        "median": 529.8342078208921,
+        "std": 10.971551788089176,
+        "max": 546.7820184826851,
+        "min": 524.0440687060354,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.149832010269165,
+        14.29966402053833,
+        21.449496030807495,
+        28.59932804107666,
+        35.749160051345825,
+        42.89899206161499,
+        50.048824071884155,
+        57.19865608215332,
+        64.34848809242249,
+        71.49832010269165
+    ],
+    "Val_Joules": [
+        866.2486947596071,
+        1732.4973895192143,
+        2598.7460842788214,
+        3464.9947790384285,
+        4331.243473798036,
+        5197.492168557643,
+        6063.74086331725,
+        6929.989558076858,
+        7796.238252836466,
+        8662.486947596073
+    ],
+    "Val_JoulesNormalized": [
+        412.80067917108533,
+        825.6013583421707,
+        1238.402037513256,
+        1651.2027166843413,
+        2064.003395855427,
+        2476.8040750265122,
+        2889.6047541975977,
+        3302.405433368683,
+        3715.206112539768,
+        4128.006791710854
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "I",
+        "C",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (fa * fb > 0.0 ) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if ((fa * fb) >= 0.0 ) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (fa * fb <= 0.0 ) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (numIterations >= maximumIterations) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (fa * fb > 0.0) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (fa * fb >= 0.0 && numIterations >= maximumIterations) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if (fa * fb >= 0.0 && numIterations == maximumIterations) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if ((fa * fb >= 0.0) && (numIterations >= maximumIterations)) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if ((fa * fb >= 0.0) && (numIterations == maximumIterations)) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n",
+        "    public static double[] bracket(UnivariateRealFunction function,\n            double initial, double lowerBound, double upperBound, \n            int maximumIterations) throws ConvergenceException, \n            FunctionEvaluationException {\n        if (function == null) {\n            throw MathRuntimeException.createIllegalArgumentException(\"function is null\");\n        }\n        if (maximumIterations <= 0)  {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"bad value for maximum iterations number: {0}\", maximumIterations);\n        }\n        if (initial < lowerBound || initial > upperBound || lowerBound >= upperBound) {\n            throw MathRuntimeException.createIllegalArgumentException(\n                  \"invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}\",\n                  lowerBound, initial, upperBound);\n        }\n        double a = initial;\n        double b = initial;\n        double fa;\n        double fb;\n        int numIterations = 0 ;\n        do {\n            a = Math.max(a - 1.0, lowerBound);\n            b = Math.min(b + 1.0, upperBound);\n            fa = function.value(a);\n            fb = function.value(b);\n            numIterations++ ;\n        } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                ((a > lowerBound) || (b < upperBound)));\n// buggy code\n//         if (fa * fb >= 0.0 ) {\n       if ((fa * fb >= 0.0 ) && (numIterations >= maximumIterations)) {\n            throw new ConvergenceException(\n                      \"number of iterations={0}, maximum iterations={1}, \" +\n                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n                      numIterations, maximumIterations, initial,\n                      lowerBound, upperBound, a, b, fa, fb);\n        }\n        return new double[]{a, b};\n    }\n"
+    ]
+}
