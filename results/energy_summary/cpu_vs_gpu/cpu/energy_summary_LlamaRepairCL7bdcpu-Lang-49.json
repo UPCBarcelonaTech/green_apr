@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-49",
+    "Time": {
+        "mean": 122.31378722190857,
+        "median": 122.31378722190857,
+        "std": 0.0,
+        "max": 122.31378722190857,
+        "min": 122.31378722190857,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 30461.146820712103,
+        "median": 30461.146820712103,
+        "std": 0.0,
+        "max": 30461.146820712103,
+        "min": 30461.146820712103,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 8146.674749720094,
+        "median": 8146.674749720094,
+        "std": 0.0,
+        "max": 8146.674749720094,
+        "min": 8146.674749720094,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        31.6868155002594,
+        41.756479024887085,
+        51.82614254951477,
+        61.895806074142456,
+        71.96546959877014,
+        82.03513312339783,
+        92.10479664802551,
+        102.1744601726532,
+        112.24412369728088,
+        122.31378722190857
+    ],
+    "Joules_Per_PatchMedian": [
+        22574.20875502825,
+        23450.5352067709,
+        24326.86165851355,
+        25203.1881102562,
+        26079.51456199885,
+        26955.8410137415,
+        27832.16746548415,
+        28708.493917226802,
+        29584.820368969453,
+        30461.146820712103
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        5828.403310358523,
+        6085.989025843142,
+        6343.574741327761,
+        6601.16045681238,
+        6858.746172296999,
+        7116.331887781618,
+        7373.917603266237,
+        7631.503318750856,
+        7889.089034235475,
+        8146.674749720094
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 21.418771664301556,
+        "median": 21.617151975631714,
+        "std": 0.5787198895319537,
+        "max": 21.872212171554565,
+        "min": 20.766950845718384,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 21786.367053623995,
+        "median": 21697.882303285598,
+        "std": 300.83457392137075,
+        "max": 22121.520545089246,
+        "min": 21539.698312497138,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 5584.808204841614,
+        "median": 5570.817594873904,
+        "std": 241.11614650051712,
+        "max": 5832.61504033804,
+        "min": 5350.991979312896,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        10.069663524627686,
+        20.13932704925537,
+        30.208990573883057,
+        40.27865409851074,
+        50.34831762313843,
+        60.41798114776611,
+        70.4876446723938,
+        80.55730819702148,
+        90.62697172164917,
+        100.69663524627686
+    ],
+    "Val_Joules": [
+        876.3264517426505,
+        1752.652903485301,
+        2628.9793552279516,
+        3505.305806970602,
+        4381.632258713253,
+        5257.958710455903,
+        6134.285162198554,
+        7010.611613941204,
+        7886.938065683855,
+        8763.264517426505
+    ],
+    "Val_JoulesNormalized": [
+        257.58571548461896,
+        515.1714309692379,
+        772.7571464538569,
+        1030.3428619384758,
+        1287.9285774230948,
+        1545.5142929077138,
+        1803.1000083923327,
+        2060.6857238769517,
+        2318.2714393615706,
+        2575.8571548461896
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/Fraction.java b/src/java/org/apache/commons/lang/math/Fraction.java\nindex 3347689..5f8e565 100644\n--- a/src/java/org/apache/commons/lang/math/Fraction.java\n+++ b/src/java/org/apache/commons/lang/math/Fraction.java\n@@ -463,9 +463,6 @@ public final class Fraction extends Number implements Comparable {\n      * @return a new reduced fraction instance, or this if no simplification possible\n      */\n     public Fraction reduce() {\n-        if (numerator == 0) {\n-            return equals(ZERO) ? this : ZERO;\n-        }\n         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);\n         if (gcd == 1) {\n             return this;\n"
+    ]
+}

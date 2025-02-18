@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-37",
+    "Time": {
+        "mean": 80.81129002571106,
+        "median": 80.81129002571106,
+        "std": 0.0,
+        "max": 80.81129002571106,
+        "min": 80.81129002571106,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 11711.370801067349,
+        "median": 11711.370801067349,
+        "std": 0.0,
+        "max": 11711.370801067349,
+        "min": 11711.370801067349,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2773.5964061260224,
+        "median": 2773.5964061260224,
+        "std": 0.0,
+        "max": 2773.5964061260224,
+        "min": 2773.5964061260224,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        13.220088481903076,
+        20.73022198677063,
+        28.240355491638184,
+        35.75048899650574,
+        43.26062250137329,
+        50.770756006240845,
+        58.2808895111084,
+        65.79102301597595,
+        73.3011565208435,
+        80.81129002571106
+    ],
+    "Joules_Per_PatchMedian": [
+        5962.763273680211,
+        6601.497443389893,
+        7240.231613099576,
+        7878.965782809259,
+        8517.69995251894,
+        9156.434122228622,
+        9795.168291938304,
+        10433.902461647986,
+        11072.636631357667,
+        11711.370801067349
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1194.7242827177054,
+        1370.154518651963,
+        1545.5847545862205,
+        1721.014990520478,
+        1896.4452264547356,
+        2071.875462388993,
+        2247.3056983232505,
+        2422.735934257508,
+        2598.166170191765,
+        2773.5964061260224
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.99389271736145,
+        "median": 5.7099549770355225,
+        "std": 0.6954371437435529,
+        "max": 7.230014801025391,
+        "min": 5.591156005859375,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5587.83529987812,
+        "median": 5324.029103970528,
+        "std": 570.1528308647964,
+        "max": 6604.090833330154,
+        "min": 5290.182387471199,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1023.9191156864165,
+        "median": 1019.2940467834478,
+        "std": 28.66602269276855,
+        "max": 1062.2844883441921,
+        "min": 997.0663086771956,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.510133504867554,
+        15.020267009735107,
+        22.53040051460266,
+        30.040534019470215,
+        37.55066752433777,
+        45.06080102920532,
+        52.570934534072876,
+        60.08106803894043,
+        67.59120154380798,
+        75.10133504867554
+    ],
+    "Val_Joules": [
+        638.7341697096826,
+        1277.4683394193653,
+        1916.202509129048,
+        2554.9366788387306,
+        3193.6708485484123,
+        3832.405018258094,
+        4471.139187967776,
+        5109.8733576774575,
+        5748.607527387139,
+        6387.341697096821
+    ],
+    "Val_JoulesNormalized": [
+        175.43023593425755,
+        350.8604718685151,
+        526.2907078027727,
+        701.7209437370302,
+        877.1511796712878,
+        1052.5814156055453,
+        1228.0116515398026,
+        1403.44188747406,
+        1578.8721234083173,
+        1754.3023593425746
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "I",
+        "I",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "passtest",
+        "passtest"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n",
+        "diff --git a/src/java/org/apache/commons/lang3/ArrayUtils.java b/src/java/org/apache/commons/lang3/ArrayUtils.java\nindex b9413e8..889497e 100644\n--- a/src/java/org/apache/commons/lang3/ArrayUtils.java\n+++ b/src/java/org/apache/commons/lang3/ArrayUtils.java\n@@ -2959,16 +2959,8 @@ public class ArrayUtils {\n         final Class<?> type1 = array1.getClass().getComponentType();\n         T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n         System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n-        try {\n             System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n-        } catch (ArrayStoreException ase) {\n             // Check if problem is incompatible types\n-            final Class<?> type2 = array2.getClass().getComponentType();\n-            if (!type1.isAssignableFrom(type2)){\n-                throw new IllegalArgumentException(\"Cannot store \"+type2.getName()+\" in an array of \"+type1.getName());\n-            }\n-            throw ase; // No, so rethrow original\n-        }\n         return joinedArray;\n     }\n \n"
+    ]
+}

@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-21",
+    "Time": {
+        "mean": 178.06200873851776,
+        "median": 178.06200873851776,
+        "std": 0.0,
+        "max": 178.06200873851776,
+        "min": 178.06200873851776,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 99633.83203563094,
+        "median": 99633.83203563094,
+        "std": 0.0,
+        "max": 99633.83203563094,
+        "min": 99633.83203563094,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 26072.395929908766,
+        "median": 26072.395929908766,
+        "std": 0.0,
+        "max": 26072.395929908766,
+        "min": 26072.395929908766,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        97.96786797046661,
+        106.86721694469452,
+        115.76656591892242,
+        124.66591489315033,
+        133.56526386737823,
+        142.46461284160614,
+        151.36396181583405,
+        160.26331079006195,
+        169.16265976428986,
+        178.06200873851776
+    ],
+    "Joules_Per_PatchMedian": [
+        92739.18839988112,
+        93505.25991496444,
+        94271.33143004775,
+        95037.40294513106,
+        95803.47446021438,
+        96569.54597529769,
+        97335.617490381,
+        98101.68900546432,
+        98867.76052054763,
+        99633.83203563094
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        24332.865778970725,
+        24526.14690685273,
+        24719.428034734734,
+        24912.70916261674,
+        25105.990290498743,
+        25299.271418380747,
+        25492.552546262752,
+        25685.833674144757,
+        25879.11480202676,
+        26072.395929908766
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 94.10533344745636,
+        "median": 89.06851899623871,
+        "std": 11.20718618359502,
+        "max": 110.84654188156128,
+        "min": 87.43775391578674,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 96706.60101666153,
+        "median": 91973.11688479781,
+        "std": 10612.096700176384,
+        "max": 112551.55778791905,
+        "min": 90328.61250913143,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 24755.650255820154,
+        "median": 24139.58465108872,
+        "std": 2657.5217967723383,
+        "max": 28507.70973331928,
+        "min": 22235.721987783894,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        8.899348974227905,
+        17.79869794845581,
+        26.698046922683716,
+        35.59739589691162,
+        44.496744871139526,
+        53.39609384536743,
+        62.29544281959534,
+        71.19479179382324,
+        80.09414076805115,
+        88.99348974227905
+    ],
+    "Val_Joules": [
+        766.071515083313,
+        1532.143030166626,
+        2298.214545249939,
+        3064.286060333252,
+        3830.357575416565,
+        4596.429090499878,
+        5362.500605583191,
+        6128.572120666504,
+        6894.643635749817,
+        7660.71515083313
+    ],
+    "Val_JoulesNormalized": [
+        193.2811278820045,
+        386.562255764009,
+        579.8433836460135,
+        773.124511528018,
+        966.4056394100226,
+        1159.686767292027,
+        1352.9678951740316,
+        1546.249023056036,
+        1739.5301509380406,
+        1932.8112788200451
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/DateUtils.java b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\nindex 52a4436..9a24c00 100644\n--- a/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/time/DateUtils.java\n@@ -262,7 +262,7 @@ public class DateUtils {\n         return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n                 cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n                 cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n-                cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+                cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n                 cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n"
+    ]
+}

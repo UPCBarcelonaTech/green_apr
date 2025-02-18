@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-160",
+    "Time": {
+        "mean": 3.0889370441436768,
+        "median": 3.0889370441436768,
+        "std": 0.0,
+        "max": 3.0889370441436768,
+        "min": 3.0889370441436768,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 2980.8630454421045,
+        "median": 2980.8630454421045,
+        "std": 0.0,
+        "max": 2980.8630454421045,
+        "min": 2980.8630454421045,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 645.873939788341,
+        "median": 645.873939788341,
+        "std": 0.0,
+        "max": 645.873939788341,
+        "min": 645.873939788341,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex a4a41a8e..11850211 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -265,7 +265,6 @@ public class Compiler extends AbstractCompiler {\n             getDiagnosticGroups().getRegisteredGroups()));\n     guards.add(options.getWarningsGuard());\n \n-    ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);\n \n     // All passes must run the variable check. This synthesizes\n     // variables later so that the compiler doesn't crash. It also\n@@ -273,12 +272,13 @@ public class Compiler extends AbstractCompiler {\n     // about missing variable declarations, we shut that specific\n     // error off.\n     if (!options.checkSymbols &&\n-        !composedGuards.enables(DiagnosticGroups.CHECK_VARIABLES)) {\n-      composedGuards.addGuard(new DiagnosticGroupWarningsGuard(\n+        (warningsGuard == null || !warningsGuard.disables(\n+            DiagnosticGroups.CHECK_VARIABLES))) {\n+      guards.add(new DiagnosticGroupWarningsGuard(\n           DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));\n     }\n \n-    this.warningsGuard = composedGuards;\n+    this.warningsGuard = new ComposeWarningsGuard(guards);\n   }\n \n   /**\n"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-114",
+    "Time": {
+        "mean": 598.0023441314697,
+        "median": 598.0023441314697,
+        "std": 0.0,
+        "max": 598.0023441314697,
+        "min": 598.0023441314697,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 101750.19563711884,
+        "median": 101750.19563711884,
+        "std": 0.0,
+        "max": 101750.19563711884,
+        "min": 101750.19563711884,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 40620.073627460006,
+        "median": 40620.073627460006,
+        "std": 0.0,
+        "max": 40620.073627460006,
+        "min": 40620.073627460006,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex a7b95b0..0fc5ae8 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -575,7 +575,7 @@ final class NameAnalyzer implements CompilerPass {\n           } else {\n             recordDepScope(nameNode, ns);\n           }\n-        } else if (!(parent.isCall() && parent.getFirstChild() == n)) {\n+        } else {\n           // The rhs of the assignment is the caller, so it's used by the\n           // context. Don't associate it w/ the lhs.\n           // FYI: this fixes only the specific case where the assignment is the\n"
+    ]
+}

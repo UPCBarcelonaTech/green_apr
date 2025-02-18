@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-152",
+    "Time": {
+        "mean": 56.17341899871826,
+        "median": 56.17341899871826,
+        "std": 0.0,
+        "max": 56.17341899871826,
+        "min": 56.17341899871826,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 58325.238907969004,
+        "median": 58325.238907969004,
+        "std": 0.0,
+        "max": 58325.238907969004,
+        "min": 58325.238907969004,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 15827.238764488706,
+        "median": 15827.238764488706,
+        "std": 0.0,
+        "max": 15827.238764488706,
+        "min": 15827.238764488706,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/FunctionType.java b/src/com/google/javascript/rhino/jstype/FunctionType.java\nindex cf2d3e86..fc2578d8 100644\n--- a/src/com/google/javascript/rhino/jstype/FunctionType.java\n+++ b/src/com/google/javascript/rhino/jstype/FunctionType.java\n@@ -868,10 +868,7 @@ public class FunctionType extends PrototypeObjectType {\n     // Warning about typeOfThis if it doesn't resolve to an ObjectType\n     // is handled further upstream.\n     // TODO(nicksantos): Handle this correctly if we have a UnionType.\n-    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);\n-    if (maybeTypeOfThis instanceof ObjectType) {\n-      typeOfThis = (ObjectType) maybeTypeOfThis;\n-    }\n+    typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);\n \n     boolean changed = false;\n     ImmutableList.Builder<ObjectType> resolvedInterfaces =\n"
+    ]
+}

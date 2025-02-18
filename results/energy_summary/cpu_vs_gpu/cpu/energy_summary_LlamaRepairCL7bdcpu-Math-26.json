@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-26",
+    "Time": {
+        "mean": 206.44411051273346,
+        "median": 206.44411051273346,
+        "std": 0.0,
+        "max": 206.44411051273346,
+        "min": 206.44411051273346,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 213131.99000338913,
+        "median": 213131.99000338913,
+        "std": 0.0,
+        "max": 213131.99000338913,
+        "min": 213131.99000338913,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 56793.66691249609,
+        "median": 56793.66691249609,
+        "std": 0.0,
+        "max": 56793.66691249609,
+        "min": 56793.66691249609,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/fraction/Fraction.java b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\nindex 08d3b95..f81ff0a 100644\n--- a/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n+++ b/src/main/java/org/apache/commons/math3/fraction/Fraction.java\n@@ -178,7 +178,7 @@ public class Fraction\n         long overflow = Integer.MAX_VALUE;\n         double r0 = value;\n         long a0 = (long)FastMath.floor(r0);\n-        if (FastMath.abs(a0) > overflow) {\n+        if (a0 > overflow) {\n             throw new FractionConversionException(value, a0, 1l);\n         }\n \n@@ -206,7 +206,7 @@ public class Fraction\n             long a1 = (long)FastMath.floor(r1);\n             p2 = (a1 * p1) + p0;\n             q2 = (a1 * q1) + q0;\n-            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n+            if ((p2 > overflow) || (q2 > overflow)) {\n                 throw new FractionConversionException(value, p2, q2);\n             }\n \n"
+    ]
+}

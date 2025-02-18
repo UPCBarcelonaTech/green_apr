@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-20",
+    "Time": {
+        "mean": 498.23827588558197,
+        "median": 498.23827588558197,
+        "std": 0.0,
+        "max": 498.23827588558197,
+        "min": 498.23827588558197,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 61331.40717718005,
+        "median": 61331.40717718005,
+        "std": 0.0,
+        "max": 61331.40717718005,
+        "min": 61331.40717718005,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 28435.04781188965,
+        "median": 28435.04781188965,
+        "std": 0.0,
+        "max": 28435.04781188965,
+        "min": 28435.04781188965,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 86521bd..bfa1707 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -217,8 +217,7 @@ class PeepholeSubstituteAlternateSyntax\n       // slightly different semantics than '' + (a). See\n       // http://code.google.com/p/closure-compiler/issues/detail?id=759\n       Node value = callTarget.getNext();\n-      if (value != null && value.getNext() == null &&\n-          NodeUtil.isImmutableValue(value)) {\n+      if (value != null) {\n         Node addition = IR.add(\n             IR.string(\"\").srcref(callTarget),\n             value.detachFromParent());\n"
+    ]
+}

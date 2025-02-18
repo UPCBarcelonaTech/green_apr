@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-88",
+    "Time": {
+        "mean": 131.73434376716614,
+        "median": 131.73434376716614,
+        "std": 0.0,
+        "max": 131.73434376716614,
+        "min": 131.73434376716614,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 76633.8969880223,
+        "median": 76633.8969880223,
+        "std": 0.0,
+        "max": 76633.8969880223,
+        "min": 76633.8969880223,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 22006.289740175012,
+        "median": 22006.289740175012,
+        "std": 0.0,
+        "max": 22006.289740175012,
+        "min": 22006.289740175012,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        73.32314741611481,
+        79.8132803440094,
+        86.30341327190399,
+        92.79354619979858,
+        99.28367912769318,
+        105.77381205558777,
+        112.26394498348236,
+        118.75407791137695,
+        125.24421083927155,
+        131.73434376716614
+    ],
+    "Joules_Per_PatchMedian": [
+        69563.1837298274,
+        70348.8185362935,
+        71134.4533427596,
+        71920.0881492257,
+        72705.7229556918,
+        73491.3577621579,
+        74276.992568624,
+        75062.6273750901,
+        75848.2621815562,
+        76633.8969880223
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        18656.106562638273,
+        19028.349137920133,
+        19400.591713201993,
+        19772.834288483853,
+        20145.076863765713,
+        20517.319439047573,
+        20889.562014329433,
+        21261.804589611293,
+        21634.047164893153,
+        22006.289740175012
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 66.77495217323303,
+        "median": 66.83301448822021,
+        "std": 1.4562958667729724,
+        "max": 68.06532287597656,
+        "min": 65.36845684051514,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 68938.24239085018,
+        "median": 68777.5489233613,
+        "std": 1174.7293857811997,
+        "max": 70261.26457717418,
+        "min": 67936.60713950395,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 18205.354847264287,
+        "median": 18283.863987356413,
+        "std": 422.66968812085844,
+        "max": 18620.534484875214,
+        "min": 17633.156929469107,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        6.490132927894592,
+        12.980265855789185,
+        19.470398783683777,
+        25.96053171157837,
+        32.45066463947296,
+        38.940797567367554,
+        45.430930495262146,
+        51.92106342315674,
+        58.41119635105133,
+        64.90132927894592
+    ],
+    "Val_Joules": [
+        785.6348064660997,
+        1571.2696129321994,
+        2356.904419398299,
+        3142.5392258643988,
+        3928.1740323304984,
+        4713.808838796598,
+        5499.443645262698,
+        6285.0784517287975,
+        7070.713258194897,
+        7856.348064660997
+    ],
+    "Val_JoulesNormalized": [
+        372.2425752818599,
+        744.4851505637198,
+        1116.7277258455797,
+        1488.9703011274396,
+        1861.2128764092995,
+        2233.4554516911594,
+        2605.6980269730193,
+        2977.940602254879,
+        3350.183177536739,
+        3722.425752818599
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n",
+        "diff --git a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex a6d7419..3bcb17f 100644\n--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -326,18 +326,19 @@ class SimplexTableau implements Serializable {\n         Integer basicRow =\n             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());\n         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());\n-        Set<Integer> basicRows = new HashSet<Integer>();\n         for (int i = 0; i < coefficients.length; i++) {\n             basicRow = getBasicRow(getNumObjectiveFunctions() + i);\n-            if (basicRows.contains(basicRow)) {\n                 // if multiple variables can take a given value \n                 // then we choose the first and set the rest equal to 0\n-                coefficients[i] = 0;\n-            } else {\n-                basicRows.add(basicRow);\n                 coefficients[i] =\n                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -\n                     (restrictToNonNegative ? 0 : mostNegative);\n+            if (basicRow != null) {\n+                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {\n+                    if (tableau.getEntry(basicRow, j) == 1) {\n+                         coefficients[i] = 0;\n+                    }\n+                }\n             }\n         }\n         return new RealPointValuePair(coefficients, f.getValue(coefficients));\n"
+    ]
+}

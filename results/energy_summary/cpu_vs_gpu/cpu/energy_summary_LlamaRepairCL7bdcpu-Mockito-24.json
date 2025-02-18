@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-24",
+    "Time": {
+        "mean": 307.04618430137634,
+        "median": 307.04618430137634,
+        "std": 0.0,
+        "max": 307.04618430137634,
+        "min": 307.04618430137634,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 86827.00074983835,
+        "median": 86827.00074983835,
+        "std": 0.0,
+        "max": 86827.00074983835,
+        "min": 86827.00074983835,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 29798.57626918555,
+        "median": 29798.57626918555,
+        "std": 0.0,
+        "max": 29798.57626918555,
+        "min": 29798.57626918555,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        79.89444649219513,
+        105.13352847099304,
+        130.37261044979095,
+        155.61169242858887,
+        180.85077440738678,
+        206.0898563861847,
+        231.3289383649826,
+        256.5680203437805,
+        281.80710232257843,
+        307.04618430137634
+    ],
+    "Joules_Per_PatchMedian": [
+        59796.33561046123,
+        62799.7428481698,
+        65803.15008587837,
+        68806.55732358694,
+        71809.9645612955,
+        74813.37179900408,
+        77816.77903671264,
+        80820.18627442121,
+        83823.59351212978,
+        86827.00074983835
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        16690.61081214547,
+        18147.051418483257,
+        19603.492024821044,
+        21059.93263115883,
+        22516.373237496617,
+        23972.813843834403,
+        25429.25445017219,
+        26885.695056509976,
+        28342.135662847762,
+        29798.57626918555
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 56.195924162864685,
+        "median": 54.65536451339722,
+        "std": 4.018211475869925,
+        "max": 62.13248682022095,
+        "min": 53.34048080444336,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 58265.46655258238,
+        "median": 56792.92837275266,
+        "std": 3832.25091884974,
+        "max": 63917.76162173748,
+        "min": 55558.24784308672,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 15584.596060091257,
+        "median": 15234.170205807684,
+        "std": 825.7507747489742,
+        "max": 16802.69686596393,
+        "min": 15067.346962785727,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        25.239081978797913,
+        50.478163957595825,
+        75.71724593639374,
+        100.95632791519165,
+        126.19540989398956,
+        151.43449187278748,
+        176.6735738515854,
+        201.9126558303833,
+        227.1517378091812,
+        252.39081978797913
+    ],
+    "Val_Joules": [
+        3003.4072377085686,
+        6006.814475417137,
+        9010.221713125706,
+        12013.628950834274,
+        15017.036188542843,
+        18020.44342625141,
+        21023.85066395998,
+        24027.25790166855,
+        27030.665139377117,
+        30034.072377085686
+    ],
+    "Val_JoulesNormalized": [
+        1456.4406063377864,
+        2912.881212675573,
+        4369.321819013359,
+        5825.762425351146,
+        7282.203031688932,
+        8738.643638026719,
+        10195.084244364505,
+        11651.524850702292,
+        13107.965457040078,
+        14564.406063377864
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n",
+        "diff --git a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\nindex d19fcda..4c00f50 100644\n--- a/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n+++ b/src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java\n@@ -73,7 +73,7 @@ public class ReturnsEmptyValues implements Answer<Object>, Serializable {\n             //see issue 184.\n             //mocks by default should return 0 if references are the same, otherwise some other value because they are not the same. Hence we return 1 (anything but 0 is good).\n             //Only for compareTo() method by the Comparable interface\n-            return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;\n+            return 1;\n         }\n         \n         Class<?> returnType = invocation.getMethod().getReturnType();\n"
+    ]
+}

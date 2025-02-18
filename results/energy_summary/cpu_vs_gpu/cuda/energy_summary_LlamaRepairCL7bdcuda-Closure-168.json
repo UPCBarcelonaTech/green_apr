@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-168",
+    "Time": {
+        "mean": 138.3281569480896,
+        "median": 138.3281569480896,
+        "std": 0.0,
+        "max": 138.3281569480896,
+        "min": 138.3281569480896,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 18201.200404119492,
+        "median": 18201.200404119492,
+        "std": 0.0,
+        "max": 18201.200404119492,
+        "min": 18201.200404119492,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 7496.322878634929,
+        "median": 7496.322878634929,
+        "std": 0.0,
+        "max": 7496.322878634929,
+        "min": 7496.322878634929,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 36f83466e..cf87eaaf0 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1993,7 +1993,7 @@ final class TypedScopeCreator implements ScopeCreator {\n         data.get(t.getScopeRoot()).recordNonEmptyReturn();\n       }\n \n-      if (t.getScopeDepth() <= 1) {\n+      if (t.getScopeDepth() <= 2) {\n         // The first-order function analyzer looks at two types of variables:\n         //\n         // 1) Local variables that are assigned in inner scopes (\"escaped vars\")\n"
+    ]
+}

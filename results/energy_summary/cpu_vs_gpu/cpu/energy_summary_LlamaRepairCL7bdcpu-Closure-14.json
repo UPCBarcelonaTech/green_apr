@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-14",
+    "Time": {
+        "mean": 687.4648156166077,
+        "median": 687.4648156166077,
+        "std": 0.0,
+        "max": 687.4648156166077,
+        "min": 687.4648156166077,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 256959.22579920883,
+        "median": 256959.22579920883,
+        "std": 0.0,
+        "max": 256959.22579920883,
+        "min": 256959.22579920883,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 83437.9977577567,
+        "median": 83437.9977577567,
+        "std": 0.0,
+        "max": 83437.9977577567,
+        "min": 83437.9977577567,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n",
+        "diff --git a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\nindex 980deff..5c6927f 100644\n--- a/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n+++ b/src/com/google/javascript/jscomp/ControlFlowAnalysis.java\n@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {\n         } else if (parent.getLastChild() == node){\n           if (cfa != null) {\n             for (Node finallyNode : cfa.finallyMap.get(parent)) {\n-              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);\n+              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);\n             }\n           }\n           return computeFollowNode(fromNode, parent, cfa);\n"
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-3",
+    "Time": {
+        "mean": 448.8796960115433,
+        "median": 448.8796960115433,
+        "std": 0.0,
+        "max": 448.8796960115433,
+        "min": 448.8796960115433,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 59452.192842000724,
+        "median": 59452.192842000724,
+        "std": 0.0,
+        "max": 59452.192842000724,
+        "min": 59452.192842000724,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 28266.82866968513,
+        "median": 28266.82866968513,
+        "std": 0.0,
+        "max": 28266.82866968513,
+        "min": 28266.82866968513,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "C",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "correct",
+        "passtest",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java\nindex 8f83d96..325fd94 100644\n--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java\n+++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java\n@@ -818,10 +818,7 @@ public class MathArrays {\n             throw new DimensionMismatchException(len, b.length);\n         }\n \n-        if (len == 1) {\n             // Revert to scalar multiplication.\n-            return a[0] * b[0];\n-        }\n \n         final double[] prodHigh = new double[len];\n         double prodLowSum = 0;\n"
+    ]
+}

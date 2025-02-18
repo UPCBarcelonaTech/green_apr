@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-25",
+    "Time": {
+        "mean": 3.329207181930542,
+        "median": 3.329207181930542,
+        "std": 0.0,
+        "max": 3.329207181930542,
+        "min": 3.329207181930542,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 2995.3254792690277,
+        "median": 2995.3254792690277,
+        "std": 0.0,
+        "max": 2995.3254792690277,
+        "min": 2995.3254792690277,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 485.7691055297855,
+        "median": 485.7691055297855,
+        "std": 0.0,
+        "max": 485.7691055297855,
+        "min": 485.7691055297855,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 74728ee..7e218d8 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1033,9 +1033,9 @@ class TypeInference\n   }\n \n   private FlowScope traverseNew(Node n, FlowScope scope) {\n-    scope = traverseChildren(n, scope);\n \n     Node constructor = n.getFirstChild();\n+    scope = traverse(constructor, scope);\n     JSType constructorType = constructor.getJSType();\n     JSType type = null;\n     if (constructorType != null) {\n@@ -1052,11 +1052,13 @@ class TypeInference\n         }\n         if (ct != null && ct.isConstructor()) {\n           type = ct.getInstanceType();\n-          backwardsInferenceFromCallSite(n, ct);\n         }\n       }\n     }\n     n.setJSType(type);\n+    for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {\n+      scope = traverse(arg, scope);\n+    }\n     return scope;\n   }\n \n"
+    ]
+}

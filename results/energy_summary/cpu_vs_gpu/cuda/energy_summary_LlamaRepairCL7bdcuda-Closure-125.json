@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-125",
+    "Time": {
+        "mean": 612.7928910255432,
+        "median": 612.7928910255432,
+        "std": 0.0,
+        "max": 612.7928910255432,
+        "min": 612.7928910255432,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 74777.17838186026,
+        "median": 74777.17838186026,
+        "std": 0.0,
+        "max": 74777.17838186026,
+        "min": 74777.17838186026,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 34753.27451987267,
+        "median": 34753.27451987267,
+        "std": 0.0,
+        "max": 34753.27451987267,
+        "min": 34753.27451987267,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex de14c04..4e05325 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1658,7 +1658,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n       FunctionType fnType = type.toMaybeFunctionType();\n-      if (fnType != null && fnType.hasInstanceType()) {\n+      if (fnType != null) {\n         visitParameterList(t, n, fnType);\n         ensureTyped(t, n, fnType.getInstanceType());\n       } else {\n"
+    ]
+}

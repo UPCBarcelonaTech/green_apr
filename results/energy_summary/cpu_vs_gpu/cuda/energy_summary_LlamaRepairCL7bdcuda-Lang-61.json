@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-61",
+    "Time": {
+        "mean": 73.69794368743896,
+        "median": 73.69794368743896,
+        "std": 0.0,
+        "max": 73.69794368743896,
+        "min": 73.69794368743896,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 7399.576501643658,
+        "median": 7399.576501643658,
+        "std": 0.0,
+        "max": 7399.576501643658,
+        "min": 7399.576501643658,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2068.4575834393495,
+        "median": 2068.4575834393495,
+        "std": 0.0,
+        "max": 2068.4575834393495,
+        "min": 2068.4575834393495,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex c7cbfb3..0e88989 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {\n             return -1;\n         }\n         char[] thisBuf = buffer;\n-        int len = size - strLen + 1;\n+        int len = thisBuf.length - strLen;\n         outer:\n         for (int i = startIndex; i < len; i++) {\n             for (int j = 0; j < strLen; j++) {\n"
+    ]
+}

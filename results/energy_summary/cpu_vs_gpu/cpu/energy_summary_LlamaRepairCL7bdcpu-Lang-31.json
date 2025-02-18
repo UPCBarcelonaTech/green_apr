@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-31",
+    "Time": {
+        "mean": 220.2386496067047,
+        "median": 220.2386496067047,
+        "std": 0.0,
+        "max": 220.2386496067047,
+        "min": 220.2386496067047,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 143432.33499325527,
+        "median": 143432.33499325527,
+        "std": 0.0,
+        "max": 143432.33499325527,
+        "min": 143432.33499325527,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 37785.70881615882,
+        "median": 37785.70881615882,
+        "std": 0.0,
+        "max": 37785.70881615882,
+        "min": 37785.70881615882,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        141.4882172346115,
+        150.2382652759552,
+        158.9883133172989,
+        167.73836135864258,
+        176.48840939998627,
+        185.23845744132996,
+        193.98850548267365,
+        202.73855352401733,
+        211.48860156536102,
+        220.2386496067047
+    ],
+    "Joules_Per_PatchMedian": [
+        136943.0041606367,
+        137664.04091981653,
+        138385.07767899637,
+        139106.1144381762,
+        139827.15119735606,
+        140548.1879565359,
+        141269.22471571574,
+        141990.26147489558,
+        142711.29823407542,
+        143432.33499325527
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        36181.901290631315,
+        36360.10212680104,
+        36538.30296297076,
+        36716.50379914048,
+        36894.704635310205,
+        37072.90547147993,
+        37251.10630764965,
+        37429.30714381937,
+        37607.507979989095,
+        37785.70881615882
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 135.1016410191854,
+        "median": 132.73816919326782,
+        "std": 7.428044073801644,
+        "max": 143.42384886741638,
+        "min": 129.14290499687195,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 139060.34876979192,
+        "median": 136221.96740145684,
+        "std": 7198.982803550673,
+        "max": 147245.85653282405,
+        "min": 133713.2223750949,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 36673.33840438527,
+        "median": 36003.70045446159,
+        "std": 1287.5196270282593,
+        "max": 38157.67708426717,
+        "min": 35858.63767442705,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        8.750048041343689,
+        17.500096082687378,
+        26.250144124031067,
+        35.000192165374756,
+        43.750240206718445,
+        52.500288248062134,
+        61.25033628940582,
+        70.00038433074951,
+        78.7504323720932,
+        87.50048041343689
+    ],
+    "Val_Joules": [
+        721.0367591798422,
+        1442.0735183596844,
+        2163.1102775395266,
+        2884.1470367193688,
+        3605.183795899211,
+        4326.220555079053,
+        5047.257314258895,
+        5768.2940734387375,
+        6489.33083261858,
+        7210.367591798422
+    ],
+    "Val_JoulesNormalized": [
+        178.2008361697226,
+        356.4016723394452,
+        534.6025085091678,
+        712.8033446788904,
+        891.004180848613,
+        1069.2050170183356,
+        1247.4058531880582,
+        1425.6066893577809,
+        1603.8075255275035,
+        1782.008361697226
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/StringUtils.java b/src/main/java/org/apache/commons/lang3/StringUtils.java\nindex 4aac02d..a90b067 100644\n--- a/src/main/java/org/apache/commons/lang3/StringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/StringUtils.java\n@@ -1443,21 +1443,13 @@ public class StringUtils {\n \t\t}\n \t\tint csLength = cs.length();\n \t\tint searchLength = searchChars.length;\n-\t\tint csLastIndex = csLength - 1;\n-\t\tint searchLastIndex = searchLength - 1;\n \t\tfor (int i = 0; i < csLength; i++) {\n \t\t\tchar ch = cs.charAt(i);\n \t\t\tfor (int j = 0; j < searchLength; j++) {\n \t\t\t\tif (searchChars[j] == ch) {\n-\t\t\t\t\tif (i < csLastIndex && j < searchLastIndex && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n \t\t\t\t\t\t// ch is a supplementary character\n-\t\t\t\t\t\tif (searchChars[j + 1] == cs.charAt(i + 1)) {\n-\t\t\t\t\t\t\treturn true;\n-\t\t\t\t\t\t}\n-\t\t\t\t\t} else {\n \t\t\t\t\t\t// ch is in the Basic Multilingual Plane\n \t\t\t\t\t\treturn true;\n-\t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t}\n"
+    ]
+}

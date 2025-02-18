@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-115",
+    "Time": {
+        "mean": 307.2232904434204,
+        "median": 307.2232904434204,
+        "std": 0.0,
+        "max": 307.2232904434204,
+        "min": 307.2232904434204,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 252247.88963195682,
+        "median": 252247.88963195682,
+        "std": 0.0,
+        "max": 252247.88963195682,
+        "min": 252247.88963195682,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 69171.23312647939,
+        "median": 69171.23312647939,
+        "std": 0.0,
+        "max": 69171.23312647939,
+        "min": 69171.23312647939,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n",
+        "diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java\nindex 5b38600..73d6a4b 100644\n--- a/src/com/google/javascript/jscomp/FunctionInjector.java\n+++ b/src/com/google/javascript/jscomp/FunctionInjector.java\n@@ -694,6 +694,14 @@ class FunctionInjector {\n \n     Node block = fnNode.getLastChild();\n \n+    boolean hasSideEffects = false;\n+    if (block.hasChildren()) {\n+      Preconditions.checkState(block.hasOneChild());\n+      Node stmt = block.getFirstChild();\n+      if (stmt.isReturn()) {\n+        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);\n+      }\n+    }\n     // CALL NODE: [ NAME, ARG1, ARG2, ... ]\n     Node cArg = callNode.getFirstChild().getNext();\n \n@@ -719,6 +727,9 @@ class FunctionInjector {\n       // For each named parameter check if a mutable argument use more than one.\n       if (fnParam != null) {\n         if (cArg != null) {\n+          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {\n+            return CanInlineResult.NO;\n+          }\n           // Check for arguments that are evaluated more than once.\n           // Note: Unlike block inlining, there it is not possible that a\n           // parameter reference will be in a loop.\n"
+    ]
+}

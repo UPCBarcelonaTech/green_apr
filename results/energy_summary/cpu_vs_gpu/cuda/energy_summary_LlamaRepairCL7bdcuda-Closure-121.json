@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-121",
+    "Time": {
+        "mean": 424.5038995742798,
+        "median": 424.5038995742798,
+        "std": 0.0,
+        "max": 424.5038995742798,
+        "min": 424.5038995742798,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 55628.46508762834,
+        "median": 55628.46508762834,
+        "std": 0.0,
+        "max": 55628.46508762834,
+        "min": 55628.46508762834,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 24803.82493389845,
+        "median": 24803.82493389845,
+        "std": 0.0,
+        "max": 24803.82493389845,
+        "min": 24803.82493389845,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 5c9df61..376abd4 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -301,12 +301,10 @@ class InlineVariables implements CompilerPass {\n       if (!maybeModifiedArguments &&\n           !staleVars.contains(v) &&\n           referenceInfo.isWellDefined() &&\n-          referenceInfo.isAssignedOnceInLifetime() &&\n+          referenceInfo.isAssignedOnceInLifetime()) {\n           // Inlining the variable based solely on well-defined and assigned\n           // once is *NOT* correct. We relax the correctness requirement if\n           // the variable is declared constant.\n-          (isInlineableDeclaredConstant(v, referenceInfo) ||\n-           referenceInfo.isOnlyAssignmentSameScopeAsDeclaration())) {\n         List<Reference> refs = referenceInfo.references;\n         for (int i = 1 /* start from a read */; i < refs.size(); i++) {\n           Node nameNode = refs.get(i).getNode();\n"
+    ]
+}

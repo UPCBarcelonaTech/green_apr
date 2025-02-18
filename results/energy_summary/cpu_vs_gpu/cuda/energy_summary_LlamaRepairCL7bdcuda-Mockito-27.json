@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-27",
+    "Time": {
+        "mean": 13.766051054000854,
+        "median": 13.766051054000854,
+        "std": 0.0,
+        "max": 13.766051054000854,
+        "min": 13.766051054000854,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 12488.261683392524,
+        "median": 12488.261683392524,
+        "std": 0.0,
+        "max": 12488.261683392524,
+        "min": 12488.261683392524,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2092.139927411077,
+        "median": 2092.139927411077,
+        "std": 0.0,
+        "max": 2092.139927411077,
+        "min": 2092.139927411077,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/util/MockUtil.java b/src/org/mockito/internal/util/MockUtil.java\nindex d7c530c..3c20596 100644\n--- a/src/org/mockito/internal/util/MockUtil.java\n+++ b/src/org/mockito/internal/util/MockUtil.java\n@@ -61,7 +61,8 @@ public class MockUtil {\n \n     public <T> void resetMock(T mock) {\n         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);\n-        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());\n+        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);\n+        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));\n         ((Factory) mock).setCallback(0, newFilter);\n     }\n \n"
+    ]
+}

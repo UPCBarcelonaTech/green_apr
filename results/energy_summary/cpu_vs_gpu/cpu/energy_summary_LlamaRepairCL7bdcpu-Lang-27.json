@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-27",
+    "Time": {
+        "mean": 398.258269071579,
+        "median": 398.258269071579,
+        "std": 0.0,
+        "max": 398.258269071579,
+        "min": 398.258269071579,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 333616.31742430304,
+        "median": 333616.31742430304,
+        "std": 0.0,
+        "max": 333616.31742430304,
+        "min": 333616.31742430304,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 94081.27638580209,
+        "median": 94081.27638580209,
+        "std": 0.0,
+        "max": 94081.27638580209,
+        "min": 94081.27638580209,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        318.6951960325241,
+        327.535537481308,
+        336.37587893009186,
+        345.21622037887573,
+        354.0565618276596,
+        362.8969032764435,
+        371.73724472522736,
+        380.57758617401123,
+        389.4179276227951,
+        398.258269071579
+    ],
+    "Joules_Per_PatchMedian": [
+        326810.2423611402,
+        327566.47292371385,
+        328322.7034862875,
+        329078.93404886115,
+        329835.1646114348,
+        330591.39517400844,
+        331347.6257365821,
+        332103.85629915574,
+        332860.0868617294,
+        333616.31742430304
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        92295.9655643046,
+        92494.33343335988,
+        92692.70130241515,
+        92891.06917147043,
+        93089.4370405257,
+        93287.80490958098,
+        93486.17277863626,
+        93684.54064769154,
+        93882.90851674681,
+        94081.27638580209
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 310.23071205616,
+        "median": 309.85485458374023,
+        "std": 3.0539389616280963,
+        "max": 314.260703086853,
+        "min": 306.9524359703064,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 326451.606760475,
+        "median": 326054.01179856656,
+        "std": 2876.6035486796864,
+        "max": 330144.85111167433,
+        "min": 323553.55233309267,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 92370.8860258788,
+        "median": 92097.59769524932,
+        "std": 1085.4662088855796,
+        "max": 93852.22846066958,
+        "min": 91436.120252347,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        8.840341448783875,
+        17.68068289756775,
+        26.521024346351624,
+        35.3613657951355,
+        44.20170724391937,
+        53.04204869270325,
+        61.88239014148712,
+        70.722731590271,
+        79.56307303905487,
+        88.40341448783875
+    ],
+    "Val_Joules": [
+        756.2305625736481,
+        1512.4611251472961,
+        2268.691687720944,
+        3024.9222502945922,
+        3781.1528128682403,
+        4537.383375441888,
+        5293.613938015536,
+        6049.8445005891845,
+        6806.0750631628325,
+        7562.305625736481
+    ],
+    "Val_JoulesNormalized": [
+        198.36786905527697,
+        396.73573811055394,
+        595.1036071658309,
+        793.4714762211079,
+        991.8393452763848,
+        1190.2072143316618,
+        1388.5750833869388,
+        1586.9429524422158,
+        1785.3108214974927,
+        1983.6786905527697
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex f1f36a8..fd03ab8 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -476,7 +476,7 @@ public class NumberUtils {\n         if (decPos > -1) {\n \n             if (expPos > -1) {\n-                if (expPos < decPos || expPos > str.length()) {\n+                if (expPos < decPos) {\n                     throw new NumberFormatException(str + \" is not a valid number.\");\n                 }\n                 dec = str.substring(decPos + 1, expPos);\n@@ -486,9 +486,6 @@ public class NumberUtils {\n             mant = str.substring(0, decPos);\n         } else {\n             if (expPos > -1) {\n-                if (expPos > str.length()) {\n-                    throw new NumberFormatException(str + \" is not a valid number.\");\n-                }\n                 mant = str.substring(0, expPos);\n             } else {\n                 mant = str;\n"
+    ]
+}

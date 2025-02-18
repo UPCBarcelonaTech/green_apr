@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-91",
+    "Time": {
+        "mean": 50.24950933456421,
+        "median": 50.24950933456421,
+        "std": 0.0,
+        "max": 50.24950933456421,
+        "min": 50.24950933456421,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 7077.666452026367,
+        "median": 7077.666452026367,
+        "std": 0.0,
+        "max": 7077.666452026367,
+        "min": 7077.666452026367,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2887.5512198567394,
+        "median": 2887.5512198567394,
+        "std": 0.0,
+        "max": 2887.5512198567394,
+        "min": 2887.5512198567394,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/Fraction.java b/src/java/org/apache/commons/math/fraction/Fraction.java\nindex d6d2f18..0706f8c 100644\n--- a/src/java/org/apache/commons/math/fraction/Fraction.java\n+++ b/src/java/org/apache/commons/math/fraction/Fraction.java\n@@ -256,8 +256,8 @@ public class Fraction extends Number implements Comparable<Fraction> {\n      *         than <tt>object</tt>, 0 if they are equal.\n      */\n     public int compareTo(Fraction object) {\n-        long nOd = ((long) numerator) * object.denominator;\n-        long dOn = ((long) denominator) * object.numerator;\n+        double nOd = doubleValue();\n+        double dOn = object.doubleValue();\n         return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n     }\n     \n"
+    ]
+}

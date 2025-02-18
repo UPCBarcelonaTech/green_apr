@@ -1,0 +1,85 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-130",
+    "Time": {
+        "mean": 2.1799960136413574,
+        "median": 2.1799960136413574,
+        "std": 0.0,
+        "max": 2.1799960136413574,
+        "min": 2.1799960136413574,
+        "count": 5
+    },
+    "Joules": {
+        "mean": 2058.2595443248747,
+        "median": 2058.2595443248747,
+        "std": 0.0,
+        "max": 2058.2595443248747,
+        "min": 2058.2595443248747,
+        "count": 5
+    },
+    "JoulesNormalized": {
+        "mean": 409.8380151987078,
+        "median": 409.8380151987078,
+        "std": 0.0,
+        "max": 409.8380151987078,
+        "min": 409.8380151987078,
+        "count": 5
+    },
+    "NrExecutions": 5,
+    "ExecutionsIds": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n",
+        "diff --git a/src/com/google/javascript/jscomp/CollapseProperties.java b/src/com/google/javascript/jscomp/CollapseProperties.java\nindex f86625f..ab2d2c7 100644\n--- a/src/com/google/javascript/jscomp/CollapseProperties.java\n+++ b/src/com/google/javascript/jscomp/CollapseProperties.java\n@@ -169,7 +169,7 @@ class CollapseProperties implements CompilerPass {\n         continue;\n       }\n \n-      if (!name.inExterns && name.globalSets == 1 && name.localSets == 0 &&\n+      if (name.globalSets == 1 && name.localSets == 0 &&\n           name.aliasingGets > 0) {\n         // {@code name} meets condition (b). Find all of its local aliases\n         // and try to inline them.\n"
+    ]
+}

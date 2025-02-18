@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-12",
+    "Time": {
+        "mean": 25.865355014801025,
+        "median": 25.865355014801025,
+        "std": 0.0,
+        "max": 25.865355014801025,
+        "min": 25.865355014801025,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 25983.474083805086,
+        "median": 25983.474083805086,
+        "std": 0.0,
+        "max": 25983.474083805086,
+        "min": 25983.474083805086,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 6773.249400639532,
+        "median": 6773.249400639532,
+        "std": 0.0,
+        "max": 6773.249400639532,
+        "min": 6773.249400639532,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMaster.java b/src/org/mockito/internal/util/reflection/GenericMaster.java\nindex 4df9f7a..64bf154 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMaster.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMaster.java\n@@ -17,12 +17,8 @@ public class GenericMaster {\n         Type generic = field.getGenericType();\n         if (generic != null && generic instanceof ParameterizedType) {\n             Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n-            if (actual instanceof Class) {\n                 return (Class) actual;\n-            } else if (actual instanceof ParameterizedType) {\n                 //in case of nested generics we don't go deep\n-                return (Class) ((ParameterizedType) actual).getRawType();\n-            }\n         }\n         \n         return Object.class;\n"
+    ]
+}

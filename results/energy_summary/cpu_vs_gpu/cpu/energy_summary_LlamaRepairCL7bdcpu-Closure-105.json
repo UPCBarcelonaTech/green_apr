@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-105",
+    "Time": {
+        "mean": 419.1408488750458,
+        "median": 419.1408488750458,
+        "std": 0.0,
+        "max": 419.1408488750458,
+        "min": 419.1408488750458,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 195055.7413543998,
+        "median": 195055.7413543998,
+        "std": 0.0,
+        "max": 195055.7413543998,
+        "min": 195055.7413543998,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 58315.94493923184,
+        "median": 58315.94493923184,
+        "std": 0.0,
+        "max": 58315.94493923184,
+        "min": 58315.94493923184,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        184.60386848449707,
+        210.66353297233582,
+        236.72319746017456,
+        262.7828619480133,
+        288.84252643585205,
+        314.9021909236908,
+        340.96185541152954,
+        367.0215198993683,
+        393.08118438720703,
+        419.1408488750458
+    ],
+    "Joules_Per_PatchMedian": [
+        169000.62044025658,
+        171895.63387516138,
+        174790.64731006618,
+        177685.66074497098,
+        180580.6741798758,
+        183475.6876147806,
+        186370.7010496854,
+        189265.7144845902,
+        192160.727919495,
+        195055.7413543998
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        46533.99082786438,
+        47843.09684023854,
+        49152.2028526127,
+        50461.308864986866,
+        51770.41487736103,
+        53079.52088973519,
+        54388.626902109354,
+        55697.73291448352,
+        57006.83892685768,
+        58315.94493923184
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 158.25071221590042,
+        "median": 158.54420399665833,
+        "std": 6.416260343736063,
+        "max": 164.45425081253052,
+        "min": 151.46019005775452,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 165878.98004974425,
+        "median": 166105.60700535178,
+        "std": 6643.955686689094,
+        "max": 172159.0647597551,
+        "min": 159145.64142851828,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 45273.33805086909,
+        "median": 45224.884815490215,
+        "std": 1398.039960309395,
+        "max": 46670.478177201745,
+        "min": 43973.1043952942,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        26.059664487838745,
+        52.11932897567749,
+        78.17899346351624,
+        104.23865795135498,
+        130.29832243919373,
+        156.35798692703247,
+        182.41765141487122,
+        208.47731590270996,
+        234.5369803905487,
+        260.59664487838745
+    ],
+    "Val_Joules": [
+        2895.013434904802,
+        5790.026869809604,
+        8685.040304714406,
+        11580.053739619208,
+        14475.06717452401,
+        17370.080609428813,
+        20265.094044333615,
+        23160.107479238417,
+        26055.12091414322,
+        28950.13434904802
+    ],
+    "Val_JoulesNormalized": [
+        1309.1060123741627,
+        2618.2120247483253,
+        3927.318037122488,
+        5236.424049496651,
+        6545.530061870813,
+        7854.636074244976,
+        9163.742086619139,
+        10472.848098993301,
+        11781.954111367464,
+        13091.060123741627
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n",
+        "diff --git a/src/com/google/javascript/jscomp/FoldConstants.java b/src/com/google/javascript/jscomp/FoldConstants.java\nindex 657ee0a..f6d6a27 100644\n--- a/src/com/google/javascript/jscomp/FoldConstants.java\n+++ b/src/com/google/javascript/jscomp/FoldConstants.java\n@@ -1474,24 +1474,22 @@ class FoldConstants extends AbstractPostOrderCallback\n \n     String joinString = NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n-    StringBuilder sb = null;\n+    StringBuilder sb = new StringBuilder();\n     int foldedSize = 0;\n     Node elem = arrayNode.getFirstChild();\n     // Merges adjacent String nodes.\n     while (elem != null) {\n       if (NodeUtil.isImmutableValue(elem)) {\n-        if (sb == null) {\n-          sb = new StringBuilder();\n-        } else {\n+        if (sb.length() > 0) {\n           sb.append(joinString);\n         }\n         sb.append(NodeUtil.getStringValue(elem));\n       } else {\n-        if (sb != null) {\n+        if (sb.length() > 0) {\n           // + 2 for the quotes.\n           foldedSize += sb.length() + 2;\n           arrayFoldedChildren.add(Node.newString(sb.toString()));\n-          sb = null;\n+          sb = new StringBuilder();\n         }\n         foldedSize += InlineCostEstimator.getCost(elem);\n         arrayFoldedChildren.add(elem);\n@@ -1499,7 +1497,7 @@ class FoldConstants extends AbstractPostOrderCallback\n       elem = elem.getNext();\n     }\n \n-    if (sb != null) {\n+    if (sb.length() > 0) {\n       // + 2 for the quotes.\n       foldedSize += sb.length() + 2;\n       arrayFoldedChildren.add(Node.newString(sb.toString()));\n"
+    ]
+}

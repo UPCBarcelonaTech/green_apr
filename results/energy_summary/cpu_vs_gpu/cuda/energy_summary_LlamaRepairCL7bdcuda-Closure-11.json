@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-11",
+    "Time": {
+        "mean": 598.3390482664108,
+        "median": 598.3390482664108,
+        "std": 0.0,
+        "max": 598.3390482664108,
+        "min": 598.3390482664108,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 72764.20519587398,
+        "median": 72764.20519587398,
+        "std": 0.0,
+        "max": 72764.20519587398,
+        "min": 72764.20519587398,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 33166.99615495801,
+        "median": 33166.99615495801,
+        "std": 0.0,
+        "max": 33166.99615495801,
+        "min": 33166.99615495801,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex e428dfa..ae8a320 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1311,6 +1311,8 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n     if (childType.isDict()) {\n       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n+    } else if (n.getJSType() != null && parent.isAssign()) {\n+      return;\n     } else if (validator.expectNotNullOrUndefined(t, n, childType,\n         \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n       checkPropertyAccess(childType, property.getString(), t, n);\n"
+    ]
+}

@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-17",
+    "Time": {
+        "mean": 195.51518154144287,
+        "median": 195.51518154144287,
+        "std": 0.0,
+        "max": 195.51518154144287,
+        "min": 195.51518154144287,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 113783.08312475678,
+        "median": 113783.08312475678,
+        "std": 0.0,
+        "max": 113783.08312475678,
+        "min": 113783.08312475678,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 30730.73012571336,
+        "median": 30730.73012571336,
+        "std": 0.0,
+        "max": 30730.73012571336,
+        "min": 30730.73012571336,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        113.07735550403595,
+        122.23711395263672,
+        131.3968724012375,
+        140.55663084983826,
+        149.71638929843903,
+        158.8761477470398,
+        168.03590619564056,
+        177.19566464424133,
+        186.3554230928421,
+        195.51518154144287
+    ],
+    "Joules_Per_PatchMedian": [
+        106930.71215842366,
+        107692.08671023845,
+        108453.46126205324,
+        109214.83581386803,
+        109976.21036568283,
+        110737.58491749762,
+        111498.95946931241,
+        112260.3340211272,
+        113021.70857294199,
+        113783.08312475678
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        28892.612530440096,
+        29096.84781880379,
+        29301.083107167487,
+        29505.318395531183,
+        29709.55368389488,
+        29913.788972258575,
+        30118.02426062227,
+        30322.259548985967,
+        30526.494837349663,
+        30730.73012571336
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 103.03403663635254,
+        "median": 103.91759705543518,
+        "std": 2.4576871218547707,
+        "max": 104.92778992652893,
+        "min": 100.2567229270935,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 105769.47607822815,
+        "median": 106169.33760660887,
+        "std": 2509.4176618359375,
+        "max": 108054.95475115775,
+        "min": 103084.13587691785,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 28592.662978319324,
+        "median": 28688.3772420764,
+        "std": 1027.5109725558889,
+        "max": 29568.967886114115,
+        "min": 27520.64380676746,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        9.159758448600769,
+        18.319516897201538,
+        27.479275345802307,
+        36.639033794403076,
+        45.798792243003845,
+        54.958550691604614,
+        64.11830914020538,
+        73.27806758880615,
+        82.43782603740692,
+        91.59758448600769
+    ],
+    "Val_Joules": [
+        761.3745518147916,
+        1522.7491036295833,
+        2284.123655444375,
+        3045.4982072591665,
+        3806.872759073958,
+        4568.24731088875,
+        5329.621862703541,
+        6090.996414518333,
+        6852.370966333125,
+        7613.745518147916
+    ],
+    "Val_JoulesNormalized": [
+        204.23528836369587,
+        408.47057672739174,
+        612.7058650910876,
+        816.9411534547835,
+        1021.1764418184794,
+        1225.4117301821752,
+        1429.647018545871,
+        1633.882306909567,
+        1838.1175952732629,
+        2042.3528836369587
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 4d010ea..4cb581d 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -80,20 +80,26 @@ public abstract class CharSequenceTranslator {\n             return;\n         }\n         int pos = 0;\n-        int len = input.length();\n+        int len = Character.codePointCount(input, 0, input.length());\n         while (pos < len) {\n             int consumed = translate(input, pos, out);\n             if (consumed == 0) {\n                 char[] c = Character.toChars(Character.codePointAt(input, pos));\n                 out.write(c);\n-                pos+= c.length;\n-                continue;\n             }\n+            else {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n+                    if (pos < len - 2) {\n                 pos += Character.charCount(Character.codePointAt(input, pos));\n+                    } else {\n+                        pos++;\n+                    }\n+                }\n+                pos--;\n             }\n+            pos++;\n         }\n     }\n \n"
+    ]
+}

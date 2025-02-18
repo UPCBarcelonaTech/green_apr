@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-19",
+    "Time": {
+        "mean": 97.28709483146667,
+        "median": 97.28709483146667,
+        "std": 0.0,
+        "max": 97.28709483146667,
+        "min": 97.28709483146667,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 14415.604866337777,
+        "median": 14415.604866337777,
+        "std": 0.0,
+        "max": 14415.604866337777,
+        "min": 14415.604866337777,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 3475.1213555932045,
+        "median": 3475.1213555932045,
+        "std": 0.0,
+        "max": 3475.1213555932045,
+        "min": 3475.1213555932045,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        15.752450108528137,
+        24.81185507774353,
+        33.87126004695892,
+        42.930665016174316,
+        51.99006998538971,
+        61.0494749546051,
+        70.1088799238205,
+        79.16828489303589,
+        88.22768986225128,
+        97.28709483146667
+    ],
+    "Joules_Per_PatchMedian": [
+        7059.58018938899,
+        7876.916264605522,
+        8694.252339822055,
+        9511.588415038586,
+        10328.924490255118,
+        11146.26056547165,
+        11963.596640688182,
+        12780.932715904713,
+        13598.268791121245,
+        14415.604866337777
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1294.2117730379105,
+        1536.5350599884987,
+        1778.858346939087,
+        2021.1816338896751,
+        2263.5049208402634,
+        2505.8282077908516,
+        2748.15149474144,
+        2990.474781692028,
+        3232.7980686426163,
+        3475.1213555932045
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 6.714930868148803,
+        "median": 6.693045139312744,
+        "std": 0.16282821369887554,
+        "max": 6.91304612159729,
+        "min": 6.510821104049683,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 6202.874944357872,
+        "median": 6242.2441141724585,
+        "std": 108.89162516367999,
+        "max": 6310.988323092461,
+        "min": 6070.9147656083105,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1021.4711373829839,
+        "median": 1051.8884860873222,
+        "std": 137.82393816856919,
+        "max": 1147.7893782138817,
+        "min": 794.949481141567,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        9.059404969215393,
+        18.118809938430786,
+        27.17821490764618,
+        36.23761987686157,
+        45.297024846076965,
+        54.35642981529236,
+        63.41583478450775,
+        72.47523975372314,
+        81.53464472293854,
+        90.59404969215393
+    ],
+    "Val_Joules": [
+        817.3360752165318,
+        1634.6721504330635,
+        2452.008225649596,
+        3269.344300866128,
+        4086.6803760826597,
+        4904.016451299191,
+        5721.352526515723,
+        6538.688601732255,
+        7356.024676948787,
+        8173.360752165318
+    ],
+    "Val_JoulesNormalized": [
+        242.32328695058823,
+        484.64657390117645,
+        726.9698608517647,
+        969.2931478023529,
+        1211.6164347529411,
+        1453.9397217035294,
+        1696.2630086541176,
+        1938.5862956047058,
+        2180.909582555294,
+        2423.2328695058823
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\nindex 3d4c238..68891ac 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java\n@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n     public int translate(CharSequence input, int index, Writer out) throws IOException {\n         int seqEnd = input.length();\n         // Uses -2 to ensure there is something after the &#\n-        if(input.charAt(index) == '&' && index < seqEnd - 2 && input.charAt(index + 1) == '#') {\n+        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {\n             int start = index + 2;\n             boolean isHex = false;\n \n@@ -47,16 +47,11 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 isHex = true;\n \n                 // Check there's more than just an x after the &#\n-                if(start == seqEnd) {\n-                    return 0;\n-                }\n             }\n \n             int end = start;\n             // Note that this supports character codes without a ; on the end\n-            while(end < seqEnd && ( (input.charAt(end) >= '0' && input.charAt(end) <= '9') ||\n-                                    (input.charAt(end) >= 'a' && input.charAt(end) <= 'f') ||\n-                                    (input.charAt(end) >= 'A' && input.charAt(end) <= 'F') ) )\n+            while(input.charAt(end) != ';') \n             {\n                 end++;\n             }\n@@ -81,9 +76,8 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {\n                 out.write(entityValue);\n             }\n \n-            boolean semiNext = (end != seqEnd) && (input.charAt(end) == ';');\n \n-            return 2 + (end - start) + (isHex ? 1 : 0) + (semiNext ? 1 : 0);\n+            return 2 + (end - start) + (isHex ? 1 : 0) + 1;\n         }\n         return 0;\n     }\n"
+    ]
+}

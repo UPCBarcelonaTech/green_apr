@@ -1,0 +1,178 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-23",
+    "Time": {
+        "mean": 607.3298721313477,
+        "median": 607.3298721313477,
+        "std": 0.0,
+        "max": 607.3298721313477,
+        "min": 607.3298721313477,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 126796.06797727341,
+        "median": 126796.06797727341,
+        "std": 0.0,
+        "max": 126796.06797727341,
+        "min": 126796.06797727341,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 47282.078998672965,
+        "median": 47282.078998672965,
+        "std": 0.0,
+        "max": 47282.078998672965,
+        "min": 47282.078998672965,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        112.60642504692078,
+        167.57569694519043,
+        222.54496884346008,
+        277.51424074172974,
+        332.4835126399994,
+        387.45278453826904,
+        442.4220564365387,
+        497.39132833480835,
+        552.360600233078,
+        607.3298721313477
+    ],
+    "Joules_Per_PatchMedian": [
+        66912.33807109595,
+        73566.085838449,
+        80219.83360580205,
+        86873.5813731551,
+        93527.32914050815,
+        100181.0769078612,
+        106834.82467521426,
+        113488.57244256731,
+        120142.32020992036,
+        126796.06797727341
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        19354.235334503654,
+        22457.32907496691,
+        25560.422815430167,
+        28663.516555893424,
+        31766.61029635668,
+        34869.70403681994,
+        37972.797777283195,
+        41075.89151774645,
+        44178.98525820971,
+        47282.078998672965
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 60.717302004496254,
+        "median": 57.63715314865112,
+        "std": 5.859544434658228,
+        "max": 67.47453784942627,
+        "min": 57.04021501541138,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 62874.134421610834,
+        "median": 60258.59030374289,
+        "std": 5372.009168275195,
+        "max": 69053.01305191517,
+        "min": 59310.79990917444,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 16598.12467402618,
+        "median": 16251.141594040397,
+        "std": 910.092026455261,
+        "max": 17630.66775686742,
+        "min": 15912.564671170723,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        54.96927189826965,
+        109.9385437965393,
+        164.90781569480896,
+        219.8770875930786,
+        274.84635949134827,
+        329.8156313896179,
+        384.7849032878876,
+        439.7541751861572,
+        494.7234470844269,
+        549.6927189826965
+    ],
+    "Val_Joules": [
+        6653.747767353059,
+        13307.495534706111,
+        19961.243302059163,
+        26614.991069412215,
+        33268.73883676527,
+        39922.48660411832,
+        46576.23437147137,
+        53229.98213882442,
+        59883.729906177476,
+        66537.47767353052
+    ],
+    "Val_JoulesNormalized": [
+        3103.093740463257,
+        6206.187480926514,
+        9309.28122138977,
+        12412.374961853027,
+        15515.468702316284,
+        18618.56244277954,
+        21721.656183242798,
+        24824.749923706055,
+        27927.84366416931,
+        31030.93740463257
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 7a0313c..f777b1c 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -1448,14 +1448,8 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n \n     Node current = left.getFirstChild();\n     Node elem = null;\n-    for (int i = 0; current != null; i++) {\n-      if (i != intIndex) {\n-        if (mayHaveSideEffects(current)) {\n-          return n;\n-        }\n-      } else {\n+    for (int i = 0; current != null && i < intIndex; i++) {\n         elem = current;\n-      }\n \n       current = current.getNext();\n     }\n"
+    ]
+}

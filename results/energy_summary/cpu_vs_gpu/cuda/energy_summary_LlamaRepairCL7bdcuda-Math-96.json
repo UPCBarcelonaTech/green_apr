@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-96",
+    "Time": {
+        "mean": 8.029509425163269,
+        "median": 8.029509425163269,
+        "std": 0.0,
+        "max": 8.029509425163269,
+        "min": 8.029509425163269,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 1995.0330876886846,
+        "median": 1995.0330876886846,
+        "std": 0.0,
+        "max": 1995.0330876886846,
+        "min": 1995.0330876886846,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 592.8910599112514,
+        "median": 592.8910599112514,
+        "std": 0.0,
+        "max": 592.8910599112514,
+        "min": 592.8910599112514,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/Complex.java b/src/java/org/apache/commons/math/complex/Complex.java\nindex 8b622cb..3571567 100644\n--- a/src/java/org/apache/commons/math/complex/Complex.java\n+++ b/src/java/org/apache/commons/math/complex/Complex.java\n@@ -255,7 +255,7 @@ public class Complex implements Serializable  {\n                 if (rhs.isNaN()) {\n                     ret = this.isNaN();\n                 } else {\n-                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); \n+                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); \n                 }\n             } catch (ClassCastException ex) {\n                 // ignore exception\n"
+    ]
+}

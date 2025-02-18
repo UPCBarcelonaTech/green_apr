@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-128",
+    "Time": {
+        "mean": 504.6695351600647,
+        "median": 504.6695351600647,
+        "std": 0.0,
+        "max": 504.6695351600647,
+        "min": 504.6695351600647,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 62495.164673042294,
+        "median": 62495.164673042294,
+        "std": 0.0,
+        "max": 62495.164673042294,
+        "min": 62495.164673042294,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 28541.054327976704,
+        "median": 28541.054327976704,
+        "std": 0.0,
+        "max": 28541.054327976704,
+        "min": 28541.054327976704,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 1dc33b7..2270c17 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -782,16 +782,13 @@ class CodeGenerator {\n \n   static boolean isSimpleNumber(String s) {\n     int len = s.length();\n-    if (len == 0) {\n-      return false;\n-    }\n     for (int index = 0; index < len; index++) {\n       char c = s.charAt(index);\n       if (c < '0' || c > '9') {\n         return false;\n       }\n     }\n-    return len == 1 || s.charAt(0) != '0';\n+    return len > 0 && s.charAt(0) != '0';\n   }\n \n   static double getSimpleNumber(String s) {\n"
+    ]
+}

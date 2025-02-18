@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-11",
+    "Time": {
+        "mean": 324.06991481781006,
+        "median": 324.06991481781006,
+        "std": 0.0,
+        "max": 324.06991481781006,
+        "min": 324.06991481781006,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 101344.88981913328,
+        "median": 101344.88981913328,
+        "std": 0.0,
+        "max": 101344.88981913328,
+        "min": 101344.88981913328,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 31732.16570695638,
+        "median": 31732.16570695638,
+        "std": 0.0,
+        "max": 31732.16570695638,
+        "min": 31732.16570695638,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\nindex fd18c28..1570681 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java\n@@ -180,7 +180,7 @@ public class MultivariateNormalDistribution\n             throw new DimensionMismatchException(vals.length, dim);\n         }\n \n-        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *\n+        return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n             FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n             getExponentTerm(vals);\n     }\n"
+    ]
+}

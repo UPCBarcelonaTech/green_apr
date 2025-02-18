@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-113",
+    "Time": {
+        "mean": 296.87379801273346,
+        "median": 296.87379801273346,
+        "std": 0.0,
+        "max": 296.87379801273346,
+        "min": 296.87379801273346,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 306120.72501905565,
+        "median": 306120.72501905565,
+        "std": 0.0,
+        "max": 306120.72501905565,
+        "min": 306120.72501905565,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 81660.41878755692,
+        "median": 81660.41878755692,
+        "std": 0.0,
+        "max": 81660.41878755692,
+        "min": 81660.41878755692,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 85cee7c..70bf1b0 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n       // the checks for broken requires turned off. In these cases, we\n       // allow broken requires to be preserved by the first run to\n       // let them be caught in the subsequent run.\n-      if (provided != null || requiresLevel.isOn()) {\n+      if (provided != null) {\n         parent.detachFromParent();\n         compiler.reportCodeChange();\n       }\n"
+    ]
+}

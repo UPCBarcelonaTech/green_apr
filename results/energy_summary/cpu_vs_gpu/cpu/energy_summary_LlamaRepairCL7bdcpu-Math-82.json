@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-82",
+    "Time": {
+        "mean": 98.04137372970581,
+        "median": 98.04137372970581,
+        "std": 0.0,
+        "max": 98.04137372970581,
+        "min": 98.04137372970581,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 35025.56872375011,
+        "median": 35025.56872375011,
+        "std": 0.0,
+        "max": 35025.56872375011,
+        "min": 35025.56872375011,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 10995.278551077838,
+        "median": 10995.278551077838,
+        "std": 0.0,
+        "max": 10995.278551077838,
+        "min": 10995.278551077838,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        33.24357485771179,
+        40.44333028793335,
+        47.64308571815491,
+        54.842841148376465,
+        62.04259657859802,
+        69.24235200881958,
+        76.44210743904114,
+        83.6418628692627,
+        90.84161829948425,
+        98.04137372970581
+    ],
+    "Joules_Per_PatchMedian": [
+        27135.81103798151,
+        28012.45078084469,
+        28889.09052370787,
+        29765.73026657105,
+        30642.370009434228,
+        31519.009752297407,
+        32395.649495160586,
+        33272.28923802376,
+        34148.928980886936,
+        35025.56872375011
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7223.108856409786,
+        7642.238822484014,
+        8061.368788558242,
+        8480.49875463247,
+        8899.628720706698,
+        9318.758686780926,
+        9737.888652855154,
+        10157.018618929382,
+        10576.14858500361,
+        10995.278551077838
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 25.775339126586914,
+        "median": 26.043819427490234,
+        "std": 2.170712495261982,
+        "max": 27.664240837097168,
+        "min": 23.34947681427002,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 26095.095538669826,
+        "median": 26259.171295118333,
+        "std": 1583.5777650142732,
+        "max": 27478.054718148705,
+        "min": 24383.984846293926,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 6827.806950575114,
+        "median": 6803.978890335558,
+        "std": 81.38414946442214,
+        "max": 6939.590718352796,
+        "min": 6763.679303276542,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        7.199755430221558,
+        14.399510860443115,
+        21.599266290664673,
+        28.79902172088623,
+        35.99877715110779,
+        43.198532581329346,
+        50.3982880115509,
+        57.59804344177246,
+        64.79779887199402,
+        71.99755430221558
+    ],
+    "Val_Joules": [
+        876.639742863179,
+        1753.279485726358,
+        2629.919228589537,
+        3506.558971452716,
+        4383.198714315895,
+        5259.838457179074,
+        6136.478200042253,
+        7013.117942905428,
+        7889.757685768604,
+        8766.397428631779
+    ],
+    "Val_JoulesNormalized": [
+        419.1299660742279,
+        838.2599321484558,
+        1257.3898982226838,
+        1676.5198642969117,
+        2095.6498303711396,
+        2514.7797964453675,
+        2933.9097625195955,
+        3353.0397285938234,
+        3772.1696946680513,
+        4191.299660742279
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\nindex 60a1b3a..8309d7b 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java\n@@ -79,7 +79,7 @@ public class SimplexSolver extends AbstractLinearOptimizer {\n         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n             final double entry = tableau.getEntry(i, col);\n-            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n                 final double ratio = rhs / entry;\n                 if (ratio < minRatio) {\n                     minRatio = ratio;\n"
+    ]
+}

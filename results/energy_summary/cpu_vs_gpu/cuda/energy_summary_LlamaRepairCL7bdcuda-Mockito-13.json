@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-13",
+    "Time": {
+        "mean": 3.289942979812622,
+        "median": 3.289942979812622,
+        "std": 0.0,
+        "max": 3.289942979812622,
+        "min": 3.289942979812622,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 3217.714090824127,
+        "median": 3217.714090824127,
+        "std": 0.0,
+        "max": 3217.714090824127,
+        "min": 3217.714090824127,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 697.18837505579,
+        "median": 697.18837505579,
+        "std": 0.0,
+        "max": 697.18837505579,
+        "min": 697.18837505579,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n",
+        "diff --git a/src/org/mockito/internal/MockHandler.java b/src/org/mockito/internal/MockHandler.java\nindex 8962ceb..6f2e4bc 100644\n--- a/src/org/mockito/internal/MockHandler.java\n+++ b/src/org/mockito/internal/MockHandler.java\n@@ -74,14 +74,12 @@ public class MockHandler<T> implements MockitoInvocationHandler, MockHandlerInte\n         if (verificationMode != null) {\n             //We need to check if verification was started on the correct mock \n             // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n+            if (verificationMode instanceof MockAwareVerificationMode && ((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                \n                 VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);            \n                 verificationMode.verify(data);\n                 return null;\n-            } else {\n                 // this means there is an invocation on a different mock. Re-adding verification mode \n                 // - see VerifyingWithAnExtraCallToADifferentMockTest (bug 138)\n-                mockingProgress.verificationStarted(verificationMode);\n             }\n         }\n         \n"
+    ]
+}

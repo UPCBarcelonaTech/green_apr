@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-41",
+    "Time": {
+        "mean": 204.2937902212143,
+        "median": 204.2937902212143,
+        "std": 0.0,
+        "max": 204.2937902212143,
+        "min": 204.2937902212143,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 24318.458696144815,
+        "median": 24318.458696144815,
+        "std": 0.0,
+        "max": 24318.458696144815,
+        "min": 24318.458696144815,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 10276.665279132128,
+        "median": 10276.665279132128,
+        "std": 0.0,
+        "max": 10276.665279132128,
+        "min": 10276.665279132128,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\nindex 1de139f..e5518e3 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java\n@@ -517,7 +517,7 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se\n                 }\n \n                 double sumWts = 0;\n-                for (int i = begin; i < begin + length; i++) {\n+                for (int i = 0; i < weights.length; i++) {\n                     sumWts += weights[i];\n                 }\n \n"
+    ]
+}

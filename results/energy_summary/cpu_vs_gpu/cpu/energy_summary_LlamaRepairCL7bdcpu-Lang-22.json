@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-22",
+    "Time": {
+        "mean": 117.56997895240784,
+        "median": 117.56997895240784,
+        "std": 0.0,
+        "max": 117.56997895240784,
+        "min": 117.56997895240784,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 37007.536916685116,
+        "median": 37007.536916685116,
+        "std": 0.0,
+        "max": 37007.536916685116,
+        "min": 37007.536916685116,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 9949.329276096823,
+        "median": 9949.329276096823,
+        "std": 0.0,
+        "max": 9949.329276096823,
+        "min": 9949.329276096823,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        37.47565793991089,
+        46.37502694129944,
+        55.27439594268799,
+        64.17376494407654,
+        73.07313394546509,
+        81.97250294685364,
+        90.87187194824219,
+        99.77124094963074,
+        108.67060995101929,
+        117.56997895240784
+    ],
+    "Joules_Per_PatchMedian": [
+        30123.396734565493,
+        30888.30119924545,
+        31653.205663925404,
+        32418.11012860536,
+        33183.01459328532,
+        33947.91905796528,
+        34712.82352264524,
+        35477.7279873252,
+        36242.63245200516,
+        37007.536916685116
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        8128.867012405392,
+        8331.140597259995,
+        8533.414182114599,
+        8735.687766969202,
+        8937.961351823806,
+        9140.23493667841,
+        9342.508521533013,
+        9544.782106387616,
+        9747.05569124222,
+        9949.329276096823
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 30.393579959869385,
+        "median": 28.57628893852234,
+        "std": 3.6435025900925733,
+        "max": 34.588287115097046,
+        "min": 28.01616382598877,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 31447.904618692395,
+        "median": 29358.492269885537,
+        "std": 3915.803170724469,
+        "max": 35965.25841405391,
+        "min": 29019.963172137737,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 8371.776653242106,
+        "median": 7926.59342755079,
+        "std": 1066.0222964466861,
+        "max": 9588.230660080902,
+        "min": 7600.505872094625,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        8.89936900138855,
+        17.7987380027771,
+        26.69810700416565,
+        35.5974760055542,
+        44.49684500694275,
+        53.3962140083313,
+        62.29558300971985,
+        71.1949520111084,
+        80.09432101249695,
+        88.9936900138855
+    ],
+    "Val_Joules": [
+        764.9044646799557,
+        1529.8089293599114,
+        2294.713394039867,
+        3059.617858719823,
+        3824.522323399782,
+        4589.4267880797415,
+        5354.331252759701,
+        6119.23571743966,
+        6884.14018211962,
+        7649.044646799579
+    ],
+    "Val_JoulesNormalized": [
+        202.27358485460263,
+        404.54716970920526,
+        606.8207545638088,
+        809.0943394184123,
+        1011.3679242730159,
+        1213.6415091276194,
+        1415.915093982223,
+        1618.1886788368265,
+        1820.46226369143,
+        2022.7358485460336
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "I",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/Fraction.java b/src/main/java/org/apache/commons/lang3/math/Fraction.java\nindex bf15a49..b36a156 100644\n--- a/src/main/java/org/apache/commons/lang3/math/Fraction.java\n+++ b/src/main/java/org/apache/commons/lang3/math/Fraction.java\n@@ -580,14 +580,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {\n      */\n     private static int greatestCommonDivisor(int u, int v) {\n         // From Commons Math:\n-        if ((u == 0) || (v == 0)) {\n-            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {\n-                throw new ArithmeticException(\"overflow: gcd is 2^31\");\n-            }\n-            return Math.abs(u) + Math.abs(v);\n-        }\n         //if either operand is abs 1, return 1:\n-        if (Math.abs(u) == 1 || Math.abs(v) == 1) {\n+        if (Math.abs(u) <= 1 || Math.abs(v) <= 1) {\n             return 1;\n         }\n         // keep u and v negative, as negative integers range down to\n"
+    ]
+}

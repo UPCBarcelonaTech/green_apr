@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-58",
+    "Time": {
+        "mean": 420.4447854757309,
+        "median": 420.4447854757309,
+        "std": 0.0,
+        "max": 420.4447854757309,
+        "min": 420.4447854757309,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 296370.9217318475,
+        "median": 296370.9217318475,
+        "std": 0.0,
+        "max": 296370.9217318475,
+        "min": 296370.9217318475,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 87047.74444462651,
+        "median": 87047.74444462651,
+        "std": 0.0,
+        "max": 87047.74444462651,
+        "min": 87047.74444462651,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n",
+        "diff --git a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\nindex e107faa..7999db4 100644\n--- a/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n+++ b/src/com/google/javascript/jscomp/LiveVariablesAnalysis.java\n@@ -203,12 +203,8 @@ class LiveVariablesAnalysis extends\n             // for(var x in y) {...}\n             lhs = lhs.getLastChild();\n           }\n-          if (NodeUtil.isName(lhs)) {\n             addToSetIfLocal(lhs, kill);\n             addToSetIfLocal(lhs, gen);\n-          } else {\n-            computeGenKill(lhs, gen, kill, conditional);\n-          }\n           computeGenKill(rhs, gen, kill, conditional);\n         }\n         return;\n"
+    ]
+}

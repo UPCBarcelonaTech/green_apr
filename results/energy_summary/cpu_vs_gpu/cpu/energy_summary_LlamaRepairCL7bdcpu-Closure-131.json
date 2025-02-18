@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-131",
+    "Time": {
+        "mean": 532.2952857017517,
+        "median": 532.2952857017517,
+        "std": 0.0,
+        "max": 532.2952857017517,
+        "min": 532.2952857017517,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 98175.21177383063,
+        "median": 98175.21177383063,
+        "std": 0.0,
+        "max": 98175.21177383063,
+        "min": 98175.21177383063,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 37371.55969430804,
+        "median": 37371.55969430804,
+        "std": 0.0,
+        "max": 37371.55969430804,
+        "min": 37371.55969430804,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n",
+        "diff --git a/src/com/google/javascript/rhino/TokenStream.java b/src/com/google/javascript/rhino/TokenStream.java\nindex cadb536..144a4ad 100644\n--- a/src/com/google/javascript/rhino/TokenStream.java\n+++ b/src/com/google/javascript/rhino/TokenStream.java\n@@ -191,13 +191,12 @@ public class TokenStream {\n       int length = s.length();\n \n       if (length == 0 ||\n-          Character.isIdentifierIgnorable(s.charAt(0)) ||\n           !Character.isJavaIdentifierStart(s.charAt(0))) {\n         return false;\n       }\n \n       for (int i = 1; i < length; i++) {\n-        if (Character.isIdentifierIgnorable(s.charAt(i)) ||\n+        if (\n             !Character.isJavaIdentifierPart(s.charAt(i))) {\n           return false;\n         }\n"
+    ]
+}

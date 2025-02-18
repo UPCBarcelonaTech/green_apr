@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-24",
+    "Time": {
+        "mean": 141.0677330493927,
+        "median": 141.0677330493927,
+        "std": 0.0,
+        "max": 141.0677330493927,
+        "min": 141.0677330493927,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 90868.40228800179,
+        "median": 90868.40228800179,
+        "std": 0.0,
+        "max": 90868.40228800179,
+        "min": 90868.40228800179,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 26715.83175826668,
+        "median": 26715.83175826668,
+        "std": 0.0,
+        "max": 26715.83175826668,
+        "min": 26715.83175826668,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeParserBucket.java b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\nindex 7c37fc1..b985cef 100644\n--- a/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n+++ b/src/main/java/org/joda/time/format/DateTimeParserBucket.java\n@@ -352,11 +352,6 @@ public class DateTimeParserBucket {\n             for (int i = 0; i < count; i++) {\n                 millis = savedFields[i].set(millis, resetFields);\n             }\n-            if (resetFields) {\n-                for (int i = 0; i < count; i++) {\n-                    millis = savedFields[i].set(millis, i == (count - 1));\n-                }\n-            }\n         } catch (IllegalFieldValueException e) {\n             if (text != null) {\n                 e.prependMessage(\"Cannot parse \\\"\" + text + '\"');\n"
+    ]
+}

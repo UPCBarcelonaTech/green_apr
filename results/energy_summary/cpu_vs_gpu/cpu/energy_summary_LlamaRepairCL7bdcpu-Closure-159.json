@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-159",
+    "Time": {
+        "mean": 303.7296373844147,
+        "median": 303.7296373844147,
+        "std": 0.0,
+        "max": 303.7296373844147,
+        "min": 303.7296373844147,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 67741.69166254996,
+        "median": 67741.69166254996,
+        "std": 0.0,
+        "max": 67741.69166254996,
+        "min": 67741.69166254996,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 22887.237406277658,
+        "median": 22887.237406277658,
+        "std": 0.0,
+        "max": 22887.237406277658,
+        "min": 22887.237406277658,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineFunctions.java b/src/com/google/javascript/jscomp/InlineFunctions.java\nindex 27caaf23..814a07f4 100644\n--- a/src/com/google/javascript/jscomp/InlineFunctions.java\n+++ b/src/com/google/javascript/jscomp/InlineFunctions.java\n@@ -774,9 +774,10 @@ class InlineFunctions implements SpecializationAwareCompilerPass {\n       Node node, Set<String> changed) {\n     Preconditions.checkArgument(changed != null);\n     // For each referenced function, add a new reference\n-    if (node.getType() == Token.NAME) {\n-      if (isCandidateUsage(node)) {\n-        changed.add(node.getString());\n+    if (node.getType() == Token.CALL) {\n+      Node child = node.getFirstChild();\n+      if (child.getType() == Token.NAME) {\n+        changed.add(child.getString());\n       }\n     }\n \n"
+    ]
+}

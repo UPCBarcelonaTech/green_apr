@@ -1,0 +1,85 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-15",
+    "Time": {
+        "mean": 73.56477785110474,
+        "median": 73.56477785110474,
+        "std": 0.0,
+        "max": 73.56477785110474,
+        "min": 73.56477785110474,
+        "count": 5
+    },
+    "Joules": {
+        "mean": 13959.593240725997,
+        "median": 13959.593240725997,
+        "std": 0.0,
+        "max": 13959.593240725997,
+        "min": 13959.593240725997,
+        "count": 5
+    },
+    "JoulesNormalized": {
+        "mean": 4224.513073277472,
+        "median": 4224.513073277472,
+        "std": 0.0,
+        "max": 4224.513073277472,
+        "min": 4224.513073277472,
+        "count": 5
+    },
+    "NrExecutions": 5,
+    "ExecutionsIds": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "correct"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n",
+        "diff --git a/src/main/java/org/joda/time/field/FieldUtils.java b/src/main/java/org/joda/time/field/FieldUtils.java\nindex 1e045b2..a0fe7e2 100644\n--- a/src/main/java/org/joda/time/field/FieldUtils.java\n+++ b/src/main/java/org/joda/time/field/FieldUtils.java\n@@ -135,9 +135,6 @@ public class FieldUtils {\n     public static long safeMultiply(long val1, int val2) {\n         switch (val2) {\n             case -1:\n-                if (val1 == Long.MIN_VALUE) {\n-                    throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n-                }\n                 return -val1;\n             case 0:\n                 return 0L;\n"
+    ]
+}

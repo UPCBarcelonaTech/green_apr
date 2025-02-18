@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-33",
+    "Time": {
+        "mean": 30.408599495887756,
+        "median": 30.408599495887756,
+        "std": 0.0,
+        "max": 30.408599495887756,
+        "min": 30.408599495887756,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 30570.44201644063,
+        "median": 30570.44201644063,
+        "std": 0.0,
+        "max": 30570.44201644063,
+        "min": 30570.44201644063,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 7571.719906467197,
+        "median": 7571.719906467197,
+        "std": 0.0,
+        "max": 7571.719906467197,
+        "min": 7571.719906467197,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex ffad2b1..203413f 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -95,19 +95,8 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n         Method m1 = invocation.getMethod();\n         Method m2 = candidate.getMethod();\n         \n-        if (m1.getName() != null && m1.getName().equals(m2.getName())) {\n         \t/* Avoid unnecessary cloning */\n-        \tClass[] params1 = m1.getParameterTypes();\n-        \tClass[] params2 = m2.getParameterTypes();\n-        \tif (params1.length == params2.length) {\n-        \t    for (int i = 0; i < params1.length; i++) {\n-        \t\tif (params1[i] != params2[i])\n-        \t\t    return false;\n-        \t    }\n-        \t    return true;\n-        \t}\n-        }\n-        return false;\n+        return m1.equals(m2);\n     }\n     \n     public Location getLocation() {\n"
+    ]
+}

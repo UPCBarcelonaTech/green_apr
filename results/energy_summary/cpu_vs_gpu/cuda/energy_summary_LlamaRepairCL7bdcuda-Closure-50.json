@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-50",
+    "Time": {
+        "mean": 466.1665551662445,
+        "median": 466.1665551662445,
+        "std": 0.0,
+        "max": 466.1665551662445,
+        "min": 466.1665551662445,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 60922.97030892968,
+        "median": 60922.97030892968,
+        "std": 0.0,
+        "max": 60922.97030892968,
+        "min": 60922.97030892968,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 26793.358506536482,
+        "median": 26793.358506536482,
+        "std": 0.0,
+        "max": 26793.358506536482,
+        "min": 26793.358506536482,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\nindex afaf85a..ffe47d3 100644\n--- a/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n+++ b/src/com/google/javascript/jscomp/PeepholeReplaceKnownMethods.java\n@@ -373,7 +373,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n \n     Node right = callTarget.getNext();\n     if (right != null) {\n-      if (right.getNext() != null || !NodeUtil.isImmutableValue(right)) {\n+      if (!NodeUtil.isImmutableValue(right)) {\n         return n;\n       }\n     }\n@@ -386,12 +386,7 @@ class PeepholeReplaceKnownMethods extends AbstractPeepholeOptimization{\n       return n;\n     }\n \n-    if (right != null && right.getType() == Token.STRING\n-        && \",\".equals(right.getString())) {\n       // \",\" is the default, it doesn't need to be explicit\n-      n.removeChild(right);\n-      reportCodeChange();\n-    }\n \n     String joinString = (right == null) ? \",\" : NodeUtil.getStringValue(right);\n     List<Node> arrayFoldedChildren = Lists.newLinkedList();\n"
+    ]
+}

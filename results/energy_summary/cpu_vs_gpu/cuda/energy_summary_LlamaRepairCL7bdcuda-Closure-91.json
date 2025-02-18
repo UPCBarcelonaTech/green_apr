@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-91",
+    "Time": {
+        "mean": 320.7790118455887,
+        "median": 320.7790118455887,
+        "std": 0.0,
+        "max": 320.7790118455887,
+        "min": 320.7790118455887,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 43117.36776535512,
+        "median": 43117.36776535512,
+        "std": 0.0,
+        "max": 43117.36776535512,
+        "min": 43117.36776535512,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 18157.46169588566,
+        "median": 18157.46169588566,
+        "std": 0.0,
+        "max": 18157.46169588566,
+        "min": 18157.46169588566,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckGlobalThis.java b/src/com/google/javascript/jscomp/CheckGlobalThis.java\nindex 91008e4..fa598d2 100644\n--- a/src/com/google/javascript/jscomp/CheckGlobalThis.java\n+++ b/src/com/google/javascript/jscomp/CheckGlobalThis.java\n@@ -112,15 +112,6 @@ final class CheckGlobalThis implements Callback {\n       }\n \n       // Don't traverse functions that are getting lent to a prototype.\n-      Node gramps = parent.getParent();\n-      if (NodeUtil.isObjectLitKey(parent, gramps)) {\n-        JSDocInfo maybeLends = gramps.getJSDocInfo();\n-        if (maybeLends != null &&\n-            maybeLends.getLendsName() != null &&\n-            maybeLends.getLendsName().endsWith(\".prototype\")) {\n-          return false;\n-        }\n-      }\n     }\n \n     if (parent != null && parent.getType() == Token.ASSIGN) {\n"
+    ]
+}

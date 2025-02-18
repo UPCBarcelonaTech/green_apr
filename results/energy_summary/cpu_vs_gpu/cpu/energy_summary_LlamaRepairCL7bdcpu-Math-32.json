@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-32",
+    "Time": {
+        "mean": 152.05482244491577,
+        "median": 152.05482244491577,
+        "std": 0.0,
+        "max": 152.05482244491577,
+        "min": 152.05482244491577,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 62425.35386108161,
+        "median": 62425.35386108161,
+        "std": 0.0,
+        "max": 62425.35386108161,
+        "min": 62425.35386108161,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 20242.494938695436,
+        "median": 20242.494938695436,
+        "std": 0.0,
+        "max": 20242.494938695436,
+        "min": 20242.494938695436,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\nindex add24ac..c6e7cf1 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -133,7 +133,7 @@ public class PolygonsSet extends AbstractRegion<Euclidean2D, Euclidean1D> {\n \n         if (v.length == 0) {\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {\n+            if ((Boolean) tree.getAttribute()) {\n                 // the instance covers the whole space\n                 setSize(Double.POSITIVE_INFINITY);\n                 setBarycenter(Vector2D.NaN);\n"
+    ]
+}

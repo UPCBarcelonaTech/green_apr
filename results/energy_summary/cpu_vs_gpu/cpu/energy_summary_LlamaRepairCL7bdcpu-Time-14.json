@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-14",
+    "Time": {
+        "mean": 126.89292645454407,
+        "median": 126.89292645454407,
+        "std": 0.0,
+        "max": 126.89292645454407,
+        "min": 126.89292645454407,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 47065.91349123119,
+        "median": 47065.91349123119,
+        "std": 0.0,
+        "max": 47065.91349123119,
+        "min": 47065.91349123119,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 14588.49141328931,
+        "median": 14588.49141328931,
+        "std": 0.0,
+        "max": 14588.49141328931,
+        "min": 14588.49141328931,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n",
+        "diff --git a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\nindex 2892a2d..afca44e 100644\n--- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n+++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java\n@@ -206,12 +206,7 @@ class BasicMonthOfYearDateTimeField extends ImpreciseDateTimeField {\n         if (valueToAdd == 0) {\n             return values;\n         }\n-        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {\n             // month is largest field and being added to, such as month-day\n-            int curMonth0 = partial.getValue(0) - 1;\n-            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;\n-            return set(partial, 0, values, newMonth);\n-        }\n         if (DateTimeUtils.isContiguous(partial)) {\n             long instant = 0L;\n             for (int i = 0, isize = partial.size(); i < isize; i++) {\n"
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-7",
+    "Time": {
+        "mean": 96.70472550392151,
+        "median": 96.70472550392151,
+        "std": 0.0,
+        "max": 96.70472550392151,
+        "min": 96.70472550392151,
+        "count": 5
+    },
+    "Joules": {
+        "mean": 100030.76047037839,
+        "median": 100030.76047037839,
+        "std": 0.0,
+        "max": 100030.76047037839,
+        "min": 100030.76047037839,
+        "count": 5
+    },
+    "JoulesNormalized": {
+        "mean": 26993.864865714313,
+        "median": 26993.864865714313,
+        "std": 0.0,
+        "max": 26993.864865714313,
+        "min": 26993.864865714313,
+        "count": 5
+    },
+    "NrExecutions": 5,
+    "ExecutionsIds": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatter.java b/src/main/java/org/joda/time/format/DateTimeFormatter.java\nindex 913d036..447674a 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatter.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatter.java\n@@ -705,9 +705,9 @@ public class DateTimeFormatter {\n         \n         long instantMillis = instant.getMillis();\n         Chronology chrono = instant.getChronology();\n-        int defaultYear = DateTimeUtils.getChronology(chrono).year().get(instantMillis);\n         long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);\n         chrono = selectChronology(chrono);\n+        int defaultYear = chrono.year().get(instantLocal);\n         \n         DateTimeParserBucket bucket = new DateTimeParserBucket(\n             instantLocal, chrono, iLocale, iPivotYear, defaultYear);\n"
+    ]
+}

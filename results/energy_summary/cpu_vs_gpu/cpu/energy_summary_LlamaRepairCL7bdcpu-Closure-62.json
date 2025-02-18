@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-62",
+    "Time": {
+        "mean": 545.6815309524536,
+        "median": 545.6815309524536,
+        "std": 0.0,
+        "max": 545.6815309524536,
+        "min": 545.6815309524536,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 111609.66465748544,
+        "median": 111609.66465748544,
+        "std": 0.0,
+        "max": 111609.66465748544,
+        "min": 111609.66465748544,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 41615.010861611365,
+        "median": 41615.010861611365,
+        "std": 0.0,
+        "max": 41615.010861611365,
+        "min": 41615.010861611365,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        101.00061213970184,
+        150.40960311889648,
+        199.81859409809113,
+        249.22758507728577,
+        298.6365760564804,
+        348.04556703567505,
+        397.4545580148697,
+        446.86354899406433,
+        496.272539973259,
+        545.6815309524536
+    ],
+    "Joules_Per_PatchMedian": [
+        59447.745215958355,
+        65243.514042794704,
+        71039.28286963105,
+        76835.05169646739,
+        82630.82052330373,
+        88426.58935014007,
+        94222.35817697641,
+        100018.12700381275,
+        105813.8958306491,
+        111609.66465748544
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        17308.194831526278,
+        20008.9521682024,
+        22709.70950487852,
+        25410.46684155464,
+        28111.22417823076,
+        30811.98151490688,
+        33512.738851583,
+        36213.49618825912,
+        38914.253524935244,
+        41615.010861611365
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 52.869373401006065,
+        "median": 51.5916211605072,
+        "std": 3.39141025151681,
+        "max": 56.71405291557312,
+        "min": 50.302446126937866,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 55029.46575242281,
+        "median": 53651.97638912201,
+        "std": 3347.3639325105573,
+        "max": 58845.7873855114,
+        "min": 52590.63348263502,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 15041.004010554154,
+        "median": 14607.437494850157,
+        "std": 795.0800339185831,
+        "max": 15958.620570755003,
+        "min": 14556.9539660573,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        49.40899097919464,
+        98.81798195838928,
+        148.22697293758392,
+        197.63596391677856,
+        247.0449548959732,
+        296.45394587516785,
+        345.8629368543625,
+        395.27192783355713,
+        444.68091881275177,
+        494.0899097919464
+    ],
+    "Val_Joules": [
+        5795.768826836349,
+        11591.537653672698,
+        17387.30648050904,
+        23183.07530734538,
+        28978.844134181723,
+        34774.612961018065,
+        40570.38178785441,
+        46366.15061469075,
+        52161.91944152709,
+        57957.68826836343
+    ],
+    "Val_JoulesNormalized": [
+        2700.7573366761208,
+        5401.5146733522415,
+        8102.272010028362,
+        10803.029346704483,
+        13503.786683380604,
+        16204.544020056725,
+        18905.301356732845,
+        21606.058693408966,
+        24306.816030085087,
+        27007.573366761208
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "I",
+        "I",
+        "W",
+        "W",
+        "I",
+        "C",
+        "C",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\nindex 420dbc0..5a4f884 100644\n--- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n+++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java\n@@ -95,7 +95,7 @@ public class LightweightMessageFormatter extends AbstractMessageFormatter {\n       // charno == sourceExpert.length() means something is missing\n       // at the end of the line\n       if (excerpt.equals(LINE)\n-          && 0 <= charno && charno <= sourceExcerpt.length()) {\n+          && 0 <= charno && charno < sourceExcerpt.length()) {\n         for (int i = 0; i < charno; i++) {\n           char c = sourceExcerpt.charAt(i);\n           if (Character.isWhitespace(c)) {\n"
+    ]
+}

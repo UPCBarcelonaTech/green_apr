@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-19",
+    "Time": {
+        "mean": 263.26197957992554,
+        "median": 263.26197957992554,
+        "std": 0.0,
+        "max": 263.26197957992554,
+        "min": 263.26197957992554,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 34057.58663243055,
+        "median": 34057.58663243055,
+        "std": 0.0,
+        "max": 34057.58663243055,
+        "min": 34057.58663243055,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 13509.675584530829,
+        "median": 13509.675584530829,
+        "std": 0.0,
+        "max": 13509.675584530829,
+        "min": 13509.675584530829,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\nindex f6a4f28..51d1c64 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java\n@@ -537,19 +537,6 @@ public class CMAESOptimizer\n                 boundaries[1] = uB;\n \n                 // Abort early if the normalization will overflow (cf. \"encode\" method).\n-                for (int i = 0; i < lB.length; i++) {\n-                    if (Double.isInfinite(boundaries[1][i] - boundaries[0][i])) {\n-                        final double max = Double.MAX_VALUE + boundaries[0][i];\n-                        final NumberIsTooLargeException e\n-                            = new NumberIsTooLargeException(boundaries[1][i],\n-                                                            max,\n-                                                            true);\n-                        e.getContext().addMessage(LocalizedFormats.OVERFLOW);\n-                        e.getContext().addMessage(LocalizedFormats.INDEX, i);\n-\n-                        throw e;\n-                    }\n-                }\n             }\n         } else {\n             // Convert API to internal handling of boundaries.\n"
+    ]
+}

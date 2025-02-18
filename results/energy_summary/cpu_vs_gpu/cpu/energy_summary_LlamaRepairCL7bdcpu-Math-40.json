@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-40",
+    "Time": {
+        "mean": 467.5290415287018,
+        "median": 467.5290415287018,
+        "std": 0.0,
+        "max": 467.5290415287018,
+        "min": 467.5290415287018,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 285640.0988718509,
+        "median": 285640.0988718509,
+        "std": 0.0,
+        "max": 285640.0988718509,
+        "min": 285640.0988718509,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 86842.88394280671,
+        "median": 86842.88394280671,
+        "std": 0.0,
+        "max": 86842.88394280671,
+        "min": 86842.88394280671,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        265.3942790031433,
+        287.8536970615387,
+        310.3131151199341,
+        332.77253317832947,
+        355.23195123672485,
+        377.69136929512024,
+        400.1507873535156,
+        422.610205411911,
+        445.0696234703064,
+        467.5290415287018
+    ],
+    "Joules_Per_PatchMedian": [
+        263012.33576960565,
+        265526.5316698551,
+        268040.7275701046,
+        270554.92347035406,
+        273069.1193706035,
+        275583.315270853,
+        278097.51117110247,
+        280611.70707135194,
+        283125.9029716014,
+        285640.0988718509
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        76847.90898705127,
+        77958.46175991299,
+        79069.0145327747,
+        80179.56730563642,
+        81290.12007849813,
+        82400.67285135985,
+        83511.22562422157,
+        84621.77839708328,
+        85732.331169945,
+        86842.88394280671
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 243.0265409151713,
+        "median": 242.93486094474792,
+        "std": 1.3225754190583758,
+        "max": 244.39257097244263,
+        "min": 241.75219082832336,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 259974.2070332686,
+        "median": 260498.13986935618,
+        "std": 1150.8996116389785,
+        "max": 260769.92237432,
+        "min": 258654.55885612965,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 75177.2287132422,
+        "median": 75737.35621418955,
+        "std": 1104.9140732857254,
+        "max": 75889.90258991718,
+        "min": 73904.4273356199,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        22.459418058395386,
+        44.91883611679077,
+        67.37825417518616,
+        89.83767223358154,
+        112.29709029197693,
+        134.75650835037231,
+        157.2159264087677,
+        179.6753444671631,
+        202.13476252555847,
+        224.59418058395386
+    ],
+    "Val_Joules": [
+        2514.1959002494696,
+        5028.391800498939,
+        7542.587700748409,
+        10056.783600997878,
+        12570.979501247348,
+        15085.175401496817,
+        17599.371301746287,
+        20113.567201995756,
+        22627.763102245226,
+        25141.959002494696
+    ],
+    "Val_JoulesNormalized": [
+        1110.5527728617162,
+        2221.1055457234324,
+        3331.6583185851487,
+        4442.211091446865,
+        5552.763864308581,
+        6663.316637170297,
+        7773.869410032014,
+        8884.42218289373,
+        9994.974955755446,
+        11105.527728617162
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\nindex 59dc461..93dd3bb 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java\n@@ -232,16 +232,10 @@ public class BracketingNthOrderBrentSolver\n             double targetY;\n             if (agingA >= MAXIMAL_AGING) {\n                 // we keep updating the high bracket, try to compensate this\n-                final int p = agingA - MAXIMAL_AGING;\n-                final double weightA = (1 << p) - 1;\n-                final double weightB = p + 1;\n-                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yB;\n             } else if (agingB >= MAXIMAL_AGING) {\n                 // we keep updating the low bracket, try to compensate this\n-                final int p = agingB - MAXIMAL_AGING;\n-                final double weightA = p + 1;\n-                final double weightB = (1 << p) - 1;\n-                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);\n+                targetY = -REDUCTION_FACTOR * yA;\n             } else {\n                 // bracketing is balanced, try to find the root itself\n                 targetY = 0;\n"
+    ]
+}

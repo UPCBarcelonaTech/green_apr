@@ -1,0 +1,82 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-88",
+    "Time": {
+        "mean": 73.87900400161743,
+        "median": 73.87900400161743,
+        "std": 0.0,
+        "max": 73.87900400161743,
+        "min": 73.87900400161743,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 41165.06512863636,
+        "median": 41165.06512863636,
+        "std": 0.0,
+        "max": 41165.06512863636,
+        "min": 41165.06512863636,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 11575.834224599595,
+        "median": 11575.834224599595,
+        "std": 0.0,
+        "max": 11575.834224599595,
+        "min": 11575.834224599595,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n",
+        "diff --git a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\nindex 879056f..ef33e4c 100644\n--- a/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n+++ b/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java\n@@ -324,15 +324,9 @@ class DeadAssignmentsElimination extends AbstractPostOrderCallback implements\n       Node n, String variable) {\n     if (NodeUtil.isName(n) && variable.equals(n.getString())) {\n       if (NodeUtil.isLhs(n, n.getParent())) {\n-        Preconditions.checkState(n.getParent().getType() == Token.ASSIGN);\n         // The expression to which the assignment is made is evaluated before\n         // the RHS is evaluated (normal left to right evaluation) but the KILL\n         // occurs after the RHS is evaluated.\n-        Node rhs = n.getNext();\n-        VariableLiveness state = isVariableReadBeforeKill(rhs, variable);\n-        if (state == VariableLiveness.READ) {\n-          return state;\n-        }\n         return VariableLiveness.KILL;\n       } else {\n         return VariableLiveness.READ;\n"
+    ]
+}

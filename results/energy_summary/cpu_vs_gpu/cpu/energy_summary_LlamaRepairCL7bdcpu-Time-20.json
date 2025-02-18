@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-20",
+    "Time": {
+        "mean": 139.96498918533325,
+        "median": 139.96498918533325,
+        "std": 0.0,
+        "max": 139.96498918533325,
+        "min": 139.96498918533325,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 48870.00211576226,
+        "median": 48870.00211576226,
+        "std": 0.0,
+        "max": 48870.00211576226,
+        "min": 48870.00211576226,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 14669.562849235528,
+        "median": 14669.562849235528,
+        "std": 0.0,
+        "max": 14669.562849235528,
+        "min": 14669.562849235528,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        47.71951138973236,
+        57.969008922576904,
+        68.21850645542145,
+        78.46800398826599,
+        88.71750152111053,
+        98.96699905395508,
+        109.21649658679962,
+        119.46599411964417,
+        129.7154916524887,
+        139.96498918533325
+    ],
+    "Joules_Per_PatchMedian": [
+        38576.96068092585,
+        39720.63195146323,
+        40864.303222000606,
+        42007.974492537985,
+        43151.645763075365,
+        44295.317033612744,
+        45438.98830415012,
+        46582.6595746875,
+        47726.33084522488,
+        48870.00211576226
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        9987.04725051522,
+        10507.326761484142,
+        11027.606272453066,
+        11547.885783421989,
+        12068.165294390912,
+        12588.444805359835,
+        13108.724316328759,
+        13629.003827297682,
+        14149.283338266605,
+        14669.562849235528
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 37.51783227920532,
+        "median": 37.47001385688782,
+        "std": 0.7709145845198766,
+        "max": 38.311542987823486,
+        "min": 36.77193999290466,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 37788.75485719839,
+        "median": 37433.28941038847,
+        "std": 626.9573390004101,
+        "max": 38512.664055764675,
+        "min": 37420.311105442044,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 9341.034065552552,
+        "median": 9466.767739546296,
+        "std": 352.445273880311,
+        "max": 9613.370082807542,
+        "min": 8942.964374303821,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        10.249497532844543,
+        20.498995065689087,
+        30.74849259853363,
+        40.997990131378174,
+        51.24748766422272,
+        61.49698519706726,
+        71.7464827299118,
+        81.99598026275635,
+        92.24547779560089,
+        102.49497532844543
+    ],
+    "Val_Joules": [
+        1143.6712705373793,
+        2287.3425410747586,
+        3431.013811612138,
+        4574.685082149517,
+        5718.356352686897,
+        6862.027623224276,
+        8005.698893761655,
+        9149.370164299035,
+        10293.041434836414,
+        11436.712705373793
+    ],
+    "Val_JoulesNormalized": [
+        520.2795109689232,
+        1040.5590219378464,
+        1560.8385329067696,
+        2081.118043875693,
+        2601.397554844616,
+        3121.6770658135392,
+        3641.9565767824624,
+        4162.236087751386,
+        4682.515598720309,
+        5202.795109689232
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\nindex ebb4b08..558a586 100644\n--- a/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java\n@@ -2539,18 +2539,12 @@ public class DateTimeFormatterBuilder {\n \n         public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n             String str = text.substring(position);\n-            String best = null;\n             for (String id : ALL_IDS) {\n                 if (str.startsWith(id)) {\n-                \tif (best == null || id.length() > best.length()) {\n-                \t\tbest = id;\n-                \t}\n+                    bucket.setZone(DateTimeZone.forID(id));\n+                    return position + id.length();\n                 }\n             }\n-            if (best != null) {\n-                bucket.setZone(DateTimeZone.forID(best));\n-                return position + best.length();\n-            }\n             return ~position;\n         }\n     }\n"
+    ]
+}

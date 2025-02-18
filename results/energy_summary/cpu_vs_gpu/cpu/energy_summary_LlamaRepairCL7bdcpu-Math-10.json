@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-10",
+    "Time": {
+        "mean": 746.5993592739105,
+        "median": 746.5993592739105,
+        "std": 0.0,
+        "max": 746.5993592739105,
+        "min": 746.5993592739105,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 173727.5106893063,
+        "median": 173727.5106893063,
+        "std": 0.0,
+        "max": 173727.5106893063,
+        "min": 173727.5106893063,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 60572.890769845224,
+        "median": 60572.890769845224,
+        "std": 0.0,
+        "max": 60572.890769845224,
+        "min": 60572.890769845224,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        161.8868373632431,
+        226.85489535331726,
+        291.8229533433914,
+        356.7910113334656,
+        421.75906932353973,
+        486.7271273136139,
+        551.695185303688,
+        616.6632432937622,
+        681.6313012838364,
+        746.5993592739105
+    ],
+    "Joules_Per_PatchMedian": [
+        108677.4625499189,
+        115905.2456765175,
+        123133.0288031161,
+        130360.8119297147,
+        137588.5950563133,
+        144816.3781829119,
+        152044.1613095105,
+        159271.9444361091,
+        166499.7275627077,
+        173727.5106893063
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        31582.354584681987,
+        34803.52527192235,
+        38024.69595916271,
+        41245.86664640307,
+        44467.03733364343,
+        47688.20802088379,
+        50909.378708124146,
+        54130.549395364505,
+        57351.720082604865,
+        60572.890769845224
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 98.00057017803192,
+        "median": 96.91877937316895,
+        "std": 3.420262023155868,
+        "max": 102.74190282821655,
+        "min": 95.42281913757324,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 102691.82531799376,
+        "median": 101449.6794233203,
+        "std": 3513.619500205246,
+        "max": 107673.80382897853,
+        "min": 100194.13859635593,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 28594.2504367739,
+        "median": 28361.183897441624,
+        "std": 752.1953296587825,
+        "max": 29631.054440665248,
+        "min": 28023.579511547097,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        64.96805799007416,
+        129.93611598014832,
+        194.90417397022247,
+        259.87223196029663,
+        324.8402899503708,
+        389.80834794044495,
+        454.7764059305191,
+        519.7444639205933,
+        584.7125219106674,
+        649.6805799007416
+    ],
+    "Val_Joules": [
+        7227.783126598602,
+        14455.566253197205,
+        21683.349379795807,
+        28911.13250639441,
+        36138.915632993,
+        43366.6987595916,
+        50594.4818861902,
+        57822.265012788805,
+        65050.04813938741,
+        72277.83126598601
+    ],
+    "Val_JoulesNormalized": [
+        3221.170687240363,
+        6442.341374480726,
+        9663.512061721085,
+        12884.682748961444,
+        16105.853436201804,
+        19327.024123442163,
+        22548.194810682522,
+        25769.36549792288,
+        28990.53618516324,
+        32211.7068724036
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\nindex d5a3c18..bf6dd65 100644\n--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n+++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java\n@@ -1416,7 +1416,6 @@ public class DSCompiler {\n         }\n \n         // fix value to take special cases (+0/+0, +0/-0, -0/+0, -0/-0, +/-infinity) correctly\n-        result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);\n \n     }\n \n"
+    ]
+}

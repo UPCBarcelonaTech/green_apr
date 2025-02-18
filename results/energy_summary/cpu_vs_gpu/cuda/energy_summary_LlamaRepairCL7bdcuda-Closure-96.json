@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-96",
+    "Time": {
+        "mean": 346.9460153579712,
+        "median": 346.9460153579712,
+        "std": 0.0,
+        "max": 346.9460153579712,
+        "min": 346.9460153579712,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 41125.52645460368,
+        "median": 41125.52645460368,
+        "std": 0.0,
+        "max": 41125.52645460368,
+        "min": 41125.52645460368,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 18467.631610012053,
+        "median": 18467.631610012053,
+        "std": 0.0,
+        "max": 18467.631610012053,
+        "min": 18467.631610012053,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        36.72683298587799,
+        71.19563102722168,
+        105.66442906856537,
+        140.13322710990906,
+        174.60202515125275,
+        209.07082319259644,
+        243.53962123394012,
+        278.0084192752838,
+        312.4772173166275,
+        346.9460153579712
+    ],
+    "Joules_Per_PatchMedian": [
+        6062.8929924070835,
+        9958.74115487337,
+        13854.589317339658,
+        17750.437479805947,
+        21646.285642272236,
+        25542.133804738525,
+        29437.981967204814,
+        33333.8301296711,
+        37229.67829213739,
+        41125.52645460368
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2262.226867330074,
+        4062.827394294739,
+        5863.427921259404,
+        7664.028448224069,
+        9464.628975188733,
+        11265.229502153397,
+        13065.830029118062,
+        14866.430556082727,
+        16667.03108304739,
+        18467.631610012053
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.324027442932129,
+        "median": 2.2580349445343018,
+        "std": 0.154361194501497,
+        "max": 2.600062131881714,
+        "min": 2.2509169578552246,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2222.8003226614,
+        "median": 2167.0448299407963,
+        "std": 126.4101941623646,
+        "max": 2448.5123138904573,
+        "min": 2159.6686186552047,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 470.1220678853991,
+        "median": 461.62634036540976,
+        "std": 23.847371439802618,
+        "max": 507.04592001438186,
+        "min": 447.273916721344,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.46879804134369,
+        68.93759608268738,
+        103.40639412403107,
+        137.87519216537476,
+        172.34399020671844,
+        206.81278824806213,
+        241.28158628940582,
+        275.7503843307495,
+        310.2191823720932,
+        344.6879804134369
+    ],
+    "Val_Joules": [
+        3895.8481624662872,
+        7791.6963249325745,
+        11687.544487398862,
+        15583.39264986515,
+        19479.240812331438,
+        23375.088974797727,
+        27270.937137264016,
+        31166.785299730305,
+        35062.633462196594,
+        38958.48162466288
+    ],
+    "Val_JoulesNormalized": [
+        1800.6005269646644,
+        3601.201053929329,
+        5401.8015808939945,
+        7202.402107858659,
+        9003.002634823322,
+        10803.603161787987,
+        12604.203688752652,
+        14404.804215717317,
+        16205.40474268198,
+        18006.005269646645
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex b05fbc4..8077e0d 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1406,13 +1406,10 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n     Node parameter = null;\n     Node argument = null;\n     while (arguments.hasNext() &&\n-           (parameters.hasNext() ||\n-            parameter != null && parameter.isVarArgs())) {\n+           parameters.hasNext()) {\n       // If there are no parameters left in the list, then the while loop\n       // above implies that this must be a var_args function.\n-      if (parameters.hasNext()) {\n         parameter = parameters.next();\n-      }\n       argument = arguments.next();\n       ordinal++;\n \n"
+    ]
+}

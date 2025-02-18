@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-79",
+    "Time": {
+        "mean": 74.76087164878845,
+        "median": 74.76087164878845,
+        "std": 0.0,
+        "max": 74.76087164878845,
+        "min": 74.76087164878845,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 10617.085034394264,
+        "median": 10617.085034394264,
+        "std": 0.0,
+        "max": 10617.085034394264,
+        "min": 10617.085034394264,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 4526.491000008584,
+        "median": 4526.491000008584,
+        "std": 0.0,
+        "max": 4526.491000008584,
+        "min": 4526.491000008584,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        9.239174604415894,
+        16.519363164901733,
+        23.799551725387573,
+        31.079740285873413,
+        38.35992884635925,
+        45.64011740684509,
+        52.92030596733093,
+        60.20049452781677,
+        67.48068308830261,
+        74.76087164878845
+    ],
+    "Joules_Per_PatchMedian": [
+        2674.7410504460336,
+        3557.2237153291703,
+        4439.706380212307,
+        5322.189045095443,
+        6204.67170997858,
+        7087.154374861717,
+        7969.637039744854,
+        8852.11970462799,
+        9734.602369511127,
+        10617.085034394264
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        735.3531228899956,
+        1156.5906647920608,
+        1577.828206694126,
+        1999.0657485961913,
+        2420.3032904982565,
+        2841.540832400322,
+        3262.7783743023874,
+        3684.015916204453,
+        4105.253458106518,
+        4526.491000008584
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.0635713577270507,
+        "median": 1.9589860439300537,
+        "std": 0.26932956707975064,
+        "max": 2.540026903152466,
+        "min": 1.8897578716278076,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1874.060736002922,
+        "median": 1792.2583855628968,
+        "std": 208.16249794534954,
+        "max": 2243.5252170920376,
+        "min": 1743.1504835128785,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 318.65966367483145,
+        "median": 314.11558098793034,
+        "std": 15.713536489303294,
+        "max": 345.6171150565149,
+        "min": 305.11518528461465,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        7.28018856048584,
+        14.56037712097168,
+        21.84056568145752,
+        29.12075424194336,
+        36.4009428024292,
+        43.68113136291504,
+        50.96131992340088,
+        58.24150848388672,
+        65.52169704437256,
+        72.8018856048584
+    ],
+    "Val_Joules": [
+        882.4826648831367,
+        1764.9653297662735,
+        2647.44799464941,
+        3529.9306595325465,
+        4412.413324415684,
+        5294.8959892988205,
+        6177.378654181957,
+        7059.861319065094,
+        7942.343983948231,
+        8824.826648831367
+    ],
+    "Val_JoulesNormalized": [
+        421.23754190206523,
+        842.4750838041305,
+        1263.7126257061957,
+        1684.950167608261,
+        2106.1877095103264,
+        2527.425251412392,
+        2948.6627933144573,
+        3369.9003352165228,
+        3791.137877118588,
+        4212.375419020654
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "C",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "C",
+        "C",
+        "C"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ad77a56..46368dc 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -1621,9 +1621,9 @@ public final class MathUtils {\n      * @return the L<sub>2</sub> distance between the two points\n      */\n     public static double distance(int[] p1, int[] p2) {\n-      double sum = 0;\n+      int sum = 0;\n       for (int i = 0; i < p1.length; i++) {\n-          final double dp = p1[i] - p2[i];\n+          final int dp = p1[i] - p2[i];\n           sum += dp * dp;\n       }\n       return Math.sqrt(sum);\n"
+    ]
+}

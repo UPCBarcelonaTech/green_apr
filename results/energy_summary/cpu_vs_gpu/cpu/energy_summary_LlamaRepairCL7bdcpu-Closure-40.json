@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-40",
+    "Time": {
+        "mean": 401.4050979614258,
+        "median": 401.4050979614258,
+        "std": 0.0,
+        "max": 401.4050979614258,
+        "min": 401.4050979614258,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 123195.55167670251,
+        "median": 123195.55167670251,
+        "std": 0.0,
+        "max": 123195.55167670251,
+        "min": 123195.55167670251,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 42220.49248391391,
+        "median": 42220.49248391391,
+        "std": 0.0,
+        "max": 42220.49248391391,
+        "min": 42220.49248391391,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/NameAnalyzer.java b/src/com/google/javascript/jscomp/NameAnalyzer.java\nindex 6e9e470..088a993 100644\n--- a/src/com/google/javascript/jscomp/NameAnalyzer.java\n+++ b/src/com/google/javascript/jscomp/NameAnalyzer.java\n@@ -632,9 +632,11 @@ final class NameAnalyzer implements CompilerPass {\n         Node nameNode = n.getFirstChild();\n         NameInformation ns = createNameInformation(t, nameNode, n);\n         if (ns != null && ns.onlyAffectsClassDef) {\n-          JsName name = getName(ns.name, true);\n+          JsName name = getName(ns.name, false);\n+          if (name != null) {\n           refNodes.add(new ClassDefiningFunctionNode(\n               name, n, parent, parent.getParent()));\n+          }\n         }\n       }\n     }\n"
+    ]
+}

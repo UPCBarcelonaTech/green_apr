@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Chart-24",
+    "Time": {
+        "mean": 90.91127872467041,
+        "median": 90.91127872467041,
+        "std": 0.0,
+        "max": 90.91127872467041,
+        "min": 90.91127872467041,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 29557.97728792429,
+        "median": 29557.97728792429,
+        "std": 0.0,
+        "max": 29557.97728792429,
+        "min": 29557.97728792429,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 8843.950704884526,
+        "median": 8843.950704884526,
+        "std": 0.0,
+        "max": 8843.950704884526,
+        "min": 8843.950704884526,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n",
+        "diff --git a/source/org/jfree/chart/renderer/GrayPaintScale.java b/source/org/jfree/chart/renderer/GrayPaintScale.java\nindex e62c43f..1e1e075 100644\n--- a/source/org/jfree/chart/renderer/GrayPaintScale.java\n+++ b/source/org/jfree/chart/renderer/GrayPaintScale.java\n@@ -123,7 +123,7 @@ public class GrayPaintScale\n     public Paint getPaint(double value) {\n         double v = Math.max(value, this.lowerBound);\n         v = Math.min(v, this.upperBound);\n-        int g = (int) ((v - this.lowerBound) / (this.upperBound \n+        int g = (int) ((value - this.lowerBound) / (this.upperBound \n                 - this.lowerBound) * 255.0);\n         return new Color(g, g, g);\n     }\n"
+    ]
+}

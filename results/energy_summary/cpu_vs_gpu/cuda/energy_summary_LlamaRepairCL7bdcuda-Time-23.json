@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-23",
+    "Time": {
+        "mean": 110.11566090583801,
+        "median": 110.11566090583801,
+        "std": 0.0,
+        "max": 110.11566090583801,
+        "min": 110.11566090583801,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 18077.55498762131,
+        "median": 18077.55498762131,
+        "std": 0.0,
+        "max": 18077.55498762131,
+        "min": 18077.55498762131,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 6696.164708840846,
+        "median": 6696.164708840846,
+        "std": 0.0,
+        "max": 6696.164708840846,
+        "min": 6696.164708840846,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        17.059612035751343,
+        27.39917302131653,
+        37.738734006881714,
+        48.0782949924469,
+        58.417855978012085,
+        68.75741696357727,
+        79.09697794914246,
+        89.43653893470764,
+        99.77609992027283,
+        110.11566090583801
+    ],
+    "Joules_Per_PatchMedian": [
+        7670.592023634911,
+        8826.921241855622,
+        9983.250460076333,
+        11139.579678297045,
+        12295.908896517756,
+        13452.238114738468,
+        14608.56733295918,
+        15764.89655117989,
+        16921.2257694006,
+        18077.55498762131
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1958.8514296889298,
+        2485.2195718169205,
+        3011.5877139449112,
+        3537.955856072902,
+        4064.3239982008927,
+        4590.692140328883,
+        5117.060282456874,
+        5643.428424584865,
+        6169.796566712856,
+        6696.164708840846
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 7.032658576965332,
+        "median": 6.720051050186157,
+        "std": 0.7272209099109949,
+        "max": 8.331115961074829,
+        "min": 6.659996032714844,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 6693.403404228688,
+        "median": 6514.262805414201,
+        "std": 529.7450451086221,
+        "max": 7625.834893023968,
+        "min": 6302.589972805977,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 1415.005064628124,
+        "median": 1432.483287560939,
+        "std": 89.96991075918217,
+        "max": 1512.7511223196989,
+        "min": 1272.2949692964548,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        10.339560985565186,
+        20.67912197113037,
+        31.018682956695557,
+        41.35824394226074,
+        51.69780492782593,
+        62.03736591339111,
+        72.3769268989563,
+        82.71648788452148,
+        93.05604887008667,
+        103.39560985565186
+    ],
+    "Val_Joules": [
+        1156.3292182207106,
+        2312.658436441421,
+        3468.9876546621326,
+        4625.316872882844,
+        5781.646091103556,
+        6937.975309324267,
+        8094.304527544979,
+        9250.63374576569,
+        10406.9629639864,
+        11563.292182207111
+    ],
+    "Val_JoulesNormalized": [
+        526.3681421279907,
+        1052.7362842559814,
+        1579.1044263839722,
+        2105.472568511963,
+        2631.8407106399536,
+        3158.2088527679443,
+        3684.576994895935,
+        4210.945137023926,
+        4737.3132791519165,
+        5263.681421279907
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 855cad0..5d89e34 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -561,11 +561,6 @@ public abstract class DateTimeZone implements Serializable {\n             // Backwards compatibility with TimeZone.\n             map = new HashMap<String, String>();\n             map.put(\"GMT\", \"UTC\");\n-            map.put(\"WET\", \"WET\");\n-            map.put(\"CET\", \"CET\");\n-            map.put(\"MET\", \"CET\");\n-            map.put(\"ECT\", \"CET\");\n-            map.put(\"EET\", \"EET\");\n             map.put(\"MIT\", \"Pacific/Apia\");\n             map.put(\"HST\", \"Pacific/Honolulu\");  // JDK 1.1 compatible\n             map.put(\"AST\", \"America/Anchorage\");\n@@ -574,19 +569,23 @@ public abstract class DateTimeZone implements Serializable {\n             map.put(\"PNT\", \"America/Phoenix\");\n             map.put(\"CST\", \"America/Chicago\");\n             map.put(\"EST\", \"America/New_York\");  // JDK 1.1 compatible\n-            map.put(\"IET\", \"America/Indiana/Indianapolis\");\n+            map.put(\"IET\", \"America/Indianapolis\");\n             map.put(\"PRT\", \"America/Puerto_Rico\");\n             map.put(\"CNT\", \"America/St_Johns\");\n-            map.put(\"AGT\", \"America/Argentina/Buenos_Aires\");\n+            map.put(\"AGT\", \"America/Buenos_Aires\");\n             map.put(\"BET\", \"America/Sao_Paulo\");\n+            map.put(\"WET\", \"Europe/London\");\n+            map.put(\"ECT\", \"Europe/Paris\");\n             map.put(\"ART\", \"Africa/Cairo\");\n             map.put(\"CAT\", \"Africa/Harare\");\n+            map.put(\"EET\", \"Europe/Bucharest\");\n             map.put(\"EAT\", \"Africa/Addis_Ababa\");\n+            map.put(\"MET\", \"Asia/Tehran\");\n             map.put(\"NET\", \"Asia/Yerevan\");\n             map.put(\"PLT\", \"Asia/Karachi\");\n-            map.put(\"IST\", \"Asia/Kolkata\");\n+            map.put(\"IST\", \"Asia/Calcutta\");\n             map.put(\"BST\", \"Asia/Dhaka\");\n-            map.put(\"VST\", \"Asia/Ho_Chi_Minh\");\n+            map.put(\"VST\", \"Asia/Saigon\");\n             map.put(\"CTT\", \"Asia/Shanghai\");\n             map.put(\"JST\", \"Asia/Tokyo\");\n             map.put(\"ACT\", \"Australia/Darwin\");\n"
+    ]
+}

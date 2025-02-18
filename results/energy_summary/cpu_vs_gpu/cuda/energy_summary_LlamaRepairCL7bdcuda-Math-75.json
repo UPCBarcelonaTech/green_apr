@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-75",
+    "Time": {
+        "mean": 24.56887698173523,
+        "median": 24.56887698173523,
+        "std": 0.0,
+        "max": 24.56887698173523,
+        "min": 24.56887698173523,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 11138.769344067572,
+        "median": 11138.769344067572,
+        "std": 0.0,
+        "max": 11138.769344067572,
+        "min": 11138.769344067572,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 2639.275810742378,
+        "median": 2639.275810742378,
+        "std": 0.0,
+        "max": 2639.275810742378,
+        "min": 2639.275810742378,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/Frequency.java b/src/main/java/org/apache/commons/math/stat/Frequency.java\nindex 68c8bf2..c45d728 100644\n--- a/src/main/java/org/apache/commons/math/stat/Frequency.java\n+++ b/src/main/java/org/apache/commons/math/stat/Frequency.java\n@@ -300,7 +300,7 @@ public class Frequency implements Serializable {\n      */\n     @Deprecated\n     public double getPct(Object v) {\n-        return getPct((Comparable<?>) v);\n+        return getCumPct((Comparable<?>) v);\n     }\n \n     /**\n"
+    ]
+}

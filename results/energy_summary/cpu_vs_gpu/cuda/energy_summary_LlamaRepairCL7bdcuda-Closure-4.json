@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-4",
+    "Time": {
+        "mean": 684.6957404613495,
+        "median": 684.6957404613495,
+        "std": 0.0,
+        "max": 684.6957404613495,
+        "min": 684.6957404613495,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 82978.51951256991,
+        "median": 82978.51951256991,
+        "std": 0.0,
+        "max": 82978.51951256991,
+        "min": 82978.51951256991,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 38039.69480127097,
+        "median": 38039.69480127097,
+        "std": 0.0,
+        "max": 38039.69480127097,
+        "min": 38039.69480127097,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        69.73785507678986,
+        138.0665090084076,
+        206.39516294002533,
+        274.72381687164307,
+        343.0524708032608,
+        411.38112473487854,
+        479.7097786664963,
+        548.038432598114,
+        616.3670865297318,
+        684.6957404613495
+    ],
+    "Joules_Per_PatchMedian": [
+        9478.15368885398,
+        17644.86100260019,
+        25811.568316346405,
+        33978.27563009262,
+        42144.98294383883,
+        50311.69025758505,
+        58478.39757133126,
+        66645.10488507748,
+        74811.8121988237,
+        82978.51951256991
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        4026.0783412992955,
+        7805.369059073925,
+        11584.659776848555,
+        15363.950494623185,
+        19143.241212397814,
+        22922.531930172445,
+        26701.822647947076,
+        30481.113365721707,
+        34260.40408349634,
+        38039.69480127097
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.476293420791626,
+        "median": 1.4092011451721191,
+        "std": 0.16629666858297384,
+        "max": 1.7702078819274902,
+        "min": 1.3698899745941162,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1366.3090497350693,
+        "median": 1311.4463751077653,
+        "std": 133.68737682971172,
+        "max": 1602.9642615914345,
+        "min": 1282.1504663228989,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 249.55812345981607,
+        "median": 246.78762352466583,
+        "std": 8.622459199758403,
+        "max": 264.1560404896736,
+        "min": 241.4728463292122,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        68.32865393161774,
+        136.65730786323547,
+        204.9859617948532,
+        273.31461572647095,
+        341.6432696580887,
+        409.9719235897064,
+        478.30057752132416,
+        546.6292314529419,
+        614.9578853845596,
+        683.2865393161774
+    ],
+    "Val_Joules": [
+        8166.707313746214,
+        16333.414627492426,
+        24500.12194123864,
+        32666.829254984856,
+        40833.53656873107,
+        49000.24388247728,
+        57166.9511962235,
+        65333.65850996972,
+        73500.36582371593,
+        81667.07313746214
+    ],
+    "Val_JoulesNormalized": [
+        3779.2907177746297,
+        7558.581435549259,
+        11337.87215332389,
+        15117.162871098519,
+        18896.453588873148,
+        22675.74430664778,
+        26455.03502442241,
+        30234.32574219704,
+        34013.61645997167,
+        37792.9071777463
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/NamedType.java b/src/com/google/javascript/rhino/jstype/NamedType.java\nindex 06988ab..70142c4 100644\n--- a/src/com/google/javascript/rhino/jstype/NamedType.java\n+++ b/src/com/google/javascript/rhino/jstype/NamedType.java\n@@ -187,7 +187,7 @@ class NamedType extends ProxyObjectType {\n     // makes more sense. Now, resolution via registry is first in order to\n     // avoid triggering the warnings built into the resolution via properties.\n     boolean resolved = resolveViaRegistry(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n@@ -199,7 +199,7 @@ class NamedType extends ProxyObjectType {\n     }\n \n     resolveViaProperties(t, enclosing);\n-    if (detectInheritanceCycle()) {\n+    if (detectImplicitPrototypeCycle()) {\n       handleTypeCycle(t);\n     }\n \n"
+    ]
+}

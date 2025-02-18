@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-63",
+    "Time": {
+        "mean": 144.1123435497284,
+        "median": 144.1123435497284,
+        "std": 0.0,
+        "max": 144.1123435497284,
+        "min": 144.1123435497284,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 49451.630858832614,
+        "median": 49451.630858832614,
+        "std": 0.0,
+        "max": 49451.630858832614,
+        "min": 49451.630858832614,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 14447.084802705042,
+        "median": 14447.084802705042,
+        "std": 0.0,
+        "max": 14447.084802705042,
+        "min": 14447.084802705042,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java\nindex ab0fe33..1361849 100644\n--- a/src/main/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/main/java/org/apache/commons/math/util/MathUtils.java\n@@ -414,7 +414,7 @@ public final class MathUtils {\n      * @return {@code true} if the values are equal.\n      */\n     public static boolean equals(double x, double y) {\n-        return equals(x, y, 1);\n+        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n     }\n \n     /**\n"
+    ]
+}

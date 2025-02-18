@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Chart-10",
+    "Time": {
+        "mean": 152.82769584655762,
+        "median": 152.82769584655762,
+        "std": 0.0,
+        "max": 152.82769584655762,
+        "min": 152.82769584655762,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 40877.7964986205,
+        "median": 40877.7964986205,
+        "std": 0.0,
+        "max": 40877.7964986205,
+        "min": 40877.7964986205,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 12229.35511000157,
+        "median": 12229.35511000157,
+        "std": 0.0,
+        "max": 12229.35511000157,
+        "min": 12229.35511000157,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        40.06086754798889,
+        52.59051513671875,
+        65.12016272544861,
+        77.64981031417847,
+        90.17945790290833,
+        102.70910549163818,
+        115.23875308036804,
+        127.7684006690979,
+        140.29804825782776,
+        152.82769584655762
+    ],
+    "Joules_Per_PatchMedian": [
+        28726.718094921114,
+        30076.83791755438,
+        31426.95774018765,
+        32777.077562820916,
+        34127.19738545418,
+        35477.31720808744,
+        36827.43703072071,
+        38177.55685335397,
+        39527.67667598723,
+        40877.7964986205
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7134.515476602319,
+        7700.608769202236,
+        8266.702061802152,
+        8832.79535440207,
+        9398.888647001986,
+        9964.981939601903,
+        10531.07523220182,
+        11097.168524801737,
+        11663.261817401653,
+        12229.35511000157
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 27.459024488925934,
+        "median": 27.531219959259033,
+        "std": 0.340717388327172,
+        "max": 27.758420944213867,
+        "min": 27.0152370929718,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 27372.042358317973,
+        "median": 27376.598272287847,
+        "std": 142.40182460597632,
+        "max": 27514.06846718788,
+        "min": 27220.904421508312,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 6574.441810598971,
+        "median": 6568.422184002402,
+        "std": 63.345689467412356,
+        "max": 6646.099851500989,
+        "min": 6514.82302289009,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        12.529647588729858,
+        25.059295177459717,
+        37.588942766189575,
+        50.118590354919434,
+        62.64823794364929,
+        75.17788553237915,
+        87.70753312110901,
+        100.23718070983887,
+        112.76682829856873,
+        125.29647588729858
+    ],
+    "Val_Joules": [
+        1350.1198226332672,
+        2700.2396452665344,
+        4050.3594678998015,
+        5400.479290533069,
+        6750.599113166332,
+        8100.718935799596,
+        9450.83875843286,
+        10800.958581066123,
+        12151.078403699386,
+        13501.19822633265
+    ],
+    "Val_JoulesNormalized": [
+        566.0932925999168,
+        1132.1865851998336,
+        1698.2798777997505,
+        2264.3731703996673,
+        2830.466462999584,
+        3396.559755599501,
+        3962.6530481994178,
+        4528.746340799335,
+        5094.839633399251,
+        5660.932925999168
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n",
+        "diff --git a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\nindex 4755d8c..cf2934c 100644\n--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@ public class StandardToolTipTagFragmentGenerator\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText) \n+        return \" title=\\\"\" + toolTipText\n             + \"\\\" alt=\\\"\\\"\";\n     }\n \n"
+    ]
+}

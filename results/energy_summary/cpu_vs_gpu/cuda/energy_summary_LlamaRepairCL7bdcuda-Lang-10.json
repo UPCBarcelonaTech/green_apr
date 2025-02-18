@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-10",
+    "Time": {
+        "mean": 127.80214858055115,
+        "median": 127.80214858055115,
+        "std": 0.0,
+        "max": 127.80214858055115,
+        "min": 127.80214858055115,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 14451.678309202194,
+        "median": 14451.678309202194,
+        "std": 0.0,
+        "max": 14451.678309202194,
+        "min": 14451.678309202194,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 4825.810018968584,
+        "median": 4825.810018968584,
+        "std": 0.0,
+        "max": 4825.810018968584,
+        "min": 4825.810018968584,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        14.760271549224854,
+        27.32048010826111,
+        39.88068866729736,
+        52.44089722633362,
+        65.00110578536987,
+        77.56131434440613,
+        90.12152290344238,
+        102.68173146247864,
+        115.24194002151489,
+        127.80214858055115
+    ],
+    "Joules_Per_PatchMedian": [
+        3309.32365706563,
+        4547.3630628585815,
+        5785.402468651533,
+        7023.441874444485,
+        8261.481280237436,
+        9499.520686030388,
+        10737.56009182334,
+        11975.599497616291,
+        13213.638903409243,
+        14451.678309202194
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        861.5463590264324,
+        1302.0200990200046,
+        1742.493839013577,
+        2182.967579007149,
+        2623.4413190007217,
+        3063.915058994294,
+        3504.3887989878667,
+        3944.8625389814392,
+        4385.336278975012,
+        4825.810018968584
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.3337899684906005,
+        "median": 2.2000629901885986,
+        "std": 0.25978522232944695,
+        "max": 2.6426658630371094,
+        "min": 2.100113868713379,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2192.526039893627,
+        "median": 2071.2842512726784,
+        "std": 209.39354473452536,
+        "max": 2445.598952376842,
+        "min": 2009.3887379407884,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 426.22008107900615,
+        "median": 421.0726190328601,
+        "std": 18.06815403233887,
+        "max": 448.53635967969853,
+        "min": 406.68433911800366,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        12.560208559036255,
+        25.12041711807251,
+        37.680625677108765,
+        50.24083423614502,
+        62.801042795181274,
+        75.36125135421753,
+        87.92145991325378,
+        100.48166847229004,
+        113.0418770313263,
+        125.60208559036255
+    ],
+    "Val_Joules": [
+        1238.0394057929516,
+        2476.078811585903,
+        3714.1182173788548,
+        4952.157623171806,
+        6190.197028964758,
+        7428.2364347577095,
+        8666.275840550661,
+        9904.315246343613,
+        11142.354652136564,
+        12380.394057929516
+    ],
+    "Val_JoulesNormalized": [
+        440.4737399935723,
+        880.9474799871446,
+        1321.4212199807168,
+        1761.8949599742891,
+        2202.3686999678616,
+        2642.842439961434,
+        3083.3161799550066,
+        3523.789919948579,
+        3964.2636599421517,
+        4404.737399935724
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "I",
+        "I",
+        "I",
+        "W",
+        "C",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "passtest",
+        "passtest",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "correct",
+        "passtest",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\nindex 8df302f..a01159b 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java\n@@ -301,8 +301,17 @@ public class FastDateParser implements DateParser, Serializable {\n      * @return The <code>StringBuilder</code>\n      */\n     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {\n+        boolean wasWhite= false;\n         for(int i= 0; i<value.length(); ++i) {\n             char c= value.charAt(i);\n+            if(Character.isWhitespace(c)) {\n+                if(!wasWhite) {\n+                    wasWhite= true;\n+                    regex.append(\"\\\\s*+\");\n+                }\n+                continue;\n+            }\n+            wasWhite= false;\n             switch(c) {\n             case '\\'':\n                 if(unquote) {\n"
+    ]
+}

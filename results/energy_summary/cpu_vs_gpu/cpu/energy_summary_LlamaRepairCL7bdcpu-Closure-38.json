@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-38",
+    "Time": {
+        "mean": 596.2443714141846,
+        "median": 596.2443714141846,
+        "std": 0.0,
+        "max": 596.2443714141846,
+        "min": 596.2443714141846,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 128595.08145004508,
+        "median": 128595.08145004508,
+        "std": 0.0,
+        "max": 128595.08145004508,
+        "min": 128595.08145004508,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 47300.438566255565,
+        "median": 47300.438566255565,
+        "std": 0.0,
+        "max": 47300.438566255565,
+        "min": 47300.438566255565,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        115.92462384700775,
+        169.29348468780518,
+        222.6623455286026,
+        276.0312063694,
+        329.40006721019745,
+        382.7689280509949,
+        436.1377888917923,
+        489.5066497325897,
+        542.8755105733871,
+        596.2443714141846
+    ],
+    "Joules_Per_PatchMedian": [
+        70377.83938382268,
+        76846.42183562517,
+        83315.00428742766,
+        89783.58673923014,
+        96252.16919103263,
+        102720.75164283512,
+        109189.33409463761,
+        115657.9165464401,
+        122126.49899824259,
+        128595.08145004508
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        19888.327385085817,
+        22934.1175163269,
+        25979.907647567983,
+        29025.697778809066,
+        32071.48791005015,
+        35117.27804129123,
+        38163.068172532316,
+        41208.8583037734,
+        44254.64843501448,
+        47300.438566255565
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 67.30762036641438,
+        "median": 62.55576300621033,
+        "std": 10.129657502010351,
+        "max": 78.93962001800537,
+        "min": 60.427478075027466,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 69252.42385449012,
+        "median": 63909.25693202019,
+        "std": 10194.727582810547,
+        "max": 81008.08106689452,
+        "min": 62839.93356455564,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 18299.215611922737,
+        "median": 16842.537253844734,
+        "std": 2659.8359852967637,
+        "max": 21369.19814329146,
+        "min": 16685.911438632014,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        53.368860840797424,
+        106.73772168159485,
+        160.10658252239227,
+        213.4754433631897,
+        266.8443042039871,
+        320.21316504478455,
+        373.58202588558197,
+        426.9508867263794,
+        480.3197475671768,
+        533.6886084079742
+    ],
+    "Val_Joules": [
+        6468.582451802489,
+        12937.164903604978,
+        19405.747355407468,
+        25874.329807209957,
+        32342.912259012446,
+        38811.494710814935,
+        45280.077162617425,
+        51748.659614419914,
+        58217.2420662224,
+        64685.82451802489
+    ],
+    "Val_JoulesNormalized": [
+        3045.790131241083,
+        6091.580262482166,
+        9137.37039372325,
+        12183.160524964333,
+        15228.950656205416,
+        18274.7407874465,
+        21320.530918687582,
+        24366.321049928665,
+        27412.11118116975,
+        30457.90131241083
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java\nindex 3522e89..4381487 100644\n--- a/src/com/google/javascript/jscomp/CodeConsumer.java\n+++ b/src/com/google/javascript/jscomp/CodeConsumer.java\n@@ -242,7 +242,7 @@ abstract class CodeConsumer {\n     // x--4 (which is a syntax error).\n     char prev = getLastChar();\n     boolean negativeZero = isNegativeZero(x);\n-    if ((x < 0 || negativeZero) && prev == '-') {\n+    if (x < 0 && prev == '-') {\n       add(\" \");\n     }\n \n"
+    ]
+}

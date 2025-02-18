@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-51",
+    "Time": {
+        "mean": 171.6032109260559,
+        "median": 171.6032109260559,
+        "std": 0.0,
+        "max": 171.6032109260559,
+        "min": 171.6032109260559,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 23895.92450075149,
+        "median": 23895.92450075149,
+        "std": 0.0,
+        "max": 23895.92450075149,
+        "min": 23895.92450075149,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 9726.884576296809,
+        "median": 9726.884576296809,
+        "std": 0.0,
+        "max": 9726.884576296809,
+        "min": 9726.884576296809,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex b3a23a1..e258c68 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -182,19 +182,10 @@ public abstract class BaseSecantSolver\n                 case PEGASUS:\n                     f0 *= f1 / (f1 + fx);\n                     break;\n-                case REGULA_FALSI:\n-                    if (x == x1) {\n-                        final double delta = FastMath.max(rtol * FastMath.abs(x1),\n-                                                          atol);\n                         // Update formula cannot make any progress: Update the\n                         // search interval.\n-                        x0 = 0.5 * (x0 + x1 - delta);\n-                        f0 = computeObjectiveValue(x0);\n-                    }\n-                    break;\n                 default:\n                     // Should never happen.\n-                    throw new MathInternalError();\n                 }\n             }\n             // Update from [x0, x1] to [x0, x].\n"
+    ]
+}

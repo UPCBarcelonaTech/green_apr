@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-112",
+    "Time": {
+        "mean": 144.5470781326294,
+        "median": 144.5470781326294,
+        "std": 0.0,
+        "max": 144.5470781326294,
+        "min": 144.5470781326294,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 19182.22091653347,
+        "median": 19182.22091653347,
+        "std": 0.0,
+        "max": 19182.22091653347,
+        "min": 19182.22091653347,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 8218.325944626331,
+        "median": 8218.325944626331,
+        "std": 0.0,
+        "max": 8218.325944626331,
+        "min": 8218.325944626331,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex 4b30d57..4c24e2f 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1189,15 +1189,9 @@ class TypeInference\n     }\n \n     // Try to infer the template types\n-    Map<TemplateType, JSType> inferred = Maps.filterKeys(\n-        inferTemplateTypesFromParameters(fnType, n),\n-        new Predicate<TemplateType>() {\n-\n-          @Override\n-          public boolean apply(TemplateType key) {\n-            return keys.contains(key);\n-          }}\n-        );\n+    Map<TemplateType, JSType> inferred = \n+        inferTemplateTypesFromParameters(fnType, n);\n+\n \n     // Replace all template types. If we couldn't find a replacement, we\n     // replace it with UNKNOWN.\n"
+    ]
+}

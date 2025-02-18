@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-69",
+    "Time": {
+        "mean": 318.4826238155365,
+        "median": 318.4826238155365,
+        "std": 0.0,
+        "max": 318.4826238155365,
+        "min": 318.4826238155365,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 243056.91797919275,
+        "median": 243056.91797919275,
+        "std": 0.0,
+        "max": 243056.91797919275,
+        "min": 243056.91797919275,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 68004.80195672513,
+        "median": 68004.80195672513,
+        "std": 0.0,
+        "max": 68004.80195672513,
+        "min": 68004.80195672513,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 5edb4f0..f58418c 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1577,13 +1577,6 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n \n       // Functions with explcit 'this' types must be called in a GETPROP\n       // or GETELEM.\n-      if (functionType.isOrdinaryFunction() &&\n-          !functionType.getTypeOfThis().isUnknownType() &&\n-          !functionType.getTypeOfThis().isNativeObjectType() &&\n-          !(child.getType() == Token.GETELEM ||\n-            child.getType() == Token.GETPROP)) {\n-        report(t, n, EXPECTED_THIS_TYPE, functionType.toString());\n-      }\n \n       visitParameterList(t, n, functionType);\n       ensureTyped(t, n, functionType.getReturnType());\n"
+    ]
+}

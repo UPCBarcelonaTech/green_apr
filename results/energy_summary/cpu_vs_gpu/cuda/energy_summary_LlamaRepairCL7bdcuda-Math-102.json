@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-102",
+    "Time": {
+        "mean": 72.66980743408203,
+        "median": 72.66980743408203,
+        "std": 0.0,
+        "max": 72.66980743408203,
+        "min": 72.66980743408203,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 12136.941990232464,
+        "median": 12136.941990232464,
+        "std": 0.0,
+        "max": 12136.941990232464,
+        "min": 12136.941990232464,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 4016.0816442012783,
+        "median": 4016.0816442012783,
+        "std": 0.0,
+        "max": 4016.0816442012783,
+        "min": 4016.0816442012783,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        11.91974949836731,
+        18.669755935668945,
+        25.41976237297058,
+        32.16976881027222,
+        38.91977524757385,
+        45.66978168487549,
+        52.419788122177124,
+        59.16979455947876,
+        65.9198009967804,
+        72.66980743408203
+    ],
+    "Joules_Per_PatchMedian": [
+        5589.33371835947,
+        6316.845748567581,
+        7044.357778775691,
+        7771.869808983802,
+        8499.381839191912,
+        9226.893869400023,
+        9954.405899608133,
+        10681.917929816243,
+        11409.429960024354,
+        12136.941990232464
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1197.0633385121819,
+        1510.2875946998593,
+        1823.5118508875366,
+        2136.736107075214,
+        2449.9603632628914,
+        2763.184619450569,
+        3076.408875638246,
+        3389.6331318259236,
+        3702.857388013601,
+        4016.0816442012783
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 5.434101200103759,
+        "median": 5.169743061065674,
+        "std": 0.6389689293528724,
+        "max": 6.56912088394165,
+        "min": 5.051778078079224,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 5079.553538026809,
+        "median": 4861.82168815136,
+        "std": 485.21791843708786,
+        "max": 5946.00363548994,
+        "min": 4824.930256676673,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 872.5132627916335,
+        "median": 883.8390823245045,
+        "std": 39.12712732875969,
+        "max": 913.1829054832465,
+        "min": 807.7118158102039,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        6.750006437301636,
+        13.500012874603271,
+        20.250019311904907,
+        27.000025749206543,
+        33.75003218650818,
+        40.500038623809814,
+        47.25004506111145,
+        54.000051498413086,
+        60.75005793571472,
+        67.50006437301636
+    ],
+    "Val_Joules": [
+        727.5120302081104,
+        1455.024060416221,
+        2182.5360906243313,
+        2910.048120832442,
+        3637.5601510405522,
+        4365.072181248663,
+        5092.584211456773,
+        5820.096241664884,
+        6547.608271872994,
+        7275.1203020811045
+    ],
+    "Val_JoulesNormalized": [
+        313.2242561876774,
+        626.4485123753548,
+        939.6727685630322,
+        1252.8970247507095,
+        1566.121280938387,
+        1879.3455371260643,
+        2192.5697933137417,
+        2505.794049501419,
+        2819.0183056890965,
+        3132.242561876774
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\nindex 984d56d..c87b010 100644\n--- a/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n+++ b/src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java\n@@ -71,28 +71,11 @@ public class ChiSquareTestImpl implements UnknownDistributionChiSquareTest {\n             throw new IllegalArgumentException(\n                 \"observed counts must be non-negative and expected counts must be postive\");\n         }\n-        double sumExpected = 0d;\n-        double sumObserved = 0d;\n-        for (int i = 0; i < observed.length; i++) {\n-            sumExpected += expected[i];\n-            sumObserved += observed[i];\n-        }\n-        double ratio = 1.0d;\n-        boolean rescale = false;\n-        if (Math.abs(sumExpected - sumObserved) > 10E-6) {\n-            ratio = sumObserved / sumExpected;\n-            rescale = true;\n-        }\n         double sumSq = 0.0d;\n         double dev = 0.0d;\n         for (int i = 0; i < observed.length; i++) {\n-            if (rescale) {\n-                dev = ((double) observed[i] - ratio * expected[i]);\n-                sumSq += dev * dev / (ratio * expected[i]);\n-            } else {\n                 dev = ((double) observed[i] - expected[i]);\n                 sumSq += dev * dev / expected[i];\n-            }\n         }\n         return sumSq;\n     }\n"
+    ]
+}

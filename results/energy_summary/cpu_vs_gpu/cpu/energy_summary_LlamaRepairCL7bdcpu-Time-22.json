@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-22",
+    "Time": {
+        "mean": 12.6873300075531,
+        "median": 12.6873300075531,
+        "std": 0.0,
+        "max": 12.6873300075531,
+        "min": 12.6873300075531,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 12570.252711081504,
+        "median": 12570.252711081504,
+        "std": 0.0,
+        "max": 12570.252711081504,
+        "min": 12570.252711081504,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 3016.966369116306,
+        "median": 3016.966369116306,
+        "std": 0.0,
+        "max": 3016.966369116306,
+        "min": 3016.966369116306,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/joda/time/base/BasePeriod.java b/src/main/java/org/joda/time/base/BasePeriod.java\nindex a5dcb74..679b734 100644\n--- a/src/main/java/org/joda/time/base/BasePeriod.java\n+++ b/src/main/java/org/joda/time/base/BasePeriod.java\n@@ -219,13 +219,8 @@ public abstract class BasePeriod\n      * @param duration  the duration, in milliseconds\n      */\n     protected BasePeriod(long duration) {\n-        super();\n+        this(duration, null, null);\n         // bug [3264409]\n-        iType = PeriodType.time();\n-        int[] values = ISOChronology.getInstanceUTC().get(this, duration);\n-        iType = PeriodType.standard();\n-        iValues = new int[8];\n-        System.arraycopy(values, 0, iValues, 4, 4);\n     }\n \n     /**\n"
+    ]
+}

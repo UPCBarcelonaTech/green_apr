@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-58",
+    "Time": {
+        "mean": 62.59800863265991,
+        "median": 62.59800863265991,
+        "std": 0.0,
+        "max": 62.59800863265991,
+        "min": 62.59800863265991,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 10878.160984784365,
+        "median": 10878.160984784365,
+        "std": 0.0,
+        "max": 10878.160984784365,
+        "min": 10878.160984784365,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 3521.5100286841403,
+        "median": 3521.5100286841403,
+        "std": 0.0,
+        "max": 3521.5100286841403,
+        "min": 3521.5100286841403,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "passtest",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\nindex e1b54f4..ae7ac39 100644\n--- a/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n+++ b/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java\n@@ -118,7 +118,7 @@ public class GaussianFitter extends CurveFitter {\n      */\n     public double[] fit() {\n         final double[] guess = (new ParameterGuesser(getObservations())).guess();\n-        return fit(guess);\n+        return fit(new Gaussian.Parametric(), guess);\n     }\n \n     /**\n"
+    ]
+}

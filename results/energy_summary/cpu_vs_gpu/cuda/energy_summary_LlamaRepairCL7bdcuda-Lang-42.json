@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-42",
+    "Time": {
+        "mean": 101.72271728515625,
+        "median": 101.72271728515625,
+        "std": 0.0,
+        "max": 101.72271728515625,
+        "min": 101.72271728515625,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 15019.92439712882,
+        "median": 15019.92439712882,
+        "std": 0.0,
+        "max": 15019.92439712882,
+        "min": 15019.92439712882,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 3977.7917781889446,
+        "median": 3977.7917781889446,
+        "std": 0.0,
+        "max": 3977.7917781889446,
+        "min": 3977.7917781889446,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n",
+        "diff --git a/src/java/org/apache/commons/lang/Entities.java b/src/java/org/apache/commons/lang/Entities.java\nindex 0d8f7f4..900e1a8 100644\n--- a/src/java/org/apache/commons/lang/Entities.java\n+++ b/src/java/org/apache/commons/lang/Entities.java\n@@ -825,15 +825,10 @@ class Entities {\n     public void escape(Writer writer, String str) throws IOException {\n         int len = str.length();\n         for (int i = 0; i < len; i++) {\n-            int c = Character.codePointAt(str, i); \n+            char c = str.charAt(i);\n             String entityName = this.entityName(c);\n             if (entityName == null) {\n-                if (c >= 0x010000 && i < len - 1) {\n-                    writer.write(\"&#\");\n-                    writer.write(Integer.toString(c, 10));\n-                    writer.write(';');\n-                    i++;\n-                } else if (c > 0x7F) { \n+                if (c > 0x7F) {\n                     writer.write(\"&#\");\n                     writer.write(Integer.toString(c, 10));\n                     writer.write(';');\n"
+    ]
+}

@@ -1,0 +1,178 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-43",
+    "Time": {
+        "mean": 385.29459857940674,
+        "median": 385.29459857940674,
+        "std": 0.0,
+        "max": 385.29459857940674,
+        "min": 385.29459857940674,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 81855.09191726446,
+        "median": 81855.09191726446,
+        "std": 0.0,
+        "max": 81855.09191726446,
+        "min": 81855.09191726446,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 28976.722500848766,
+        "median": 28976.722500848766,
+        "std": 0.0,
+        "max": 28976.722500848766,
+        "min": 28976.722500848766,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        75.87995767593384,
+        110.25936222076416,
+        144.63876676559448,
+        179.0181713104248,
+        213.39757585525513,
+        247.77698040008545,
+        282.15638494491577,
+        316.5357894897461,
+        350.9151940345764,
+        385.29459857940674
+    ],
+    "Joules_Per_PatchMedian": [
+        47470.635889399055,
+        51291.13100360632,
+        55111.62611781359,
+        58932.12123202086,
+        62752.616346228126,
+        66573.1114604354,
+        70393.60657464266,
+        74214.10168884993,
+        78034.5968030572,
+        81855.09191726446
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        14081.992902386184,
+        15736.962857770915,
+        17391.932813155647,
+        19046.902768540378,
+        20701.87272392511,
+        22356.84267930984,
+        24011.812634694572,
+        25666.782590079303,
+        27321.752545464034,
+        28976.722500848766
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 42.64767440160116,
+        "median": 41.500553131103516,
+        "std": 3.0088833366048173,
+        "max": 46.061387062072754,
+        "min": 40.3810830116272,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 45026.42159003814,
+        "median": 43650.14077519179,
+        "std": 2972.5192462806012,
+        "max": 48437.659316420555,
+        "min": 42991.46467850208,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 12695.820931128661,
+        "median": 12427.022947001453,
+        "std": 796.7643254419776,
+        "max": 13592.220003962517,
+        "min": 12068.219842422011,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        34.37940454483032,
+        68.75880908966064,
+        103.13821363449097,
+        137.5176181793213,
+        171.8970227241516,
+        206.27642726898193,
+        240.65583181381226,
+        275.0352363586426,
+        309.4146409034729,
+        343.7940454483032
+    ],
+    "Val_Joules": [
+        3820.4951142072678,
+        7640.9902284145355,
+        11461.485342621803,
+        15281.980456829071,
+        19102.47557103634,
+        22922.970685243607,
+        26743.465799450874,
+        30563.960913658142,
+        34384.45602786541,
+        38204.95114207268
+    ],
+    "Val_JoulesNormalized": [
+        1654.9699553847313,
+        3309.9399107694626,
+        4964.909866154194,
+        6619.879821538925,
+        8274.849776923656,
+        9929.819732308388,
+        11584.789687693119,
+        13239.75964307785,
+        14894.729598462582,
+        16549.699553847313
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\nindex 4af3955..404be49 100644\n--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n+++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java\n@@ -419,7 +419,6 @@ public class ExtendedMessageFormat extends MessageFormat {\n         int start = pos.getIndex();\n         char[] c = pattern.toCharArray();\n         if (escapingOn && c[start] == QUOTE) {\n-            next(pos);\n             return appendTo == null ? null : appendTo.append(QUOTE);\n         }\n         int lastHold = start;\n"
+    ]
+}

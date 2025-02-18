@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-77",
+    "Time": {
+        "mean": 583.9873700141907,
+        "median": 583.9873700141907,
+        "std": 0.0,
+        "max": 583.9873700141907,
+        "min": 583.9873700141907,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 143488.6029013455,
+        "median": 143488.6029013455,
+        "std": 0.0,
+        "max": 143488.6029013455,
+        "min": 143488.6029013455,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 50807.510348832606,
+        "median": 50807.510348832606,
+        "std": 0.0,
+        "max": 50807.510348832606,
+        "min": 50807.510348832606,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        132.20269787311554,
+        182.40099477767944,
+        232.59929168224335,
+        282.79758858680725,
+        332.99588549137115,
+        383.19418239593506,
+        433.39247930049896,
+        483.59077620506287,
+        533.7890731096268,
+        583.9873700141907
+    ],
+    "Joules_Per_PatchMedian": [
+        93120.2174158454,
+        98716.70469201208,
+        104313.19196817875,
+        109909.67924434543,
+        115506.16652051211,
+        121102.65379667879,
+        126699.14107284546,
+        132295.62834901214,
+        137892.11562517882,
+        143488.6029013455
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        28392.38488907218,
+        30882.954384601115,
+        33373.52388013005,
+        35864.09337565899,
+        38354.662871187924,
+        40845.23236671686,
+        43335.8018622458,
+        45826.37135777473,
+        48316.94085330367,
+        50807.510348832606
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 82.39698481559753,
+        "median": 82.00440096855164,
+        "std": 1.222913763285758,
+        "max": 84.10650110244751,
+        "min": 81.47263622283936,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 87808.6261413306,
+        "median": 87523.73013967872,
+        "std": 1402.2198725419728,
+        "max": 89741.94935970307,
+        "min": 86445.0949262619,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 25792.350185933712,
+        "median": 25901.815393543242,
+        "std": 542.0684706471538,
+        "max": 26236.98105169536,
+        "min": 25128.788904953006,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        50.198296904563904,
+        100.39659380912781,
+        150.5948907136917,
+        200.79318761825562,
+        250.99148452281952,
+        301.1897814273834,
+        351.3880783319473,
+        401.58637523651123,
+        451.78467214107513,
+        501.98296904563904
+    ],
+    "Val_Joules": [
+        5596.4872761666775,
+        11192.974552333355,
+        16789.461828500032,
+        22385.94910466671,
+        27982.436380833387,
+        33578.923657000065,
+        39175.41093316674,
+        44771.89820933342,
+        50368.3854855001,
+        55964.872761666775
+    ],
+    "Val_JoulesNormalized": [
+        2490.5694955289364,
+        4981.138991057873,
+        7471.708486586809,
+        9962.277982115746,
+        12452.847477644682,
+        14943.416973173618,
+        17433.986468702555,
+        19924.55596423149,
+        22415.125459760427,
+        24905.694955289364
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "passtest",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 22df685..8cd3ab9 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -963,7 +963,6 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n"
+    ]
+}

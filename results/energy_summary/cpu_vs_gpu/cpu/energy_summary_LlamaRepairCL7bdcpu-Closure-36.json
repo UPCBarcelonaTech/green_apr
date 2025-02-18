@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-36",
+    "Time": {
+        "mean": 647.0011801719666,
+        "median": 647.0011801719666,
+        "std": 0.0,
+        "max": 647.0011801719666,
+        "min": 647.0011801719666,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 181405.87532863618,
+        "median": 181405.87532863618,
+        "std": 0.0,
+        "max": 181405.87532863618,
+        "min": 181405.87532863618,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 61626.2727768421,
+        "median": 61626.2727768421,
+        "std": 0.0,
+        "max": 61626.2727768421,
+        "min": 61626.2727768421,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        166.41455495357513,
+        219.81306886672974,
+        273.21158277988434,
+        326.61009669303894,
+        380.00861060619354,
+        433.40712451934814,
+        486.80563843250275,
+        540.2041523456573,
+        593.602666258812,
+        647.0011801719666
+    ],
+    "Joules_Per_PatchMedian": [
+        123417.68829450608,
+        129860.8201871872,
+        136303.95207986832,
+        142747.08397254944,
+        149190.21586523057,
+        155633.3477579117,
+        162076.4796505928,
+        168519.61154327393,
+        174962.74343595505,
+        181405.87532863618
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        34462.24216587545,
+        37480.467789316186,
+        40498.693412756926,
+        43516.919036197665,
+        46535.144659638405,
+        49553.370283079144,
+        52571.595906519884,
+        55589.82152996062,
+        58608.04715340136,
+        61626.2727768421
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 115.81151175498962,
+        "median": 113.01604104042053,
+        "std": 7.077606175427023,
+        "max": 123.85992503166199,
+        "min": 110.55856919288635,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 119686.45693324805,
+        "median": 116974.55640182496,
+        "std": 7243.098955088686,
+        "max": 127894.17186975479,
+        "min": 114190.6425281644,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 31930.604418655246,
+        "median": 31444.016542434707,
+        "std": 1749.7068548793538,
+        "max": 33872.102778220185,
+        "min": 30475.693935310846,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        53.3985139131546,
+        106.7970278263092,
+        160.1955417394638,
+        213.5940556526184,
+        266.992569565773,
+        320.3910834789276,
+        373.7895973920822,
+        427.1881113052368,
+        480.5866252183914,
+        533.985139131546
+    ],
+    "Val_Joules": [
+        6443.131892681122,
+        12886.263785362244,
+        19329.395678043365,
+        25772.527570724487,
+        32215.65946340561,
+        38658.79135608673,
+        45101.92324876785,
+        51545.055141448975,
+        57988.1870341301,
+        64431.31892681122
+    ],
+    "Val_JoulesNormalized": [
+        3018.2256234407396,
+        6036.451246881479,
+        9054.676870322219,
+        12072.902493762958,
+        15091.128117203698,
+        18109.353740644437,
+        21127.579364085177,
+        24145.804987525917,
+        27164.030610966656,
+        30182.256234407396
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineVariables.java b/src/com/google/javascript/jscomp/InlineVariables.java\nindex 47b8e8a..0b4b3de 100644\n--- a/src/com/google/javascript/jscomp/InlineVariables.java\n+++ b/src/com/google/javascript/jscomp/InlineVariables.java\n@@ -572,9 +572,6 @@ class InlineVariables implements CompilerPass {\n \n           // issue 668: Don't inline singleton getter methods\n           // calls as this confused class removing logic.\n-          if (convention.getSingletonGetterClassName(callNode) != null) {\n-            return false;\n-          }\n         }\n       }\n \n"
+    ]
+}

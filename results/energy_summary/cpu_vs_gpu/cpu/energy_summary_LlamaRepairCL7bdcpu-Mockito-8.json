@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-8",
+    "Time": {
+        "mean": 443.9650480747223,
+        "median": 443.9650480747223,
+        "std": 0.0,
+        "max": 443.9650480747223,
+        "min": 443.9650480747223,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 94327.4173423529,
+        "median": 94327.4173423529,
+        "std": 0.0,
+        "max": 94327.4173423529,
+        "min": 94327.4173423529,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 35838.558235704906,
+        "median": 35838.558235704906,
+        "std": 0.0,
+        "max": 35838.558235704906,
+        "min": 35838.558235704906,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        84.42437207698822,
+        124.37333607673645,
+        164.32230007648468,
+        204.2712640762329,
+        244.22022807598114,
+        284.16919207572937,
+        324.1181560754776,
+        364.06712007522583,
+        404.01608407497406,
+        443.9650480747223
+    ],
+    "Joules_Per_PatchMedian": [
+        50847.662260925776,
+        55678.74615886212,
+        60509.83005679847,
+        65340.91395473482,
+        70171.99785267116,
+        75003.08175060751,
+        79834.16564854386,
+        84665.2495464802,
+        89496.33344441655,
+        94327.4173423529
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        14785.845705223091,
+        17125.03598638774,
+        19464.226267552385,
+        21803.416548717032,
+        24142.60682988168,
+        26481.797111046326,
+        28820.987392210973,
+        31160.17767337562,
+        33499.36795454026,
+        35838.558235704906
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 49.35397736231486,
+        "median": 44.47540807723999,
+        "std": 8.750594713970136,
+        "max": 59.45632791519165,
+        "min": 44.13019609451294,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 50667.86424842278,
+        "median": 46016.57836298943,
+        "std": 8148.230400077357,
+        "max": 60076.43125975132,
+        "min": 45910.583122527605,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 13134.8866693457,
+        "median": 12446.655424058445,
+        "std": 1490.395193616659,
+        "max": 14845.029798269272,
+        "min": 12112.974785709383,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        39.94896399974823,
+        79.89792799949646,
+        119.84689199924469,
+        159.79585599899292,
+        199.74481999874115,
+        239.69378399848938,
+        279.6427479982376,
+        319.59171199798584,
+        359.54067599773407,
+        399.4896399974823
+    ],
+    "Val_Joules": [
+        4831.083897936347,
+        9662.167795872694,
+        14493.251693809041,
+        19324.33559174539,
+        24155.419489681735,
+        28986.503387618082,
+        33817.58728555443,
+        38648.67118349078,
+        43479.75508142712,
+        48310.83897936347
+    ],
+    "Val_JoulesNormalized": [
+        2339.190281164647,
+        4678.380562329294,
+        7017.570843493941,
+        9356.761124658588,
+        11695.951405823234,
+        14035.141686987881,
+        16374.331968152528,
+        18713.522249317175,
+        21052.71253048182,
+        23391.90281164646
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n",
+        "diff --git a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\nindex 8046052..152e942 100644\n--- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n+++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java\n@@ -76,7 +76,7 @@ public abstract class GenericMetadataSupport {\n \n             if (actualTypeArgument instanceof WildcardType) {\n                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));\n-            } else if (typeParameter != actualTypeArgument) {\n+            } else {\n                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);\n             }\n             // logger.log(\"For '\" + parameterizedType + \"' found type variable : { '\" + typeParameter + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' : '\" + actualTypeArgument + \"(\" + System.identityHashCode(typeParameter) + \")\" + \"' }\");\n"
+    ]
+}

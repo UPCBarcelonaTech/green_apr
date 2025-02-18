@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-102",
+    "Time": {
+        "mean": 163.12275576591492,
+        "median": 163.12275576591492,
+        "std": 0.0,
+        "max": 163.12275576591492,
+        "min": 163.12275576591492,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 19502.677589130402,
+        "median": 19502.677589130402,
+        "std": 0.0,
+        "max": 19502.677589130402,
+        "min": 19502.677589130402,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 8446.038673126695,
+        "median": 8446.038673126695,
+        "std": 0.0,
+        "max": 8446.038673126695,
+        "min": 8446.038673126695,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n",
+        "diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java\nindex 1db94e2..4aa4555 100644\n--- a/src/com/google/javascript/jscomp/Normalize.java\n+++ b/src/com/google/javascript/jscomp/Normalize.java\n@@ -86,12 +86,12 @@ class Normalize implements CompilerPass, Callback {\n   @Override\n   public void process(Node externs, Node root) {\n     NodeTraversal.traverse(compiler, root, this);\n-    removeDuplicateDeclarations(root);\n     if (MAKE_LOCAL_NAMES_UNIQUE) {\n       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n       NodeTraversal t = new NodeTraversal(compiler, renamer);\n       t.traverseRoots(externs, root);\n     }\n+    removeDuplicateDeclarations(root);\n     new PropogateConstantAnnotations(compiler, assertOnChange)\n         .process(externs, root);\n   }\n"
+    ]
+}

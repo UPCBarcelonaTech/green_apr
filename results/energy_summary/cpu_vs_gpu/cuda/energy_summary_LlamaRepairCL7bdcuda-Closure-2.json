@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-2",
+    "Time": {
+        "mean": 71.63875830173492,
+        "median": 71.63875830173492,
+        "std": 0.0,
+        "max": 71.63875830173492,
+        "min": 71.63875830173492,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 11547.864610391855,
+        "median": 11547.864610391855,
+        "std": 0.0,
+        "max": 11547.864610391855,
+        "min": 11547.864610391855,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 4425.988918614386,
+        "median": 4425.988918614386,
+        "std": 0.0,
+        "max": 4425.988918614386,
+        "min": 4425.988918614386,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java\nindex 96f256d..a0f95db 100644\n--- a/src/com/google/javascript/jscomp/TypeCheck.java\n+++ b/src/com/google/javascript/jscomp/TypeCheck.java\n@@ -1569,13 +1569,9 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {\n       ObjectType interfaceType) {\n     ObjectType implicitProto = interfaceType.getImplicitPrototype();\n     Set<String> currentPropertyNames;\n-    if (implicitProto == null) {\n       // This can be the case if interfaceType is proxy to a non-existent\n       // object (which is a bad type annotation, but shouldn't crash).\n-      currentPropertyNames = ImmutableSet.of();\n-    } else {\n       currentPropertyNames = implicitProto.getOwnPropertyNames();\n-    }\n     for (String name : currentPropertyNames) {\n       ObjectType oType = properties.get(name);\n       if (oType != null) {\n"
+    ]
+}

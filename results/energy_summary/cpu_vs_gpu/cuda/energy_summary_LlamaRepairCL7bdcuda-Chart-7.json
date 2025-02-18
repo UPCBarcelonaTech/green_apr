@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Chart-7",
+    "Time": {
+        "mean": 66.36771631240845,
+        "median": 66.36771631240845,
+        "std": 0.0,
+        "max": 66.36771631240845,
+        "min": 66.36771631240845,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 11351.046438670159,
+        "median": 11351.046438670159,
+        "std": 0.0,
+        "max": 11351.046438670159,
+        "min": 11351.046438670159,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 4002.162933266163,
+        "median": 4002.162933266163,
+        "std": 0.0,
+        "max": 4002.162933266163,
+        "min": 4002.162933266163,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "uncompilable",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "uncompilable",
+        "passtest",
+        "passtest"
+    ],
+    "patches": [
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n",
+        "Index: source/org/jfree/data/time/TimePeriodValues.java\n===================================================================\n--- source/org/jfree/data/time/TimePeriodValues.java\t(revision 1087)\n+++ source/org/jfree/data/time/TimePeriodValues.java\t(revision 1086)\n@@ -297,9 +296,9 @@\n         }\n         \n         if (this.maxMiddleIndex >= 0) {\n-            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()\n+            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()\n                 .getTime();\n-            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()\n+            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()\n                 .getTime();\n             long maxMiddle = s + (e - s) / 2;\n             if (middle > maxMiddle) {\n"
+    ]
+}

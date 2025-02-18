@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-33",
+    "Time": {
+        "mean": 325.812024474144,
+        "median": 325.812024474144,
+        "std": 0.0,
+        "max": 325.812024474144,
+        "min": 325.812024474144,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 80065.94939933422,
+        "median": 80065.94939933422,
+        "std": 0.0,
+        "max": 80065.94939933422,
+        "min": 80065.94939933422,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 26572.649687981608,
+        "median": 26572.649687981608,
+        "std": 0.0,
+        "max": 26572.649687981608,
+        "min": 26572.649687981608,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\nindex 327b2ae..9a6993a 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java\n@@ -335,7 +335,7 @@ class SimplexTableau implements Serializable {\n         // positive cost non-artificial variables\n         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {\n             final double entry = tableau.getEntry(0, i);\n-            if (Precision.compareTo(entry, 0d, epsilon) > 0) {\n+            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {\n                 columnsToDrop.add(i);\n             }\n         }\n"
+    ]
+}

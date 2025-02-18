@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-95",
+    "Time": {
+        "mean": 326.5483981370926,
+        "median": 326.5483981370926,
+        "std": 0.0,
+        "max": 326.5483981370926,
+        "min": 326.5483981370926,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 148983.30856857295,
+        "median": 148983.30856857295,
+        "std": 0.0,
+        "max": 148983.30856857295,
+        "min": 148983.30856857295,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 47018.67838078142,
+        "median": 47018.67838078142,
+        "std": 0.0,
+        "max": 47018.67838078142,
+        "min": 47018.67838078142,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex c7005b2..4bd6bfb 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -896,16 +896,9 @@ final class TypedScopeCreator implements ScopeCreator {\n       // scope where the root object appears. This helps out people\n       // who declare \"global\" names in an anonymous namespace.\n       Scope scopeToDeclareIn = scope;\n-      if (n.getType() == Token.GETPROP && !scope.isGlobal() &&\n-          isQnameRootedInGlobalScope(n)) {\n-        Scope globalScope = scope.getGlobalScope();\n \n         // don't try to declare in the global scope if there's\n         // already a symbol there with this name.\n-        if (!globalScope.isDeclared(variableName, false)) {\n-          scopeToDeclareIn = scope.getGlobalScope();\n-        }\n-      }\n \n       // declared in closest scope?\n       if (scopeToDeclareIn.isDeclared(variableName, false)) {\n"
+    ]
+}

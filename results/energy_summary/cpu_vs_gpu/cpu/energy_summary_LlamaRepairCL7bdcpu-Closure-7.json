@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-7",
+    "Time": {
+        "mean": 371.07865011692047,
+        "median": 371.07865011692047,
+        "std": 0.0,
+        "max": 371.07865011692047,
+        "min": 371.07865011692047,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 81552.50284988283,
+        "median": 81552.50284988283,
+        "std": 0.0,
+        "max": 81552.50284988283,
+        "min": 81552.50284988283,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 28599.503986430173,
+        "median": 28599.503986430173,
+        "std": 0.0,
+        "max": 28599.503986430173,
+        "min": 28599.503986430173,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n",
+        "diff --git a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\nindex fa7d47d..0afabc8 100644\n--- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n+++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java\n@@ -610,13 +610,9 @@ public abstract class ChainableReverseAbstractInterpreter\n     public JSType caseObjectType(ObjectType type) {\n       if (value.equals(\"function\")) {\n         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n-        if (resultEqualsValue) {\n+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n           // Objects are restricted to \"Function\", subtypes are left\n-          return ctorType.getGreatestSubtype(type);\n-        } else {\n           // Only filter out subtypes of \"function\"\n-          return type.isSubtype(ctorType) ? null : type;\n-        }\n       }\n       return matchesExpectation(\"object\") ? type : null;\n     }\n"
+    ]
+}

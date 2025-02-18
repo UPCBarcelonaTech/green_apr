@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-1",
+    "Time": {
+        "mean": 645.7522969245911,
+        "median": 645.7522969245911,
+        "std": 0.0,
+        "max": 645.7522969245911,
+        "min": 645.7522969245911,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 676787.7980529309,
+        "median": 676787.7980529309,
+        "std": 0.0,
+        "max": 676787.7980529309,
+        "min": 676787.7980529309,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 192619.97810987226,
+        "median": 192619.97810987226,
+        "std": 0.0,
+        "max": 192619.97810987226,
+        "min": 192619.97810987226,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 70b8d64..1e6ccdc 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -464,20 +464,11 @@ public class NumberUtils {\n             }\n         }\n         if (pfxLen > 0) { // we have a hex number\n-            char firstSigDigit = 0; // strip leading zeroes\n-            for(int i = pfxLen; i < str.length(); i++) {\n-                firstSigDigit = str.charAt(i);\n-                if (firstSigDigit == '0') { // count leading zeroes\n-                    pfxLen++;\n-                } else {\n-                    break;\n-                }\n-            }\n             final int hexDigits = str.length() - pfxLen;\n-            if (hexDigits > 16 || (hexDigits == 16 && firstSigDigit > '7')) { // too many for Long\n+            if (hexDigits > 16) { // too many for Long\n                 return createBigInteger(str);\n             }\n-            if (hexDigits > 8 || (hexDigits == 8 && firstSigDigit > '7')) { // too many for an int\n+            if (hexDigits > 8) { // too many for an int\n                 return createLong(str);\n             }\n             return createInteger(str);\n"
+    ]
+}

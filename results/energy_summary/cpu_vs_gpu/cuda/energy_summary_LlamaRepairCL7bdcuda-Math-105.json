@@ -1,0 +1,85 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-105",
+    "Time": {
+        "mean": 5.129961013793945,
+        "median": 5.129961013793945,
+        "std": 0.0,
+        "max": 5.129961013793945,
+        "min": 5.129961013793945,
+        "count": 5
+    },
+    "Joules": {
+        "mean": 4477.64409211874,
+        "median": 4477.64409211874,
+        "std": 0.0,
+        "max": 4477.64409211874,
+        "min": 4477.64409211874,
+        "count": 5
+    },
+    "JoulesNormalized": {
+        "mean": 660.4401017546656,
+        "median": 660.4401017546656,
+        "std": 0.0,
+        "max": 660.4401017546656,
+        "min": 660.4401017546656,
+        "count": 5
+    },
+    "NrExecutions": 5,
+    "ExecutionsIds": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\nindex d9fa592..dcf512b 100644\n--- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n+++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java\n@@ -261,7 +261,7 @@ public class SimpleRegression implements Serializable {\n      * @return sum of squared errors associated with the regression model\n      */\n     public double getSumSquaredErrors() {\n-        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);\n+        return sumYY - sumXY * sumXY / sumXX;\n     }\n \n     /**\n"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-69",
+    "Time": {
+        "mean": 64.7276201248169,
+        "median": 64.7276201248169,
+        "std": 0.0,
+        "max": 64.7276201248169,
+        "min": 64.7276201248169,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 8760.159593689441,
+        "median": 8760.159593689441,
+        "std": 0.0,
+        "max": 8760.159593689441,
+        "min": 8760.159593689441,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 3623.1916481614116,
+        "median": 3623.1916481614116,
+        "std": 0.0,
+        "max": 3623.1916481614116,
+        "min": 3623.1916481614116,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\nindex dc83314..83b4c41 100644\n--- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n+++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java\n@@ -168,7 +168,7 @@ public class PearsonsCorrelation {\n                 } else {\n                     double r = correlationMatrix.getEntry(i, j);\n                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));\n-                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);\n+                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));\n                 }\n             }\n         }\n"
+    ]
+}

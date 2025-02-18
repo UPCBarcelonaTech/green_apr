@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Chart-9",
+    "Time": {
+        "mean": 141.2575387954712,
+        "median": 141.2575387954712,
+        "std": 0.0,
+        "max": 141.2575387954712,
+        "min": 141.2575387954712,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 52464.91960074899,
+        "median": 52464.91960074899,
+        "std": 0.0,
+        "max": 52464.91960074899,
+        "min": 52464.91960074899,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 16795.50159879923,
+        "median": 16795.50159879923,
+        "std": 0.0,
+        "max": 16795.50159879923,
+        "min": 16795.50159879923,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        49.18879818916321,
+        59.41865825653076,
+        69.64851832389832,
+        79.87837839126587,
+        90.10823845863342,
+        100.33809852600098,
+        110.56795859336853,
+        120.79781866073608,
+        131.02767872810364,
+        141.2575387954712
+    ],
+    "Joules_Per_PatchMedian": [
+        42176.60265613198,
+        43319.74898331165,
+        44462.895310491316,
+        45606.04163767098,
+        46749.18796485065,
+        47892.33429203032,
+        49035.480619209986,
+        50178.62694638965,
+        51321.77327356932,
+        52464.91960074899
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        12354.453276896478,
+        12847.903090441228,
+        13341.352903985979,
+        13834.802717530729,
+        14328.252531075479,
+        14821.70234462023,
+        15315.15215816498,
+        15808.60197170973,
+        16302.05178525448,
+        16795.50159879923
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 41.08049035072327,
+        "median": 38.958938121795654,
+        "std": 4.072829613833019,
+        "max": 45.77612590789795,
+        "min": 38.506407022476196,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 43005.86425951719,
+        "median": 41033.456328952314,
+        "std": 3759.1374240190703,
+        "max": 47340.697704041,
+        "min": 40643.43874555826,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 11915.606558541456,
+        "median": 11861.003463351728,
+        "std": 577.8288063419067,
+        "max": 12518.798725903034,
+        "min": 11367.017486369608,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        10.229860067367554,
+        20.459720134735107,
+        30.68958020210266,
+        40.919440269470215,
+        51.14930033683777,
+        61.37916040420532,
+        71.60902047157288,
+        81.83888053894043,
+        92.06874060630798,
+        102.29860067367554
+    ],
+    "Val_Joules": [
+        1143.1463271796674,
+        2286.292654359335,
+        3429.4389815390023,
+        4572.58530871867,
+        5715.731635898337,
+        6858.8779630780045,
+        8002.024290257672,
+        9145.17061743734,
+        10288.316944617007,
+        11431.463271796674
+    ],
+    "Val_JoulesNormalized": [
+        493.4498135447502,
+        986.8996270895004,
+        1480.3494406342506,
+        1973.7992541790009,
+        2467.249067723751,
+        2960.6988812685013,
+        3454.1486948132515,
+        3947.5985083580017,
+        4441.048321902752,
+        4934.498135447502
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex d16d447..4067e3e 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n             endIndex = -(endIndex + 1); // this is first item AFTER end period\n             endIndex = endIndex - 1;    // so this is last item BEFORE end\n         }\n-        if ((endIndex < 0)  || (endIndex < startIndex)) {\n+        if (endIndex < 0) {\n             emptyRange = true;\n         }\n         if (emptyRange) {\n"
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-43",
+    "Time": {
+        "mean": 180.57519578933716,
+        "median": 180.57519578933716,
+        "std": 0.0,
+        "max": 180.57519578933716,
+        "min": 180.57519578933716,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 23126.087850189208,
+        "median": 23126.087850189208,
+        "std": 0.0,
+        "max": 23126.087850189208,
+        "min": 23126.087850189208,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 10421.931635093688,
+        "median": 10421.931635093688,
+        "std": 0.0,
+        "max": 10421.931635093688,
+        "min": 10421.931635093688,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\nindex da987cd..1203d51 100644\n--- a/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n+++ b/src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java\n@@ -155,13 +155,13 @@ public class SummaryStatistics implements StatisticalSummary, Serializable {\n         secondMoment.increment(value);\n         // If mean, variance or geomean have been overridden,\n         // need to increment these\n-        if (meanImpl != mean) {\n+        if (!(meanImpl instanceof Mean)) {\n             meanImpl.increment(value);\n         }\n-        if (varianceImpl != variance) {\n+        if (!(varianceImpl instanceof Variance)) {\n             varianceImpl.increment(value);\n         }\n-        if (geoMeanImpl != geoMean) {\n+        if (!(geoMeanImpl instanceof GeometricMean)) {\n             geoMeanImpl.increment(value);\n         }\n         n++;\n"
+    ]
+}

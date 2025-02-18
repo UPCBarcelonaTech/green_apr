@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-40",
+    "Time": {
+        "mean": 96.38327181339264,
+        "median": 96.38327181339264,
+        "std": 0.0,
+        "max": 96.38327181339264,
+        "min": 96.38327181339264,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 47316.06430107949,
+        "median": 47316.06430107949,
+        "std": 0.0,
+        "max": 47316.06430107949,
+        "min": 47316.06430107949,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 12387.09421656728,
+        "median": 12387.09421656728,
+        "std": 0.0,
+        "max": 12387.09421656728,
+        "min": 12387.09421656728,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "passtest",
+        "uncompilable",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n",
+        "diff --git a/src/java/org/apache/commons/lang/StringUtils.java b/src/java/org/apache/commons/lang/StringUtils.java\nindex 8351b3e..72b4a49 100644\n--- a/src/java/org/apache/commons/lang/StringUtils.java\n+++ b/src/java/org/apache/commons/lang/StringUtils.java\n@@ -1045,14 +1045,7 @@ public class StringUtils {\n         if (str == null || searchStr == null) {\n             return false;\n         }\n-        int len = searchStr.length();\n-        int max = str.length() - len;\n-        for (int i = 0; i <= max; i++) {\n-            if (str.regionMatches(true, i, searchStr, 0, len)) {\n-                return true;\n-            }\n-        }\n-        return false;\n+        return contains(str.toUpperCase(), searchStr.toUpperCase());\n     }\n \n     // IndexOfAny chars\n"
+    ]
+}

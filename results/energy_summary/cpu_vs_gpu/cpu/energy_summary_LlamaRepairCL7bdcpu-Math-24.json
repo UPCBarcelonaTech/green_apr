@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-24",
+    "Time": {
+        "mean": 887.7516422271729,
+        "median": 887.7516422271729,
+        "std": 0.0,
+        "max": 887.7516422271729,
+        "min": 887.7516422271729,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 575299.2536907848,
+        "median": 575299.2536907848,
+        "std": 0.0,
+        "max": 575299.2536907848,
+        "min": 575299.2536907848,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 170098.58390550019,
+        "median": 170098.58390550019,
+        "std": 0.0,
+        "max": 170098.58390550019,
+        "min": 170098.58390550019,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\nindex cff5bfd..b6ce68e 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java\n@@ -227,7 +227,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n \n                 if (checker != null) {\n                     if (checker.converged(iter, previous, current)) {\n-                        return best(current, previous, isMinim);\n+                        return current;\n                     }\n                 }\n \n@@ -264,7 +264,7 @@ public class BrentOptimizer extends BaseAbstractUnivariateOptimizer {\n                     }\n                 }\n             } else { // Default termination (Brent's criterion).\n-                return best(current, previous, isMinim);\n+                return current;\n             }\n             ++iter;\n         }\n"
+    ]
+}

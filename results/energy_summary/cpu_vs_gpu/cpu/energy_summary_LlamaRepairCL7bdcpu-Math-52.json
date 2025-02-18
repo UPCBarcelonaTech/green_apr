@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-52",
+    "Time": {
+        "mean": 516.4149502515793,
+        "median": 516.4149502515793,
+        "std": 0.0,
+        "max": 516.4149502515793,
+        "min": 516.4149502515793,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 344334.0430343988,
+        "median": 344334.0430343988,
+        "std": 0.0,
+        "max": 344334.0430343988,
+        "min": 344334.0430343988,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 100909.13281770944,
+        "median": 100909.13281770944,
+        "std": 0.0,
+        "max": 100909.13281770944,
+        "min": 100909.13281770944,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        328.7676086425781,
+        349.6173132658005,
+        370.4670178890228,
+        391.3167225122452,
+        412.16642713546753,
+        433.0161317586899,
+        453.86583638191223,
+        474.7155410051346,
+        495.56524562835693,
+        516.4149502515793
+    ],
+    "Joules_Per_PatchMedian": [
+        323361.4307136119,
+        325691.7209714771,
+        328022.0112293423,
+        330352.30148720753,
+        332682.59174507274,
+        335012.88200293796,
+        337343.17226080317,
+        339673.4625186684,
+        342003.7527765336,
+        344334.0430343988
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        91360.35641888382,
+        92421.33157430889,
+        93482.30672973396,
+        94543.28188515903,
+        95604.2570405841,
+        96665.23219600916,
+        97726.20735143423,
+        98787.1825068593,
+        99848.15766228437,
+        100909.13281770944
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 309.81509125232697,
+        "median": 307.9179040193558,
+        "std": 7.178542294413042,
+        "max": 320.08026099205017,
+        "min": 303.34429597854614,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 322620.84901481273,
+        "median": 321031.1404557467,
+        "std": 6792.258219462007,
+        "max": 332218.91558854585,
+        "min": 316202.19955921173,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 89815.37921473384,
+        "median": 90299.38126345875,
+        "std": 1428.0476260506605,
+        "max": 90939.47850384709,
+        "min": 87723.27582817076,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        20.84970462322235,
+        41.6994092464447,
+        62.54911386966705,
+        83.3988184928894,
+        104.24852311611176,
+        125.0982277393341,
+        145.94793236255646,
+        166.7976369857788,
+        187.64734160900116,
+        208.4970462322235
+    ],
+    "Val_Joules": [
+        2330.290257865214,
+        4660.580515730428,
+        6990.870773595641,
+        9321.161031460855,
+        11651.451289326069,
+        13981.741547191283,
+        16312.031805056497,
+        18642.32206292171,
+        20972.612320786924,
+        23302.902578652138
+    ],
+    "Val_JoulesNormalized": [
+        1060.9751554250688,
+        2121.9503108501376,
+        3182.9254662752064,
+        4243.900621700275,
+        5304.875777125344,
+        6365.850932550413,
+        7426.826087975482,
+        8487.80124340055,
+        9548.77639882562,
+        10609.751554250688
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\nindex ada0a8f..20f5b34 100644\n--- a/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n+++ b/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotation.java\n@@ -341,8 +341,7 @@ public class Rotation implements Serializable {\n   Vector3D k     = v1Su1.crossProduct(v2Su2);\n   Vector3D u3    = u1.crossProduct(u2);\n   double c       = k.dotProduct(u3);\n-  final double inPlaneThreshold = 0.001;\n-  if (c <= inPlaneThreshold * k.getNorm() * u3.getNorm()) {\n+  if (c == 0) {\n     // the (q1, q2, q3) vector is close to the (u1, u2) plane\n     // we try other vectors\n     Vector3D v3 = Vector3D.crossProduct(v1, v2);\n@@ -351,13 +350,13 @@ public class Rotation implements Serializable {\n     Vector3D u2Prime = u1.crossProduct(u3);\n     c = k.dotProduct(u2Prime);\n \n-    if (c <= inPlaneThreshold * k.getNorm() * u2Prime.getNorm()) {\n+    if (c == 0) {\n       // the (q1, q2, q3) vector is also close to the (u1, u3) plane,\n       // it is almost aligned with u1: we try (u2, u3) and (v2, v3)\n       k = v2Su2.crossProduct(v3Su3);;\n       c = k.dotProduct(u2.crossProduct(u3));;\n \n-      if (c <= 0) {\n+      if (c == 0) {\n         // the (q1, q2, q3) vector is aligned with everything\n         // this is really the identity rotation\n         q0 = 1.0;\n"
+    ]
+}

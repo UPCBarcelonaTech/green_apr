@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-50",
+    "Time": {
+        "mean": 289.741481423378,
+        "median": 289.741481423378,
+        "std": 0.0,
+        "max": 289.741481423378,
+        "min": 289.741481423378,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 151354.71621656412,
+        "median": 151354.71621656412,
+        "std": 0.0,
+        "max": 151354.71621656412,
+        "min": 151354.71621656412,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 46421.14859176874,
+        "median": 46421.14859176874,
+        "std": 0.0,
+        "max": 46421.14859176874,
+        "min": 46421.14859176874,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "correct",
+        "passtest",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\nindex c781a90..e47d982 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -184,6 +184,10 @@ public abstract class BaseSecantSolver\n                     break;\n                 case REGULA_FALSI:\n                     // Nothing.\n+                    if (x == x1) {\n+                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        f0 = computeObjectiveValue(x0);\n+                    }\n                     break;\n                 default:\n                     // Should never happen.\n"
+    ]
+}

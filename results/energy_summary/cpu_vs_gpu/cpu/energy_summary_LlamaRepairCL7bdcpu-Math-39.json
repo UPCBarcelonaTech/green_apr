@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-39",
+    "Time": {
+        "mean": 754.0670207738876,
+        "median": 754.0670207738876,
+        "std": 0.0,
+        "max": 754.0670207738876,
+        "min": 754.0670207738876,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 684705.3750748932,
+        "median": 684705.3750748932,
+        "std": 0.0,
+        "max": 684705.3750748932,
+        "min": 684705.3750748932,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 193152.42760323882,
+        "median": 193152.42760323882,
+        "std": 0.0,
+        "max": 193152.42760323882,
+        "min": 193152.42760323882,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex d2bbf67..13ced27 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -247,15 +247,6 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         stepSize = hNew;\n-        if (forward) {\n-            if (stepStart + stepSize >= t) {\n-                stepSize = t - stepStart;\n-            }\n-        } else {\n-            if (stepStart + stepSize <= t) {\n-                stepSize = t - stepStart;\n-            }\n-        }\n \n         // next stages\n         for (int k = 1; k < stages; ++k) {\n"
+    ]
+}

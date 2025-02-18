@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Time-25",
+    "Time": {
+        "mean": 135.809583902359,
+        "median": 135.809583902359,
+        "std": 0.0,
+        "max": 135.809583902359,
+        "min": 135.809583902359,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 64362.71238166692,
+        "median": 64362.71238166692,
+        "std": 0.0,
+        "max": 64362.71238166692,
+        "min": 64362.71238166692,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 19037.796948879964,
+        "median": 19037.796948879964,
+        "std": 0.0,
+        "max": 19037.796948879964,
+        "min": 19037.796948879964,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex 81f5872..a320022 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -896,15 +896,6 @@ public abstract class DateTimeZone implements Serializable {\n                     return offsetLocal;\n                 }\n             }\n-        } else if (offsetLocal > 0) {\n-            long prev = previousTransition(instantAdjusted);\n-            if (prev < instantAdjusted) {\n-                int offsetPrev = getOffset(prev);\n-                int diff = offsetPrev - offsetLocal;\n-                if (instantAdjusted - prev <= diff) {\n-                    return offsetPrev;\n-                }\n-            }\n         }\n         return offsetAdjusted;\n     }\n"
+    ]
+}

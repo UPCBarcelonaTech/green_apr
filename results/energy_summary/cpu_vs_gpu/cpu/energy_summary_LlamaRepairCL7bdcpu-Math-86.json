@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-86",
+    "Time": {
+        "mean": 331.6433812379837,
+        "median": 331.6433812379837,
+        "std": 0.0,
+        "max": 331.6433812379837,
+        "min": 331.6433812379837,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 281909.22563598724,
+        "median": 281909.22563598724,
+        "std": 0.0,
+        "max": 281909.22563598724,
+        "min": 281909.22563598724,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 76813.02274594907,
+        "median": 76813.02274594907,
+        "std": 0.0,
+        "max": 76813.02274594907,
+        "min": 76813.02274594907,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        271.88218080997467,
+        278.52231419086456,
+        285.16244757175446,
+        291.80258095264435,
+        298.44271433353424,
+        305.08284771442413,
+        311.722981095314,
+        318.3631144762039,
+        325.0032478570938,
+        331.6433812379837
+    ],
+    "Joules_Per_PatchMedian": [
+        274953.24091373675,
+        275726.1281050979,
+        276499.0152964591,
+        277271.90248782025,
+        278044.7896791814,
+        278817.6768705426,
+        279590.56406190374,
+        280363.4512532649,
+        281136.3384446261,
+        281909.22563598724
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        73495.20827116369,
+        73863.85432391762,
+        74232.50037667155,
+        74601.14642942548,
+        74969.79248217941,
+        75338.43853493335,
+        75707.08458768728,
+        76075.73064044121,
+        76444.37669319514,
+        76813.02274594907
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 265.3990787267685,
+        "median": 265.2420474290848,
+        "std": 19.30374227684559,
+        "max": 283.90001606941223,
+        "min": 247.2122039794922,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 274265.19555759727,
+        "median": 274180.3537223756,
+        "std": 19259.237252951723,
+        "max": 292253.7954385161,
+        "min": 256446.2793471217,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 73157.08874324856,
+        "median": 73126.56221840976,
+        "std": 4353.879740391606,
+        "max": 77142.75326272246,
+        "min": 69232.47727345227,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        6.640133380889893,
+        13.280266761779785,
+        19.920400142669678,
+        26.56053352355957,
+        33.20066690444946,
+        39.840800285339355,
+        46.48093366622925,
+        53.12106704711914,
+        59.76120042800903,
+        66.40133380889893
+    ],
+    "Val_Joules": [
+        772.8871913611656,
+        1545.7743827223312,
+        2318.661574083497,
+        3091.5487654446624,
+        3864.435956805828,
+        4637.323148166994,
+        5410.210339528159,
+        6183.097530889325,
+        6955.98472225049,
+        7728.871913611656
+    ],
+    "Val_JoulesNormalized": [
+        368.64605275393114,
+        737.2921055078623,
+        1105.9381582617934,
+        1474.5842110157246,
+        1843.2302637696557,
+        2211.876316523587,
+        2580.522369277518,
+        2949.168422031449,
+        3317.8144747853803,
+        3686.4605275393114
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n",
+        "diff --git a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\nindex 67e372f..acd9222 100644\n--- a/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n+++ b/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java\n@@ -111,6 +111,9 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n \n             final double[] lI = lTData[i];\n \n+            if (lTData[i][i] < absolutePositivityThreshold) {\n+                throw new NotPositiveDefiniteMatrixException();\n+            }\n             // check off-diagonal elements (and reset them to 0)\n             for (int j = i + 1; j < order; ++j) {\n                 final double[] lJ = lTData[j];\n@@ -131,9 +134,6 @@ public class CholeskyDecompositionImpl implements CholeskyDecomposition {\n             final double[] ltI = lTData[i];\n \n             // check diagonal element\n-            if (ltI[i] < absolutePositivityThreshold) {\n-                throw new NotPositiveDefiniteMatrixException();\n-            }\n \n             ltI[i] = Math.sqrt(ltI[i]);\n             final double inverse = 1.0 / ltI[i];\n"
+    ]
+}

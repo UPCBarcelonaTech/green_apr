@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-73",
+    "Time": {
+        "mean": 359.97144198417664,
+        "median": 359.97144198417664,
+        "std": 0.0,
+        "max": 359.97144198417664,
+        "min": 359.97144198417664,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 45195.93662505148,
+        "median": 45195.93662505148,
+        "std": 0.0,
+        "max": 45195.93662505148,
+        "min": 45195.93662505148,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 20335.884228813647,
+        "median": 20335.884228813647,
+        "std": 0.0,
+        "max": 20335.884228813647,
+        "min": 20335.884228813647,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "I",
+        "I",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex 823d897..558e74f 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1042,7 +1042,7 @@ class CodeGenerator {\n             // No charsetEncoder provided - pass straight latin characters\n             // through, and escape the rest.  Doing the explicit character\n             // check is measurably faster than using the CharsetEncoder.\n-            if (c > 0x1f && c < 0x7f) {\n+            if (c > 0x1f && c <= 0x7f) {\n               sb.append(c);\n             } else {\n               // Other characters can be misinterpreted by some js parsers,\n"
+    ]
+}

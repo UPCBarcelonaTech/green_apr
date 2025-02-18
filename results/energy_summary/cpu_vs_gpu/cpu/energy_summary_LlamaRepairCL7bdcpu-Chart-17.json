@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Chart-17",
+    "Time": {
+        "mean": 124.01789724826813,
+        "median": 124.01789724826813,
+        "std": 0.0,
+        "max": 124.01789724826813,
+        "min": 124.01789724826813,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 34582.86461628078,
+        "median": 34582.86461628078,
+        "std": 0.0,
+        "max": 34582.86461628078,
+        "min": 34582.86461628078,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 10432.790958708527,
+        "median": 10432.790958708527,
+        "std": 0.0,
+        "max": 10432.790958708527,
+        "min": 10432.790958708527,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        33.483129143714905,
+        43.542547821998596,
+        53.60196650028229,
+        63.66138517856598,
+        73.72080385684967,
+        83.78022253513336,
+        93.83964121341705,
+        103.89905989170074,
+        113.95847856998444,
+        124.01789724826813
+    ],
+    "Joules_Per_PatchMedian": [
+        24469.997032952306,
+        25593.64898665547,
+        26717.300940358633,
+        27840.952894061797,
+        28964.60484776496,
+        30088.256801468124,
+        31211.908755171287,
+        32335.56070887445,
+        33459.212662577615,
+        34582.86461628078
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        6066.403016930821,
+        6551.557232683899,
+        7036.711448436978,
+        7521.865664190056,
+        8007.019879943135,
+        8492.174095696213,
+        8977.328311449292,
+        9462.48252720237,
+        9947.636742955448,
+        10432.790958708527
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 23.367607712745667,
+        "median": 23.423710465431213,
+        "std": 0.25181065560484367,
+        "max": 23.574836015701294,
+        "min": 23.048173904418945,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 23292.297249189018,
+        "median": 23346.345079249142,
+        "std": 202.0768456020723,
+        "max": 23473.46597058773,
+        "min": 23003.03286767006,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 5614.100660237671,
+        "median": 5581.248801177742,
+        "std": 114.4453162899424,
+        "max": 5777.505172324181,
+        "min": 5516.399866271018,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        10.059418678283691,
+        20.118837356567383,
+        30.178256034851074,
+        40.237674713134766,
+        50.29709339141846,
+        60.35651206970215,
+        70.41593074798584,
+        80.47534942626953,
+        90.53476810455322,
+        100.59418678283691
+    ],
+    "Val_Joules": [
+        1123.6519537031636,
+        2247.303907406327,
+        3370.955861109491,
+        4494.607814812654,
+        5618.259768515818,
+        6741.911722218982,
+        7865.563675922145,
+        8989.215629625309,
+        10112.867583328472,
+        11236.519537031636
+    ],
+    "Val_JoulesNormalized": [
+        485.15421575307846,
+        970.3084315061569,
+        1455.4626472592354,
+        1940.6168630123138,
+        2425.7710787653923,
+        2910.9252945184708,
+        3396.079510271549,
+        3881.2337260246277,
+        4366.387941777706,
+        4851.542157530785
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n",
+        "diff --git a/source/org/jfree/data/time/TimeSeries.java b/source/org/jfree/data/time/TimeSeries.java\nindex 907fc20..ffd1dff 100644\n--- a/source/org/jfree/data/time/TimeSeries.java\n+++ b/source/org/jfree/data/time/TimeSeries.java\n@@ -854,8 +854,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {\n      *         subclasses may differ.\n      */\n     public Object clone() throws CloneNotSupportedException {\n-        TimeSeries clone = (TimeSeries) super.clone();\n-        clone.data = (List) ObjectUtilities.deepClone(this.data);\n+        Object clone = createCopy(0, getItemCount() - 1);\n         return clone;\n     }\n \n"
+    ]
+}

@@ -1,0 +1,85 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-145",
+    "Time": {
+        "mean": 3.808992862701416,
+        "median": 3.808992862701416,
+        "std": 0.0,
+        "max": 3.808992862701416,
+        "min": 3.808992862701416,
+        "count": 5
+    },
+    "Joules": {
+        "mean": 3352.7301019310953,
+        "median": 3352.7301019310953,
+        "std": 0.0,
+        "max": 3352.7301019310953,
+        "min": 3352.7301019310953,
+        "count": 5
+    },
+    "JoulesNormalized": {
+        "mean": 518.8394120812413,
+        "median": 518.8394120812413,
+        "std": 0.0,
+        "max": 518.8394120812413,
+        "min": 518.8394120812413,
+        "count": 5
+    },
+    "NrExecutions": 5,
+    "ExecutionsIds": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cce82f48..42c9ab38 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -706,25 +706,12 @@ class CodeGenerator {\n    * labels).\n    */\n   private boolean isOneExactlyFunctionOrDo(Node n) {\n-    if (n.getType() == Token.LABEL) {\n-      Node labeledStatement = n.getLastChild();\n-      if (labeledStatement.getType() != Token.BLOCK) {\n-        return isOneExactlyFunctionOrDo(labeledStatement);\n-      } else {\n         // For labels with block children, we need to ensure that a\n         // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n         // are skipped. \n-        if (getNonEmptyChildCount(n, 2) == 1) { \n-          return isOneExactlyFunctionOrDo(getFirstNonEmptyChild(n));\n-        } else {\n           // Either a empty statement or an block with more than one child,\n           // way it isn't a FUNCTION or DO.\n-          return false;\n-        }\n-      }\n-    } else {\n       return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n-    }\n   }\n \n   /**\n"
+    ]
+}

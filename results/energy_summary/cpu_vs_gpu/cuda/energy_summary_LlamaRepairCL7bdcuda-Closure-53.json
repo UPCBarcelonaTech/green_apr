@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-53",
+    "Time": {
+        "mean": 260.0719826221466,
+        "median": 260.0719826221466,
+        "std": 0.0,
+        "max": 260.0719826221466,
+        "min": 260.0719826221466,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 34225.0678268373,
+        "median": 34225.0678268373,
+        "std": 0.0,
+        "max": 34225.0678268373,
+        "min": 34225.0678268373,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 14864.338734447956,
+        "median": 14864.338734447956,
+        "std": 0.0,
+        "max": 14864.338734447956,
+        "min": 14864.338734447956,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n",
+        "diff --git a/src/com/google/javascript/jscomp/InlineObjectLiterals.java b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\nindex d92b16c..9061925 100644\n--- a/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n+++ b/src/com/google/javascript/jscomp/InlineObjectLiterals.java\n@@ -328,9 +328,6 @@ class InlineObjectLiterals implements CompilerPass {\n       }\n \n       Node replacement;\n-      if (nodes.isEmpty()) {\n-        replacement = new Node(Token.TRUE);\n-      } else {\n         // All assignments evaluate to true, so make sure that the\n         // expr statement evaluates to true in case it matters.\n         nodes.add(new Node(Token.TRUE));\n@@ -350,7 +347,6 @@ class InlineObjectLiterals implements CompilerPass {\n         }\n         cur.addChildToFront(nodes.get(i));\n         cur.addChildToFront(nodes.get(i + 1));\n-      }\n \n       Node replace = ref.getParent();\n       replacement.copyInformationFromForTree(replace);\n"
+    ]
+}

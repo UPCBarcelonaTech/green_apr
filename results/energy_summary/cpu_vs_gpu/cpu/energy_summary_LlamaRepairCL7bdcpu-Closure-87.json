@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-87",
+    "Time": {
+        "mean": 432.6499443054199,
+        "median": 432.6499443054199,
+        "std": 0.0,
+        "max": 432.6499443054199,
+        "min": 432.6499443054199,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 96125.25458656553,
+        "median": 96125.25458656553,
+        "std": 0.0,
+        "max": 96125.25458656553,
+        "min": 96125.25458656553,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 33605.29753364325,
+        "median": 33605.29753364325,
+        "std": 0.0,
+        "max": 33605.29753364325,
+        "min": 33605.29753364325,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        90.11945164203644,
+        128.17839527130127,
+        166.2373389005661,
+        204.29628252983093,
+        242.35522615909576,
+        280.4141697883606,
+        318.4731134176254,
+        356.53205704689026,
+        394.5910006761551,
+        432.6499443054199
+    ],
+    "Joules_Per_PatchMedian": [
+        57094.077970600134,
+        61430.87537237407,
+        65767.672774148,
+        70104.47017592193,
+        74441.26757769586,
+        78778.0649794698,
+        83114.86238124373,
+        87451.65978301766,
+        91788.4571847916,
+        96125.25458656553
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        15619.961330884693,
+        17618.332020080088,
+        19616.702709275483,
+        21615.07339847088,
+        23613.444087666274,
+        25611.81477686167,
+        27610.185466057064,
+        29608.55615525246,
+        31606.926844447855,
+        33605.29753364325
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 51.92962098121643,
+        "median": 52.060508012771606,
+        "std": 0.967866072573513,
+        "max": 52.785019874572754,
+        "min": 50.812448024749756,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 52824.129389196634,
+        "median": 52757.2805688262,
+        "std": 834.2194284781726,
+        "max": 53774.80342410803,
+        "min": 52007.15299502611,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 13661.101280504465,
+        "median": 13621.590641689298,
+        "std": 237.1037642085539,
+        "max": 13985.45544265509,
+        "min": 13415.768395984174,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        38.05894362926483,
+        76.11788725852966,
+        114.1768308877945,
+        152.23577451705933,
+        190.29471814632416,
+        228.353661775589,
+        266.4126054048538,
+        304.47154903411865,
+        342.5304926633835,
+        380.5894362926483
+    ],
+    "Val_Joules": [
+        4336.7974017739325,
+        8673.594803547865,
+        13010.392205321798,
+        17347.18960709573,
+        21683.987008869663,
+        26020.784410643595,
+        30357.581812417528,
+        34694.37921419146,
+        39031.17661596539,
+        43367.974017739325
+    ],
+    "Val_JoulesNormalized": [
+        1998.3706891953952,
+        3996.7413783907905,
+        5995.112067586186,
+        7993.482756781581,
+        9991.853445976976,
+        11990.224135172371,
+        13988.594824367767,
+        15986.965513563162,
+        17985.336202758557,
+        19983.706891953952
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\nindex 6c4ee4a..9498fa6 100644\n--- a/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n+++ b/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java\n@@ -520,29 +520,17 @@ public class PeepholeSubstituteAlternateSyntax\n     if (n.getType() == Token.BLOCK) {\n       if (n.hasOneChild()) {\n         Node maybeExpr = n.getFirstChild();\n-        if (maybeExpr.getType() == Token.EXPR_RESULT) {\n           // IE has a bug where event handlers behave differently when\n           // their return value is used vs. when their return value is in\n           // an EXPR_RESULT. It's pretty freaking weird. See:\n           // http://code.google.com/p/closure-compiler/issues/detail?id=291\n           // We try to detect this case, and not fold EXPR_RESULTs\n           // into other expressions.\n-          if (maybeExpr.getFirstChild().getType() == Token.CALL) {\n-            Node calledFn = maybeExpr.getFirstChild().getFirstChild();\n \n             // We only have to worry about methods with an implicit 'this'\n             // param, or this doesn't happen.\n-            if (calledFn.getType() == Token.GETELEM) {\n-              return false;\n-            } else if (calledFn.getType() == Token.GETPROP &&\n-                       calledFn.getLastChild().getString().startsWith(\"on\")) {\n-              return false;\n-            }\n-          }\n \n-          return true;\n-        }\n-        return false;\n+          return NodeUtil.isExpressionNode(maybeExpr);\n       }\n     }\n \n"
+    ]
+}

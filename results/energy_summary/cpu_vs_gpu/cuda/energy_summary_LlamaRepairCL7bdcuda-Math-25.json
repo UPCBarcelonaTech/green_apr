@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-25",
+    "Time": {
+        "mean": 189.88819551467896,
+        "median": 189.88819551467896,
+        "std": 0.0,
+        "max": 189.88819551467896,
+        "min": 189.88819551467896,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 39768.56942304373,
+        "median": 39768.56942304373,
+        "std": 0.0,
+        "max": 39768.56942304373,
+        "min": 39768.56942304373,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 13292.084515249726,
+        "median": 13292.084515249726,
+        "std": 0.0,
+        "max": 13292.084515249726,
+        "min": 13292.084515249726,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\nindex c7af9ae..1da2c45 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java\n@@ -320,11 +320,8 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {\n                 }\n                 a = 0.5 * (yMax - yMin);\n             } else {\n-                if (c2 == 0) {\n                     // In some ill-conditioned cases (cf. MATH-844), the guesser\n                     // procedure cannot produce sensible results.\n-                    throw new MathIllegalStateException(LocalizedFormats.ZERO_DENOMINATOR);\n-                }\n \n                 a = FastMath.sqrt(c1 / c2);\n                 omega = FastMath.sqrt(c2 / c3);\n"
+    ]
+}

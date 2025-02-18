@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-59",
+    "Time": {
+        "mean": 115.87516582012177,
+        "median": 115.87516582012177,
+        "std": 0.0,
+        "max": 115.87516582012177,
+        "min": 115.87516582012177,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 34170.87737315892,
+        "median": 34170.87737315892,
+        "std": 0.0,
+        "max": 34170.87737315892,
+        "min": 34170.87737315892,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 9290.652484393118,
+        "median": 9290.652484393118,
+        "std": 0.0,
+        "max": 9290.652484393118,
+        "min": 9290.652484393118,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        34.52137064933777,
+        43.560681223869324,
+        52.59999179840088,
+        61.639302372932434,
+        70.67861294746399,
+        79.71792352199554,
+        88.7572340965271,
+        97.79654467105865,
+        106.83585524559021,
+        115.87516582012177
+    ],
+    "Joules_Per_PatchMedian": [
+        27017.194699293374,
+        27812.04832972288,
+        28606.901960152383,
+        29401.755590581888,
+        30196.609221011393,
+        30991.462851440898,
+        31786.316481870403,
+        32581.170112299907,
+        33376.02374272941,
+        34170.87737315892
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7227.338567674162,
+        7456.595669531824,
+        7685.8527713894855,
+        7915.109873247147,
+        8144.366975104809,
+        8373.624076962471,
+        8602.881178820133,
+        8832.138280677795,
+        9061.395382535457,
+        9290.652484393118
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 25.598734974861145,
+        "median": 25.482060074806213,
+        "std": 0.562960522952872,
+        "max": 26.329347848892212,
+        "min": 25.10147190093994,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 26396.9772441715,
+        "median": 26222.34106886387,
+        "std": 781.3957374539186,
+        "max": 27469.19812049866,
+        "min": 25674.028718459605,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 7049.787884119155,
+        "median": 6998.0814658165,
+        "std": 332.6876684982609,
+        "max": 7493.12190754414,
+        "min": 6709.86669729948,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        9.039310574531555,
+        18.07862114906311,
+        27.117931723594666,
+        36.15724229812622,
+        45.196552872657776,
+        54.23586344718933,
+        63.275174021720886,
+        72.31448459625244,
+        81.353795170784,
+        90.39310574531555
+    ],
+    "Val_Joules": [
+        794.8536304295048,
+        1589.7072608590097,
+        2384.5608912885145,
+        3179.4145217180194,
+        3974.2681521475242,
+        4769.121782577029,
+        5563.975413006534,
+        6358.829043436039,
+        7153.682673865544,
+        7948.5363042950485
+    ],
+    "Val_JoulesNormalized": [
+        229.25710185766184,
+        458.5142037153237,
+        687.7713055729855,
+        917.0284074306473,
+        1146.2855092883092,
+        1375.542611145971,
+        1604.7997130036329,
+        1834.0568148612947,
+        2063.3139167189565,
+        2292.5710185766184
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n",
+        "diff --git a/src/java/org/apache/commons/lang/text/StrBuilder.java b/src/java/org/apache/commons/lang/text/StrBuilder.java\nindex 4c14509..886d424 100644\n--- a/src/java/org/apache/commons/lang/text/StrBuilder.java\n+++ b/src/java/org/apache/commons/lang/text/StrBuilder.java\n@@ -881,7 +881,7 @@ public class StrBuilder implements Cloneable {\n             String str = (obj == null ? getNullText() : obj.toString());\n             int strLen = str.length();\n             if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n+                str.getChars(0, strLen, buffer, size);\n             } else {\n                 int padLen = width - strLen;\n                 str.getChars(0, strLen, buffer, size);\n"
+    ]
+}

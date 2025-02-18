@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-2",
+    "Time": {
+        "mean": 67.4286425113678,
+        "median": 67.4286425113678,
+        "std": 0.0,
+        "max": 67.4286425113678,
+        "min": 67.4286425113678,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 68890.87161682248,
+        "median": 68890.87161682248,
+        "std": 0.0,
+        "max": 68890.87161682248,
+        "min": 68890.87161682248,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 17718.986977761982,
+        "median": 17718.986977761982,
+        "std": 0.0,
+        "max": 17718.986977761982,
+        "min": 17718.986977761982,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\nindex 81e180c..2769127 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java\n@@ -265,7 +265,7 @@ public class HypergeometricDistribution extends AbstractIntegerDistribution {\n      * size {@code n}, the mean is {@code n * m / N}.\n      */\n     public double getNumericalMean() {\n-        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());\n+        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n     }\n \n     /**\n"
+    ]
+}

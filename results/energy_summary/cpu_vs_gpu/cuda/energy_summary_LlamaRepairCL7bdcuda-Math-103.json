@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-103",
+    "Time": {
+        "mean": 2.240054130554199,
+        "median": 2.240054130554199,
+        "std": 0.0,
+        "max": 2.240054130554199,
+        "min": 2.240054130554199,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 2003.1810699224473,
+        "median": 2003.1810699224473,
+        "std": 0.0,
+        "max": 2003.1810699224473,
+        "min": 2003.1810699224473,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 333.22071559429173,
+        "median": 333.22071559429173,
+        "std": 0.0,
+        "max": 333.22071559429173,
+        "min": 333.22071559429173,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n",
+        "diff --git a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\nindex a08eac5..02810e1 100644\n--- a/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n+++ b/src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java\n@@ -106,18 +106,8 @@ public class NormalDistributionImpl extends AbstractContinuousDistribution\n      * convergence exception is caught and 0 or 1 is returned.\n      */\n     public double cumulativeProbability(double x) throws MathException {\n-        try {\n             return 0.5 * (1.0 + Erf.erf((x - mean) /\n                     (standardDeviation * Math.sqrt(2.0))));\n-        } catch (MaxIterationsExceededException ex) {\n-            if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-                return 0.0d;\n-            } else if (x > (mean + 20 * standardDeviation)) {\n-                return 1.0d;\n-            } else {\n-                throw ex;\n-            }\n-        }\n     }\n     \n     /**\n"
+    ]
+}

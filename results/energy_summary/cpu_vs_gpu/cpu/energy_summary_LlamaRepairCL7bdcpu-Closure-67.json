@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-67",
+    "Time": {
+        "mean": 489.98707354068756,
+        "median": 489.98707354068756,
+        "std": 0.0,
+        "max": 489.98707354068756,
+        "min": 489.98707354068756,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 78465.81418397425,
+        "median": 78465.81418397425,
+        "std": 0.0,
+        "max": 78465.81418397425,
+        "min": 78465.81418397425,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 31250.70524931549,
+        "median": 31250.70524931549,
+        "std": 0.0,
+        "max": 31250.70524931549,
+        "min": 31250.70524931549,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        70.51114535331726,
+        117.11958181858063,
+        163.728018283844,
+        210.33645474910736,
+        256.9448912143707,
+        303.5533276796341,
+        350.16176414489746,
+        396.7702006101608,
+        443.3786370754242,
+        489.98707354068756
+    ],
+    "Joules_Per_PatchMedian": [
+        29970.389235770705,
+        35358.7697855711,
+        40747.150335371494,
+        46135.53088517189,
+        51523.91143497228,
+        56912.29198477267,
+        62300.67253457307,
+        67689.05308437346,
+        73077.43363417385,
+        78465.81418397425
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        8952.353374314307,
+        11429.948027092218,
+        13907.542679870128,
+        16385.13733264804,
+        18862.731985425948,
+        21340.326638203856,
+        23817.921290981765,
+        26295.515943759674,
+        28773.110596537583,
+        31250.70524931549
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 24.012231469154358,
+        "median": 23.902708888053894,
+        "std": 0.7807475872704851,
+        "max": 25.058242082595825,
+        "min": 23.18526601791382,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 24677.296770998837,
+        "median": 24582.008685970308,
+        "std": 631.5608390307012,
+        "max": 25457.18301112652,
+        "min": 24087.98670092821,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 6506.837364998459,
+        "median": 6474.7587215363965,
+        "std": 182.74641033295518,
+        "max": 6758.081259584425,
+        "min": 6319.7507573366165,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        46.60843646526337,
+        93.21687293052673,
+        139.8253093957901,
+        186.43374586105347,
+        233.04218232631683,
+        279.6506187915802,
+        326.25905525684357,
+        372.86749172210693,
+        419.4759281873703,
+        466.08436465263367
+    ],
+    "Val_Joules": [
+        5388.380549800397,
+        10776.761099600793,
+        16165.141649401186,
+        21553.52219920158,
+        26941.902749001973,
+        32330.283298802366,
+        37718.66384860276,
+        43107.04439840315,
+        48495.424948203545,
+        53883.80549800394
+    ],
+    "Val_JoulesNormalized": [
+        2477.5946527779106,
+        4955.189305555821,
+        7432.783958333732,
+        9910.378611111642,
+        12387.973263889551,
+        14865.56791666746,
+        17343.16256944537,
+        19820.757222223277,
+        22298.351875001186,
+        24775.946527779095
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n",
+        "diff --git a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\nindex 4472638..30b19e0 100644\n--- a/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n+++ b/src/com/google/javascript/jscomp/AnalyzePrototypeProperties.java\n@@ -315,7 +315,7 @@ class AnalyzePrototypeProperties implements CompilerPass {\n       Node n = assign.getFirstChild();\n       if (n != null && NodeUtil.isVarOrSimpleAssignLhs(n, assign)\n           && n.getType() == Token.GETPROP\n-          && assign.getParent().getType() == Token.EXPR_RESULT) {\n+          ) {\n         // We want to exclude the assignment itself from the usage list\n         boolean isChainedProperty =\n             n.getFirstChild().getType() == Token.GETPROP;\n"
+    ]
+}

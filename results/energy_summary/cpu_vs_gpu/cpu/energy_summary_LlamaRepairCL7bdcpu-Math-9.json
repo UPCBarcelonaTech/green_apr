@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-9",
+    "Time": {
+        "mean": 20.801428079605103,
+        "median": 20.801428079605103,
+        "std": 0.0,
+        "max": 20.801428079605103,
+        "min": 20.801428079605103,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 20556.81298788786,
+        "median": 20556.81298788786,
+        "std": 0.0,
+        "max": 20556.81298788786,
+        "min": 20556.81298788786,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 4712.121428346636,
+        "median": 4712.121428346636,
+        "std": 0.0,
+        "max": 4712.121428346636,
+        "min": 4712.121428346636,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\nindex 7c9a28f..674c4aa 100644\n--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/Line.java\n@@ -84,8 +84,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {\n      * @return a new instance, with reversed direction\n      */\n     public Line revert() {\n-        final Line reverted = new Line(this);\n-        reverted.direction = reverted.direction.negate();\n+        final Line reverted = new Line(zero, zero.subtract(direction));\n         return reverted;\n     }\n \n"
+    ]
+}

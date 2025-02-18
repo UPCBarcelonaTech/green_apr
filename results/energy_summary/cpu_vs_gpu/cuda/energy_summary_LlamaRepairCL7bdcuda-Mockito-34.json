@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Mockito-34",
+    "Time": {
+        "mean": 83.836963057518,
+        "median": 83.836963057518,
+        "std": 0.0,
+        "max": 83.836963057518,
+        "min": 83.836963057518,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 11351.534962898493,
+        "median": 11351.534962898493,
+        "std": 0.0,
+        "max": 11351.534962898493,
+        "min": 11351.534962898493,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 5385.401835137606,
+        "median": 5385.401835137606,
+        "std": 0.0,
+        "max": 5385.401835137606,
+        "min": 5385.401835137606,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "C",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "passtest"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n",
+        "diff --git a/src/org/mockito/internal/invocation/InvocationMatcher.java b/src/org/mockito/internal/invocation/InvocationMatcher.java\nindex f15b9d4..c72b119 100644\n--- a/src/org/mockito/internal/invocation/InvocationMatcher.java\n+++ b/src/org/mockito/internal/invocation/InvocationMatcher.java\n@@ -103,7 +103,7 @@ public class InvocationMatcher implements PrintableInvocation, PrintingFriendlyI\n     public void captureArgumentsFrom(Invocation i) {\n         int k = 0;\n         for (Matcher m : matchers) {\n-            if (m instanceof CapturesArguments && i.getArguments().length > k) {\n+            if (m instanceof CapturesArguments) {\n                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n             }\n             k++;\n"
+    ]
+}

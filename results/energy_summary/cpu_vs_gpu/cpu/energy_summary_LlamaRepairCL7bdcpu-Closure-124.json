@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-124",
+    "Time": {
+        "mean": 723.8663929700851,
+        "median": 723.8663929700851,
+        "std": 0.0,
+        "max": 723.8663929700851,
+        "min": 723.8663929700851,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 114242.16044737698,
+        "median": 114242.16044737698,
+        "std": 0.0,
+        "max": 114242.16044737698,
+        "min": 114242.16044737698,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 46752.79848081468,
+        "median": 46752.79848081468,
+        "std": 0.0,
+        "max": 46752.79848081468,
+        "min": 46752.79848081468,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        100.26852548122406,
+        169.55717742443085,
+        238.84582936763763,
+        308.1344813108444,
+        377.4231332540512,
+        446.711785197258,
+        516.0004371404648,
+        585.2890890836716,
+        654.5777410268784,
+        723.8663929700851
+    ],
+    "Joules_Per_PatchMedian": [
+        39435.61498325467,
+        47747.45336815715,
+        56059.291753059624,
+        64371.1301379621,
+        72682.96852286457,
+        80994.80690776705,
+        89306.64529266953,
+        97618.48367757202,
+        105930.3220624745,
+        114242.16044737698
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        11688.574054431916,
+        15584.598990696668,
+        19480.62392696142,
+        23376.64886322617,
+        27272.673799490924,
+        31168.698735755675,
+        35064.723672020424,
+        38960.748608285176,
+        42856.77354454993,
+        46752.79848081468
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 31.04982030391693,
+        "median": 30.979873538017273,
+        "std": 0.29132584391564936,
+        "max": 31.455219984054565,
+        "min": 30.784314155578613,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 31102.892121255398,
+        "median": 31123.776598352197,
+        "std": 135.32522639014852,
+        "max": 31237.43629181385,
+        "min": 30926.578996503355,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 7763.8210524618635,
+        "median": 7792.549118167164,
+        "std": 290.5319385763254,
+        "max": 8052.005395030974,
+        "min": 7418.180578482152,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        69.28865194320679,
+        138.57730388641357,
+        207.86595582962036,
+        277.15460777282715,
+        346.44325971603394,
+        415.7319116592407,
+        485.0205636024475,
+        554.3092155456543,
+        623.5978674888611,
+        692.8865194320679
+    ],
+    "Val_Joules": [
+        8311.838384902476,
+        16623.67676980495,
+        24935.515154707427,
+        33247.3535396099,
+        41559.19192451237,
+        49871.030309414855,
+        58182.86869431734,
+        66494.70707921982,
+        74806.5454641223,
+        83118.38384902479
+    ],
+    "Val_JoulesNormalized": [
+        3896.024936264752,
+        7792.049872529504,
+        11688.074808794256,
+        15584.099745059008,
+        19480.12468132376,
+        23376.14961758851,
+        27272.17455385326,
+        31168.19949011801,
+        35064.22442638276,
+        38960.24936264752
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ExploitAssigns.java b/src/com/google/javascript/jscomp/ExploitAssigns.java\nindex 1639f2c..0f03e35 100644\n--- a/src/com/google/javascript/jscomp/ExploitAssigns.java\n+++ b/src/com/google/javascript/jscomp/ExploitAssigns.java\n@@ -210,9 +210,7 @@ class ExploitAssigns extends AbstractPeepholeOptimization {\n     }\n     Preconditions.checkArgument(node.isGetProp());\n \n-    while (node.isGetProp()) {\n       node = node.getFirstChild();\n-    }\n     if (node.isName()\n         && isNameAssignedTo(node.getString(), replacement)) {\n       return false;\n"
+    ]
+}

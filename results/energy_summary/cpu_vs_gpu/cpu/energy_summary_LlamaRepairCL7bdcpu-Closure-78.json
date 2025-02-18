@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-78",
+    "Time": {
+        "mean": 347.4269518852234,
+        "median": 347.4269518852234,
+        "std": 0.0,
+        "max": 347.4269518852234,
+        "min": 347.4269518852234,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 166277.3874238551,
+        "median": 166277.3874238551,
+        "std": 0.0,
+        "max": 166277.3874238551,
+        "min": 166277.3874238551,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 52685.6043732047,
+        "median": 52685.6043732047,
+        "std": 0.0,
+        "max": 52685.6043732047,
+        "min": 52685.6043732047,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "uncompilable",
+        "uncompilable",
+        "passtest",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "passtest",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n",
+        "diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\nindex 1afb7a8..c5ef4b0 100644\n--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n+++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java\n@@ -708,12 +708,14 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {\n         break;\n       case Token.MOD:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval % rval;\n         break;\n       case Token.DIV:\n         if (rval == 0) {\n+          error(DiagnosticType.error(\"JSC_DIVIDE_BY_0_ERROR\", \"Divide by 0\"), right);\n           return null;\n         }\n         result = lval / rval;\n"
+    ]
+}

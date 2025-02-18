@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-122",
+    "Time": {
+        "mean": 2.840015172958374,
+        "median": 2.840015172958374,
+        "std": 0.0,
+        "max": 2.840015172958374,
+        "min": 2.840015172958374,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 2593.981431210041,
+        "median": 2593.981431210041,
+        "std": 0.0,
+        "max": 2593.981431210041,
+        "min": 2593.981431210041,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 478.43568822145517,
+        "median": 478.43568822145517,
+        "std": 0.0,
+        "max": 478.43568822145517,
+        "min": 478.43568822145517,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex 936af02..709534b 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -249,8 +249,7 @@ class IRFactory {\n    * Check to see if the given block comment looks like it should be JSDoc.\n    */\n   private void handleBlockComment(Comment comment) {\n-    Pattern p = Pattern.compile(\"(/|(\\n[ \\t]*))\\\\*[ \\t]*@[a-zA-Z]\");\n-    if (p.matcher(comment.getValue()).find()) {\n+    if (comment.getValue().indexOf(\"/* @\") != -1 || comment.getValue().indexOf(\"\\n * @\") != -1) {\n       errorReporter.warning(\n           SUSPICIOUS_COMMENT_WARNING,\n           sourceName,\n"
+    ]
+}

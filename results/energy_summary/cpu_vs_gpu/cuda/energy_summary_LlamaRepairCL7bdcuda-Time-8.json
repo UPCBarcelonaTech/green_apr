@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-8",
+    "Time": {
+        "mean": 79.60920071601868,
+        "median": 79.60920071601868,
+        "std": 0.0,
+        "max": 79.60920071601868,
+        "min": 79.60920071601868,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 13292.61377268433,
+        "median": 13292.61377268433,
+        "std": 0.0,
+        "max": 13292.61377268433,
+        "min": 13292.61377268433,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 4718.80547671318,
+        "median": 4718.80547671318,
+        "std": 0.0,
+        "max": 4718.80547671318,
+        "min": 4718.80547671318,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n",
+        "diff --git a/src/main/java/org/joda/time/DateTimeZone.java b/src/main/java/org/joda/time/DateTimeZone.java\nindex a127604..7d1719b 100644\n--- a/src/main/java/org/joda/time/DateTimeZone.java\n+++ b/src/main/java/org/joda/time/DateTimeZone.java\n@@ -276,17 +276,14 @@ public abstract class DateTimeZone implements Serializable {\n         if (hoursOffset < -23 || hoursOffset > 23) {\n             throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n         }\n-        if (minutesOffset < -59 || minutesOffset > 59) {\n+        if (minutesOffset < 0 || minutesOffset > 59) {\n             throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n         }\n-        if (hoursOffset > 0 && minutesOffset < 0) {\n-            throw new IllegalArgumentException(\"Positive hours must not have negative minutes: \" + minutesOffset);\n-        }\n         int offset = 0;\n         try {\n             int hoursInMinutes = hoursOffset * 60;\n             if (hoursInMinutes < 0) {\n-                minutesOffset = hoursInMinutes - Math.abs(minutesOffset);\n+                minutesOffset = hoursInMinutes - minutesOffset;\n             } else {\n                 minutesOffset = hoursInMinutes + minutesOffset;\n             }\n"
+    ]
+}

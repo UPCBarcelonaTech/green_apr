@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-85",
+    "Time": {
+        "mean": 134.26729559898376,
+        "median": 134.26729559898376,
+        "std": 0.0,
+        "max": 134.26729559898376,
+        "min": 134.26729559898376,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 75279.36461036798,
+        "median": 75279.36461036798,
+        "std": 0.0,
+        "max": 75279.36461036798,
+        "min": 75279.36461036798,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 22739.963071227085,
+        "median": 22739.963071227085,
+        "std": 0.0,
+        "max": 22739.963071227085,
+        "min": 22739.963071227085,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        69.91880750656128,
+        77.06863951683044,
+        84.21847152709961,
+        91.36830353736877,
+        98.51813554763794,
+        105.6679675579071,
+        112.81779956817627,
+        119.96763157844543,
+        127.1174635887146,
+        134.26729559898376
+    ],
+    "Joules_Per_PatchMedian": [
+        67483.12635753154,
+        68349.37505229114,
+        69215.62374705075,
+        70081.87244181035,
+        70948.12113656996,
+        71814.36983132956,
+        72680.61852608917,
+        73546.86722084877,
+        74413.11591560837,
+        75279.36461036798
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        19024.756958687303,
+        19437.55763785839,
+        19850.358317029477,
+        20263.158996200564,
+        20675.95967537165,
+        21088.760354542737,
+        21501.561033713824,
+        21914.36171288491,
+        22327.162392055998,
+        22739.963071227085
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 62.657153964042664,
+        "median": 62.768975496292114,
+        "std": 1.7152640214315356,
+        "max": 64.57234787940979,
+        "min": 60.518316984176636,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 66522.3610232383,
+        "median": 66616.87766277193,
+        "std": 1701.0253326408422,
+        "max": 68379.68602530957,
+        "min": 64476.002742099765,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 18592.019982936978,
+        "median": 18611.956279516216,
+        "std": 508.30410439035865,
+        "max": 19176.11333686114,
+        "min": 17968.054035854337,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        7.149832010269165,
+        14.29966402053833,
+        21.449496030807495,
+        28.59932804107666,
+        35.749160051345825,
+        42.89899206161499,
+        50.048824071884155,
+        57.19865608215332,
+        64.34848809242249,
+        71.49832010269165
+    ],
+    "Val_Joules": [
+        866.2486947596044,
+        1732.4973895192088,
+        2598.746084278813,
+        3464.9947790384176,
+        4331.243473798022,
+        5197.492168557626,
+        6063.740863317231,
+        6929.989558076835,
+        7796.23825283644,
+        8662.486947596044
+    ],
+    "Val_JoulesNormalized": [
+        412.8006791710868,
+        825.6013583421736,
+        1238.4020375132604,
+        1651.2027166843473,
+        2064.003395855434,
+        2476.804075026521,
+        2889.6047541976077,
+        3302.4054333686945,
+        3715.2061125397813,
+        4128.006791710868
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "I",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "passtest",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "passtest",
+        "passtest",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n",
+        "diff --git a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\nindex e6398f6..bf3e4bf 100644\n--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -195,7 +195,7 @@ public class UnivariateRealSolverUtils {\n         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && \n                 ((a > lowerBound) || (b < upperBound)));\n    \n-        if (fa * fb > 0.0 ) {\n+        if (fa * fb >= 0.0 ) {\n             throw new ConvergenceException(\n                       \"number of iterations={0}, maximum iterations={1}, \" +\n                       \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n"
+    ]
+}

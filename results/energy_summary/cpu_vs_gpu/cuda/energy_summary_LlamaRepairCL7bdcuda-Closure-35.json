@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-35",
+    "Time": {
+        "mean": 11.211333990097046,
+        "median": 11.211333990097046,
+        "std": 0.0,
+        "max": 11.211333990097046,
+        "min": 11.211333990097046,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 10757.706698691843,
+        "median": 10757.706698691843,
+        "std": 0.0,
+        "max": 10757.706698691843,
+        "min": 10757.706698691843,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2277.1526205420487,
+        "median": 2277.1526205420487,
+        "std": 0.0,
+        "max": 2277.1526205420487,
+        "min": 2277.1526205420487,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java\nindex fb6be1e..13e1092 100644\n--- a/src/com/google/javascript/jscomp/TypeInference.java\n+++ b/src/com/google/javascript/jscomp/TypeInference.java\n@@ -1118,8 +1118,21 @@ class TypeInference\n \n     ObjectType constraintObj =\n         ObjectType.cast(constraint.restrictByNotNullOrUndefined());\n-    if (constraintObj != null) {\n-      type.matchConstraint(constraintObj);\n+    if (constraintObj != null && constraintObj.isRecordType()) {\n+      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());\n+      if (objType != null) {\n+        for (String prop : constraintObj.getOwnPropertyNames()) {\n+          JSType propType = constraintObj.getPropertyType(prop);\n+          if (!objType.isPropertyTypeDeclared(prop)) {\n+            JSType typeToInfer = propType;\n+            if (!objType.hasProperty(prop)) {\n+              typeToInfer =\n+                  getNativeType(VOID_TYPE).getLeastSupertype(propType);\n+            }\n+            objType.defineInferredProperty(prop, typeToInfer, null);\n+          }\n+        }\n+      }\n     }\n   }\n \n"
+    ]
+}

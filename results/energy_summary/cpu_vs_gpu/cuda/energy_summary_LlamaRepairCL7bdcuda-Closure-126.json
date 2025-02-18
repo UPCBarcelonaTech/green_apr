@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-126",
+    "Time": {
+        "mean": 197.51518058776855,
+        "median": 197.51518058776855,
+        "std": 0.0,
+        "max": 197.51518058776855,
+        "min": 197.51518058776855,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 30170.008976686004,
+        "median": 30170.008976686004,
+        "std": 0.0,
+        "max": 30170.008976686004,
+        "min": 30170.008976686004,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 12401.709228897096,
+        "median": 12401.709228897096,
+        "std": 0.0,
+        "max": 12401.709228897096,
+        "min": 12401.709228897096,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n",
+        "diff --git a/src/com/google/javascript/jscomp/MinimizeExitPoints.java b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\nindex bc9befe..4146f17 100644\n--- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n+++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java\n@@ -138,6 +138,10 @@ class MinimizeExitPoints\n        * can cause problems if it changes the completion type of the finally\n        * block. See ECMA 262 Sections 8.9 & 12.14\n        */\n+      if (NodeUtil.hasFinally(n)) {\n+        Node finallyBlock = n.getLastChild();\n+        tryMinimizeExits(finallyBlock, exitType, labelName);\n+      }\n     }\n \n     // Just a 'label'.\n"
+    ]
+}

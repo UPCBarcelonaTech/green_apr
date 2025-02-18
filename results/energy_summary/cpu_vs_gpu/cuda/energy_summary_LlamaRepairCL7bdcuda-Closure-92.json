@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-92",
+    "Time": {
+        "mean": 346.4722056388855,
+        "median": 346.4722056388855,
+        "std": 0.0,
+        "max": 346.4722056388855,
+        "min": 346.4722056388855,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 43983.99774581194,
+        "median": 43983.99774581194,
+        "std": 0.0,
+        "max": 43983.99774581194,
+        "min": 43983.99774581194,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 19883.074666070937,
+        "median": 19883.074666070937,
+        "std": 0.0,
+        "max": 19883.074666070937,
+        "min": 19883.074666070937,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        37.23897862434387,
+        71.59822607040405,
+        105.95747351646423,
+        140.3167209625244,
+        174.6759684085846,
+        209.03521585464478,
+        243.39446330070496,
+        277.75371074676514,
+        312.1129581928253,
+        346.4722056388855
+    ],
+    "Joules_Per_PatchMedian": [
+        6935.247826534509,
+        11051.775595343111,
+        15168.303364151714,
+        19284.831132960317,
+        23401.35890176892,
+        27517.88667057752,
+        31634.414439386124,
+        35750.94220819473,
+        39867.46997700333,
+        43983.99774581194
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        2565.7478728115557,
+        4489.89529428482,
+        6414.042715758084,
+        8338.19013723135,
+        10262.337558704614,
+        12186.484980177878,
+        14110.632401651143,
+        16034.779823124407,
+        17958.92724459767,
+        19883.074666070937
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.9193418979644776,
+        "median": 2.8797311782836914,
+        "std": 0.0567001446708115,
+        "max": 2.9991939067840576,
+        "min": 2.878923177719116,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2846.638080830574,
+        "median": 2818.7200577259064,
+        "std": 45.945814134024175,
+        "max": 2908.633705282211,
+        "min": 2805.7184318184854,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 647.0642045259476,
+        "median": 641.6004513382909,
+        "std": 32.721947701893775,
+        "max": 683.1178122758865,
+        "min": 613.4649035930634,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        34.35924744606018,
+        68.71849489212036,
+        103.07774233818054,
+        137.43698978424072,
+        171.7962372303009,
+        206.15548467636108,
+        240.51473212242126,
+        274.87397956848145,
+        309.2332270145416,
+        343.5924744606018
+    ],
+    "Val_Joules": [
+        4116.527768808603,
+        8233.055537617205,
+        12349.583306425808,
+        16466.11107523441,
+        20582.638844043013,
+        24699.166612851615,
+        28815.694381660218,
+        32932.22215046882,
+        37048.74991927743,
+        41165.27768808603
+    ],
+    "Val_JoulesNormalized": [
+        1924.1474214732648,
+        3848.294842946529,
+        5772.442264419793,
+        7696.589685893059,
+        9620.737107366323,
+        11544.884528839588,
+        13469.031950312852,
+        15393.179371786116,
+        17317.32679325938,
+        19241.474214732647
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "passtest",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n",
+        "diff --git a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\nindex 1d738b5..c929a36 100644\n--- a/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n+++ b/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java\n@@ -786,7 +786,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback\n         } else {\n           // In this case, the name was implicitly provided by two independent\n           // modules. We need to move this code up to a common module.\n-          int indexOfDot = namespace.lastIndexOf('.');\n+          int indexOfDot = namespace.indexOf('.');\n           if (indexOfDot == -1) {\n             // Any old place is fine.\n             compiler.getNodeForCodeInsertion(minimumModule)\n"
+    ]
+}

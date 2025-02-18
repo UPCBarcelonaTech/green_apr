@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-31",
+    "Time": {
+        "mean": 328.4429931640625,
+        "median": 328.4429931640625,
+        "std": 0.0,
+        "max": 328.4429931640625,
+        "min": 328.4429931640625,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 43597.19380136729,
+        "median": 43597.19380136729,
+        "std": 0.0,
+        "max": 43597.19380136729,
+        "min": 43597.19380136729,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 19436.83107303381,
+        "median": 19436.83107303381,
+        "std": 0.0,
+        "max": 19436.83107303381,
+        "min": 19436.83107303381,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n",
+        "diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java\nindex d98be4a..b76bbb5 100644\n--- a/src/com/google/javascript/jscomp/Compiler.java\n+++ b/src/com/google/javascript/jscomp/Compiler.java\n@@ -1282,6 +1282,7 @@ public class Compiler extends AbstractCompiler {\n \n       // Check if the sources need to be re-ordered.\n       if (options.dependencyOptions.needsManagement() &&\n+          !options.skipAllPasses &&\n           options.closurePass) {\n         for (CompilerInput input : inputs) {\n           // Forward-declare all the provided types, so that they\n"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-45",
+    "Time": {
+        "mean": 0.8710081577301025,
+        "median": 0.8710081577301025,
+        "std": 0.0,
+        "max": 0.8710081577301025,
+        "min": 0.8710081577301025,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 810.8530592083931,
+        "median": 810.8530592083931,
+        "std": 0.0,
+        "max": 810.8530592083931,
+        "min": 810.8530592083931,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 153.22326745986925,
+        "median": 153.22326745986925,
+        "std": 0.0,
+        "max": 153.22326745986925,
+        "min": 153.22326745986925,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\nindex f05c878..174eda6 100644\n--- a/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n+++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java\n@@ -47,11 +47,6 @@ public class OpenMapRealMatrix extends AbstractRealMatrix\n      */\n     public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n         super(rowDimension, columnDimension);\n-        long lRow = (long) rowDimension;\n-        long lCol = (long) columnDimension;\n-        if (lRow * lCol >= (long) Integer.MAX_VALUE) {\n-            throw new NumberIsTooLargeException(lRow * lCol, Integer.MAX_VALUE, false);\n-        }\n         this.rows = rowDimension;\n         this.columns = columnDimension;\n         this.entries = new OpenIntToDoubleHashMap(0.0);\n"
+    ]
+}

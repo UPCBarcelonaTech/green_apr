@@ -1,0 +1,82 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Chart-5",
+    "Time": {
+        "mean": 140.72210264205933,
+        "median": 140.72210264205933,
+        "std": 0.0,
+        "max": 140.72210264205933,
+        "min": 140.72210264205933,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 83819.06076794858,
+        "median": 83819.06076794858,
+        "std": 0.0,
+        "max": 83819.06076794858,
+        "min": 83819.06076794858,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 23461.269932556133,
+        "median": 23461.269932556133,
+        "std": 0.0,
+        "max": 23461.269932556133,
+        "min": 23461.269932556133,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n",
+        "diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java\nindex b26e11e..0b37e6e 100644\n--- a/source/org/jfree/data/xy/XYSeries.java\n+++ b/source/org/jfree/data/xy/XYSeries.java\n@@ -541,15 +541,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {\n         if (x == null) {\n             throw new IllegalArgumentException(\"Null 'x' argument.\");\n         }\n-        if (this.allowDuplicateXValues) {\n-            add(x, y);\n-            return null;\n-        }\n \n         // if we get to here, we know that duplicate X values are not permitted\n         XYDataItem overwritten = null;\n         int index = indexOf(x);\n-        if (index >= 0) {\n+        if (index >= 0 && !this.allowDuplicateXValues) {\n             XYDataItem existing = (XYDataItem) this.data.get(index);\n             try {\n                 overwritten = (XYDataItem) existing.clone();\n"
+    ]
+}

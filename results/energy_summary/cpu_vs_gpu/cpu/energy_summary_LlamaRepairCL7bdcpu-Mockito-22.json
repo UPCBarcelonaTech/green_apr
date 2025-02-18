@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-22",
+    "Time": {
+        "mean": 266.9874212741852,
+        "median": 266.9874212741852,
+        "std": 0.0,
+        "max": 266.9874212741852,
+        "min": 266.9874212741852,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 52851.77247602941,
+        "median": 52851.77247602941,
+        "std": 0.0,
+        "max": 52851.77247602941,
+        "min": 52851.77247602941,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 20235.72836995125,
+        "median": 20235.72836995125,
+        "std": 0.0,
+        "max": 20235.72836995125,
+        "min": 20235.72836995125,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        47.29629611968994,
+        71.70642113685608,
+        96.11654615402222,
+        120.52667117118835,
+        144.9367961883545,
+        169.34692120552063,
+        193.75704622268677,
+        218.1671712398529,
+        242.57729625701904,
+        266.9874212741852
+    ],
+    "Joules_Per_PatchMedian": [
+        26201.99341779947,
+        29163.079979825015,
+        32124.16654185056,
+        35085.25310387611,
+        38046.33966590166,
+        41007.42622792721,
+        43968.51278995276,
+        46929.59935197831,
+        49890.68591400386,
+        52851.77247602941
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        7091.948538029197,
+        8552.36851935387,
+        10012.788500678542,
+        11473.208482003214,
+        12933.628463327886,
+        14394.048444652559,
+        15854.468425977231,
+        17314.888407301903,
+        18775.308388626578,
+        20235.72836995125
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 22.89021571477254,
+        "median": 22.886171102523804,
+        "std": 0.5449852259966895,
+        "max": 23.437211990356445,
+        "min": 22.347264051437378,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 23064.18771882057,
+        "median": 23240.906855773923,
+        "std": 369.8803078478109,
+        "max": 23312.561282229424,
+        "min": 22639.095018458363,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 5668.409297792116,
+        "median": 5631.528556704525,
+        "std": 98.7758124952689,
+        "max": 5780.319018054004,
+        "min": 5593.380318617819,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        24.410125017166138,
+        48.820250034332275,
+        73.23037505149841,
+        97.64050006866455,
+        122.05062508583069,
+        146.46075010299683,
+        170.87087512016296,
+        195.2810001373291,
+        219.69112515449524,
+        244.10125017166138
+    ],
+    "Val_Joules": [
+        2961.0865620255463,
+        5922.173124051093,
+        8883.259686076639,
+        11844.346248102185,
+        14805.432810127735,
+        17766.519372153285,
+        20727.605934178835,
+        23688.692496204385,
+        26649.779058229935,
+        29610.865620255485
+    ],
+    "Val_JoulesNormalized": [
+        1460.4199813246723,
+        2920.8399626493447,
+        4381.259943974017,
+        5841.679925298689,
+        7302.099906623362,
+        8762.519887948034,
+        10222.939869272706,
+        11683.359850597379,
+        13143.779831922053,
+        14604.199813246727
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "C",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n",
+        "diff --git a/src/org/mockito/internal/matchers/Equality.java b/src/org/mockito/internal/matchers/Equality.java\nindex 0791441..43e11fc 100644\n--- a/src/org/mockito/internal/matchers/Equality.java\n+++ b/src/org/mockito/internal/matchers/Equality.java\n@@ -10,9 +10,7 @@ import java.lang.reflect.Array;\n public class Equality {\n \n     public static boolean areEqual(Object o1, Object o2) {\n-        if (o1 == o2 ) {\n-            return true;\n-\t} else if (o1 == null || o2 == null) {\n+        if (o1 == null || o2 == null) {\n             return o1 == null && o2 == null;\n         } else if (isArray(o1)) {\n             return isArray(o2) && areArraysEqual(o1, o2);\n"
+    ]
+}

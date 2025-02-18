@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-94",
+    "Time": {
+        "mean": 107.84897422790527,
+        "median": 107.84897422790527,
+        "std": 0.0,
+        "max": 107.84897422790527,
+        "min": 107.84897422790527,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 44629.38641654252,
+        "median": 44629.38641654252,
+        "std": 0.0,
+        "max": 44629.38641654252,
+        "min": 44629.38641654252,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 14144.10430190563,
+        "median": 14144.10430190563,
+        "std": 0.0,
+        "max": 14144.10430190563,
+        "min": 14144.10430190563,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        41.96492147445679,
+        49.28537178039551,
+        56.60582208633423,
+        63.92627239227295,
+        71.24672269821167,
+        78.56717300415039,
+        85.88762331008911,
+        93.20807361602783,
+        100.52852392196655,
+        107.84897422790527
+    ],
+    "Joules_Per_PatchMedian": [
+        37090.7562438488,
+        37928.38181859255,
+        38766.007393336295,
+        39603.63296808004,
+        40441.25854282379,
+        41278.88411756753,
+        42116.50969231128,
+        42954.135267055026,
+        43791.76084179877,
+        44629.38641654252
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        10651.35605598092,
+        11039.439194416998,
+        11427.522332853077,
+        11815.605471289156,
+        12203.688609725235,
+        12591.771748161314,
+        12979.854886597393,
+        13367.938025033473,
+        13756.021163469552,
+        14144.10430190563
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 36.13097802797953,
+        "median": 34.644471168518066,
+        "std": 3.4902103610972595,
+        "max": 40.11834788322449,
+        "min": 33.630115032196045,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 37410.289207855865,
+        "median": 36253.130669105056,
+        "std": 2767.607778680903,
+        "max": 40568.67290853262,
+        "min": 35409.06404592991,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 10258.077816788356,
+        "median": 10263.27291754484,
+        "std": 159.86712596663094,
+        "max": 10415.284071624283,
+        "min": 10095.676461195944,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        7.320450305938721,
+        14.640900611877441,
+        21.961350917816162,
+        29.281801223754883,
+        36.6022515296936,
+        43.922701835632324,
+        51.243152141571045,
+        58.563602447509766,
+        65.88405275344849,
+        73.2045030593872
+    ],
+    "Val_Joules": [
+        837.6255747437463,
+        1675.2511494874925,
+        2512.8767242312388,
+        3350.502298974985,
+        4188.127873718731,
+        5025.7534484624775,
+        5863.379023206224,
+        6701.00459794997,
+        7538.630172693716,
+        8376.255747437463
+    ],
+    "Val_JoulesNormalized": [
+        388.083138436079,
+        776.166276872158,
+        1164.249415308237,
+        1552.332553744316,
+        1940.4156921803951,
+        2328.498830616474,
+        2716.581969052553,
+        3104.665107488632,
+        3492.7482459247112,
+        3880.8313843607903
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "passtest",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "passtest"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n",
+        "diff --git a/src/java/org/apache/commons/math/util/MathUtils.java b/src/java/org/apache/commons/math/util/MathUtils.java\nindex df71405..c5342ae 100644\n--- a/src/java/org/apache/commons/math/util/MathUtils.java\n+++ b/src/java/org/apache/commons/math/util/MathUtils.java\n@@ -409,7 +409,7 @@ public final class MathUtils {\n      * @since 1.1\n      */\n     public static int gcd(int u, int v) {\n-        if ((u == 0) || (v == 0)) {\n+        if (u * v == 0) {\n             return (Math.abs(u) + Math.abs(v));\n         }\n         // keep u and v negative, as negative integers range down to\n"
+    ]
+}

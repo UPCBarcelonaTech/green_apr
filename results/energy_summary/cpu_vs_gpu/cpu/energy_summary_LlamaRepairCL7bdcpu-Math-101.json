@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-101",
+    "Time": {
+        "mean": 127.84403395652771,
+        "median": 127.84403395652771,
+        "std": 0.0,
+        "max": 127.84403395652771,
+        "min": 127.84403395652771,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 63913.51197912696,
+        "median": 63913.51197912696,
+        "std": 0.0,
+        "max": 63913.51197912696,
+        "min": 63913.51197912696,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 19095.315737342833,
+        "median": 19095.315737342833,
+        "std": 0.0,
+        "max": 19095.315737342833,
+        "min": 19095.315737342833,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        60.79705369472504,
+        68.24671816825867,
+        75.6963826417923,
+        83.14604711532593,
+        90.59571158885956,
+        98.04537606239319,
+        105.49504053592682,
+        112.94470500946045,
+        120.39436948299408,
+        127.84403395652771
+    ],
+    "Joules_Per_PatchMedian": [
+        56751.87028200627,
+        57547.60824835301,
+        58343.346214699755,
+        59139.0841810465,
+        59934.82214739324,
+        60730.560113739986,
+        61526.29808008673,
+        62322.03604643347,
+        63117.77401278022,
+        63913.51197912696
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        16073.313597357272,
+        16409.091612911223,
+        16744.869628465174,
+        17080.647644019125,
+        17416.425659573077,
+        17752.203675127028,
+        18087.98169068098,
+        18423.75970623493,
+        18759.53772178888,
+        19095.315737342833
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 53.18162671724955,
+        "median": 53.347389221191406,
+        "std": 2.4416980178156944,
+        "max": 55.53621983528137,
+        "min": 50.66127109527588,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 56059.929267255466,
+        "median": 55956.132315659524,
+        "std": 2538.255968471416,
+        "max": 58648.49149808884,
+        "min": 53575.16398801804,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 16067.954789861047,
+        "median": 15737.53558180332,
+        "std": 893.5257538204982,
+        "max": 17079.630951380735,
+        "min": 15386.697836399086,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        7.44966447353363,
+        14.89932894706726,
+        22.34899342060089,
+        29.79865789413452,
+        37.24832236766815,
+        44.69798684120178,
+        52.14765131473541,
+        59.59731578826904,
+        67.04698026180267,
+        74.4966447353363
+    ],
+    "Val_Joules": [
+        795.7379663467436,
+        1591.4759326934873,
+        2387.213899040231,
+        3182.9518653869745,
+        3978.689831733718,
+        4774.427798080462,
+        5570.165764427205,
+        6365.903730773949,
+        7161.641697120693,
+        7957.379663467436
+    ],
+    "Val_JoulesNormalized": [
+        335.77801555395126,
+        671.5560311079025,
+        1007.3340466618538,
+        1343.112062215805,
+        1678.8900777697563,
+        2014.6680933237076,
+        2350.446108877659,
+        2686.22412443161,
+        3022.0021399855614,
+        3357.7801555395126
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n",
+        "diff --git a/src/java/org/apache/commons/math/complex/ComplexFormat.java b/src/java/org/apache/commons/math/complex/ComplexFormat.java\nindex 0757d9b..b404bc4 100644\n--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -374,8 +374,7 @@ public class ComplexFormat extends Format implements Serializable {\n         int n = getImaginaryCharacter().length();\n         startIndex = pos.getIndex();\n         int endIndex = startIndex + n;\n-        if ((startIndex >= source.length()) ||\n-            (endIndex > source.length()) ||\n+        if (\n             source.substring(startIndex, endIndex).compareTo(\n             getImaginaryCharacter()) != 0) {\n             // set index back to initial, error index should be the start index\n"
+    ]
+}

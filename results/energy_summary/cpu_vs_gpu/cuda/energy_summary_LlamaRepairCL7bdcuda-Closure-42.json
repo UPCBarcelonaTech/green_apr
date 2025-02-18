@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Closure-42",
+    "Time": {
+        "mean": 261.59383380413055,
+        "median": 261.59383380413055,
+        "std": 0.0,
+        "max": 261.59383380413055,
+        "min": 261.59383380413055,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 31909.493691325184,
+        "median": 31909.493691325184,
+        "std": 0.0,
+        "max": 31909.493691325184,
+        "min": 31909.493691325184,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 14575.353258311749,
+        "median": 14575.353258311749,
+        "std": 0.0,
+        "max": 14575.353258311749,
+        "min": 14575.353258311749,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n",
+        "diff --git a/src/com/google/javascript/jscomp/parsing/IRFactory.java b/src/com/google/javascript/jscomp/parsing/IRFactory.java\nindex c6b70c5..1a95aa2 100644\n--- a/src/com/google/javascript/jscomp/parsing/IRFactory.java\n+++ b/src/com/google/javascript/jscomp/parsing/IRFactory.java\n@@ -565,15 +565,8 @@ class IRFactory {\n \n     @Override\n     Node processForInLoop(ForInLoop loopNode) {\n-      if (loopNode.isForEach()) {\n-        errorReporter.error(\n-            \"unsupported language extension: for each\",\n-            sourceName,\n-            loopNode.getLineno(), \"\", 0);\n \n         // Return the bare minimum to put the AST in a valid state.\n-        return newNode(Token.EXPR_RESULT, Node.newNumber(0));\n-      }\n       return newNode(\n           Token.FOR,\n           transform(loopNode.getIterator()),\n"
+    ]
+}

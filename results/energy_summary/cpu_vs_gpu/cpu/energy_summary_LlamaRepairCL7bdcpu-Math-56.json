@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-56",
+    "Time": {
+        "mean": 236.08461141586304,
+        "median": 236.08461141586304,
+        "std": 0.0,
+        "max": 236.08461141586304,
+        "min": 236.08461141586304,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 63860.98590391874,
+        "median": 63860.98590391874,
+        "std": 0.0,
+        "max": 63860.98590391874,
+        "min": 63860.98590391874,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 20564.993632674214,
+        "median": 20564.993632674214,
+        "std": 0.0,
+        "max": 20564.993632674214,
+        "min": 20564.993632674214,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        61.2224417924881,
+        80.65157175064087,
+        100.08070170879364,
+        119.50983166694641,
+        138.93896162509918,
+        158.36809158325195,
+        177.79722154140472,
+        197.2263514995575,
+        216.65548145771027,
+        236.08461141586304
+    ],
+    "Joules_Per_PatchMedian": [
+        44618.610099345446,
+        46756.651855409145,
+        48894.693611472845,
+        51032.735367536545,
+        53170.777123600245,
+        55308.818879663944,
+        57446.860635727644,
+        59584.902391791344,
+        61722.94414785504,
+        63860.98590391874
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        12214.977363884445,
+        13142.75694930553,
+        14070.536534726616,
+        14998.316120147701,
+        15926.095705568787,
+        16853.875290989872,
+        17781.654876410958,
+        18709.434461832043,
+        19637.21404725313,
+        20564.993632674214
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 41.37535627683004,
+        "median": 41.79331183433533,
+        "std": 0.9699930756289473,
+        "max": 42.066307067871094,
+        "min": 40.26644992828369,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 42442.04010207653,
+        "median": 42480.568343281746,
+        "std": 528.7848914323756,
+        "max": 42950.507108449936,
+        "min": 41895.04485449791,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 11197.808928906916,
+        "median": 11287.19777846336,
+        "std": 440.2332973438452,
+        "max": 11586.487993478775,
+        "min": 10719.74101477861,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        19.42912995815277,
+        38.85825991630554,
+        58.28738987445831,
+        77.71651983261108,
+        97.14564979076385,
+        116.57477974891663,
+        136.0039097070694,
+        155.43303966522217,
+        174.86216962337494,
+        194.2912995815277
+    ],
+    "Val_Joules": [
+        2138.0417560636997,
+        4276.083512127399,
+        6414.125268191099,
+        8552.167024254799,
+        10690.208780318499,
+        12828.250536382198,
+        14966.292292445898,
+        17104.334048509598,
+        19242.375804573298,
+        21380.417560636997
+    ],
+    "Val_JoulesNormalized": [
+        927.7795854210854,
+        1855.5591708421707,
+        2783.338756263256,
+        3711.1183416843414,
+        4638.897927105427,
+        5566.677512526512,
+        6494.4570979475975,
+        7422.236683368683,
+        8350.016268789768,
+        9277.795854210854
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "I",
+        "W",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\nindex fb0614e..56c9ffe 100644\n--- a/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n+++ b/src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java\n@@ -234,7 +234,13 @@ public class MultidimensionalCounter implements Iterable<Integer> {\n             indices[i] = idx;\n         }\n \n-        indices[last] = index - count;\n+        int idx = 1;\n+        while (count < index) {\n+            count += idx;\n+            ++idx;\n+        }\n+        --idx;\n+        indices[last] = idx;\n \n         return indices;\n     }\n"
+    ]
+}

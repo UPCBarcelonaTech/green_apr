@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-17",
+    "Time": {
+        "mean": 516.5024218559265,
+        "median": 516.5024218559265,
+        "std": 0.0,
+        "max": 516.5024218559265,
+        "min": 516.5024218559265,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 130135.84100530748,
+        "median": 130135.84100530748,
+        "std": 0.0,
+        "max": 130135.84100530748,
+        "min": 130135.84100530748,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 46668.722667223214,
+        "median": 46668.722667223214,
+        "std": 0.0,
+        "max": 46668.722667223214,
+        "min": 46668.722667223214,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 8bc7bda..efaba2c 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1288,12 +1288,8 @@ final class TypedScopeCreator implements ScopeCreator {\n           if (info.isConstant()) {\n             JSType knownType = null;\n             if (rValue != null) {\n-              JSDocInfo rValueInfo = rValue.getJSDocInfo();\n-              if (rValueInfo != null && rValueInfo.hasType()) {\n+              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {\n                 // If rValue has a type-cast, we use the type in the type-cast.\n-                return rValueInfo.getType().evaluate(scope, typeRegistry);\n-              } else if (rValue.getJSType() != null\n-                  && !rValue.getJSType().isUnknownType()) {\n                 // If rValue's type was already computed during scope creation,\n                 // then we can safely use that.\n                 return rValue.getJSType();\n"
+    ]
+}

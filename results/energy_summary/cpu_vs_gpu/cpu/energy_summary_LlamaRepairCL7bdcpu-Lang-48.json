@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-48",
+    "Time": {
+        "mean": 148.29887402057648,
+        "median": 148.29887402057648,
+        "std": 0.0,
+        "max": 148.29887402057648,
+        "min": 148.29887402057648,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 58361.70321768521,
+        "median": 58361.70321768521,
+        "std": 0.0,
+        "max": 58361.70321768521,
+        "min": 58361.70321768521,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 16598.90626320838,
+        "median": 16598.90626320838,
+        "std": 0.0,
+        "max": 16598.90626320838,
+        "min": 16598.90626320838,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        57.13341450691223,
+        67.26291000843048,
+        77.39240550994873,
+        87.52190101146698,
+        97.65139651298523,
+        107.78089201450348,
+        117.91038751602173,
+        128.03988301753998,
+        138.16937851905823,
+        148.29887402057648
+    ],
+    "Joules_Per_PatchMedian": [
+        50398.63574681282,
+        51283.421021354196,
+        52168.20629589557,
+        53052.99157043695,
+        53937.776844978325,
+        54822.5621195197,
+        55707.34739406108,
+        56592.132668602455,
+        57476.91794314383,
+        58361.70321768521
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        14274.715720647571,
+        14532.959114265439,
+        14791.202507883307,
+        15049.445901501174,
+        15307.689295119042,
+        15565.93268873691,
+        15824.176082354777,
+        16082.419475972645,
+        16340.662869590513,
+        16598.90626320838
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 47.62031900882721,
+        "median": 47.00391900539398,
+        "std": 3.456689991297047,
+        "max": 51.73412799835205,
+        "min": 44.73931002616882,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 50085.41839909255,
+        "median": 49513.85047227144,
+        "std": 3181.6723752762646,
+        "max": 53959.32803031206,
+        "min": 47354.64462151527,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 14055.821353641151,
+        "median": 14016.472327029704,
+        "std": 748.3749730887562,
+        "max": 14967.315757954122,
+        "min": 13223.025002551076,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        10.12949550151825,
+        20.2589910030365,
+        30.38848650455475,
+        40.517982006073,
+        50.64747750759125,
+        60.7769730091095,
+        70.90646851062775,
+        81.035964012146,
+        91.16545951366425,
+        101.2949550151825
+    ],
+    "Val_Joules": [
+        884.7852745413766,
+        1769.5705490827531,
+        2654.3558236241297,
+        3539.1410981655063,
+        4423.926372706883,
+        5308.711647248259,
+        6193.496921789636,
+        7078.2821963310125,
+        7963.067470872389,
+        8847.852745413766
+    ],
+    "Val_JoulesNormalized": [
+        258.2433936178677,
+        516.4867872357354,
+        774.7301808536031,
+        1032.9735744714708,
+        1291.2169680893385,
+        1549.4603617072062,
+        1807.7037553250739,
+        2065.9471489429416,
+        2324.1905425608093,
+        2582.433936178677
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n",
+        "diff --git a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\nindex 6901c8e..a783b35 100644\n--- a/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n+++ b/src/java/org/apache/commons/lang/builder/EqualsBuilder.java\n@@ -377,12 +377,8 @@ public class EqualsBuilder {\n         }\n         Class lhsClass = lhs.getClass();\n         if (!lhsClass.isArray()) {\n-            if (lhs instanceof java.math.BigDecimal) {\n-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);\n-            } else {\n                 // The simple case, not an array, just test the element\n                 isEquals = lhs.equals(rhs);\n-            }\n         } else if (lhs.getClass() != rhs.getClass()) {\n             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] \n             this.setEquals(false);\n"
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-84",
+    "Time": {
+        "mean": 10.90993881225586,
+        "median": 10.90993881225586,
+        "std": 0.0,
+        "max": 10.90993881225586,
+        "min": 10.90993881225586,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 10433.367845857145,
+        "median": 10433.367845857145,
+        "std": 0.0,
+        "max": 10433.367845857145,
+        "min": 10433.367845857145,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 2115.0977493762985,
+        "median": 2115.0977493762985,
+        "std": 0.0,
+        "max": 2115.0977493762985,
+        "min": 2115.0977493762985,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\nindex 929560c..42a4d9d 100644\n--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n+++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java\n@@ -61,7 +61,6 @@ public class MultiDirectional extends DirectSearchOptimizer {\n     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)\n         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {\n \n-        final RealConvergenceChecker checker = getConvergenceChecker();\n         while (true) {\n \n             incrementIterationsCounter();\n@@ -90,16 +89,8 @@ public class MultiDirectional extends DirectSearchOptimizer {\n             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);\n             if (comparator.compare(contracted, best) < 0) {\n                 // accept the contracted simplex\n-                return;\n-            }\n \n             // check convergence\n-            final int iter = getIterations();\n-            boolean converged = true;\n-            for (int i = 0; i < simplex.length; ++i) {\n-                converged &= checker.converged(iter, original[i], simplex[i]);\n-            }\n-            if (converged) {\n                 return;\n             }\n \n"
+    ]
+}

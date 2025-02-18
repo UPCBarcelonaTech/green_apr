@@ -1,0 +1,180 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-42",
+    "Time": {
+        "mean": 225.6393268108368,
+        "median": 225.6393268108368,
+        "std": 0.0,
+        "max": 225.6393268108368,
+        "min": 225.6393268108368,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 26743.278221106524,
+        "median": 26743.278221106524,
+        "std": 0.0,
+        "max": 26743.278221106524,
+        "min": 26743.278221106524,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 11309.730935132506,
+        "median": 11309.730935132506,
+        "std": 0.0,
+        "max": 11309.730935132506,
+        "min": 11309.730935132506,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        24.21901571750641,
+        46.59905028343201,
+        68.9790848493576,
+        91.3591194152832,
+        113.7391539812088,
+        136.1191885471344,
+        158.49922311306,
+        180.8792576789856,
+        203.2592922449112,
+        225.6393268108368
+    ],
+    "Joules_Per_PatchMedian": [
+        4276.427457356453,
+        6772.744208884239,
+        9269.060960412025,
+        11765.377711939811,
+        14261.694463467597,
+        16758.011214995382,
+        19254.327966523168,
+        21750.644718050953,
+        24246.96146957874,
+        26743.278221106524
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1474.79585031867,
+        2567.566415297985,
+        3660.3369802772995,
+        4753.107545256615,
+        5845.87811023593,
+        6938.648675215245,
+        8031.41924019456,
+        9124.189805173875,
+        10216.96037015319,
+        11309.730935132506
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 1.8375805377960206,
+        "median": 1.8389811515808105,
+        "std": 0.0037471447257280445,
+        "max": 1.839953899383545,
+        "min": 1.8309178352355957,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 1780.2974703145028,
+        "median": 1780.1107058286666,
+        "std": 6.106003563251403,
+        "max": 1787.349738740921,
+        "min": 1773.0765168309213,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 383.60563897371287,
+        "median": 382.0252853393554,
+        "std": 11.925263405119704,
+        "max": 403.07504830360404,
+        "min": 373.43576515913014,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        22.380034565925598,
+        44.760069131851196,
+        67.1401036977768,
+        89.52013826370239,
+        111.90017282962799,
+        134.2802073955536,
+        156.6602419614792,
+        179.04027652740479,
+        201.42031109333038,
+        223.80034565925598
+    ],
+    "Val_Joules": [
+        2496.316751527786,
+        4992.633503055573,
+        7488.950254583358,
+        9985.267006111144,
+        12481.58375763893,
+        14977.900509166715,
+        17474.217260694502,
+        19970.534012222288,
+        22466.850763750073,
+        24963.16751527786
+    ],
+    "Val_JoulesNormalized": [
+        1092.7705649793147,
+        2185.5411299586294,
+        3278.311694937944,
+        4371.082259917259,
+        5463.852824896574,
+        6556.623389875889,
+        7649.393954855204,
+        8742.16451983452,
+        9834.935084813835,
+        10927.70564979315
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\nindex d96c916..02c22b5 100644\n--- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -407,12 +407,10 @@ class SimplexTableau implements Serializable {\n             continue;\n           }\n           Integer basicRow = getBasicRow(colIndex);\n-          if (basicRow != null && basicRow == 0) {\n               // if the basic row is found to be the objective function row\n               // set the coefficient to 0 -> this case handles unconstrained \n               // variables that are still part of the objective function\n-              coefficients[i] = 0;\n-          } else if (basicRows.contains(basicRow)) {\n+          if (basicRows.contains(basicRow)) {\n               // if multiple variables can take a given value\n               // then we choose the first and set the rest equal to 0\n               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n"
+    ]
+}

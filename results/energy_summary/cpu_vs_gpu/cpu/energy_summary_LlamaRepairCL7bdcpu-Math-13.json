@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-13",
+    "Time": {
+        "mean": 148.97650504112244,
+        "median": 148.97650504112244,
+        "std": 0.0,
+        "max": 148.97650504112244,
+        "min": 148.97650504112244,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 153192.84248734117,
+        "median": 153192.84248734117,
+        "std": 0.0,
+        "max": 153192.84248734117,
+        "min": 153192.84248734117,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 40196.719310742614,
+        "median": 40196.719310742614,
+        "std": 0.0,
+        "max": 40196.719310742614,
+        "min": 40196.719310742614,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\nindex 982e559..99d86e9 100644\n--- a/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java\n@@ -559,16 +559,7 @@ public abstract class AbstractLeastSquaresOptimizer\n      * @return the square-root of the weight matrix.\n      */\n     private RealMatrix squareRoot(RealMatrix m) {\n-        if (m instanceof DiagonalMatrix) {\n-            final int dim = m.getRowDimension();\n-            final RealMatrix sqrtM = new DiagonalMatrix(dim);\n-            for (int i = 0; i < dim; i++) {\n-               sqrtM.setEntry(i, i, FastMath.sqrt(m.getEntry(i, i)));\n-            }\n-            return sqrtM;\n-        } else {\n             final EigenDecomposition dec = new EigenDecomposition(m);\n             return dec.getSquareRoot();\n-        }\n     }\n }\n"
+    ]
+}

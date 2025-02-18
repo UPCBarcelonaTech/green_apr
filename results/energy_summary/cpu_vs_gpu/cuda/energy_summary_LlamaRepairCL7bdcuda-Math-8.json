@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-8",
+    "Time": {
+        "mean": 10.86301302909851,
+        "median": 10.86301302909851,
+        "std": 0.0,
+        "max": 10.86301302909851,
+        "min": 10.86301302909851,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 10271.759672510623,
+        "median": 10271.759672510623,
+        "std": 0.0,
+        "max": 10271.759672510623,
+        "min": 10271.759672510623,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 2009.864080083371,
+        "median": 2009.864080083371,
+        "std": 0.0,
+        "max": 2009.864080083371,
+        "min": 2009.864080083371,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\nindex 879eb2a..5cb0e43 100644\n--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n+++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java\n@@ -178,13 +178,13 @@ public class DiscreteDistribution<T> {\n      * @throws NotStrictlyPositiveException if {@code sampleSize} is not\n      * positive.\n      */\n-    public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {\n+    public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n         if (sampleSize <= 0) {\n             throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                     sampleSize);\n         }\n \n-        final Object[] out = new Object[sampleSize];\n+        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n \n         for (int i = 0; i < sampleSize; i++) {\n             out[i] = sample();\n"
+    ]
+}

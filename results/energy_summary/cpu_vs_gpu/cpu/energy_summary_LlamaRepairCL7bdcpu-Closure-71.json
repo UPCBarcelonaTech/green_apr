@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-71",
+    "Time": {
+        "mean": 516.3565456867218,
+        "median": 516.3565456867218,
+        "std": 0.0,
+        "max": 516.3565456867218,
+        "min": 516.3565456867218,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 134308.88409804108,
+        "median": 134308.88409804108,
+        "std": 0.0,
+        "max": 134308.88409804108,
+        "min": 134308.88409804108,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 47073.726605999465,
+        "median": 47073.726605999465,
+        "std": 0.0,
+        "max": 47073.726605999465,
+        "min": 47073.726605999465,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/CheckAccessControls.java b/src/com/google/javascript/jscomp/CheckAccessControls.java\nindex 09eaa26..b23fd7a 100644\n--- a/src/com/google/javascript/jscomp/CheckAccessControls.java\n+++ b/src/com/google/javascript/jscomp/CheckAccessControls.java\n@@ -413,7 +413,7 @@ class CheckAccessControls implements ScopedCallback, HotSwapCompilerPass {\n     if (objectType != null) {\n       // Is this a normal property access, or are we trying to override\n       // an existing property?\n-      boolean isOverride = parent.getJSDocInfo() != null &&\n+      boolean isOverride = t.inGlobalScope() &&\n           parent.getType() == Token.ASSIGN &&\n           parent.getFirstChild() == getprop;\n \n"
+    ]
+}

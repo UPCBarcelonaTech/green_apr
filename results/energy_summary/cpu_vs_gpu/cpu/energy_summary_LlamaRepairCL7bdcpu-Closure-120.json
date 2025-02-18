@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-120",
+    "Time": {
+        "mean": 160.48732614517212,
+        "median": 160.48732614517212,
+        "std": 0.0,
+        "max": 160.48732614517212,
+        "min": 160.48732614517212,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 37590.93734271526,
+        "median": 37590.93734271526,
+        "std": 0.0,
+        "max": 37590.93734271526,
+        "min": 37590.93734271526,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 13456.585958480835,
+        "median": 13456.585958480835,
+        "std": 0.0,
+        "max": 13456.585958480835,
+        "min": 13456.585958480835,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n",
+        "diff --git a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\nindex 0af61d0..cdacc5f 100644\n--- a/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n+++ b/src/com/google/javascript/jscomp/ReferenceCollectingCallback.java\n@@ -428,9 +428,6 @@ class ReferenceCollectingCallback implements ScopedCallback,\n       for (BasicBlock block = ref.getBasicBlock();\n            block != null; block = block.getParent()) {\n         if (block.isFunction) {\n-          if (ref.getSymbol().getScope() != ref.scope) {\n-            return false;\n-          }\n           break;\n         } else if (block.isLoop) {\n           return false;\n"
+    ]
+}

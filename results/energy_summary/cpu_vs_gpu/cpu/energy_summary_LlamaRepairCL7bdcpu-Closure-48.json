@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-48",
+    "Time": {
+        "mean": 550.3497372865677,
+        "median": 550.3497372865677,
+        "std": 0.0,
+        "max": 550.3497372865677,
+        "min": 550.3497372865677,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 196892.8624420286,
+        "median": 196892.8624420286,
+        "std": 0.0,
+        "max": 196892.8624420286,
+        "min": 196892.8624420286,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 65224.80358003377,
+        "median": 65224.80358003377,
+        "std": 0.0,
+        "max": 65224.80358003377,
+        "min": 65224.80358003377,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 09aba12..3fb4813 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1518,14 +1518,11 @@ final class TypedScopeCreator implements ScopeCreator {\n             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));\n       }\n \n-      if (inferred && rhsValue != null && rhsValue.isFunction()) {\n+      if (inferred) {\n         // Determining declaration for #2\n-        if (info != null) {\n-          inferred = false;\n-        } else if (!scope.isDeclared(qName, false) &&\n-                   n.isUnscopedQualifiedName()) {\n-          inferred = false;\n-        }\n+        inferred = !(rhsValue != null &&\n+            rhsValue.isFunction() &&\n+            (info != null || !scope.isDeclared(qName, false)));\n       }\n \n       if (!inferred) {\n"
+    ]
+}

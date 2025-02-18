@@ -1,0 +1,82 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-73",
+    "Time": {
+        "mean": 179.76969575881958,
+        "median": 179.76969575881958,
+        "std": 0.0,
+        "max": 179.76969575881958,
+        "min": 179.76969575881958,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 158987.25748988392,
+        "median": 158987.25748988392,
+        "std": 0.0,
+        "max": 158987.25748988392,
+        "min": 158987.25748988392,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 43823.27938193083,
+        "median": 43823.27938193083,
+        "std": 0.0,
+        "max": 43823.27938193083,
+        "min": 43823.27938193083,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\nindex e0cb427..8142b5e 100644\n--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java\n@@ -133,10 +133,6 @@ public class BrentSolver extends UnivariateRealSolverImpl {\n             return solve(f, initial, yInitial, max, yMax, initial, yInitial);\n         }\n \n-        if (yMin * yMax > 0) {\n-            throw MathRuntimeException.createIllegalArgumentException(\n-                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);\n-        }\n \n         // full Brent algorithm starting with provided initial guess\n         return solve(f, min, yMin, max, yMax, initial, yInitial);\n"
+    ]
+}

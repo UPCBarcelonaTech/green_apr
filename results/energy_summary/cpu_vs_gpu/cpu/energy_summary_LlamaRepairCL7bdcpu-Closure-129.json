@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-129",
+    "Time": {
+        "mean": 651.9183138608932,
+        "median": 651.9183138608932,
+        "std": 0.0,
+        "max": 651.9183138608932,
+        "min": 651.9183138608932,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 100365.32836632727,
+        "median": 100365.32836632727,
+        "std": 0.0,
+        "max": 100365.32836632727,
+        "min": 100365.32836632727,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 41937.332577925925,
+        "median": 41937.332577925925,
+        "std": 0.0,
+        "max": 41937.332577925925,
+        "min": 41937.332577925925,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        86.81982946395874,
+        149.60854995250702,
+        212.3972704410553,
+        275.1859909296036,
+        337.97471141815186,
+        400.76343190670013,
+        463.5521523952484,
+        526.3408728837967,
+        589.129593372345,
+        651.9183138608932
+    ],
+    "Joules_Per_PatchMedian": [
+        32450.659689635042,
+        39996.73398704529,
+        47542.80828445555,
+        55088.88258186579,
+        62634.95687927604,
+        70181.03117668629,
+        77727.10547409653,
+        85273.17977150678,
+        92819.25406891703,
+        100365.32836632727
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        10008.502248495817,
+        13556.150062876939,
+        17103.79787725806,
+        20651.445691639183,
+        24199.093506020305,
+        27746.741320401426,
+        31294.38913478255,
+        34842.036949163674,
+        38389.6847635448,
+        41937.332577925925
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 24.102191746234894,
+        "median": 24.03110897541046,
+        "std": 0.7427285631921517,
+        "max": 24.97332501411438,
+        "min": 23.373224020004272,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 24906.870033049585,
+        "median": 24904.58539222479,
+        "std": 585.3678174152886,
+        "max": 25544.595439112185,
+        "min": 24273.71390863657,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 6441.849634557962,
+        "median": 6460.8544341146935,
+        "std": 162.4436553969966,
+        "max": 6613.76738240719,
+        "min": 6231.922287595273,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        62.78872048854828,
+        125.57744097709656,
+        188.36616146564484,
+        251.15488195419312,
+        313.9436024427414,
+        376.7323229312897,
+        439.52104341983795,
+        502.30976390838623,
+        565.0984843969345,
+        627.8872048854828
+    ],
+    "Val_Joules": [
+        7546.07429741025,
+        15092.1485948205,
+        22638.222892230755,
+        30184.297189641,
+        37730.37148705125,
+        45276.445784461495,
+        52822.52008187174,
+        60368.59437928199,
+        67914.66867669224,
+        75460.74297410248
+    ],
+    "Val_JoulesNormalized": [
+        3547.6478143811237,
+        7095.2956287622455,
+        10642.943443143367,
+        14190.59125752449,
+        17738.239071905613,
+        21285.88688628673,
+        24833.534700667857,
+        28381.182515048982,
+        31928.830329430108,
+        35476.47814381123
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n",
+        "diff --git a/src/com/google/javascript/jscomp/PrepareAst.java b/src/com/google/javascript/jscomp/PrepareAst.java\nindex 42982af..d993bee 100644\n--- a/src/com/google/javascript/jscomp/PrepareAst.java\n+++ b/src/com/google/javascript/jscomp/PrepareAst.java\n@@ -163,9 +163,6 @@ class PrepareAst implements CompilerPass {\n       Node first = n.getFirstChild();\n \n       // ignore cast nodes.\n-      while (first.isCast()) {\n-        first = first.getFirstChild();\n-      }\n \n       if (!NodeUtil.isGet(first)) {\n         n.putBooleanProp(Node.FREE_CALL, true);\n"
+    ]
+}

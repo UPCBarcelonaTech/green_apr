@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-172",
+    "Time": {
+        "mean": 56.61037802696228,
+        "median": 56.61037802696228,
+        "std": 0.0,
+        "max": 56.61037802696228,
+        "min": 56.61037802696228,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 59373.13493673205,
+        "median": 59373.13493673205,
+        "std": 0.0,
+        "max": 59373.13493673205,
+        "min": 59373.13493673205,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 16518.232790011167,
+        "median": 16518.232790011167,
+        "std": 0.0,
+        "max": 16518.232790011167,
+        "min": 16518.232790011167,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 4acb363a..d5a59476 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1667,13 +1667,7 @@ final class TypedScopeCreator implements ScopeCreator {\n \n       // Prototypes of constructors and interfaces are always declared.\n       if (qName != null && qName.endsWith(\".prototype\")) {\n-        String className = qName.substring(0, qName.lastIndexOf(\".prototype\"));\n-        Var slot = scope.getSlot(className);\n-        JSType classType = slot == null ? null : slot.getType();\n-        if (classType != null\n-            && (classType.isConstructor() || classType.isInterface())) {\n           return false;\n-        }\n       }\n \n       boolean inferred = true;\n"
+    ]
+}

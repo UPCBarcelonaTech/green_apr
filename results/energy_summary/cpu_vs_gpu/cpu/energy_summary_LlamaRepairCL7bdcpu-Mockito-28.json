@@ -1,0 +1,177 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Mockito-28",
+    "Time": {
+        "mean": 191.16541194915771,
+        "median": 191.16541194915771,
+        "std": 0.0,
+        "max": 191.16541194915771,
+        "min": 191.16541194915771,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 68655.76764895918,
+        "median": 68655.76764895918,
+        "std": 0.0,
+        "max": 68655.76764895918,
+        "min": 68655.76764895918,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 21797.530712985994,
+        "median": 21797.530712985994,
+        "std": 0.0,
+        "max": 21797.530712985994,
+        "min": 21797.530712985994,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "ExecutionTime_Per_PatchMedian": [
+        64.538090467453,
+        78.60779285430908,
+        92.67749524116516,
+        106.74719762802124,
+        120.81690001487732,
+        134.8866024017334,
+        148.95630478858948,
+        163.02600717544556,
+        177.09570956230164,
+        191.16541194915771
+    ],
+    "Joules_Per_PatchMedian": [
+        53186.849711668496,
+        54905.61837136746,
+        56624.38703106643,
+        58343.155690765394,
+        60061.92435046436,
+        61780.693010163326,
+        63499.46166986229,
+        65218.23032956126,
+        66936.99898926022,
+        68655.76764895918
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        14221.14936754703,
+        15062.969517040248,
+        15904.789666533467,
+        16746.609816026685,
+        17588.429965519903,
+        18430.25011501312,
+        19272.07026450634,
+        20113.890413999557,
+        20955.710563492776,
+        21797.530712985994
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 50.38336801528931,
+        "median": 50.468388080596924,
+        "std": 0.6844776931289677,
+        "max": 51.021363973617554,
+        "min": 49.66035199165344,
+        "count": 3
+    },
+    "Inf_Joules": {
+        "mean": 51566.841319183506,
+        "median": 51468.08105196953,
+        "std": 568.7714655970459,
+        "max": 52178.52545179128,
+        "min": 51053.917453789705,
+        "count": 3
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 13480.40055105686,
+        "median": 13379.329218053812,
+        "std": 403.5263629597711,
+        "max": 13924.854946279527,
+        "min": 13137.017488837242,
+        "count": 3
+    },
+    "Val_ExecutionTime": [
+        14.069702386856079,
+        28.139404773712158,
+        42.20910716056824,
+        56.278809547424316,
+        70.3485119342804,
+        84.41821432113647,
+        98.48791670799255,
+        112.55761909484863,
+        126.62732148170471,
+        140.6970238685608
+    ],
+    "Val_Joules": [
+        1718.768659698966,
+        3437.537319397932,
+        5156.305979096898,
+        6875.074638795864,
+        8593.84329849483,
+        10312.611958193796,
+        12031.380617892763,
+        13750.149277591729,
+        15468.917937290687,
+        17187.686596989653
+    ],
+    "Val_JoulesNormalized": [
+        841.8201494932182,
+        1683.6402989864364,
+        2525.4604484796546,
+        3367.280597972873,
+        4209.100747466091,
+        5050.920896959309,
+        5892.741046452527,
+        6734.561195945746,
+        7576.381345438964,
+        8418.201494932182
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n",
+        "diff --git a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\nindex 846fbf7..213ebf3 100644\n--- a/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n+++ b/src/org/mockito/internal/configuration/DefaultInjectionEngine.java\n@@ -90,8 +90,7 @@ public class DefaultInjectionEngine {\n \n     private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n         for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n-            Object injected = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n-            mocks.remove(injected);\n+            mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n         }\n     }\n \n"
+    ]
+}

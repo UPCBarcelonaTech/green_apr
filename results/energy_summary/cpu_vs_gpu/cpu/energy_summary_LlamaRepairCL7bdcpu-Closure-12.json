@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-12",
+    "Time": {
+        "mean": 267.5514576435089,
+        "median": 267.5514576435089,
+        "std": 0.0,
+        "max": 267.5514576435089,
+        "min": 267.5514576435089,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 63436.7114653468,
+        "median": 63436.7114653468,
+        "std": 0.0,
+        "max": 63436.7114653468,
+        "min": 63436.7114653468,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 21739.093108779194,
+        "median": 21739.093108779194,
+        "std": 0.0,
+        "max": 21739.093108779194,
+        "min": 21739.093108779194,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n",
+        "diff --git a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\nindex 8361ac9..add5c66 100644\n--- a/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n+++ b/src/com/google/javascript/jscomp/MaybeReachingVariableUse.java\n@@ -157,12 +157,6 @@ class MaybeReachingVariableUse extends\n   }\n \n   private boolean hasExceptionHandler(Node cfgNode) {\n-    List<DiGraphEdge<Node, Branch>> branchEdges = getCfg().getOutEdges(cfgNode);\n-    for (DiGraphEdge<Node, Branch> edge : branchEdges) {\n-      if (edge.getValue() == Branch.ON_EX) {\n-        return true;\n-      }\n-    }\n     return false;\n   }\n \n"
+    ]
+}

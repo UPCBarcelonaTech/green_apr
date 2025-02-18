@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-106",
+    "Time": {
+        "mean": 117.006542801857,
+        "median": 117.006542801857,
+        "std": 0.0,
+        "max": 117.006542801857,
+        "min": 117.006542801857,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 90681.72613638046,
+        "median": 90681.72613638046,
+        "std": 0.0,
+        "max": 90681.72613638046,
+        "min": 90681.72613638046,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 24332.280692780027,
+        "median": 24332.280692780027,
+        "std": 0.0,
+        "max": 24332.280692780027,
+        "min": 24332.280692780027,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n",
+        "diff --git a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\nindex a98b665..df2713d 100644\n--- a/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n+++ b/src/java/org/apache/commons/math/fraction/ProperFractionFormat.java\n@@ -162,11 +162,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (num.intValue() < 0) {\n             // minus signs should be leading, invalid expression\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         // parse '/'\n         int startIndex = pos.getIndex();\n@@ -201,11 +197,7 @@ public class ProperFractionFormat extends FractionFormat {\n             return null;\n         }\n         \n-        if (den.intValue() < 0) {\n             // minus signs must be leading, invalid\n-            pos.setIndex(initialIndex);\n-            return null;\n-        }\n \n         int w = whole.intValue();\n         int n = num.intValue();\n"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-39",
+    "Time": {
+        "mean": 433.3512616157532,
+        "median": 433.3512616157532,
+        "std": 0.0,
+        "max": 433.3512616157532,
+        "min": 433.3512616157532,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 107906.00616943238,
+        "median": 107906.00616943238,
+        "std": 0.0,
+        "max": 107906.00616943238,
+        "min": 107906.00616943238,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 37995.73552438021,
+        "median": 37995.73552438021,
+        "std": 0.0,
+        "max": 37995.73552438021,
+        "min": 37995.73552438021,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n",
+        "diff --git a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\nindex f4b537d..dffe3a5 100644\n--- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n+++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java\n@@ -377,10 +377,10 @@ class PrototypeObjectType extends ObjectType {\n \n         sb.append(property);\n         sb.append(\": \");\n-        sb.append(getPropertyType(property).toStringHelper(forAnnotations));\n+        sb.append(getPropertyType(property).toString());\n \n         ++i;\n-        if (!forAnnotations && i == MAX_PRETTY_PRINTED_PROPERTIES) {\n+        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {\n           sb.append(\", ...\");\n           break;\n         }\n@@ -391,7 +391,7 @@ class PrototypeObjectType extends ObjectType {\n       prettyPrint = true;\n       return sb.toString();\n     } else {\n-      return forAnnotations ? \"?\" : \"{...}\";\n+      return \"{...}\";\n     }\n   }\n \n"
+    ]
+}

@@ -1,0 +1,81 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-58",
+    "Time": {
+        "mean": 626.2370624542236,
+        "median": 626.2370624542236,
+        "std": 0.0,
+        "max": 626.2370624542236,
+        "min": 626.2370624542236,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 610876.7535607098,
+        "median": 610876.7535607098,
+        "std": 0.0,
+        "max": 610876.7535607098,
+        "min": 610876.7535607098,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 169206.98815315354,
+        "median": 169206.98815315354,
+        "std": 0.0,
+        "max": 169206.98815315354,
+        "min": 169206.98815315354,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 3,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n",
+        "diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java\nindex eb74e72..c0f06a4 100644\n--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,7 +451,8 @@ public class NumberUtils {\n                 case 'L' :\n                     if (dec == null\n                         && exp == null\n-                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {\n+                        && isDigits(numeric.substring(1))\n+                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n                         try {\n                             return createLong(numeric);\n                         } catch (NumberFormatException nfe) {\n"
+    ]
+}

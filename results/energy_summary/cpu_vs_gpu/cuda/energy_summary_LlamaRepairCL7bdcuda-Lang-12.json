@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Lang-12",
+    "Time": {
+        "mean": 101.28572869300842,
+        "median": 101.28572869300842,
+        "std": 0.0,
+        "max": 101.28572869300842,
+        "min": 101.28572869300842,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 11887.729515600206,
+        "median": 11887.729515600206,
+        "std": 0.0,
+        "max": 11887.729515600206,
+        "min": 11887.729515600206,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 3744.6603539228436,
+        "median": 3744.6603539228436,
+        "std": 0.0,
+        "max": 3744.6603539228436,
+        "min": 3744.6603539228436,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\nindex a799057..b200223 100644\n--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java\n@@ -227,21 +227,14 @@ public class RandomStringUtils {\n         } else if (count < 0) {\n             throw new IllegalArgumentException(\"Requested random string length \" + count + \" is less than 0.\");\n         }\n-        if (chars != null && chars.length == 0) {\n-            throw new IllegalArgumentException(\"The chars array must not be empty\");\n-        }\n \n         if (start == 0 && end == 0) {\n-            if (chars != null) {\n-                end = chars.length;\n-            } else {\n                 if (!letters && !numbers) {\n                     end = Integer.MAX_VALUE;\n                 } else {\n                     end = 'z' + 1;\n                     start = ' ';                \n                 }\n-            }\n         }\n \n         char[] buffer = new char[count];\n"
+    ]
+}

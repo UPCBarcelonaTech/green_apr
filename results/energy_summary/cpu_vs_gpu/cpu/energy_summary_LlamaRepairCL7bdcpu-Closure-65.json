@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-65",
+    "Time": {
+        "mean": 633.6251336336136,
+        "median": 633.6251336336136,
+        "std": 0.0,
+        "max": 633.6251336336136,
+        "min": 633.6251336336136,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 149223.70579387544,
+        "median": 149223.70579387544,
+        "std": 0.0,
+        "max": 149223.70579387544,
+        "min": 149223.70579387544,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 52984.27720546124,
+        "median": 52984.27720546124,
+        "std": 0.0,
+        "max": 52984.27720546124,
+        "min": 52984.27720546124,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        136.83351349830627,
+        192.0325824022293,
+        247.23165130615234,
+        302.4307202100754,
+        357.6297891139984,
+        412.82885801792145,
+        468.0279269218445,
+        523.2269958257675,
+        578.4260647296906,
+        633.6251336336136
+    ],
+    "Joules_Per_PatchMedian": [
+        93584.60956609248,
+        99766.73136917947,
+        105948.85317226646,
+        112130.97497535346,
+        118313.09677844045,
+        124495.21858152744,
+        130677.34038461444,
+        136859.46218770143,
+        143041.58399078844,
+        149223.70579387544
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        28357.969074159853,
+        31094.22553319334,
+        33830.48199222683,
+        36566.73845126032,
+        39302.994910293804,
+        42039.25136932729,
+        44775.50782836078,
+        47511.76428739427,
+        50248.020746427756,
+        52984.27720546124
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 81.95526003837585,
+        "median": 81.63444459438324,
+        "std": 1.570538954916116,
+        "max": 84.05465292930603,
+        "min": 80.49749803543091,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 87624.79204136728,
+        "median": 87402.48776300548,
+        "std": 1667.82572202504,
+        "max": 89858.47360833883,
+        "min": 85835.71903111934,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 25438.258539202805,
+        "median": 25621.712615126366,
+        "std": 654.2133601272724,
+        "max": 25972.734649419785,
+        "min": 24536.874277138704,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        55.199068903923035,
+        110.39813780784607,
+        165.5972067117691,
+        220.79627561569214,
+        275.9953445196152,
+        331.1944134235382,
+        386.39348232746124,
+        441.5925512313843,
+        496.7916201353073,
+        551.9906890392303
+    ],
+    "Val_Joules": [
+        6182.121803086993,
+        12364.243606173986,
+        18546.36540926098,
+        24728.487212347973,
+        30910.609015434966,
+        37092.73081852196,
+        43274.85262160895,
+        49456.974424695945,
+        55639.09622778295,
+        61821.21803086996
+    ],
+    "Val_JoulesNormalized": [
+        2736.2564590334878,
+        5472.5129180669755,
+        8208.769377100463,
+        10945.025836133951,
+        13681.282295167439,
+        16417.538754200927,
+        19153.795213234414,
+        21890.051672267902,
+        24626.30813130139,
+        27362.564590334878
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n",
+        "diff --git a/src/com/google/javascript/jscomp/CodeGenerator.java b/src/com/google/javascript/jscomp/CodeGenerator.java\nindex cb9229a..6117a89 100644\n--- a/src/com/google/javascript/jscomp/CodeGenerator.java\n+++ b/src/com/google/javascript/jscomp/CodeGenerator.java\n@@ -1012,7 +1012,7 @@ class CodeGenerator {\n     for (int i = 0; i < s.length(); i++) {\n       char c = s.charAt(i);\n       switch (c) {\n-        case '\\0': sb.append(\"\\\\000\"); break;\n+        case '\\0': sb.append(\"\\\\0\"); break;\n         case '\\n': sb.append(\"\\\\n\"); break;\n         case '\\r': sb.append(\"\\\\r\"); break;\n         case '\\t': sb.append(\"\\\\t\"); break;\n"
+    ]
+}

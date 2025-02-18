@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-30",
+    "Time": {
+        "mean": 355.0483949184418,
+        "median": 355.0483949184418,
+        "std": 0.0,
+        "max": 355.0483949184418,
+        "min": 355.0483949184418,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 40717.91077958346,
+        "median": 40717.91077958346,
+        "std": 0.0,
+        "max": 40717.91077958346,
+        "min": 40717.91077958346,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 16973.697808241846,
+        "median": 16973.697808241846,
+        "std": 0.0,
+        "max": 16973.697808241846,
+        "min": 16973.697808241846,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "ExecutionTime_Per_PatchMedian": [
+        37.34967744350433,
+        72.6495349407196,
+        107.94939243793488,
+        143.24924993515015,
+        178.54910743236542,
+        213.8489649295807,
+        249.14882242679596,
+        284.44867992401123,
+        319.7485374212265,
+        355.0483949184418
+    ],
+    "Joules_Per_PatchMedian": [
+        5809.80058336854,
+        9688.479494059085,
+        13567.15840474963,
+        17445.837315440178,
+        21324.516226130723,
+        25203.19513682127,
+        29081.874047511814,
+        32960.55295820236,
+        36839.23186889291,
+        40717.91077958346
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        1980.7285057425497,
+        3646.6139837980268,
+        5312.499461853504,
+        6978.384939908981,
+        8644.270417964459,
+        10310.155896019936,
+        11976.041374075414,
+        13641.926852130891,
+        15307.812330186369,
+        16973.697808241846
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 2.249674367904663,
+        "median": 2.0498199462890625,
+        "std": 0.29775444453378647,
+        "max": 2.579176902770996,
+        "min": 1.9993610382080078,
+        "count": 5
+    },
+    "Inf_Joules": {
+        "mean": 2092.904562523365,
+        "median": 1931.121672677994,
+        "std": 239.35266235043053,
+        "max": 2355.5358700037,
+        "min": 1896.8435913681983,
+        "count": 5
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 307.58937098264687,
+        "median": 314.84302768707266,
+        "std": 36.84060460626559,
+        "max": 339.1414065003396,
+        "min": 244.67173547744756,
+        "count": 5
+    },
+    "Val_ExecutionTime": [
+        35.29985749721527,
+        70.59971499443054,
+        105.89957249164581,
+        141.19942998886108,
+        176.49928748607635,
+        211.79914498329163,
+        247.0990024805069,
+        282.39885997772217,
+        317.69871747493744,
+        352.9985749721527
+    ],
+    "Val_Joules": [
+        3878.678910690546,
+        7757.3578213810915,
+        11636.036732071636,
+        15514.715642762185,
+        19393.39455345273,
+        23272.073464143275,
+        27150.75237483382,
+        31029.431285524366,
+        34908.11019621491,
+        38786.78910690546
+    ],
+    "Val_JoulesNormalized": [
+        1665.885478055477,
+        3331.770956110954,
+        4997.656434166431,
+        6663.541912221908,
+        8329.427390277386,
+        9995.312868332863,
+        11661.19834638834,
+        13327.083824443818,
+        14992.969302499296,
+        16658.854780554775
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "W",
+        "I",
+        "C",
+        "I",
+        "I",
+        "I",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "passtest",
+        "wrong",
+        "wrong",
+        "passtest",
+        "correct",
+        "passtest",
+        "passtest",
+        "passtest",
+        "passtest"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n",
+        "diff --git a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\nindex a161737..ce694ce 100644\n--- a/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n+++ b/src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java\n@@ -170,7 +170,7 @@ public class MannWhitneyUTest {\n                                              final int n2)\n         throws ConvergenceException, MaxCountExceededException {\n \n-        final double n1n2prod = n1 * n2;\n+        final int n1n2prod = n1 * n2;\n \n         // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n         final double EU = n1n2prod / 2.0;\n"
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-6",
+    "Time": {
+        "mean": 248.13527882099152,
+        "median": 248.13527882099152,
+        "std": 0.0,
+        "max": 248.13527882099152,
+        "min": 248.13527882099152,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 162254.27325537198,
+        "median": 162254.27325537198,
+        "std": 0.0,
+        "max": 162254.27325537198,
+        "min": 162254.27325537198,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 43968.08968385462,
+        "median": 43968.08968385462,
+        "std": 0.0,
+        "max": 43968.08968385462,
+        "min": 43968.08968385462,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\nindex 0500460..4d010ea 100644\n--- a/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\n@@ -92,7 +92,7 @@ public abstract class CharSequenceTranslator {\n //          // contract with translators is that they have to understand codepoints \n //          // and they just took care of a surrogate pair\n             for (int pt = 0; pt < consumed; pt++) {\n-                pos += Character.charCount(Character.codePointAt(input, pt));\n+                pos += Character.charCount(Character.codePointAt(input, pos));\n             }\n         }\n     }\n"
+    ]
+}

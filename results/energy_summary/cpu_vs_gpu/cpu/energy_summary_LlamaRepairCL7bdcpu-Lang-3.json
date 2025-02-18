@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-3",
+    "Time": {
+        "mean": 372.2452554702759,
+        "median": 372.2452554702759,
+        "std": 0.0,
+        "max": 372.2452554702759,
+        "min": 372.2452554702759,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 306630.2952391208,
+        "median": 306630.2952391208,
+        "std": 0.0,
+        "max": 306630.2952391208,
+        "min": 306630.2952391208,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 88187.15977125763,
+        "median": 88187.15977125763,
+        "std": 0.0,
+        "max": 88187.15977125763,
+        "min": 88187.15977125763,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\nindex 1e6ccdc..c584021 100644\n--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n+++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java\n@@ -590,22 +590,18 @@ public class NumberUtils {\n         //Must be a Float, Double, BigDecimal\n         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);\n         try {\n-            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float\n                 final Float f = createFloat(str);\n                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {\n                     return f;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n         try {\n-            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double\n                 final Double d = createDouble(str);\n                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {\n                     return d;\n                 }\n-            }\n         } catch (final NumberFormatException nfe) { // NOPMD\n             // ignore the bad number\n         }\n"
+    ]
+}

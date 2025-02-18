@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Time-27",
+    "Time": {
+        "mean": 86.43585920333862,
+        "median": 86.43585920333862,
+        "std": 0.0,
+        "max": 86.43585920333862,
+        "min": 86.43585920333862,
+        "count": 3
+    },
+    "Joules": {
+        "mean": 14517.452979719641,
+        "median": 14517.452979719641,
+        "std": 0.0,
+        "max": 14517.452979719641,
+        "min": 14517.452979719641,
+        "count": 3
+    },
+    "JoulesNormalized": {
+        "mean": 5146.075812065602,
+        "median": 5146.075812065602,
+        "std": 0.0,
+        "max": 5146.075812065602,
+        "min": 5146.075812065602,
+        "count": 3
+    },
+    "NrExecutions": 3,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n",
+        "diff --git a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\nindex f7c7738..1533228 100644\n--- a/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n+++ b/src/main/java/org/joda/time/format/PeriodFormatterBuilder.java\n@@ -798,11 +798,9 @@ public class PeriodFormatterBuilder {\n         int size = elementPairs.size();\n         if (size >= 2 && elementPairs.get(0) instanceof Separator) {\n             Separator sep = (Separator) elementPairs.get(0);\n-            if (sep.iAfterParser == null && sep.iAfterPrinter == null) {\n                 PeriodFormatter f = toFormatter(elementPairs.subList(2, size), notPrinter, notParser);\n                 sep = sep.finish(f.getPrinter(), f.getParser());\n                 return new PeriodFormatter(sep, sep);\n-            }\n         }\n         Object[] comp = createComposite(elementPairs);\n         if (notPrinter) {\n"
+    ]
+}

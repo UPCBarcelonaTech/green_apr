@@ -1,0 +1,84 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcuda-Math-57",
+    "Time": {
+        "mean": 136.94647920131683,
+        "median": 136.94647920131683,
+        "std": 0.0,
+        "max": 136.94647920131683,
+        "min": 136.94647920131683,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 16810.539751303197,
+        "median": 16810.539751303197,
+        "std": 0.0,
+        "max": 16810.539751303197,
+        "min": 16810.539751303197,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 6911.078298729659,
+        "median": 6911.078298729659,
+        "std": 0.0,
+        "max": 6911.078298729659,
+        "min": 6911.078298729659,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cuda",
+        "s2_cuda",
+        "s3_cuda",
+        "s4_cuda",
+        "s5_cuda"
+    ],
+    "NrExecutionsInference": 5,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "C",
+        "I",
+        "I",
+        "I",
+        "W",
+        "I",
+        "W",
+        "I",
+        "I",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "correct",
+        "passtest",
+        "passtest",
+        "passtest",
+        "uncompilable",
+        "passtest",
+        "uncompilable",
+        "passtest",
+        "passtest",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\nindex e09bbc3..b73ac9d 100644\n--- a/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n+++ b/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java\n@@ -172,7 +172,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {\n         while (resultSet.size() < k) {\n             // For each data point x, compute D(x), the distance between x and\n             // the nearest center that has already been chosen.\n-            double sum = 0;\n+            int sum = 0;\n             for (int i = 0; i < pointSet.size(); i++) {\n                 final T p = pointSet.get(i);\n                 final Cluster<T> nearest = getNearestCluster(resultSet, p);\n"
+    ]
+}

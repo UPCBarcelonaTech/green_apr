@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Lang-18",
+    "Time": {
+        "mean": 258.9421365261078,
+        "median": 258.9421365261078,
+        "std": 0.0,
+        "max": 258.9421365261078,
+        "min": 258.9421365261078,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 240102.2255489886,
+        "median": 240102.2255489886,
+        "std": 0.0,
+        "max": 240102.2255489886,
+        "min": 240102.2255489886,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 69004.79654956463,
+        "median": 69004.79654956463,
+        "std": 0.0,
+        "max": 69004.79654956463,
+        "min": 69004.79654956463,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "I",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "uncompilable",
+        "wrong",
+        "wrong",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n",
+        "diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\nindex 51da48e..e043323 100644\n--- a/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n+++ b/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java\n@@ -492,10 +492,10 @@ public class FastDateFormat extends Format {\n                 rule = new TextField(Calendar.ERA, ERAs);\n                 break;\n             case 'y': // year (number)\n-                if (tokenLen == 2) {\n-                    rule = TwoDigitYearField.INSTANCE;\n+                if (tokenLen >= 4) {\n+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);\n                 } else {\n-                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);\n+                    rule = TwoDigitYearField.INSTANCE;\n                 }\n                 break;\n             case 'M': // month in year (text and number)\n"
+    ]
+}

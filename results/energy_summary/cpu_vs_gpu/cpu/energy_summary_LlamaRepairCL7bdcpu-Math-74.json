@@ -1,0 +1,83 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Math-74",
+    "Time": {
+        "mean": 196.244584441185,
+        "median": 196.244584441185,
+        "std": 0.0,
+        "max": 196.244584441185,
+        "min": 196.244584441185,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 210658.0127418816,
+        "median": 210658.0127418816,
+        "std": 0.0,
+        "max": 210658.0127418816,
+        "min": 210658.0127418816,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 62196.0740912616,
+        "median": 62196.0740912616,
+        "std": 0.0,
+        "max": 62196.0740912616,
+        "min": 62196.0740912616,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable",
+        "uncompilable"
+    ],
+    "patches": [
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n",
+        "diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\nindex 1bbad3e..6f3e883 100644\n--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n+++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java\n@@ -242,15 +242,12 @@ public abstract class EmbeddedRungeKuttaIntegrator\n         }\n \n         if (firstTime) {\n-          final double[] scale = new double[y0.length];\n+          final double[] scale;\n           if (vecAbsoluteTolerance == null) {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);\n-              }\n+              scale = new double[y0.length];\n+              java.util.Arrays.fill(scale, scalAbsoluteTolerance);\n             } else {\n-              for (int i = 0; i < scale.length; ++i) {\n-                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);\n-              }\n+              scale = vecAbsoluteTolerance;\n             }\n           hNew = initializeStep(equations, forward, getOrder(), scale,\n                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);\n"
+    ]
+}

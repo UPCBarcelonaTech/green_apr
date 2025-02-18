@@ -1,0 +1,179 @@
+{
+    "TOOL_BUG_ID": "LlamaRepairCL7bdcpu-Closure-150",
+    "Time": {
+        "mean": 485.27406120300293,
+        "median": 485.27406120300293,
+        "std": 0.0,
+        "max": 485.27406120300293,
+        "min": 485.27406120300293,
+        "count": 4
+    },
+    "Joules": {
+        "mean": 124483.21762233973,
+        "median": 124483.21762233973,
+        "std": 0.0,
+        "max": 124483.21762233973,
+        "min": 124483.21762233973,
+        "count": 4
+    },
+    "JoulesNormalized": {
+        "mean": 40871.26390966177,
+        "median": 40871.26390966177,
+        "std": 0.0,
+        "max": 40871.26390966177,
+        "min": 40871.26390966177,
+        "count": 4
+    },
+    "NrExecutions": 4,
+    "ExecutionsIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+    ],
+    "ExecutionsInferenceIds": [
+        "s1_cpu",
+        "s2_cpu",
+        "s4_cpu",
+        "s5_cpu"
+    ],
+    "NrExecutionsInference": 4,
+    "ExecutionTime_Per_PatchMedian": [
+        117.53997802734375,
+        158.399320602417,
+        199.25866317749023,
+        240.11800575256348,
+        280.9773483276367,
+        321.83669090270996,
+        362.6960334777832,
+        403.55537605285645,
+        444.4147186279297,
+        485.27406120300293
+    ],
+    "Joules_Per_PatchMedian": [
+        83277.37117609382,
+        87855.79855901003,
+        92434.22594192624,
+        97012.65332484245,
+        101591.08070775867,
+        106169.50809067488,
+        110747.93547359109,
+        115326.3628565073,
+        119904.79023942351,
+        124483.21762233973
+    ],
+    "JoulesNormalized_Per_PatchMedian": [
+        22543.67446903586,
+        24580.073295772072,
+        26616.472122508283,
+        28652.870949244494,
+        30689.269775980705,
+        32725.668602716916,
+        34762.06742945313,
+        36798.46625618934,
+        38834.86508292556,
+        40871.26390966177
+    ],
+    "Inf_ExecutionTime": {
+        "mean": 76.64431124925613,
+        "median": 76.68063545227051,
+        "std": 1.741696906215661,
+        "max": 78.56634902954102,
+        "min": 74.6496250629425,
+        "count": 4
+    },
+    "Inf_Joules": {
+        "mean": 78639.23368385137,
+        "median": 78698.9437931776,
+        "std": 1824.179888720154,
+        "max": 80705.15262019634,
+        "min": 76453.89452885391,
+        "count": 4
+    },
+    "Inf_JoulesNormalized": {
+        "mean": 20434.040732011206,
+        "median": 20507.27564229965,
+        "std": 412.56117399961465,
+        "max": 20829.73802478314,
+        "min": 19891.87361866238,
+        "count": 4
+    },
+    "Val_ExecutionTime": [
+        40.85934257507324,
+        81.71868515014648,
+        122.57802772521973,
+        163.43737030029297,
+        204.2967128753662,
+        245.15605545043945,
+        286.0153980255127,
+        326.87474060058594,
+        367.7340831756592,
+        408.5934257507324
+    ],
+    "Val_Joules": [
+        4578.427382916212,
+        9156.854765832424,
+        13735.282148748636,
+        18313.70953166485,
+        22892.13691458106,
+        27470.564297497272,
+        32048.991680413485,
+        36627.4190633297,
+        41205.84644624591,
+        45784.27382916212
+    ],
+    "Val_JoulesNormalized": [
+        2036.398826736211,
+        4072.797653472422,
+        6109.196480208633,
+        8145.595306944844,
+        10181.994133681055,
+        12218.392960417266,
+        14254.791787153477,
+        16291.190613889692,
+        18327.589440625907,
+        20363.98826736212
+    ],
+    "NrPatches": {
+        "median": 0,
+        "std": 0.0,
+        "max": 0,
+        "min": 0
+    },
+    "Correctness_Per_Patch": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+    ],
+    "Correctness_Per_Patch_original": [
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong",
+        "wrong"
+    ],
+    "patches": [
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n",
+        "diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java\nindex 5628a08a..4b841ae8 100644\n--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java\n+++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java\n@@ -1448,7 +1448,21 @@ final class TypedScopeCreator implements ScopeCreator {\n         return;\n       }\n \n-      super.visit(t, n, parent);\n+      attachLiteralTypes(n);\n+      switch (n.getType()) {\n+        case Token.FUNCTION:\n+          if (parent.getType() == Token.NAME) {\n+            return;\n+          }\n+          defineDeclaredFunction(n, parent);\n+          break;\n+        case Token.CATCH:\n+          defineCatch(n, parent);\n+          break;\n+        case Token.VAR:\n+          defineVar(n, parent);\n+          break;\n+      }\n     }\n \n     /** Handle bleeding functions and function parameters. */\n"
+    ]
+}
